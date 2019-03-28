@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/auth-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>OPD-WMS &middot; Login</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="login-container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><img th:src="@{theme/img/logo-full-retina.png}" alt="logo" width="150px" height="39px" class="logo-img"><span>Please enter your user information.</span></div>
+            <div class="panel-body">
+
+                <div th:if="${error}" class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <span th:text="${error}"></span>
+                </div>
+
+                <div th:if="${msg}" class="alert alert-success alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <span th:text="${msg}"></span>
+                </div>
+
+                <form th:action="@{/login}" method="post" autocomplete="off" class="form-horizontal">
+                    <div class="login-form">
+                        <div class="form-group">
+                            <div class="input-group"><span class="input-group-addon"><i class="icon s7-user"></i></span>
+                                <input id="email" type="text" placeholder="email" required="" name="email"  autocomplete="off" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group"><span class="input-group-addon"><i class="icon s7-lock"></i></span>
+                                <input id="password" type="password" name="password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group login-submit">
+                            <button data-dismiss="modal" type="submit" class="btn btn-primary btn-lg">Log me in</button>
+                        </div>
+                        <div class="form-group footer row">
+                            <div class="col-xs-6"><a th:href="@{/password-reset}">Forgot Password?</a></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center out-links"><a href="http://one-point-seven.com/">© 2019 One Point Seven Ltd</a></div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="script">
+    <!--<script th:src="@{/js/app-util.js}"></script>-->
+    <!--<script th:src="@{/js/user-manager/login.js}"></script>-->
+    <!--<script type="text/javascript">-->
+        <!--$(document).ready(function(){-->
+            <!--//initialize the javascript-->
+            <!--App.init();-->
+        <!--});-->
+    <!--</script>-->
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Atlas &middot; Schools</title>
+
+    <link th:href="@{/theme/plugins/bootstrap-select/css/bootstrap-select.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+
+    <!-- Title -->
+    <div class="row heading-bg">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h5 class="txt-dark">Schools</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}">Dashboard</a></li>
+                <li><a th:href="@{/Schools}"><span>System Setup</span></a></li>
+                <li class="active"><span>Schools</span></li>
+            </ol>
+        </div>
+        <!-- /Breadcrumb -->
+    </div>
+    <!-- /Title -->
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default panel-tabs card-view">
+                <div class="panel-heading">
+                    <div class="pull-left">
+                        <div class="tab-struct custom-tab-1">
+                            <ul role="tablist" class="nav nav-pills nav-pills-outline nav-pills-rounded" id="Schools_tab">
+                            <!--<ul role="tablist" class="nav nav-pills nav-pills-rounded" id="Schools_tab">-->
+                            <!--<ul role="tablist" class="nav nav-tabs" id="Schools_tab">-->
+                                <li role="presentation" class="active">
+                                    <a aria-expanded="true" data-toggle="tab" role="tab"
+                                       class="active" href="#active"><span class="fa fa-bolt"></span> <span th:text="#{core.activeRecords}"></span> </a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a data-toggle="tab" role="tab"
+                                       href="#new" aria-expanded="false"><span class="fa fa-plus"></span> <span th:text="#{core.newRecords}"></span> </a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a data-toggle="tab" role="tab"
+                                       href="#edited" aria-expanded="false"><span class="fa fa-pencil-alt"></span> <span th:text="#{core.editedRecords}"></span></a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a data-toggle="tab" role="tab"
+                                       href="#deactivated" aria-expanded="false"><span class="fa fa-times"></span> <span th:text="#{core.deactivatedRecords}"></span></a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a data-toggle="tab" role="tab"
+                                       href="#inactive" aria-expanded="false"><span class="fa fa-ban"></span> <span th:text="#{core.inactiveRecords}"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <a href="#"
+                           role="menuitem" data-toggle="modal"
+                           data-target=".edit-view" class="pull-left inline-block refresh mr-15">
+                            <i class="fa fa-plus txt-success weight-600"></i>
+                        </a>
+                        <a href="#" data-action="refresh" class="pull-left inline-block refresh mr-15">
+                            <i class="fa fa-sync  txt-primary weight-600"></i>
+                        </a>
+                        <a href="#" class="pull-left inline-block full-screen mr-15">
+                            <i class="fa fa-arrows-alt txt-dark weight-600"></i>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="tab-content" id="Schools-tab-content">
+
+                            <div id="active" class="tab-pane fade active in" role="tabpanel">
+                                <div class="table-wrap">
+
+                                    <div class="table-responsive">
+                                        <table id="datable_active"
+                                               class="table-active table table-striped mb-0 table-responsive">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Phone </th>
+                                                <th>Email </th>
+                                                <th>Created On</th>
+                                                <th>Updated On</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--End Active Table-->
+                            <div id="new" class="tab-pane fade" role="tabpanel">
+                                <div class="table-wrap">
+
+                                    <div class="table-responsive">
+                                        <table id="datable_new"
+                                               class="table-new table table-striped mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Phone </th>
+                                                <th>Email </th>
+                                                <th>Created On</th>
+                                                <th>Updated On</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end new table-->
+                            <div id="edited" class="tab-pane fade" role="tabpanel">
+                                <div class="table-wrap">
+
+                                    <div class="table-responsive">
+                                        <table id="datable_edited"
+                                               class="table-edited table table-striped mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Phone </th>
+                                                <th>Email </th>
+                                                <th>Created On</th>
+                                                <th>Updated On</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end edited table-->
+                            <div id="deactivated" class="tab-pane fade" role="tabpanel">
+                                <div class="table-wrap">
+
+                                    <div class="table-responsive">
+                                        <table id="datable_deactivated"
+                                               class="table-deactivated table table-striped mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Phone </th>
+                                                <th>Email </th>
+                                                <th>Created On</th>
+                                                <th>Updated On</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end deactivated table-->
+                            <div id="inactive" class="tab-pane fade" role="tabpanel">
+                                <div class="table-wrap">
+
+                                    <div class="table-responsive">
+                                        <table id="datable_inactive"
+                                               class="table-inactive table table-striped mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Location</th>
+                                                <th>Phone </th>
+                                                <th>Email </th>
+                                                <th>Created On</th>
+                                                <th>Updated On</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+
+</th:block>
+
+<th:block layout:fragment="modals">
+
+    <div id="responsive-modal" class="modal fade edit-view" tabindex="-1" role="dialog" aria-labelledby="new-modal"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-ncgafrica-white">
+                    <button type="button" class="close txt-light" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title txt-light"><span class="fa fa-university"></span> Schools</h5>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name" class="control-label mb-10">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="location" class="control-label mb-10">Location:</label>
+                            <input type="text" class="form-control" id="location" name="location">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail" class="control-label mb-10">Email:</label>
+                            <input type="text" class="form-control" id="contactEmail" name="contactEmail">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactPhone" class="control-label mb-10">Phone:</label>
+                            <input type="text" class="form-control" id="contactPhone" name="contactPhone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="costPerSMS" class="control-label mb-10">Cost Per SMS:</label>
+                            <input type="text" class="form-control" id="costPerSMS" name="costPerSMS">
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-ncgafrica-white">
+                        <input type="hidden" name="action" value="new"/>
+                        <input type="hidden" name="id" value=""/>
+                        <button type="submit" class="btn btn-success" th:text="#{core.save}"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{core.close}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/makerchecker::modals"></div>
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/app-util.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{/theme/plugins/bootstrap-select/js/bootstrap-select.min.js}" rel="script"
+            type="application/javascript"></script>
+    <script th:src="@{/js/schools/schools.js}" rel="script" type="application/javascript"></script>
+
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Atlas &middot; System Settings</title>
+
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+
+    <!-- Title -->
+    <div class="row heading-bg">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h5 class="txt-dark">System Settings</h5>
+        </div>
+        <!-- Breadcrumb -->
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a th:href="@{/}">Dashboard</a></li>
+                <li class="active"><a th:href="@{/system-settings}"><span>Configuration</span></a></li>
+                <li class="active"><span>System Settings</span></li>
+            </ol>
+        </div>
+        <!-- /Breadcrumb -->
+    </div>
+    <!-- /Title -->
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default panel-tabs card-view">
+                <div class="panel-heading">
+                    <div class="pull-left">
+
+                        <div class="tab-struct custom-tab-1">
+                            <ul role="tablist" class="nav nav-tabs" id="banks_tab">
+                                <li role="presentation" class="active">
+                                    <a aria-expanded="true" data-toggle="tab" role="tab"
+                                       class="active" href="#active"><span th:text="#{core.activeRecords}"></span> </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="pull-right">
+                        <a href="#" data-action="refresh" class="pull-left inline-block refresh mr-15">
+                            <i class="fa fa-sync  txt-primary weight-600"></i>
+                        </a>
+                        <a href="#" class="pull-left inline-block full-screen mr-15">
+                            <i class="fa fa-arrows-alt txt-dark weight-600"></i>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-wrapper collapse in">
+                    <div class="panel-body">
+                        <div class="tab-content" id="reason-codes-tab-content">
+
+                            <div id="active" class="tab-pane  active fade in" role="tabpanel">
+                                <div class="table-wrap">
+
+                                    <div class="table-responsive">
+                                        <table id="datable_active"
+                                               class="table-records table table-striped mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th>Property</th>
+                                                <th>Value</th>
+                                                <th>Description</th>
+                                                <th class="text-center text-muted" style="width: 100px;">Actions </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--End Active Table-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+
+</th:block>
+
+<th:block layout:fragment="modals">
+
+    <div id="responsive-modal" class="modal fade edit-view" tabindex="-1" role="dialog" aria-labelledby="new-modal"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-ncgafrica-white">
+                    <button type="button" class="close txt-light" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title txt-light"><span class="fa fa-cogs"></span> System Settings</h5>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="control-label ">Name</label>
+                            <input type="text" name="name" placeholder="Name" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Description </label>
+                            <textarea type="text" class="form-control" rows="2" name="description" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Value </label>
+                            <input type="text" name="value" placeholder="Value" class="form-control" />
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer bg-ncgafrica-white">
+                        <input type="hidden" name="action" value="edit"/>
+                        <input type="hidden" name="id" value=""/>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/app-util.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{/theme/plugins/bootstrap-select/js/bootstrap-select.min.js}" rel="script"
+            type="application/javascript"></script>
+    <script th:src="@{/js/configs/settings.js}" rel="script" type="application/javascript"></script>
+</th:block>
+
+</body>
+</html>

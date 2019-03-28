@@ -1,0 +1,1 @@
+package atlas.web.usermanager.entities;

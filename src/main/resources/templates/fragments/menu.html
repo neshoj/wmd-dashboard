@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>OPD-WMS &middot; Menu</title>
+</head>
+<body>
+
+<th:block th:fragment="menu">
+    <div th:replace="fragments/nav-bar::nav-bar"></div>
+    <div th:replace="fragments/left-sidebar::left-sidebar"></div>
+</th:block>
+
+</body>
+</html>

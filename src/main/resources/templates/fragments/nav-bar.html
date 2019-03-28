@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title> OPD-WMS &middot; Left Sidebar</title>
+</head>
+<body>
+
+<th:block th:fragment="nav-bar">
+
+    <nav class="navbar navbar-default navbar-fixed-top am-top-header">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="page-title">
+                    <span>Dashboard</span></div><a href="index.php#" class="am-toggle-left-sidebar navbar-toggle collapsed"><span class="icon-bar"><span></span><span></span><span></span></span></a><a href="index.php" class="navbar-brand"></a>
+            </div><a href="index.php#" class="am-toggle-right-sidebar"><span class="icon s7-menu2"></span></a><a href="index.php#" data-toggle="collapse" data-target="#am-navbar-collapse" class="am-toggle-top-header-menu collapsed"><span class="icon s7-angle-down"></span></a>
+            <div id="am-navbar-collapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav am-user-nav">
+                    <li class="dropdown"><a href="index.php#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="assets/img/avatar.jpg"><span class="user-name">Samantha Amaretti</span><span class="angle-down s7-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="index.php#"> <span class="icon s7-user"></span>My profile</a></li>
+                            <li><a href="index.php#"> <span class="icon s7-config"></span>Settings</a></li>
+                            <li><a href="index.php#"> <span class="icon s7-help1"></span>Help</a></li>
+                            <li><a href="index.php#"> <span class="icon s7-power"></span>Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav am-top-menu">
+                    <li><a href="index.php#">Home</a></li>
+                    <li><a href="index.php#">Live Preview</a></li>
+                    <li class="dropdown"><a href="index.php#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Quick Access <span class="angle-down s7-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="index.php#">Weighbridge Stations</a></li>
+                            <li><a href="index.php#">Reports</a></li>
+                            <li><a href="index.php#">Tagging</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav am-icons-nav">
+                    <li class="dropdown"><a href="index.php#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-bell"></span><span class="indicator"></span></a>
+                        <ul class="dropdown-menu am-notifications">
+                            <li>
+                                <div class="title">Notifications<span class="badge">3</span></div>
+                                <div class="list">
+                                    <div class="am-scroller nano">
+                                        <div class="content nano-content">
+                                            <ul>
+                                                <li class="active"><a href="index.php#">
+                                                    <div class="logo"><span class="icon s7-pin"></span></div>
+                                                    <div class="user-content"><span class="circle"></span><span class="name">Jessica Caruso</span><span class="text-content"> accepted your invitation to join the team.</span><span class="date">2 min ago</span></div></a></li>
+                                                <li><a href="index.php#">
+                                                    <div class="logo"><span class="icon s7-add-user"></span></div>
+                                                    <div class="user-content"><span class="name">Joel King</span><span class="text-content"> is now following you</span><span class="date">2 days ago</span></div></a></li>
+                                                <li><a href="index.php#">
+                                                    <div class="logo"><span class="icon s7-gleam"></span></div>
+                                                    <div class="user-content"><span class="name">Claire Sassu</span><span class="text-content"> is watching your main repository</span><span class="date">2 days ago</span></div></a></li>
+                                                <li><a href="index.php#">
+                                                    <div class="logo"><span class="icon s7-add-user"></span></div>
+                                                    <div class="user-content"><span class="name">Emily Carter</span><span class="text-content"> is now following you</span><span class="date">5 days ago</span></div></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer"> <a href="index.php#">View all notifications</a></div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</th:block>
+
+</body>
+</html>

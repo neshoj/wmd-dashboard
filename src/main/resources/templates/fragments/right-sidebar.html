@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>OPD-WMS &middot; Right Sidebar</title>
+</head>
+<body>
+
+<th:block th:fragment="right-sidebar">
+    <nav class="am-right-sidebar">
+        <div class="sb-content">
+            <div class="user-info"><img src="assets/img/avatar.jpg"><span class="name">Samantha Amaretti<span class="status"></span></span><span class="position">Art Director</span></div>
+            <div class="tab-navigation">
+                <ul role="tablist" class="nav nav-tabs nav-justified">
+                    <li role="presentation" class="active"><a href="index.php#tab1" aria-controls="home" role="tab" data-toggle="tab"> <span class="icon s7-smile"></span></a></li>
+                    <li role="presentation"><a href="index.php#tab4" aria-controls="settings" role="tab" data-toggle="tab"> <span class="icon s7-ticket"></span></a></li>
+                </ul>
+            </div>
+            <div class="tab-panel">
+                <div class="tab-content">
+                    <div id="tab1" role="tabpanel" class="tab-pane announcement active am-scroller nano">
+                        <div class="nano-content">
+                            <div class="content">
+                                <h2>Announcement</h2>
+                                <ul>
+                                    <li>
+                                        <div class="icon"><span class="icon s7-sun"></span></div>
+                                        <div class="content"><a href="index.php#">Happy Day</a><span>Suspendisse nec leo tortor rhoncus tincidunt. Duis sit amet rutrum elit.</span></div>
+                                    </li>
+                                    <li>
+                                        <div class="icon"><span class="icon s7-gift"></span></div>
+                                        <div class="content"><a href="index.php#">Congratulations Developers</a><span>Suspendisse nec leo tortor rhoncus tincidunt. Duis sit amet rutrum elit.</span></div>
+                                    </li>
+                                    <li>
+                                        <div class="icon"><span class="icon s7-star"></span></div>
+                                        <div class="content"><a href="index.php#">High Score</a><span>Suspendisse nec leo tortor rhoncus tincidunt. Duis sit amet rutrum elit.</span></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search">
+                            <input type="text" placeholder="Search..." name="q"><span class="s7-search"></span>
+                        </div>
+                    </div>
+                    <div id="tab4" role="tabpanel" class="tab-pane ticket am-scroller nano">
+                        <div class="nano-content">
+                            <div class="content">
+                                <h2>New Ticket</h2>
+                                <form>
+                                    <div class="form-group send-ticket">
+                                        <input type="text" placeholder="Title" class="form-control">
+                                    </div>
+                                    <div class="form-group send-ticket">
+                                        <textarea rows="3" placeholder="Write Here..." class="form-control"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg">Create Ticket</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<div th:fragment="modals">
+    <!-- Deactivate Modal -->
+    <div id="responsive-modal" tabindex="-1" role="dialog" class="modal-container modal-colored-header modal-colored-header-success modal-effect-10 deactivate-view">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{core.deactivate}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+
+                        <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                            <i class="icon wb-bell" aria-hidden="true"></i>
+                            <span th:text="#{ajax.prompt.deactivate}"></span>&nbsp;
+                            <span class="identity font-weight-bold"></span>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label>Reason</label>
+                            <select name="reasonCodeNo" class="selectpicker form-control"
+                                    data-fv-notempty="true" data-fv-message="Reason code is required">
+                                <option value=""> Select Reason</option>
+                                <option th:each="item : ${reasoncodes}"
+                                        th:value="${item.id}"
+                                        th:text="${item.name}"></option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="reasonDescription" rows="3" class="form-control" required="required"
+                                      data-fv-notempty="true" data-fv-message="Description is required"></textarea>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary md-close" th:text="#{core.deactivate}"></button>
+                        <button type="button" class="btn btn-default md-close" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
+                        <input type="hidden" name="action" value="deactivate"/>
+                        <input type="hidden" name="index"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End Deactivate Modal-->
+
+    <!--View Deactivation Reason Modal-->
+    <div tabindex="-1" role="dialog" class="modal-container modal-colored-header modal-colored-header-success modal-effect-10 view-reasons">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{core.viewDeactivationReason}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                <span class="float-left">
+                  <i class="ft-user mr-1"></i>
+                </span>
+                                The record was deactivated by <span class=" user font-weight-bold"></span>
+                            </li>
+                            <li class="list-group-item">
+                <span class="float-left">
+                  <i class="ft-alert-circle mr-1"></i>
+                </span>
+                                <span class="font-weight-bold">Deactivation Reason : </span>
+                                <span class="reason font-weight-bold"></span>
+                            </li>
+                            <li class="list-group-item">
+                <span class="float-left">
+                  <i class="ft-voicemail mr-1"></i>
+                </span>
+                                <span class="font-weight-bold">Reason Description : </span>
+                                <span class="description font-weight-bold"></span>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary md-close" data-action="approve-deactivation"
+                                th:text="#{core.approve}"></button>
+                        <button type="submit" class="btn btn-primary md-close" data-action="decline-deactivation"
+                                th:text="#{core.decline}"></button>
+                        <button type="button" class="btn btn-default md-close" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
+                        <input type="hidden" name="action"/>
+                        <input type="hidden" name="index"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End view Deactivation reason modal-->
+
+    <!-- View Changes -->
+    <div tabindex="-1" role="dialog" class="modal-container modal-colored-header modal-colored-header-success modal-effect-10 view-changes">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{core.viewUpdates}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="index"/>
+                        <input type="hidden" name="action"/>
+                        <button type="submit" class="btn btn-success" data-action="approve-edit"
+                                th:text="#{core.approve}"></button>
+                        <button type="submit" class="btn btn-danger" data-action="decline-edit"
+                                th:text="#{core.decline}"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End view Changes-->
+
+</div>
+
+<script>
+    $('.selectpicker').selectpicker();
+</script>
+</body>
+</html>

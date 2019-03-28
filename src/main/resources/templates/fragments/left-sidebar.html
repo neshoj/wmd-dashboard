@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title> OPD-WMS &middot; Left Sidebar</title>
+</head>
+<body>
+
+<th:block th:fragment="left-sidebar">
+    <div class="am-left-sidebar">
+        <div class="content">
+            <div class="am-logo"></div>
+            <ul class="sidebar-elements">
+                <li class="parent"><a href="#"><i class="icon s7-monitor"></i><span>Dashboard</span></a>
+                    <ul class="sub-menu">
+                        <li class="active"><a href="static-wms-dashboard.html">Static WMS Dashboard</a>
+                        </li>
+                        <li><a href="virtual-wms-dashboard.html">Virtual WMS Dashboard</a>
+                        </li>
+                        <li><a href="filter-based.html">Filter Based Dashboard</a>
+                        </li>
+                        <li><a href="live-preview.html">Live Preview</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent"><a href="#"><i class="icon s7-config"></i><span>Setup</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="weighbridge-stations.html">Weighbridge Stations</a>
+                        </li>
+                        <li><a href="vehicle-configuration.html">Vehicle Configurations</a>
+                        </li>
+                        <li><a href="demerit-points.html">Demerit Points</a>
+                        </li>
+                        <li><a href="penalties.html">Penalties</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent"><a href="index.php#"><i class="icon s7-users"></i><span>User Management</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="user-groups.html">User Groups</a>
+                        </li>
+                        <li><a href="users.html">Users</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent"><a href="index.php#"><i class="icon s7-car"></i><span> Vehicle Tags</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="active-tags.html">Active Tags</a>
+                        </li>
+                        <li><a href="cleared-tags.html">Cleared Tags</a>
+                        </li>
+                        <li><a href="cleared-tags.html">All Tags</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent"><a href="index.php#"><i class="icon s7-news-paper"></i><span>Reports</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="hourly-reports.html">Hourly</a>
+                        </li>
+                        <li><a href="daily-reports.html">Daily</a>
+                        </li>
+                        <li><a href="tagging-reports.html">Tagging</a>
+                        </li>
+                        <li><a href="cargo-type-reports.html">Cargo Type</a>
+                        </li>
+                        <li><a href="operator-reports.html">Operator</a>
+                        </li>
+                        <li><a href="weighbridge-stations.html">Weighbridge station</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent"><a href="index.php#"><i class="icon s7-tools"></i><span>System</span></a>
+                    <ul class="sub-menu">
+                        <li><a href="hourly-reports.html">Maker Checker</a>
+                        </li>
+                        <li><a href="daily-reports.html">System Configuration</a>
+                        </li>
+                        <li><a href="tagging-reports.html">Reason Codes</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!--Sidebar bottom content-->
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>
