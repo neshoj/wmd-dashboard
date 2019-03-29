@@ -22,8 +22,11 @@ import java.io.Serializable;
 public class UserTypes implements Serializable {
 
     public static final String SUPERADMIN = "super-admin";
-    public static final String SCHOOL_ADMIN = "school-admin";
-    public static final String SCHOOL_OFFICER = "school-officer";
+    public static final String KENHA_ADMIN = "kenha-admin";
+    public static final String KENHA_AXLE_LOAD_CONTROL_OFFICER = "kenha-axle-load-control-officer";
+    public static final String AEA_ADMIN = "aea-admin";
+    public static final String AEA_WEIGHBRIDGE_MANAGER = "aea-weighbridge-manager";
+    public static final String AEA_OPERATIONS_MANAGER = "aea-operations-manager";
 
     private static final long serialVersionUID = 1L;
     @Id

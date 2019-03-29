@@ -1,6 +1,6 @@
 package atlas.web.usermanager.auth.handlers;
 
-import atlas.web.usermanager.entities.SchoolUsers;
+import atlas.web.usermanager.entities.ClientsUsers;
 import atlas.web.usermanager.entities.UserTypes;
 import atlas.web.usermanager.entities.Users;
 import atlas.web.usermanager.repository.UserRepository;
@@ -50,11 +50,21 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
             switch( user.getUserTypeLink().getCode() )
             {
-                case UserTypes.SCHOOL_ADMIN:
-                    session = setSchoolUsersParentNoAndParentType(session, user, UserTypes.SCHOOL_ADMIN);
+                case UserTypes.AEA_ADMIN:
+                    session = setClientUsersParentNoAndParentType(session, user, UserTypes.AEA_ADMIN);
                     break;
-                case UserTypes.SCHOOL_OFFICER:
-                    session = setSchoolUsersParentNoAndParentType(session, user, UserTypes.SCHOOL_OFFICER);
+                case UserTypes.AEA_OPERATIONS_MANAGER:
+                    session = setClientUsersParentNoAndParentType(session, user, UserTypes.AEA_OPERATIONS_MANAGER);
+                    break;
+                case UserTypes.AEA_WEIGHBRIDGE_MANAGER:
+                    session = setClientUsersParentNoAndParentType(session, user, UserTypes.AEA_WEIGHBRIDGE_MANAGER);
+                    break;
+
+                case UserTypes.KENHA_ADMIN:
+                    session = setClientUsersParentNoAndParentType(session, user, UserTypes.KENHA_ADMIN);
+                    break;
+                case UserTypes.KENHA_AXLE_LOAD_CONTROL_OFFICER:
+                    session = setClientUsersParentNoAndParentType(session, user, UserTypes.KENHA_AXLE_LOAD_CONTROL_OFFICER);
                     break;
             }
 
@@ -78,11 +88,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     }
 
 
-    private HttpSession setSchoolUsersParentNoAndParentType(HttpSession session, Users user, String parent) {
+    private HttpSession setClientUsersParentNoAndParentType(HttpSession session, Users user, String parent) {
 
-        if( null != user.getSchoolUsersLink() ) {
-            SchoolUsers schoolUsersLink = user.getSchoolUsersLink();
-            session.setAttribute("_userParentNo", schoolUsersLink.getSchool() );
+        if( null != user.getClientUsersLink() ) {
+            ClientsUsers clientUsersLink = user.getClientUsersLink();
+            session.setAttribute("_userParentNo", clientUsersLink.getClientNo() );
         }
 
         session.setAttribute("_userParentType", parent);

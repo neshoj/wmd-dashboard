@@ -202,7 +202,7 @@ public class UserService implements UserServiceInterface {
      * Persist a new record
      *
      * @param request
-     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> saveRecord(HttpServletRequest request) {
@@ -230,20 +230,20 @@ public class UserService implements UserServiceInterface {
             UserTypes userTypeNode = userTypesRepository.findById(entity.getUserTypeNo()).get();
             String code = userTypeNode.getCode();
 
-            if (
-                    code.equals(UserTypes.SCHOOL_ADMIN) ||
-                    code.equals(UserTypes.SCHOOL_OFFICER)
+            if (code.equals(UserTypes.AEA_ADMIN) ||
+                    code.equals(UserTypes.AEA_OPERATIONS_MANAGER) ||
+                    code.equals(UserTypes.AEA_WEIGHBRIDGE_MANAGER)
             ) {
-                SchoolUsers child = new SchoolUsers();
-                String merchantNo = request.getParameter("schoolNo");
-                child.setId(entity.getId()).setSchool(Long.valueOf(merchantNo));
+                ClientsUsers child = new ClientsUsers();
+                String merchantNo = request.getParameter("clientNo");
+                child.setId(entity.getId()).setClientNo(Long.valueOf(merchantNo));
                 schoolsUsersRepository.save(child);
             }
         } else {
-            //When a school is creating this record
-            if (UserTypes.SCHOOL_ADMIN.equals(parentType)) {
-                SchoolUsers child = new SchoolUsers();
-                child.setId(entity.getId()).setSchool(Long.valueOf(parentNo));
+            //When a AEA or KENHA is creating this record
+            if (UserTypes.AEA_ADMIN.equals(parentType) || UserTypes.KENHA_ADMIN.equals(parentType)) {
+                ClientsUsers child = new ClientsUsers();
+                child.setId(entity.getId()).setClientNo(Long.valueOf(parentNo));
                 schoolsUsersRepository.save(child);
             }
         }
@@ -269,7 +269,7 @@ public class UserService implements UserServiceInterface {
      * Edit a record
      *
      * @param request
-     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> editRecord(HttpServletRequest request) {
@@ -325,7 +325,7 @@ public class UserService implements UserServiceInterface {
      * Approve edit changes
      *
      * @param request
-     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> approveEditChanges(HttpServletRequest request) {
@@ -358,7 +358,7 @@ public class UserService implements UserServiceInterface {
      * Fetch a record information
      *
      * @param request
-     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> fetchRecord(HttpServletRequest request) {
@@ -370,7 +370,7 @@ public class UserService implements UserServiceInterface {
      * Fetch edit changes
      *
      * @param request
-     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> fetchRecordChanges(HttpServletRequest request) {
@@ -382,7 +382,7 @@ public class UserService implements UserServiceInterface {
      * Update record status
      *
      * @param request
-     * @return Map<String                                                                                                                               ,                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> flagRecords(HttpServletRequest request) {
@@ -432,7 +432,7 @@ public class UserService implements UserServiceInterface {
      * Deactivate a record
      *
      * @param request
-     * @return Map<String                                                                                                                               ,                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> deactivateRecord(HttpServletRequest request) {
@@ -461,7 +461,7 @@ public class UserService implements UserServiceInterface {
      * Fetch deactivation details
      *
      * @param request
-     * @return Map<String                                                                                                                               ,                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> fetchDeactivationInfo(HttpServletRequest request) {
@@ -489,7 +489,7 @@ public class UserService implements UserServiceInterface {
      * Reset user attempts
      *
      * @param request
-     * @return Map<String                                                                                                                               ,                                                                                                                                                                                                                                                               Object>
+     * @return Map<String                                                                                                                                                                                                                                                               ,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Object>
      */
     @Override
     public Map<String, Object> unlockUser(HttpServletRequest request) {

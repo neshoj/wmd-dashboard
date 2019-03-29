@@ -127,10 +127,10 @@ public class UserGroupController {
         // Set the parent entity
         if( !StringUtils.isEmpty( parentType ) && null != parentNo ){
 
-            if( parentType.equals( UserTypes.SCHOOL_ADMIN) ){
+            if( parentType.equals( UserTypes.AEA_ADMIN) || parentType.equals( UserTypes.AEA_ADMIN) ){
                 dataTable
-                        .from("LEFT JOIN a.schoolGroups b")
-                        .where("b.schoolNo = :parentNo")
+                        .from("LEFT JOIN a.clientsGroups b")
+                        .where("b.clientNo = :parentNo")
                         .setParameter("parentNo", parentNo);
             }
         }

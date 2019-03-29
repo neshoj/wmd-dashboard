@@ -99,7 +99,7 @@ public class UserGroups implements Serializable {
     private ReasonCodes reasonCodeLink;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "userGroup", fetch = FetchType.LAZY)
-    private SchoolGroups schoolGroups;
+    private ClientsGroups clientsGroups;
 
     //DISCLAIMER: RELATION NOT ENFORCED IN THE DB
     @JoinColumn(name = "CREATED_BY", referencedColumnName = "ID", nullable = false, insertable = false, updatable = false)
@@ -220,11 +220,8 @@ public class UserGroups implements Serializable {
         this.reasonCodeNo = reasonCodeNo;
     }
 
-    @JsonIgnore
-    public SchoolGroups getSchoolGroups() {
-        return schoolGroups;
-    }
 
+    @JsonIgnore public ClientsGroups getClientsGroups() { return clientsGroups;    }
     @JsonIgnore public ReasonCodes getReasonCodeLink() {
         return reasonCodeLink;
     }

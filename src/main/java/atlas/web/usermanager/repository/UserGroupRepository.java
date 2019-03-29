@@ -33,8 +33,8 @@ public interface UserGroupRepository extends CrudRepository<UserGroups, Long> {
      * @param parentNo
      * @return List<UserGroups>
      */
-    @Query("SELECT a FROM UserGroups a LEFT JOIN a.schoolGroups b WHERE b.schoolNo = ?1 AND a.flag = '1' ")
-    public List<UserGroups> fetchSchoolRecords(Long parentNo);
+    @Query("SELECT a FROM UserGroups a LEFT JOIN a.clientsGroups b WHERE b.clientNo = ?1 AND a.flag = '1' ")
+    public List<UserGroups> fetchClientGroupRecords(Long parentNo);
 
 
     /**

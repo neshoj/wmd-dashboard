@@ -43,10 +43,15 @@ public class UserTypeService implements UserTypeServiceInterface {
         //When server non-super-admins
         else {
             List<String> codes = new ArrayList<>();
-            //When serving bank admin
-            if (parentType.equals(UserTypes.SCHOOL_ADMIN)) {
-                codes.add(UserTypes.SCHOOL_ADMIN);
-                codes.add(UserTypes.SCHOOL_OFFICER);
+            //When serving aea admin
+            if (parentType.equals(UserTypes.AEA_ADMIN)) {
+                codes.add(UserTypes.AEA_ADMIN);
+                codes.add(UserTypes.AEA_OPERATIONS_MANAGER);
+                codes.add(UserTypes.AEA_WEIGHBRIDGE_MANAGER);
+            }
+            else if (parentType.equals(UserTypes.KENHA_ADMIN)) {
+                codes.add(UserTypes.KENHA_AXLE_LOAD_CONTROL_OFFICER);
+                codes.add(UserTypes.KENHA_ADMIN);
             }
 
             userTypes = userTypesRepository.findByCodeIn(codes);

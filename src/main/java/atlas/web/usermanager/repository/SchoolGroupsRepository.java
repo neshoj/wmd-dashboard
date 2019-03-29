@@ -1,6 +1,6 @@
 package atlas.web.usermanager.repository;
 
-import atlas.web.usermanager.entities.SchoolGroups;
+import atlas.web.usermanager.entities.ClientsGroups;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  * @version     1.0.0
  */
 @Repository
-public interface SchoolGroupsRepository extends CrudRepository<SchoolGroups, Long> {
+public interface SchoolGroupsRepository extends CrudRepository<ClientsGroups, Long> {
 }

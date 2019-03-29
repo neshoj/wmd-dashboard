@@ -15,15 +15,16 @@ create table `app_roles` (
   AUTO_INCREMENT = 7
   DEFAULT CHARSET = utf8;
 
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (1,   'Weighbridge Stations', 'ROLE_WEIGHBRIDGE', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin,kenha-admin, aea-admin');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (2,   'User Groups', 'ROLE_USER_GROUP', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin,kenha-admin, aea-admin');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (3,   'Users', 'ROLE_USERS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin,kenha-admin, aea-admin');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (4,   'Vehicle Tags', 'ROLE_VEHICLE_TAGS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin, aea-weighbridge-manager');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (5,   'Vehicle Configuration', 'ROLE_VEHICLE_CONFIGURATION', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (6,   'Demerit Points', 'ROLE_DEMERIT_POINTS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (7,   'Penalties', 'ROLE_PENALTIES', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (8,   'Reports', 'ROLE_REPORTS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin, aea-weighbridge-manager,aea-operations-manager');
-INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (9,   'Audit Logs', 'ROLE_AUDIT_LOGS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (1,   'Weighbridge Stations', 'ROLE_WEIGHBRIDGE_STATION', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin,kenha-admin, aea-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (2,   'Clients', 'ROLE_CLIENTS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (3,   'User Groups', 'ROLE_USER_GROUP', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin,kenha-admin, aea-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (4,   'Users', 'ROLE_USERS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin,kenha-admin, aea-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (5,   'Vehicle Tags', 'ROLE_VEHICLE_TAGS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin, aea-weighbridge-manager');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (6,   'Vehicle Configuration', 'ROLE_VEHICLE_CONFIGURATION', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (7,   'Demerit Points', 'ROLE_DEMERIT_POINTS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (8,   'Penalties', 'ROLE_PENALTIES', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (9,   'Reports', 'ROLE_REPORTS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin, aea-weighbridge-manager,aea-operations-manager');
+INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (10,   'Audit Logs', 'ROLE_AUDIT_LOGS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin');
 
 --- App Settings Table
 drop table if exists `app_settings`;
@@ -188,9 +189,26 @@ INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VA
 INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (47, 'Delete Users', 'delete', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 3);
 INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (48, 'Activate Users', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 3);
 
-INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (81, 'Can view transactions', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 6);
-INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (82, 'Can view reports', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 7);
-INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (83, 'Can view audit logs', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 8);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (49, 'View Clients', 'default', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (50, 'View Active Clients', 'view-active', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (51, 'View New Clients', 'view-new', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (52, 'View Edited Clients', 'view-edit', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (53, 'View Deactivated Clients', 'view-deactivated', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (54, 'View Inactive Clients', 'view-inactive', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (55, 'Create Clients', 'new', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (56, 'Edit Clients', 'edit', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (57, 'Approve New  Clients', 'approve-new', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (58, 'Decline New Clients', 'decline-new', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (59, 'Approve Edited Clients', 'approve-edit', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (60, 'Decline Edited Clients', 'decline-edit', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (61, 'Approve Deactivated Clients', 'approve-deactivation', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (62, 'Decline Deactivated Clients', 'decline-deactivation', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (63, 'Delete Clients', 'delete', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (64, 'Activate Clients', 'activate', '2019-02-01 02:20:20', '2019-02-01 02:20:20', 2);
+
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (65, 'Can view transactions', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 6);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (66, 'Can view reports', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 7);
+INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (67, 'Can view audit logs', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 8);
 
 --- Group Permissions Table
 drop table if exists `group_permissions`;
@@ -305,7 +323,7 @@ insert into `users` (`id`, `first_name`, `surname`, `email`, `phone`, `password`
 values (1, 'one', 'point-seven', 'info@one-point-seven.com', '+254706151591', '$2a$10$OB4s5782LhCGjpzfmxa97e85NwR.yBTSjOfbBd5Bl98I2frrwiwaK', 1, 0, 1, 1, '1', 1, 1, 1);
 
 -- =====================================================================================================================
--- =========================        Merchants         ====================================================================
+-- =========================        Clients         ====================================================================
 -- =====================================================================================================================
 
 --- clients Table
@@ -319,7 +337,6 @@ create table clients (
   `contact_surname`   varchar(100)          default null,
   `contact_phone`      varchar(20)           default null,
   `contact_email`      text                  default null,
-  `contact_passport`   varchar(100)          default null,
 
   `flag`               varchar(20)           default '0', -- MakerChecker Flag
   `edit_data`          longtext,
@@ -335,6 +352,8 @@ create table clients (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+INSERT INTO `clients` (`name`, `location`, `contact_first_name`, `contact_surname`, `contact_phone`, `contact_email`, `flag`, `created_by`, `updated_by`, `created_on`, `updated_on`) VALUES ('AEA', 'Nairobi', 'Avery', 'Support', '+254724 259 815', 'avery@averyafrica.com', '1', '1', '1', '2019-02-22 10:15:02', '2019-02-22 10:15:02');
+INSERT INTO `clients` (`name`, `location`, `contact_first_name`, `contact_surname`, `contact_phone`, `contact_email`, `flag`, `created_by`, `updated_by`, `created_on`, `updated_on`) VALUES ('KENHA', 'Nairobi', 'KENHA', 'Support', '+254-020-2729200', 'info@kenha.co.ke', '1', '1', '1', '2019-02-22 10:15:02', '2019-02-22 10:15:02');
 
 
 --- Client Users Table
@@ -368,14 +387,43 @@ create table clients_groups (
 -- =====================================================================================================================
 -- =========================        Weighbridge Stations         =======================================================
 -- =====================================================================================================================
+drop table if exists `weighbridge_types`;
+create table `weighbridge_types` (
+  `id`                    int(11)   not null auto_increment,
+  `name`                  varchar(100)       default null,
+  `description`           varchar(100)       default null,
+
+  `flag`                 varchar(20)        default '0',
+  `edit_data`            longtext,
+  `reason_code_no`       int(11)            default null,
+  `reason_description`   varchar(200)       default null,
+  `created_on`           timestamp null     default current_timestamp,
+  `updated_on`           timestamp null     default current_timestamp,
+  `deleted_on`           timestamp null     default null,
+  `created_by`           int(11)            default null,
+  `updated_by`           int(11)            default null,
+  PRIMARY KEY (`id`),
+  KEY `reason_code_no` (`reason_code_no`),
+  CONSTRAINT `weighbridge_types_fk_1` FOREIGN KEY (`reason_code_no`) REFERENCES `reason_codes` (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+INSERT INTO `weighbridge_types` (`id`, `name`, `description`)
+VALUES
+      ('1', 'Single Axle Weigher', 'Measure each axle independently'),
+      ('2', 'Group Axle Weigher', 'Measure axle groups independently'),
+      ('3', 'Multi Deck Axle Weigher', 'Measure vehicle gross weight once');
+
 drop table if exists `weighbridge_stations`;
 create table `weighbridge_stations` (
   `id`                  int(11)       not null auto_increment,
   `name`                varchar(100)  not null,
   `station_code`        varchar(200)  not null,
-  `country`             varchar(100)  not null,
   `location`            varchar(200)  not null,
   `mobile_no`           varchar(20)   not null,
+
+  `weighbridge_types_no`  int(11)       not null,
 
   `created_on`          timestamp null     default current_timestamp,
   `updated_on`          timestamp null     default current_timestamp,
@@ -389,7 +437,9 @@ create table `weighbridge_stations` (
 
   PRIMARY KEY (`id`),
   KEY `reason_code_no` (`reason_code_no`),
-  CONSTRAINT `weighbridge_stations_fk_1` FOREIGN KEY (`reason_code_no`) REFERENCES `reason_codes` (`id`)
+  KEY `weighbridge_types_no` (`weighbridge_types_no`),
+  CONSTRAINT `weighbridge_stations_fk_1` FOREIGN KEY (`reason_code_no`) REFERENCES `reason_codes` (`id`),
+  CONSTRAINT `weighbridge_stations_fk_2` FOREIGN KEY (`weighbridge_types_no`) REFERENCES `weighbridge_types` (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;

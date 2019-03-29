@@ -121,9 +121,9 @@ public class UserGroupService implements UserGroupServiceInterface {
         //When server non-super-admins
         else {
             List<String> codes = new ArrayList<>();
-            //When serving bank admin
-            if (parentType.equals(UserTypes.SCHOOL_ADMIN)) {
-                groups = entityRepository.fetchSchoolRecords(parentNo);
+            //When serving aea admin
+            if (parentType.equals(UserTypes.AEA_ADMIN) || parentType.equals(UserTypes.KENHA_ADMIN)) {
+                groups = entityRepository.fetchClientGroupRecords(parentNo);
             }
         }
 
@@ -183,9 +183,9 @@ public class UserGroupService implements UserGroupServiceInterface {
             // Set the owner of the group
             if (!StringUtils.isEmpty(parentType) && null != parentNo) {
 
-                if (parentType.equals(UserTypes.SCHOOL_ADMIN)) {
-                    SchoolGroups child = new SchoolGroups()
-                            .setSchoolNo(parentNo)
+                if (parentType.equals(UserTypes.AEA_ADMIN) || parentType.equals(UserTypes.KENHA_ADMIN)) {
+                    ClientsGroups child = new ClientsGroups()
+                            .setClientNo(parentNo)
                             .setId(entity.getId());
                     bankGroupsRepository.save(child);
                 }

@@ -176,7 +176,7 @@ public class Users implements Serializable {
     private Users updatedByLink;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usersLink", fetch = FetchType.LAZY)
-    private SchoolUsers schoolUsersLink;
+    private ClientsUsers clientUsersLink;
 
     public Users() { }
 
@@ -427,8 +427,8 @@ public class Users implements Serializable {
     }
 
 
-    @JsonIgnore public SchoolUsers getSchoolUsersLink() {
-        return schoolUsersLink;
+    @JsonIgnore public ClientsUsers getClientUsersLink() {
+        return clientUsersLink;
     }
     @JsonIgnore public ReasonCodes getReasonCodeLink() { return reasonCodeLink;  }
     @JsonIgnore public UserGroups getUserGroupLink() { return userGroupLink; }

@@ -5,7 +5,7 @@ import atlas.core.template.AjaxUtils;
 import atlas.core.template.View;
 import atlas.core.template.datatables.DatatablesInterface;
 import atlas.web.configs.ReasonCodeServiceInterface;
-import atlas.web.schools.SchoolServiceInterface;
+import atlas.web.clients.ClientsServiceInterface;
 import atlas.web.usermanager.UserGroupServiceInterface;
 import atlas.web.usermanager.UserServiceInterface;
 import atlas.web.usermanager.UserTypeServiceInterface;
@@ -37,7 +37,7 @@ public class UsersController {
     private DatatablesInterface dataTable;
     private ReasonCodeServiceInterface reasonCodeService;
     private UserTypeServiceInterface userTypeService;
-    private SchoolServiceInterface schoolServiceInterface;
+    private ClientsServiceInterface schoolServiceInterface;
     private MailerService mailService;
 
     @Value("${app.endpoint}")
@@ -49,7 +49,7 @@ public class UsersController {
                            DatatablesInterface dataTable,
                            ReasonCodeServiceInterface reasonCodeService,
                            UserTypeServiceInterface userTypeService,
-                           SchoolServiceInterface schoolServiceInterface,
+                           ClientsServiceInterface schoolServiceInterface,
                            MailerService mailService) {
         this.entityService = entityService;
         this.userGroupService = userGroupService;
@@ -65,8 +65,8 @@ public class UsersController {
         View view = new View("user-manager/users");
         String parentType = (String) request.getSession().getAttribute("_userParentType");
 
-        if (ObjectUtils.nullSafeEquals(parentType, UserTypes.SCHOOL_ADMIN))
-            view = new View("user-manager/school-admin-users");
+        if (ObjectUtils.nullSafeEquals(parentType, UserTypes.AEA_ADMIN) || ObjectUtils.nullSafeEquals(parentType, UserTypes.KENHA_ADMIN))
+            view = new View("user-manager/users");
 
         if (AjaxUtils.isAjaxRequest(request)) {
             String action = request.getParameter("action");
@@ -189,10 +189,10 @@ public class UsersController {
         // Set the parent entity
         if (!StringUtils.isEmpty(parentType) && null != parentNo) {
 
-            if (parentType.equals(UserTypes.SCHOOL_ADMIN)) {
+            if (parentType.equals(UserTypes.AEA_ADMIN) || parentType.equals(UserTypes.KENHA_ADMIN)) {
                 dataTable
-                        .from("LEFT JOIN a.schoolUsersLink c")
-                        .where("c.school = :parentNo")
+                        .from("LEFT JOIN a.clientUsersLink c")
+                        .where("c.clientNo = :parentNo")
                         .setParameter("parentNo", parentNo);
             }
         }

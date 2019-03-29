@@ -33,8 +33,12 @@ public class DashboardController {
         View view = new View("dashboard/default-view");
         String parentType = (String)request.getSession().getAttribute("_userParentType");
 
-        if(UserTypes.SCHOOL_ADMIN.equals( parentType ) || UserTypes.SCHOOL_OFFICER.equals( parentType ) )
-            view = new View("dashboard/school-admin-view");
+        if(
+                UserTypes.AEA_ADMIN.equals( parentType ) || UserTypes.KENHA_ADMIN.equals( parentType ) ||
+                UserTypes.AEA_OPERATIONS_MANAGER.equals( parentType ) || UserTypes.KENHA_AXLE_LOAD_CONTROL_OFFICER.equals( parentType ) ||
+                UserTypes.AEA_WEIGHBRIDGE_MANAGER.equals( parentType )
+        )
+            view = new View("dashboard/default-view");
 
         if (AjaxUtils.isAjaxRequest(request)) {
             String calendarStart = request.getParameter("start");

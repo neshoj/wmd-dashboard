@@ -2081,14 +2081,14 @@ var App = function() {
                 var a = App.color.alt2;
                 $.plot($("#line-chart1"), [{
                     data: [
-                        [0, 20],
-                        [1, 30],
-                        [2, 25],
-                        [3, 39],
-                        [4, 35],
-                        [5, 40],
-                        [6, 30],
-                        [7, 45]
+                        [0, 30],
+                        [1, 25],
+                        [2, 22],
+                        [3, 20],
+                        [4, 19],
+                        [5, 15],
+                        [6, 12],
+                        [7, 10]
                     ],
                     label: "Page Views"
                 }], {
@@ -2802,13 +2802,13 @@ var App = function() {
 
             function b() {
                 var a = [{
-                        label: "Premium Purchases",
+                        label: "Overloads",
                         data: 15
                     }, {
-                        label: "Standard Plans",
+                        label: "Within allowed %",
                         data: 25
                     }, {
-                        label: "Services",
+                        label: "Within Limit",
                         data: 60
                     }],
                     b = tinycolor(App.color.primary).lighten(5).toString(),
@@ -2836,20 +2836,14 @@ var App = function() {
 
             function c() {
                 var a = [{
-                        label: "Direct Access",
+                        label: "Trucks",
                         data: 20
                     }, {
-                        label: "Advertisment",
+                        label: "Buses",
                         data: 15
                     }, {
-                        label: "Facebook",
+                        label: "Cars",
                         data: 15
-                    }, {
-                        label: "Twitter",
-                        data: 30
-                    }, {
-                        label: "Google Plus",
-                        data: 20
                     }],
                     b = App.color.alt2,
                     c = App.color.alt4,
@@ -2911,19 +2905,14 @@ var App = function() {
 
             function f() {
                 var a = ($("#line-chart1"), [
-                        [1, 10],
-                        [2, 30],
-                        [3, 55],
-                        [4, 36],
-                        [5, 57],
-                        [6, 80],
-                        [7, 65],
-                        [8, 50],
-                        [9, 80],
-                        [10, 70],
-                        [11, 90],
-                        [12, 67],
-                        [12, 67]
+                        [0, 30],
+                        [1, 25],
+                        [2, 22],
+                        [3, 20],
+                        [4, 19],
+                        [5, 15],
+                        [6, 12],
+                        [7, 10]
                     ]),
                     b = App.color.alt3;
                 $.plot("#line-chart1", [{
@@ -3144,8 +3133,8 @@ var App = function() {
                         [3, 39],
                         [4, 35],
                         [5, 40],
-                        [6, 30],
-                        [7, 45]
+                        [6, 60],
+                        [7, 70]
                     ],
                     label: "Page Views"
                 }], {
@@ -3200,17 +3189,23 @@ var App = function() {
 
             function g() {
                 var a = [{
-                        label: "Google",
-                        data: 45
+                        label: "2A",
+                        data: 415
                     }, {
-                        label: "Dribbble",
-                        data: 25
+                        label: "3D",
+                        data: 205
                     }, {
-                        label: "Twitter",
-                        data: 20
+                        label: "4C",
+                        data: 161
                     }, {
-                        label: "Facebook",
-                        data: 10
+                        label: "5B",
+                        data: 385
+                    },{
+                        label: "6*SDDWWW",
+                        data: 670
+                    }, {
+                        label: "7C",
+                        data: 1000
                     }],
                     b = tinycolor(App.color.primary).brighten(9).toString(),
                     c = tinycolor(App.color.primary).lighten(13).toString(),
@@ -3256,36 +3251,36 @@ var App = function() {
                     b = tinycolor(App.color.primary).brighten(5).toString();
                 $.plot($("#bar-chart1"), [{
                     data: [
-                        [0, 15],
-                        [1, 15],
-                        [2, 19],
-                        [3, 28],
-                        [4, 30],
-                        [5, 37],
-                        [6, 35],
-                        [7, 38],
-                        [8, 48],
-                        [9, 43],
-                        [10, 38],
-                        [11, 32],
-                        [12, 38]
+                        [0, 1],
+                        [1, 1],
+                        [2, 1],
+                        [3, 1],
+                        [4, 1],
+                        [5, 1],
+                        [6, 1],
+                        [7, 1],
+                        [8, 1],
+                        [9, 1],
+                        [10, 1],
+                        [11, 1],
+                        [12, 1]
                     ],
                     label: "Page Views"
                 }, {
                     data: [
-                        [0, 7],
-                        [1, 10],
+                        [0, 38],
+                        [1, 20],
                         [2, 15],
-                        [3, 23],
-                        [4, 24],
-                        [5, 29],
-                        [6, 25],
-                        [7, 33],
-                        [8, 35],
-                        [9, 38],
-                        [10, 32],
-                        [11, 27],
-                        [12, 32]
+                        [3, 12],
+                        [4, 12],
+                        [5, 13],
+                        [6, 10],
+                        [7, 9],
+                        [8, 6],
+                        [9, 4],
+                        [10, 3],
+                        [11, 3],
+                        [12, 2]
                     ],
                     label: "Unique Visitor"
                 }], {
@@ -3562,17 +3557,23 @@ var App = function() {
 
             function e() {
                 var a = [{
-                        label: "Google",
-                        data: 45
+                        label: "2A",
+                        data: 415
                     }, {
-                        label: "Dribbble",
-                        data: 25
+                        label: "3D",
+                        data: 205
                     }, {
-                        label: "Twitter",
-                        data: 20
+                        label: "4C",
+                        data: 161
                     }, {
-                        label: "Facebook",
-                        data: 10
+                        label: "5B",
+                        data: 385
+                    },{
+                        label: "6*SDDWWW",
+                        data: 670
+                    }, {
+                        label: "7C",
+                        data: 1000
                     }],
                     b = tinycolor(App.color.primary).brighten(9).toString(),
                     c = tinycolor(App.color.primary).lighten(13).toString(),
@@ -3630,7 +3631,7 @@ var App = function() {
                         [9, 43],
                         [10, 38],
                         [11, 32],
-                        [12, 38]
+                        [12, 1]
                     ],
                     label: "Page Views"
                 }, {
@@ -3647,7 +3648,7 @@ var App = function() {
                         [9, 38],
                         [10, 32],
                         [11, 27],
-                        [12, 32]
+                        [12, 1]
                     ],
                     label: "Unique Visitor"
                 }], {
