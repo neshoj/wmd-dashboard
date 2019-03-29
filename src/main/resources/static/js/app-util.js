@@ -3,7 +3,7 @@ var utils = (function (p) {
 
     //The parent element that wraps all the elements to be
     //manipulated in this file
-    const e = $('.wrapper');
+    const e = $('.am-wrapper');
 
     //Data-table placeholders for maker-checker tables
     let activeTableDt = null;
