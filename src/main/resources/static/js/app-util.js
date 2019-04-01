@@ -379,10 +379,30 @@ var utils = (function (p) {
 
         fnRowActions: function (o, ident, state) {
             let actions = '';
-            if (state === 0) {
-                actions += '<a href="javascript:void(0)" class="pr-10 approve-new" data-toggle="tooltip" title="Approve" data-toggle="tooltip" data-placement="top" title="Approve" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-check txt-success"></i></a>'
-                actions += '<a href="javascript:void(0)" class="pr-10 decline-new" data-toggle="tooltip" title="Decline" data-toggle="tooltip" data-placement="top" title="Decline" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-ban txt-danger"></i></a>'
-            } else if (state === 1) {
+
+            if(state === 0){
+                actions += '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-success btn-sm approve-new" data-toggle="tooltip" data-placement="top" title="Approve" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-check"></i></button>\n' +
+                    '                <button type="button" class="btn btn-primary btn-sm decline-new" data-toggle="tooltip" data-placement="top" title="Decline" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-trash"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+
+            }
+
+
+
+
+
+            // if (state === 0) {
+            //     actions += '<a href="javascript:void(0)" class="pr-10 approve-new" data-toggle="tooltip" title="Approve" data-toggle="tooltip" data-placement="top" title="Approve" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-check txt-success"></i></a>'
+            //     actions += '<a href="javascript:void(0)" class="pr-10 decline-new" data-toggle="tooltip" title="Decline" data-toggle="tooltip" data-placement="top" title="Decline" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-ban txt-danger"></i></a>'
+            // }
+
+
+            else if (state === 1) {
                 actions += '<a href="javascript:void(0)" class="pr-10 edit" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-pencil-alt txt-primary"></i></a>'
                 actions += '<a href="javascript:void(0)" class="pr-10 deactivate" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Deactivate" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-times  txt-danger"></i></a>'
             } else if (state === 2) {

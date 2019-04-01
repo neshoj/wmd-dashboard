@@ -21,14 +21,14 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
     <link rel="stylesheet" type="text/css" th:href="@{theme/lib/datatables/css/dataTables.bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{theme/lib/bootstrap-select/css/bootstrap-select.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{theme/css/style.css}">
 
-    <link rel="stylesheet" th:href="@{theme/lib/sweetalert/sweetalert.css}"/>
-    <link rel="stylesheet" th:href="@{theme/lib/formvalidation/formValidation.min.css}"/>
-    <link rel="stylesheet" th:href="@{theme/lib/intelutil/css/intlTelInput.css}"/>
+    <link rel="stylesheet"  type="text/css" th:href="@{theme/lib/sweetalert/sweetalert.css}"/>
+    <link  rel="stylesheet" type="text/css" th:href="@{theme/lib/font-awesome/css/all.css}"/>
+    <link rel="stylesheet"  type="text/css" th:href="@{theme/lib/formvalidation/formValidation.min.css}"/>
+    <link rel="stylesheet"  type="text/css" th:href="@{theme/lib/intelutil/css/intlTelInput.css}"/>
 
 </head>
 
@@ -40,17 +40,17 @@
 
     <!-- Main Content -->
     <div class="am-content">
-            <div class="lang-pack d-none">
-                <span class="_ajax_error" th:text="#{ajax.error}"></span>
-                <span class="_ajax_error_404" th:text="#{ajax.error.404}"></span>
-                <span class="_ajax_error_403" th:text="#{ajax.error.403}"></span>
-                <span class="_ajax_error_500" th:text="#{ajax.error.500}"></span>
-                <span class="_ajax_question_delete" th:text="#{ajax.question.delete}"></span>
-                <span class="_ajax_question_activate" th:text="#{ajax.question.activate}"></span>
-                <span class="_ajax_question_decline-new" th:text="#{ajax.question.decline-new}"></span>
-                <span class="_ajax_question_approve-new" th:text="#{ajax.question.approve-new}"></span>
-                <span class="_ajax_question_unlock" th:text="#{ajax.question.unlock}"></span>
-            </div>
+        <div class="lang-pack d-none">
+            <span class="_ajax_error" th:text="#{ajax.error}"></span>
+            <span class="_ajax_error_404" th:text="#{ajax.error.404}"></span>
+            <span class="_ajax_error_403" th:text="#{ajax.error.403}"></span>
+            <span class="_ajax_error_500" th:text="#{ajax.error.500}"></span>
+            <span class="_ajax_question_delete" th:text="#{ajax.question.delete}"></span>
+            <span class="_ajax_question_activate" th:text="#{ajax.question.activate}"></span>
+            <span class="_ajax_question_decline-new" th:text="#{ajax.question.decline-new}"></span>
+            <span class="_ajax_question_approve-new" th:text="#{ajax.question.approve-new}"></span>
+            <span class="_ajax_question_unlock" th:text="#{ajax.question.unlock}"></span>
+        </div>
         <th:block layout:fragment="content"></th:block>
 
     </div>
@@ -59,6 +59,19 @@
     <!--Right Side bar-->
     <div th:replace="fragments/right-sidebar::right-sidebar"></div>
     <!--End Right Side bar-->
+
+    <!--Modal windows area-->
+    <th:block layout:fragment="modals"></th:block>
+    <!--End Modal window area-->
+
+    <!--<div class="xs-mb-0">-->
+        <!--<div class="btn-toolbar">-->
+            <!--<div class="btn-group btn-space">-->
+                <!--<button type="button" class="btn btn-default btn-sm"><i class="icon s7-home"></i></button>-->
+                <!--<button type="button" class="btn btn-default btn-sm"><i class="icon s7-mail"></i></button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
 
 
@@ -67,6 +80,8 @@
 <script th:src="@{theme/lib/jquery.nanoscroller/javascripts/jquery.nanoscroller.min.js}"
         type="text/javascript"></script>
 <script th:src="@{theme/lib/bootstrap/dist/js/bootstrap.min.js}"
+        type="text/javascript"></script>
+<script th:href="@{theme/lib/datatables/js/dataTables.bootstrap.min.js}"
         type="text/javascript"></script>
 <script th:src="@{theme/lib/datatables/js/jquery.dataTables.min.js}"
         type="text/javascript"></script>
@@ -88,6 +103,15 @@
         type="text/javascript"></script>
 <script th:src="@{theme/js/main.js}"
         type="text/javascript"></script>
+<script th:src="@{theme/lib/font-awesome/js/all.js}"
+        type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //initialize the javascript
+        App.init();
+        // App.dashboard();
+    });
+</script>
 <!--Additional JS resources-->
 <th:block layout:fragment="script"></th:block>
 <!--Additional JS resources-->

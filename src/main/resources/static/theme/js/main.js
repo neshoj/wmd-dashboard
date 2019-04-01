@@ -285,11 +285,13 @@ var App = function() {
                     $(".am-scroller").nanoScroller()
                 }), $(".nav-tabs").on("shown.bs.tab", function(a) {
                     $(".am-scroller").nanoScroller()
-                }), $('[data-toggle="tooltip"]').tooltip(), $('[data-toggle="popover"]').popover(), $(".modal").on("show.bs.modal", function() {
-                    $("html").addClass("am-modal-open")
-                }), $(".modal").on("hidden.bs.modal", function() {
-                    $("html").removeClass("am-modal-open")
-                })
+                }), $('[data-toggle="tooltip"]').tooltip(), $('[data-toggle="popover"]').popover()
+                //     , $(".modal").on("show.bs.modal", function() {
+                //     $("html").addClass("am-modal-open")
+                //         })  ,
+                //     $(".modal").on("hidden.bs.modal", function() {
+                //     $("html").removeClass("am-modal-open")
+                // })
             },
             leftSidebarInit: b,
             rightSidebarInit: c,

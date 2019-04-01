@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table( name="weighbridge_stations")
+@Table(name = "weighbridge_stations")
 public class WeighbridgeStations implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,23 +23,23 @@ public class WeighbridgeStations implements Serializable {
     private Long id;
 
     @Size(max = 100)
-    @MutableField( name = "Name ")
+    @MutableField(name = "Name ")
     @Column(name = "NAME", length = 100)
     private String name;
 
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 200)
-    @MutableField( name = "Station Code ")
+    @MutableField(name = "Station Code ")
     @Column(name = "station_code", length = 200)
     private String stationCode;
 
     @Size(max = 200)
-    @MutableField( name = "Location ")
+    @MutableField(name = "Location ")
     @Column(name = "LOCATION", length = 200)
     private String location;
 
     @Size(max = 20)
-    @MutableField( name = "Mobile No ")
+    @MutableField(name = "Mobile No ")
     @Column(name = "MOBILE_NO", length = 20)
     private String mobileNo;
 
@@ -82,7 +82,7 @@ public class WeighbridgeStations implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private ReasonCodes reasonCodeLink;
 
-    @MutableField( name = "Weighbridge Station Type", entity = "WeighbridgeTypes", reference = "name", optional = true)
+    @MutableField(name = "Weighbridge Station Type", entity = "WeighbridgeTypes", reference = "name", optional = true)
     @Column(name = "weighbridge_types_no")
     private Long weighbridgeTypeNo;
 
@@ -100,7 +100,8 @@ public class WeighbridgeStations implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Users updatedByLink;
 
-    public WeighbridgeStations() {}
+    public WeighbridgeStations() {
+    }
 
     public Long getId() {
         return id;
@@ -192,7 +193,10 @@ public class WeighbridgeStations implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public String getFlag() {   return flag;  }
+    public String getFlag() {
+        return flag;
+    }
+
     public WeighbridgeStations setFlag(String flag) {
         this.flag = flag;
         return this;
@@ -222,35 +226,36 @@ public class WeighbridgeStations implements Serializable {
         this.reasonCodeNo = reasonCodeNo;
     }
 
-//    public String getCountry() {
-//        return country;
-//    }
-//
-//    public WeighbridgeStations setCountry(String country) {
-//        this.country = country;
-//        return this;
-//    }
-
     @JsonIgnore
     public WeighbridgeTypes getWeighbridgeTypesLink() {
         return weighbridgeTypesLink;
     }
 
-    @JsonIgnore public ReasonCodes getReasonCodeLink() { return reasonCodeLink; }
+    @JsonIgnore
+    public ReasonCodes getReasonCodeLink() {
+        return reasonCodeLink;
+    }
 
-    @JsonIgnore public Users getCreatedByLink() {  return createdByLink; }
-    @JsonIgnore public Users getUpdatedByLink() {  return updatedByLink; }
+    @JsonIgnore
+    public Users getCreatedByLink() {
+        return createdByLink;
+    }
 
-    public WeighbridgeStations createdOn(Long userId){
-        this.updatedOn = new Date( System.currentTimeMillis() );
-        this.createdOn = new Date( System.currentTimeMillis() );
+    @JsonIgnore
+    public Users getUpdatedByLink() {
+        return updatedByLink;
+    }
+
+    public WeighbridgeStations createdOn(Long userId) {
+        this.updatedOn = new Date(System.currentTimeMillis());
+        this.createdOn = new Date(System.currentTimeMillis());
         this.updatedBy = userId;
         this.createdBy = userId;
         return this;
     }
 
-    public WeighbridgeStations updatedOn(Long userId){
-        this.updatedOn = new Date( System.currentTimeMillis() );
+    public WeighbridgeStations updatedOn(Long userId) {
+        this.updatedOn = new Date(System.currentTimeMillis());
         this.updatedBy = userId;
         return this;
     }
