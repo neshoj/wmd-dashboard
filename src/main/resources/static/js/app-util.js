@@ -289,9 +289,14 @@ var utils = (function (p) {
     const standardTable = {
 
         fnStandardActions: (recordId) => {
-            return `<a href="javascript:void(0)" class="pr-10 edit" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' ${recordId}'><i class="fa fa-edit txt-primary"></i></a>`
-                + `<a href="javascript:void(0)" class="pr-10 delete" data-toggle="tooltip" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete" data-index='${recordId}'><i class="fa fa-trash txt-danger"></i></a>`;
-
+           return  '<div class="xs-mb-0">\n' +
+            '        <div class="btn-toolbar">\n' +
+            '            <div class="btn-group btn-space">\n' +
+            '                <button type="button" class="btn btn-info btn-sm edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' +recordId+ '><i class="icon s7-pen"></i></button>\n' +
+            '                <button type="button" class="btn btn-danger btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete" data-index=' + recordId + ' ><i class="icon s7-close-circle"></i></button>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </div>'
         },
 
         //Fetch a record from the server side, and pass the result to
@@ -390,30 +395,44 @@ var utils = (function (p) {
                     '        </div>\n' +
                     '    </div>';
 
-            }
-
-
-
-
-
-            // if (state === 0) {
-            //     actions += '<a href="javascript:void(0)" class="pr-10 approve-new" data-toggle="tooltip" title="Approve" data-toggle="tooltip" data-placement="top" title="Approve" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-check txt-success"></i></a>'
-            //     actions += '<a href="javascript:void(0)" class="pr-10 decline-new" data-toggle="tooltip" title="Decline" data-toggle="tooltip" data-placement="top" title="Decline" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-ban txt-danger"></i></a>'
-            // }
-
-
-            else if (state === 1) {
-                actions += '<a href="javascript:void(0)" class="pr-10 edit" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-pencil-alt txt-primary"></i></a>'
-                actions += '<a href="javascript:void(0)" class="pr-10 deactivate" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Deactivate" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-times  txt-danger"></i></a>'
+            }else if(state === 1){
+                actions += '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-info btn-sm edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-pen"></i></button>\n' +
+                    '                <button type="button" class="btn btn-danger btn-sm deactivate" data-toggle="tooltip" data-placement="top" title="Deactivate" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-close-circle"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
             } else if (state === 2) {
-                actions += '<a href="javascript:void(0)" class="pr-10 vedit" data-toggle="tooltip" title="View Changes" data-toggle="tooltip" data-placement="top" title="View Changes" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-eye txt-orange"></i></a>'
-            } else if (state === 3) {
-                actions += '<a href="javascript:void(0)" class="pr-10 vdeactivation" data-toggle="tooltip" title="View Changes" data-toggle="tooltip" data-placement="top" title="View Changes" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-eye txt-orange"></i></a>'
-            } else if (state === 4) {
-                actions += '<a href="javascript:void(0)" class="pr-10 activate" data-toggle="tooltip" title="Activate" data-toggle="tooltip" data-placement="top" title="Activate" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-check-circle txt-success"></i></a>'
-                actions += '<a href="javascript:void(0)" class="pr-10 delete" data-toggle="tooltip" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete" data-index=' + o + ' data-name=' + ident + '><i class="fa fa-trash-alt txt-danger"></i></a>'
-            }
+                actions += '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-info btn-sm vedit" data-toggle="tooltip" data-placement="top" title="View Changes" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-look"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
 
+            }else if (state === 3) {
+                actions += '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-info btn-sm vdeactivation" data-toggle="tooltip" data-placement="top" title="View Changes" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-look"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+
+            } else if (state === 4) {
+                actions += '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-success btn-sm activate" data-toggle="tooltip" data-placement="top" title="Activate" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-check"></i></button>\n' +
+                    '                <button type="button" class="btn btn-primary btn-sm delete" data-toggle="tooltip" data-placement="top" title="Delete" data-index=' + o + ' data-name=' + ident + '><i class="icon s7-trash"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+
+            }
             return actions;
         },
 
@@ -762,7 +781,7 @@ var utils = (function (p) {
                         callback(countryCode);
                     });
                 },
-                utilsScript: '/theme/plugins/intelutil/js/utils.js',
+                utilsScript: '/theme/lib/intelutil/js/utils.js',
                 autoPlaceholder: true,
                 initialCountry: "auto",
                 separateDialCode: true

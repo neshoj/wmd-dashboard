@@ -12,11 +12,11 @@
 
 <th:block layout:fragment="content">
     <div class="page-head">
-        <h2 class="page-head-title">Weighbridge Stations </h2>
+        <h2 class="page-head-title" th:text="#{page.weighbridge.stations}"></h2>
         <ol class="breadcrumb">
             <li><a th:href="@{/}">Home</a></li>
             <li><a th:href="@{/weighbridge-stations}">Setup</a></li>
-            <li class="active">Weighbridge Stations</li>
+            <li class="active" th:text="#{page.weighbridge.stations}"></li>
         </ol>
     </div>
 
@@ -27,8 +27,8 @@
             <button type="button" class="btn btn-rounded btn-space btn-success" data-toggle="modal"
                     data-target=".edit-view"><i class="icon icon-left s7-plus"></i> Add New
             </button>
-            <button type="button" class="btn btn-rounded btn-space btn-success"><i
-                    class="icon icon-left s7-refresh" data-name="refresh"></i> Refresh
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
             </button>
         </div>
 
@@ -150,11 +150,9 @@
 </th:block>
 
 <th:block layout:fragment="modals">
-
-    <!--<div id="form-bp1" tabindex="-1" role="dialog"-->
-    <!--class="modal modal-container modal-colored-header modal-colored-header-success modal-effect-10 edit-view">-->
-    <div class="modal modal-colored-header modal-colored-header-info fade edit-view" id="drian" tabindex="-1"
-         role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
          aria-hidden="true">
         <div class="modal-dialog custom-width">
             <div class="modal-content">
@@ -191,12 +189,6 @@
                         </div>
 
                         <div class="form-group m-form__group">
-                            <label> Region </label>
-                            <input type="text" name="region" class="form-control m-input" placeholder="Region"
-                                   required="required"/>
-                        </div>
-
-                        <div class="form-group m-form__group">
                             <label> Weighbridge Type </label>
                             <select name="weighbridgeTypeNo" class="form-control">
                                 <option value=""> Select Weighbridge Type</option>
@@ -206,24 +198,12 @@
                             </select>
                         </div>
 
-                        <!--<div class="form-group m-form__group">-->
-                        <!--<label> Weighbridge Types </label>-->
-                        <!--<select name="weighbridgeTypeNo" class="form-control">-->
-                        <!--<option value=""> Select Weighbridge Type</option>-->
-                        <!--<option th:each="item : ${weighbridgetypes}"-->
-                        <!--th:value="${item.id}"-->
-                        <!--th:text="${item.name}"></option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-
-
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success md-close" th:text="#{core.save}"></button>
-                        <button type="button" class="btn btn-default md-close" data-dismiss="modal"
-                                th:text="#{core.close}"></button>
-                        <input type="hidden" name="action" value="new"/>
-                        <input type="hidden" name="index"/>
+                        <input type="hidden" name="action" value="new" />
+                        <input type="hidden" name="id" value="" />
+                        <button type="submit" class="btn btn-success" th:text="#{core.save}"></button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"  th:text="#{core.close}"></button>
                     </div>
                 </form>
             </div>

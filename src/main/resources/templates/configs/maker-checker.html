@@ -4,120 +4,86 @@
       layout:decorate="~{layouts/default-layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Atlas &middot; Maker Checker</title>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Maker Checker </title>
 
 </head>
 <body>
 
-
 <th:block layout:fragment="content">
-
-    <!-- Title -->
-    <div class="row heading-bg">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">Maker Checker</h5>
-        </div>
-        <!-- Breadcrumb -->
-        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <ol class="breadcrumb">
-                <li><a th:href="@{/}">Dashboard</a></li>
-                <li class="active"><a th:href="@{/maker-checker}"><span>Configuration</span></a></li>
-                <li class="active"><span>Maker Checker</span></li>
-            </ol>
-        </div>
-        <!-- /Breadcrumb -->
+    <div class="page-head">
+        <h2 class="page-head-title"> Maker Checker </h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/maker-checker}">System</a></li>
+            <li class="active" th:text="#{page.maker.checker}"></li>
+        </ol>
     </div>
-    <!-- /Title -->
 
-    <!-- Row -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default panel-tabs card-view">
-                <div class="panel-heading">
-                    <div class="pull-left">
+    <div class="main-content">
 
-                        <div class="tab-struct custom-tab-1">
-                            <ul role="tablist" class="nav nav-tabs" id="banks_tab">
-                                <li role="presentation" class="active">
-                                    <a aria-expanded="true" data-toggle="tab" role="tab"
-                                       class="active" href="#active"><span th:text="#{core.activeRecords}"></span> </a>
-                                </li>
-                            </ul>
-                        </div>
+        <div class="xs-mt-0 xs-mb-5">
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
 
-                    </div>
-                    <div class="pull-right">
-                        <a href="#" data-action="refresh" class="pull-left inline-block refresh mr-15">
-                            <i class="fa fa-sync  txt-primary weight-600"></i>
-                        </a>
-                        <a href="#" class="pull-left inline-block full-screen mr-15">
-                            <i class="fa fa-arrows-alt txt-dark weight-600"></i>
-                        </a>
-                    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div id="active" class="tab-pane active cont active">
 
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-wrapper collapse in">
-                    <div class="panel-body">
-                        <div class="tab-content" id="reason-codes-tab-content">
+                            <table class="table table-striped table-hover table-fw-widget table-active">
+                                <thead>
+                                <tr>
+                                    <th>Module</th>
+                                    <th>Enabled</th>
+                                    <th class="text-center text-muted" style="width: 100px;">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
 
-                            <div id="active" class="tab-pane  active fade in" role="tabpanel">
-                                <div class="table-wrap">
-
-                                    <div class="table-responsive">
-                                        <table id="datable_active"
-                                               class="table-records table table-striped mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Module</th>
-                                                <th>Enabled</th>
-                                                <th class="text-center text-muted" style="width: 100px;">Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!--End Active Table-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /Row -->
 
+    </div>
 </th:block>
 
 <th:block layout:fragment="modals">
-
-    <div id="responsive-modal" class="modal fade edit-view" tabindex="-1" role="dialog" aria-labelledby="new-modal"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-width">
             <div class="modal-content">
-                <div class="modal-header bg-ncgafrica-white">
-                    <button type="button" class="close txt-light" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h5 class="modal-title txt-light"><span class="fa fa-check-double"></span> Maker Checker </h5>
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.maker.checker}"></span></h3>
                 </div>
                 <form autocomplete="off">
-                    <div class="modal-body">
-                        <div class="form-group">
+                    <div class="modal-body form">
+
+                        <div class="form-group m-form__group">
                             <label class="control-label">Module</label>
-                            <input type="text" name="module" class="form-control" readonly required="required"/>
+                            <input type="text" name="module" class="form-control m-input" readonly required="required"/>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group m-form__group">
                             <label class="mt-checkbox mt-checkbox-outline"> Enable
                                 <input type="checkbox" value="1" name="status"/>
                                 <span></span>
                             </label>
                         </div>
+
                     </div>
-                    <div class="modal-footer bg-ncgafrica-white">
+                    <div class="modal-footer">
                         <input type="hidden" name="enabled"/>
                         <input type="hidden" name="action" value="edit"/>
                         <input type="hidden" name="id" value=""/>
@@ -134,10 +100,9 @@
 
 
 <th:block layout:fragment="script">
-    <script th:src="@{/js/app-util.js}" rel="script" type="application/javascript"></script>
-    <script th:src="@{/theme/plugins/bootstrap-select/js/bootstrap-select.min.js}" rel="script"
-            type="application/javascript"></script>
-    <script th:src="@{/js/configs/maker-checker.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{js/configs/maker-checker.js}"></script>
 </th:block>
 
 </body>

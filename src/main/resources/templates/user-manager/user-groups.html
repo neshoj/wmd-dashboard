@@ -4,222 +4,158 @@
       layout:decorate="~{layouts/default-layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Atlas &middot; User Groups</title>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; User Groups </title>
 
-    <link th:href="@{/theme/plugins/bootstrap-select/css/bootstrap-select.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
-
 <th:block layout:fragment="content">
-
-    <!-- Title -->
-    <div class="row heading-bg">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h5 class="txt-dark">User Groups</h5>
-        </div>
-        <!-- Breadcrumb -->
-        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <ol class="breadcrumb">
-                <li><a th:href="@{/}">Dashboard</a></li>
-                <li><a th:href="@{/user-groups}"><span>User Management</span></a></li>
-                <li class="active"><span>User Groups</span></li>
-            </ol>
-        </div>
-        <!-- /Breadcrumb -->
+    <div class="page-head">
+        <h2 class="page-head-title" th:text="#{page.user.groups}"></h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/user-groups}">User Management</a></li>
+            <li class="active" th:text="#{page.user.groups}"></li>
+        </ol>
     </div>
-    <!-- /Title -->
 
-    <!-- Row -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-default panel-tabs card-view">
-                <div class="panel-heading">
-                    <div class="pull-left">
-                        <div class="tab-struct custom-tab-1">
-                            <ul role="tablist" class="nav nav-pills nav-pills-outline nav-pills-rounded" id="User_groups_tab">
-                                <!--<ul role="tablist" class="nav nav-pills nav-pills-rounded" id="User_groups_tab">-->
-                                <!--<ul role="tablist" class="nav nav-tabs" id="User_groups_tab">-->
-                                <li role="presentation" class="active">
-                                    <a aria-expanded="true" data-toggle="tab" role="tab"
-                                       class="active" href="#active"><span class="fa fa-bolt"></span> <span th:text="#{core.activeRecords}"></span> </a>
-                                </li>
-                                <li role="presentation" class="">
-                                    <a data-toggle="tab" role="tab"
-                                       href="#new" aria-expanded="false"><span class="fa fa-plus"></span> <span th:text="#{core.newRecords}"></span> </a>
-                                </li>
-                                <li role="presentation" class="">
-                                    <a data-toggle="tab" role="tab"
-                                       href="#edited" aria-expanded="false"><span class="fa fa-pencil-alt"></span> <span th:text="#{core.editedRecords}"></span></a>
-                                </li>
-                                <li role="presentation" class="">
-                                    <a data-toggle="tab" role="tab"
-                                       href="#deactivated" aria-expanded="false"><span class="fa fa-times"></span> <span th:text="#{core.deactivatedRecords}"></span></a>
-                                </li>
-                                <li role="presentation" class="">
-                                    <a data-toggle="tab" role="tab"
-                                       href="#inactive" aria-expanded="false"><span class="fa fa-ban"></span> <span th:text="#{core.inactiveRecords}"></span></a>
-                                </li>
-                            </ul>
+    <div class="main-content">
+
+        <div class="xs-mt-0 xs-mb-5">
+
+            <button type="button" class="btn btn-rounded btn-space btn-success" data-toggle="modal"
+                    data-target=".edit-view"><i class="icon icon-left s7-plus"></i> Add New
+            </button>
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-container">
+                    <ul class="nav nav-tabs ">
+                        <li class="active"><a href="#active" data-toggle="tab">Active</a></li>
+                        <li><a href="#new" data-toggle="tab">New</a></li>
+                        <li><a href="#edited" data-toggle="tab">Edited</a></li>
+                        <li><a href="#deactivated" data-toggle="tab">Deactivation Request</a></li>
+                        <li><a href="#inactive" data-toggle="tab">Inactive</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="active" class="tab-pane active cont active">
+
+                            <table class="table table-striped table-hover table-fw-widget table-active">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created On</th>
+                                    <th>Updated On</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
                         </div>
-                    </div>
-                    <div class="pull-right">
-                        <a href="#"
-                           role="menuitem" data-toggle="modal"
-                           data-target=".edit-view" class="pull-left inline-block refresh mr-15">
-                            <i class="fa fa-plus txt-success weight-600"></i>
-                        </a>
-                        <a href="#" data-action="refresh" class="pull-left inline-block refresh mr-15">
-                            <i class="fa fa-sync  txt-primary weight-600"></i>
-                        </a>
-                        <a href="#" class="pull-left inline-block full-screen mr-15">
-                            <i class="fa fa-arrows-alt txt-dark weight-600"></i>
-                        </a>
-                    </div>
+                        <div id="new" class="tab-pane cont">
 
-                    <div class="clearfix"></div>
-                </div>
-                <div class="panel-wrapper collapse in">
-                    <div class="panel-body">
-                        <div class="tab-content" id="user-groups-tab-content">
+                            <table id="table-new" class="table table-striped table-hover table-fw-widget table-new">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created On</th>
+                                    <th>Updated On</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
 
-                            <div id="active" class="tab-pane fade active in" role="tabpanel">
-                                <div class="table-wrap">
+                        </div>
+                        <div id="edited" class="tab-pane">
 
-                                    <div class="table-responsive">
-                                        <table id="datable_active"
-                                               class="table-active table table-striped mb-0 table-responsive">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Created On</th>
-                                                <th>Updated On</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <table id="table-edited"
+                                   class="table table-striped table-hover table-fw-widget table-edited">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created On</th>
+                                    <th>Updated On</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
 
-                                </div>
-                            </div>
-                            <!--End Active Table-->
-                            <div id="new" class="tab-pane fade" role="tabpanel">
-                                <div class="table-wrap">
+                        </div>
+                        <div id="deactivated" class="tab-pane">
 
-                                    <div class="table-responsive">
-                                        <table id="datable_new"
-                                               class="table-new table table-striped mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Created On</th>
-                                                <th>Updated On</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <table id="table-deactivated"
+                                   class="table table-striped table-hover table-fw-widget table-deactivated">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Created On</th>
+                                    <th>Updated On</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
 
-                                </div>
-                            </div>
-                            <!--end new table-->
-                            <div id="edited" class="tab-pane fade" role="tabpanel">
-                                <div class="table-wrap">
+                        </div>
+                        <div id="inactive" class="tab-pane">
 
-                                    <div class="table-responsive">
-                                        <table id="datable_edited"
-                                               class="table-edited table table-striped mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Created On</th>
-                                                <th>Updated On</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            <table id="table-inactive"
+                                   class="table table-striped table-hover table-fw-widget table-inactive">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Station Code</th>
+                                    <th>Location</th>
+                                    <th>Contact</th>
+                                    <th>Created On</th>
+                                    <th>Updated On</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
 
-                                </div>
-                            </div>
-                            <!--end edited table-->
-                            <div id="deactivated" class="tab-pane fade" role="tabpanel">
-                                <div class="table-wrap">
-
-                                    <div class="table-responsive">
-                                        <table id="datable_deactivated"
-                                               class="table-deactivated table table-striped mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Created On</th>
-                                                <th>Updated On</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!--end deactivated table-->
-                            <div id="inactive" class="tab-pane fade" role="tabpanel">
-                                <div class="table-wrap">
-
-                                    <div class="table-responsive">
-                                        <table id="datable_inactive"
-                                               class="table-inactive table table-striped mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Created On</th>
-                                                <th>Updated On</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /Row -->
 
+    </div>
 </th:block>
 
 <th:block layout:fragment="modals">
-
-    <div id="responsive-modal" class="modal fade edit-view" tabindex="-1" role="dialog" aria-labelledby="new-modal"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-lg">
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog  modal-full-width">
             <div class="modal-content">
-                <div class="modal-header bg-ncgafrica-white">
-                    <button type="button" class="close txt-light" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h5 class="modal-title txt-light"><span class="fa fa-users"></span> User Groups</h5>
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.user.groups}"></span></h3>
                 </div>
                 <form autocomplete="off">
-                    <div class="modal-body">
+                    <div class="modal-body form">
+
                         <div class="form-group">
                             <label class="control-label">Name</label>
                             <input type="text" class="form-control" name="name" maxlength="50" required="required">
@@ -229,8 +165,12 @@
                             <label class="control-label"> System Role</label>
                             <select name="baseType" class="form-control" required>
                                 <option value="super-admin"> Super Admin </option>
-                                <option value="school-admin"> School Admin </option>
-                                <option value="school-officer"> School Officer </option>
+                                <option value="kenha-admin"> KENHA Admin </option>
+                                <option value="kenha-axle-load-control-officer"> KENHA Axle Load Control Officer </option>
+
+                                <option value="aea-admin"> AEA Admin </option>
+                                <option value="aea-weighbridge-managers"> AEA Weighbridge Manager </option>
+                                <option value="aea-operations-managers"> AEA Operations Manager </option>
                             </select>
                         </div>
 
@@ -256,7 +196,7 @@
                                             multiple="multiple">
 
                                         <th:block th:each="item : ${permissions}">
-                                            <optgroup class="text-bold" th:label="${item.role}"
+                                            <optgroup class="title" th:label="${item.role}"
                                                       th:attr="data-basetype=${item.function}">
 
                                                 <option th:each="node : ${item.permissions}"
@@ -272,13 +212,13 @@
 
                                 <div class="col-lg-2">
                                     <button type="button" id="permissionsEl_rightAll" class="btn btn-block btn-success"><i
-                                            class="ti-angle-double-right"></i></button>
+                                            class="fa fa-2x fa-angle-double-right"></i></button>
                                     <button type="button" id="permissionsEl_rightSelected" class="btn btn-block btn-success"><i
-                                            class="ti-angle-right"></i></button>
+                                            class="fa fa-2x fa-angle-right"></i></button>
                                     <button type="button" id="permissionsEl_leftSelected" class="btn btn-block btn-danger"><i
-                                            class="ti-angle-left"></i></button>
+                                            class="fa fa-2x fa-angle-left"></i></button>
                                     <button type="button" id="permissionsEl_leftAll" class="btn btn-block btn-danger"><i
-                                            class="ti-angle-double-left"></i></button>
+                                            class="fa fa-2x fa-angle-double-left"></i></button>
                                 </div>
 
                                 <div class="col-lg-5">
@@ -288,29 +228,36 @@
                             </div>
 
                         </div>
+
                     </div>
-                    <div class="modal-footer bg-ncgafrica-white">
+                    <div class="modal-footer">
                         <input type="hidden" name="action" value="new"/>
                         <input type="hidden" name="id" value=""/>
                         <button type="submit" class="btn btn-success" th:text="#{core.save}"></button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{core.close}"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div th:replace="fragments/makerchecker::modals"></div>
 </th:block>
 
 
 <th:block layout:fragment="script">
-    <script th:src="@{/js/app-util.js}" rel="script" type="application/javascript"></script>
-    <script th:src="@{/theme/plugins/multiselect.js}"></script>
-    <script th:src="@{/theme/plugins/bootstrap-select/js/bootstrap-select.min.js}" rel="script"
+    <script th:src="@{js/app-util.js}"
+            rel="script"
             type="application/javascript"></script>
-    <script th:src="@{/js/user-manager/usergroups.js}" rel="script" type="application/javascript"></script>
-
+    <script th:src="@{theme/lib/multiselect.js}"
+            rel="script"
+            type="application/javascript"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.min.js}"
+            rel="script"
+            type="application/javascript"></script>
+    <script th:src="@{js/user-manager/usergroups.js}"
+            rel="script"
+            type="application/javascript"></script>
 </th:block>
 
 </body>

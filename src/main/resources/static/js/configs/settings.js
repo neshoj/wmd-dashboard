@@ -20,7 +20,15 @@
         oTable = utils.dataTable({
             table : $(".table"),
             fnRowCallback: function(nRow, aData){
-                $(nRow).children('td:eq(-1)').html('<a href="javascript:void(0)" class="pr-10 edit" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index='+ aData[3] + '><i class="fa fa-edit txt-primary"></i></a>');
+                $(nRow).children('td:eq(-1)').html(
+                '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-info btn-sm edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' + aData[3] + ' ><i class="icon s7-pen"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>'
+                );
 
                 $(".edit", nRow).click( function(){
                     let index = $(this).data("index");

@@ -108,7 +108,7 @@ public class WeighBridgeStationsService implements WeighbridgeStationsServiceInt
     public Map<String, Object> editRecord(HttpServletRequest request){
         Map<String, Object> map = new HashMap<>();
         AuditTrail log = new AuditTrail();
-        Long userNo = (Long) request.getSession().getAttribute("_userNo");
+        Long userNo = (Long) request.getSession().getAttribute("1");
 
         boolean isModified = entityForm.handleEditRequest(request);
         WeighbridgeStations record = entityForm.getEntity();

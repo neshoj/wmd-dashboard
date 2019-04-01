@@ -14,7 +14,6 @@
         let ui = $('.edit-view'),
             fnEdit = function (o) {
                 $('input[name="firstName"]', ui).val(o.firstName);
-                $('input[name="middleName"]', ui).val(o.middleName);
                 $('input[name="surname"]', ui).val(o.surname);
                 $('input[name="email"]', ui).val(o.email);
                 $('input[name="phone"]', ui).val(o.phone);
@@ -59,11 +58,20 @@
         let fnUpdateGroups = userType => {
             //Handle merchant attributes conflicts
             switch (userType) {
-                case 'school-admin':
-                    userType = 'school-admin'
+                case 'kenha-admin':
+                    userType = 'kenha-admin'
                     break;
-                case 'school-officer':
-                    userType = 'school-officer'
+                case 'kenha-axle-load-control-officer':
+                    userType = 'kenha-axle-load-control-officer'
+                    break;
+                case 'aea-admin':
+                    userType = 'aea-admin'
+                    break;
+                case 'aea-weighbridge-managers':
+                    userType = 'aea-weighbridge-managers'
+                    break;
+                case 'aea-operations-managers':
+                    userType = 'aea-operations-managers'
                     break;
                 default:
                     userType = 'super-admin'
@@ -90,15 +98,15 @@
             .find('[name="userTypeNo"]').change(function (e) {
             let element = $(this).find("option:selected").data("type");
 
-            switch (element) {
-                case 'school-admin':
-                case 'school-officer':
-                    console.log('Element ', element);
-                    $(".schools-view", ui).toggleClass("d-none", false);
-                    break;
-                default:
-                    $(".schools-view", ui).toggleClass("d-none", true);
-            }
+            // switch (element) {
+            //     case 'kenha-admin':
+            //     case 'kenha-axle-load-control-officer':
+            //         console.log('Element ', element);
+            //         $(".schools-view", ui).toggleClass("d-none", false);
+            //         break;
+            //     default:
+            //         $(".schools-view", ui).toggleClass("d-none", true);
+            // }
 
             //Restrict groups to a given user-type
             fnUpdateGroups(element);
@@ -111,7 +119,6 @@
                     userGroupNo: {validators: {notEmpty: {message: 'User group is required'}}},
                     phone: {validators: {mobile: {message: 'Invalid mobile number'}}},
                     userTypeNo: {validators: {notEmpty: {message: "User type is required."}}},
-                    merchantNo: {validators: {notEmpty: {message: "Merchant is required."}}},
                     email: {
                         verbose: false,
                         validators: {

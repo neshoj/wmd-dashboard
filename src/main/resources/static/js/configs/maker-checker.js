@@ -19,7 +19,16 @@
                 ui.modal("show");
             },
             actions = function( o ){
-                return '<a href="javascript:void(0)" class="pr-10 edit" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index='+ o + '><i class="fa fa-edit txt-primary"></i></a>';
+                // return '<a href="javascript:void(0)" class="pr-10 edit" data-toggle="tooltip" title="edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index='+ o + '><i class="fa fa-edit txt-primary"></i></a>';
+
+                return '<div class="xs-mb-0">\n' +
+                    '        <div class="btn-toolbar">\n' +
+                    '            <div class="btn-group btn-space">\n' +
+                    '                <button type="button" class="btn btn-info btn-sm edit" data-toggle="tooltip" data-placement="top" title="Edit" data-index=' + o + ' ><i class="icon s7-pen"></i></button>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>'
+
 
             };
 
