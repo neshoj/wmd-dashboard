@@ -320,7 +320,10 @@ create table `users` (
   DEFAULT CHARSET = utf8;
 
 insert into `users` (`id`, `first_name`, `surname`, `email`, `phone`, `password`, `enabled`, `non_locked`, `mobile_verified`, `email_verified`, `flag`, `user_type_no`, `user_group_no`, `password_never_expires`)
-values (1, 'one', 'point-seven', 'info@one-point-seven.com', '+254706151591', '$2a$10$OB4s5782LhCGjpzfmxa97e85NwR.yBTSjOfbBd5Bl98I2frrwiwaK', 1, 0, 1, 1, '1', 1, 1, 1);
+values
+(1, 'one', 'point-seven', 'info@one-point-seven.com', '+254706151591', '$2a$10$OB4s5782LhCGjpzfmxa97e85NwR.yBTSjOfbBd5Bl98I2frrwiwaK', 1, 0, 1, 1, '1', 1, 1, 1),
+(2, 'AEA', 'Limited', 'avery@averyafrica.com', '+254724259815', '$2a$10$OB4s5782LhCGjpzfmxa97e85NwR.yBTSjOfbBd5Bl98I2frrwiwaK', 1, 0, 1, 1, '1', 1, 1, 1),
+(3, 'Dg', 'Kenha', 'dg@kenha.co.ke', '+2542989000', '$2a$10$OB4s5782LhCGjpzfmxa97e85NwR.yBTSjOfbBd5Bl98I2frrwiwaK', 1, 0, 1, 1, '1', 1, 1, 1);
 
 -- =====================================================================================================================
 -- =========================        Clients         ====================================================================
