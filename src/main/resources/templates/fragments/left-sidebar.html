@@ -14,16 +14,16 @@
             <div class="am-logo"></div>
             <ul class="sidebar-elements">
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/','/live-preview')}">
+                    th:classappend="${@viewTags.isActiveMenu('/','/live-preview','tags-live-preview')}">
                     <a th:href="@{/}"><i class="icon s7-monitor"></i><span>Dashboard</span></a>
                     <ul class="sub-menu">
                         <li th:classappend="${@viewTags.isActiveMenu('/')}"><a th:href="@{/}">Static WMS Dashboard</a>
                         </li>
-                        <!--<li><a href="virtual-wms-dashboard.html">Virtual WMS Dashboard</a>-->
-                        <!--</li>-->
-                        <!--<li><a href="filter-based.html">Filter Based Dashboard</a>-->
-                        <!--</li>-->
                         <li th:classappend="${@viewTags.isActiveMenu('/live-preview')}"><a th:href="@{/live-preview}">Live
+                            Preview</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/tags-live-preview')}"><a
+                                th:href="@{/tags-live-preview}">Tagging Live
                             Preview</a>
                         </li>
                     </ul>
@@ -35,12 +35,6 @@
                         <li th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations')}"><a
                                 th:href="@{/weighbridge-stations}">Weighbridge Stations</a>
                         </li>
-                        <!--<li><a href="vehicle-configuration.html">Vehicle Configurations</a>-->
-                        <!--</li>-->
-                        <!--<li><a href="demerit-points.html">Demerit Points</a>-->
-                        <!--</li>-->
-                        <!--<li><a href="penalties.html">Penalties</a>-->
-                        <!--</li>-->
                     </ul>
                 </li>
                 <li class="parent"
@@ -55,23 +49,21 @@
                     </ul>
                 </li>
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/all-tags')}">
+                    th:classappend="${@viewTags.isActiveMenu('/tagging-transactions')}">
                     <a th:href="@{/cleared-tags}"><i class="icon s7-car"></i><span> Vehicle Tags</span></a>
                     <ul class="sub-menu">
-                        <!--<li><a th:href="@{/active-tags}">Active Tags</a>-->
-                        <!--</li>-->
-                        <!--<li><a th:href="@{/cleared-tags}">Cleared Tags</a>-->
-                        <!--</li>-->
-                        <li th:classappend="${@viewTags.isActiveMenu('/all-tags')}"><a th:href="@{/all-tags}">All
+                        <li th:classappend="${@viewTags.isActiveMenu('/tagging-transactions')}"><a
+                                th:href="@{/tagging-transactions}">All
                             Tags</a>
                         </li>
                     </ul>
                 </li>
                 <li class="parent"
                     th:classappend="${@viewTags.isActiveMenu('/weighing-transactions')}">
-                    <a th:href="@{/transactions}"><i class="icon s7-note2"></i><span> Transactions </span></a>
+                    <a th:href="@{/weighing-transactions}"><i class="icon s7-note2"></i><span> Transactions </span></a>
                     <ul class="sub-menu">
-                        <li th:classappend="${@viewTags.isActiveMenu('/weighing-transactions')}"><a th:href="@{/weighing-transactions}">Weigh Transactions</a>
+                        <li th:classappend="${@viewTags.isActiveMenu('/weighing-transactions')}"><a
+                                th:href="@{/weighing-transactions}">Weigh Transactions</a>
                         </li>
                     </ul>
                 </li>
@@ -79,18 +71,8 @@
                     th:classappend="${@viewTags.isActiveMenu('/daily-reports')}">
                     <a th:href="@{/daily-reports}"><i class="icon s7-news-paper"></i><span>Reports</span></a>
                     <ul class="sub-menu">
-                        <!--<li><a href="hourly-reports.html">Hourly</a>-->
-                        <!--</li>-->
                         <li th:classappend="${@viewTags.isActiveMenu('/daily-reports')}"><a th:href="@{/daily-reports}">Daily</a>
                         </li>
-                        <!--<li><a th:href="@{/tagging-reports}">Tagging</a>-->
-                        <!--</li>-->
-                        <!--<li><a href="cargo-type-reports.html">Cargo Type</a>-->
-                        <!--</li>-->
-                        <!--<li><a href="operator-reports.html">Operator</a>-->
-                        <!--</li>-->
-                        <!--<li><a th:href="@{/weighbridge-stations}">Weighbridge station</a>-->
-                        <!--</li>-->
                     </ul>
                 </li>
                 <li class="parent"

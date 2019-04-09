@@ -2,11 +2,14 @@ package opdwms.api.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import opdwms.api.ProcessingInboundWeighingTransactionsInterface;
+import opdwms.api.models.TaggingTransactionsRequest;
 import opdwms.api.models.WeighbridgeTransactionsRequest;
 import opdwms.web.weighbridgestations.WeighbridgeStationsServiceInterface;
 import opdwms.web.weighbridgestations.entities.WeighbridgeStations;
 import opdwms.web.weighingtransactions.WeighbridgeTransactionsServiceInterface;
+import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.entities.WeighingTransactions;
+import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -18,32 +21,36 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class ProcessingInboundWeighingTransactions  implements ProcessingInboundWeighingTransactionsInterface {
+public class ProcessingInboundWeighingTransactions implements ProcessingInboundWeighingTransactionsInterface {
 
     private WeighbridgeStationsServiceInterface weighbridgeStationsServiceInterface;
     private WeighbridgeTransactionsServiceInterface weighbridgeTransactionsServiceInterface;
+    private TaggingTransactionsRepository taggingTransactionsRepository;
     private SimpMessagingTemplate messagingTemplate;
 
     @Autowired
     public ProcessingInboundWeighingTransactions(WeighbridgeStationsServiceInterface weighbridgeStationsServiceInterface,
                                                  WeighbridgeTransactionsServiceInterface weighbridgeTransactionsServiceInterface,
-                                                 SimpMessagingTemplate messagingTemplate){
+                                                 SimpMessagingTemplate messagingTemplate,
+                                                 TaggingTransactionsRepository taggingTransactionsRepository) {
         this.weighbridgeStationsServiceInterface = weighbridgeStationsServiceInterface;
         this.weighbridgeTransactionsServiceInterface = weighbridgeTransactionsServiceInterface;
+        this.taggingTransactionsRepository = taggingTransactionsRepository;
         this.messagingTemplate = messagingTemplate;
     }
 
     /**
      * Save the transaction under the registered weighbridge
+     *
      * @param request
      * @return
      */
     @Override
-    public Map<String, Object> saveTransaction(WeighbridgeTransactionsRequest request) {
-        Map<String, Object> results =  new HashMap<>();
+    public Map<String, Object> saveRawWeighingTransaction(WeighbridgeTransactionsRequest request) {
+        Map<String, Object> results = new HashMap<>();
         Optional<WeighbridgeStations> optionalWBSByCode = weighbridgeStationsServiceInterface.findByWBSCode(request.getStationCode());
-        
-        if(optionalWBSByCode.isPresent()){
+
+        if (optionalWBSByCode.isPresent()) {
             try {
                 WeighingTransactions transaction = new WeighingTransactions()
                         .setTicketNo(request.getTicketNo())
@@ -124,10 +131,53 @@ public class ProcessingInboundWeighingTransactions  implements ProcessingInbound
 
                 // Send to live review topic
                 messagingTemplate.convertAndSend("/topic/weighing-transactions", new ObjectMapper().writeValueAsString(weighbridgeStations));
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("e.getMessage() = " + e.getMessage());
             }
-        }else{
+        } else {
+            results.put("status", "01");
+            results.put("message", "Invalid or Unknown Station Code");
+        }
+
+        return results;
+    }
+
+    @Override
+    public Map<String, Object> saveTaggingTransaction(TaggingTransactionsRequest request) {
+        Map<String, Object> results = new HashMap<>();
+        Optional<WeighbridgeStations> optionalWBSByCode = weighbridgeStationsServiceInterface.findByWBSCode(request.getSceneOfTagging());
+
+        if (optionalWBSByCode.isPresent()) {
+            try {
+                TaggingTransactions transaction = new TaggingTransactions()
+                        .setCreatedOn(new Date())
+                        .setTransactionDate(request.getTransactionTime())
+                        .setChargedReason(request.getChargedReason())
+                        .setConfirmedVehicle_no(request.getConfirmedVehicleNo())
+                        .setVehicleNo(request.getVehicleNo())
+                        .setEvidenceReference(request.getPhotoEvidence())
+                        .setEvidenceId(request.getEvidenceId())
+                        .setTaggingScene(request.getSceneOfTagging())
+                        .setTaggingSystem(request.getTaggingSystemUsed())
+                        .setTagOnChargeAmount(new BigDecimal(request.getChargedAmount() == null ? 0 : request.getChargedAmount()))
+                        .setTagReference(request.getTagReference())
+                        .setTagStatus(String.valueOf(request.getTagFlag()))
+                        .setTagType(request.getTagType())
+                        .setTransgression(request.getTransgression())
+                        .setWeighbridge(request.getWeighbridge())
+                        .setWeighbridgeNo(optionalWBSByCode.get().getId())
+                        .setWeighingReference(request.getWeighingReference());
+
+                TaggingTransactions weighbridgeStations = taggingTransactionsRepository.save(transaction);
+                results.put("status", "00");
+                results.put("message", "Transaction saved successfully");
+
+                // Send to live review topic
+                messagingTemplate.convertAndSend("/topic/tags-transactions", new ObjectMapper().writeValueAsString(weighbridgeStations));
+            } catch (Exception e) {
+                System.out.println("e.getMessage() = " + e.getMessage());
+            }
+        } else {
             results.put("status", "01");
             results.put("message", "Invalid or Unknown Station Code");
         }

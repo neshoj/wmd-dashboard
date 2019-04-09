@@ -1,6 +1,7 @@
 package opdwms.api.controllers;
 
 import opdwms.api.ProcessingInboundWeighingTransactionsInterface;
+import opdwms.api.models.TaggingTransactionsRequest;
 import opdwms.api.models.WeighbridgeTransactionsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,9 +28,15 @@ public class WeighingTransactionController {
      */
     @PostMapping(path = "/api/weighing-transaction", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    Map<String, Object> searchCustomerAccount(@RequestBody WeighbridgeTransactionsRequest request) {
+    Map<String, Object> processWeighingRequestFromWeighbridgeStations(@RequestBody WeighbridgeTransactionsRequest request) {
         System.err.println("Request = " + request.toString());
-        return processingInboundWeighingTransactionsInterface.saveTransaction(request);
+        return processingInboundWeighingTransactionsInterface.saveRawWeighingTransaction(request);
     }
 
+    @PostMapping(path = "/api/tag-transaction", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Map<String, Object> processTaggingReportFromWeighbridgeStations(@RequestBody TaggingTransactionsRequest request) {
+        System.err.println("Tag Request = " + request.toString());
+        return processingInboundWeighingTransactionsInterface.saveTaggingTransaction(request);
+    }
 }

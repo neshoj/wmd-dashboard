@@ -5,18 +5,18 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8"/>
-    <title>OPD-WMS &middot; Live Preview </title>
+    <title>OPD-WMS &middot; Tags Live Preview </title>
 
 </head>
 <body>
 
 <th:block layout:fragment="content">
     <div class="page-head">
-        <h2 class="page-head-title"> Live Preview</h2>
+        <h2 class="page-head-title"> Tagging Live Preview</h2>
         <ol class="breadcrumb">
             <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/live-preview}"> Dashboard</a></li>
-            <li class="active">Live Preview</li>
+            <li><a th:href="@{/tags-live-preview}"> Dashboard</a></li>
+            <li class="active">Tags Live Preview</li>
         </ol>
     </div>
 
@@ -32,15 +32,17 @@
                                 <thead>
                                 <tr>
                                     <th>Time</th>
-                                    <th>Ticket No</th>
-                                    <th>Station Code</th>
-                                    <th>Vehicle</th>
-                                    <th>Axle Class</th>
-                                    <th>Vehicle GVM</th>
-                                    <th>Operator</th>
-                                    <th>Origin</th>
-                                    <th>Destination</th>
-                                    <th>Action</th>
+                                    <th>Tag Ref. No</th>
+                                    <th>Reg. No</th>
+                                    <th>Conf. Reg. No</th>
+                                    <th>Transgression</th>
+                                    <th>Weigh Ref.</th>
+                                    <th>Tag System</th>
+                                    <th>Tag Location</th>
+                                    <th>Status</th>
+                                    <th>Charge Amount</th>
+                                    <th>Weighbridge</th>
+                                    <th>Tag Reason</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -64,7 +66,7 @@
     <script th:src="@{theme/lib/sockjs/sockjs.min.js}"></script>
     <script th:src="@{theme/lib/sockjs/sockjs.min.js.map}"></script>
     <script th:src="@{theme/lib/sockjs/stomp.min.js}"></script>
-    <script th:src="@{js/live-preview/live-preview.js}"></script>
+    <script th:src="@{js/live-preview/tags-live-preview.js}"></script>
 </th:block>
 
 </body>

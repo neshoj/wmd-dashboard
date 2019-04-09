@@ -578,4 +578,36 @@ create table weighing_transactions (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+
+--  Tagging Transactions table
+drop table if exists tagging_transactions;
+create table tagging_transactions (
+  `id`                      int(11) not null AUTO_INCREMENT,
+  `tag_reference`           varchar(150) not null,
+  `vehicle_no`              varchar(50) not null,
+  `transgression`           varchar(250) not null,
+  `transaction_date`        timestamp null,
+  `weighing_reference`      varchar(100) default '-',
+  `tagging_system`          varchar(100) default '-',
+  `tagging_scene`           varchar(100) default '-',
+  `tag_status`              varchar(10) default '-',
+  `confirmed_vehicle_no`    varchar(50) default '-',
+  `tag_on_charge_amount`    decimal (11, 2) default 0,
+  `tag_type`                varchar(20) default '-',
+  `weighbridge`             varchar(150) default '-',
+  `charged_reason`          varchar(255) default '-',
+  `evidence_reference`      varchar(20) default '-',
+  `evidence_id`             varchar(20) default '-',
+  `created_on`              timestamp null default current_timestamp,
+
+  `weighbridge_no`          int(11) not null,
+
+   PRIMARY KEY (id),
+   KEY `weighbridge_no` (`weighbridge_no`),
+  CONSTRAINT `tagging_transactions_fk_1` FOREIGN KEY (`weighbridge_no`) REFERENCES `weighbridge_stations` (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
 set foreign_key_checks = 0;

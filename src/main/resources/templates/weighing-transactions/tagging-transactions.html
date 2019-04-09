@@ -5,22 +5,29 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8"/>
-    <title>OPD-WMS &middot; Live Preview </title>
+    <title>OPD-WMS &middot; Weighing Transaction </title>
 
 </head>
 <body>
 
 <th:block layout:fragment="content">
     <div class="page-head">
-        <h2 class="page-head-title"> Live Preview</h2>
+        <h2 class="page-head-title"> Vehicle Tagging </h2>
         <ol class="breadcrumb">
             <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/live-preview}"> Dashboard</a></li>
-            <li class="active">Live Preview</li>
+            <li><a th:href="@{/tagging-transactions}">Vehicle Tags</a></li>
+            <li class="active" th:text="#{page.tags.transactions}"></li>
         </ol>
     </div>
 
     <div class="main-content">
+
+        <div class="xs-mt-0 xs-mb-5">
+
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
 
         <div class="row">
             <div class="col-sm-12">
@@ -32,15 +39,17 @@
                                 <thead>
                                 <tr>
                                     <th>Time</th>
-                                    <th>Ticket No</th>
-                                    <th>Station Code</th>
-                                    <th>Vehicle</th>
-                                    <th>Axle Class</th>
-                                    <th>Vehicle GVM</th>
-                                    <th>Operator</th>
-                                    <th>Origin</th>
-                                    <th>Destination</th>
-                                    <th>Action</th>
+                                    <th>Tag Ref. No</th>
+                                    <th>Reg. No</th>
+                                    <th>Conf. Reg. No</th>
+                                    <th>Transgression</th>
+                                    <th>Weigh Ref.</th>
+                                    <th>Tag System</th>
+                                    <th>Tag Location</th>
+                                    <th>Status</th>
+                                    <th>Charge Amount</th>
+                                    <th>Weighbridge</th>
+                                    <th>Tag Reason</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -61,10 +70,8 @@
 
 <th:block layout:fragment="script">
     <script th:src="@{js/app-util.js}"></script>
-    <script th:src="@{theme/lib/sockjs/sockjs.min.js}"></script>
-    <script th:src="@{theme/lib/sockjs/sockjs.min.js.map}"></script>
-    <script th:src="@{theme/lib/sockjs/stomp.min.js}"></script>
-    <script th:src="@{js/live-preview/live-preview.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{js/weighing-transactions/weighing-transactions.js}"></script>
 </th:block>
 
 </body>

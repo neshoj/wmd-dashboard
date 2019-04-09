@@ -15,12 +15,10 @@ public class WeighingTransactionsControllers {
     private DatatablesInterface datatable;
 
     @RequestMapping("/weighing-transactions")
-    public ModelAndView index(HttpServletRequest request){
+    public ModelAndView weighingTransaction(HttpServletRequest request){
         View view = new View("weighing-transactions/weighing-transactions");
-
         // Fetch the table data
         if ( AjaxUtils.isAjaxRequest( request ) ) {
-
             //Set-up data
             datatable
                     .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, a.stationCode, a.vehicleNo, ")
@@ -35,7 +33,23 @@ public class WeighingTransactionsControllers {
 
             return view.sendJSON( datatable.showTable() );
         }
+        return view.getView();
+    }
 
+    @RequestMapping("/tagging-transactions")
+    public ModelAndView taggingTransaction(HttpServletRequest request){
+        View view = new View("weighing-transactions/tagging-transactions");
+        // Fetch the table data
+        if ( AjaxUtils.isAjaxRequest( request ) ) {
+            //Set-up data
+            datatable
+                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo,  a.confirmedVehicle_no, a.transgression, ")
+                    .select(" a.weighingReference, a.taggingSystem, a.taggingScene, ")
+                    .select("a.tagStatus, a.tagOnChargeAmount, a.weighbridge, a.chargedReason ")
+                    .from("TaggingTransactions a");
+
+            return view.sendJSON( datatable.showTable() );
+        }
         return view.getView();
     }
 }
