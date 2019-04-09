@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers( SWAGGER_WHITELIST ).permitAll()
-                    .antMatchers("/password-reset/**", "/setup-account/*", "/img/**").permitAll()
+                    .antMatchers("/password-reset/**", "/setup-account/*", "/img/**", "/api/**").permitAll()
                     .antMatchers("/resetpassword/*").permitAll()
                     .antMatchers("/plugins/**").permitAll()
                     .anyRequest().authenticated()

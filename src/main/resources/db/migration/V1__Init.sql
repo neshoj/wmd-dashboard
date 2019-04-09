@@ -507,7 +507,7 @@ create table vehicle_tags (
 
 
 -- =====================================================================================================================
--- =========================        Weighing Transactions         ===============================================================
+-- =========================        Weighing Transactions         ======================================================
 -- =====================================================================================================================
 
 --  Weighing Transactions table
@@ -516,55 +516,58 @@ create table weighing_transactions (
   `id`                          int(11) not null AUTO_INCREMENT,
   `ticket_no`                   varchar(100) not null,
   `station_code`                varchar(100) not null,
-  `transaction_date`            timestamp null     default current_timestamp,
-  `vehicle_no`                  varchar(100) not null,
-  `axle_configuration`          varchar(100) not null,
+  `transaction_date`            timestamp null,
+  `vehicle_no`                  varchar(100) default '-',
+  `axle_configuration`          varchar(100) default '-',
 
-  `first_axle_weight`           varchar(11) not null,
-  `first_axle_legal_weight`     varchar(11) not null,
+  `first_axle_weight`           decimal (11, 2) default 0,
+  `first_axle_legal_weight`     decimal (11, 2) default 0,
   `first_axle_type`             varchar(20) not null,
   `first_axle_grouping`         varchar(20) not null,
 
-  `second_axle_weight`          varchar(11) not null,
-  `second_axle_legal_weight`    varchar(11) not null,
+  `second_axle_weight`          decimal (11, 2) default 0,
+  `second_axle_legal_weight`    decimal (11, 2) default 0,
   `second_axle_type`            varchar(20) not null,
   `second_axle_grouping`        varchar(20) not null,
 
-  `third_axle_weight`           varchar(11) not null,
-  `third_axle_legal_weight`     varchar(11) not null,
-  `third_axle_type`             varchar(20) not null,
-  `third_axle_grouping`         varchar(20) not null,
+  `third_axle_weight`           decimal (11, 2) default 0,
+  `third_axle_legal_weight`     decimal (11, 2) default 0,
+  `third_axle_type`             varchar(20) default '-',
+  `third_axle_grouping`         varchar(20) default '-',
 
-  `fourth_axle_weight`          varchar(11) not null,
-  `fourth_axle_legal_weight`    varchar(11) not null,
-  `fourth_axle_type`            varchar(20) not null,
-  `fourth_axle_grouping`        varchar(20) not null,
+  `fourth_axle_weight`          decimal (11, 2) default 0,
+  `fourth_axle_legal_weight`    decimal (11, 2) default 0,
+  `fourth_axle_type`            varchar(20) default '-',
+  `fourth_axle_grouping`        varchar(20) default '-',
 
-  `fifth_axle_weight`           varchar(11) not null,
-  `fifth_axle_legal_weight`     varchar(11) not null,
-  `fifth_axle_type`             varchar(20) not null,
-  `fifth_axle_grouping`         varchar(20) not null,
+  `fifth_axle_weight`           decimal (11, 2) default 0,
+  `fifth_axle_legal_weight`     decimal (11, 2) default 0,
+  `fifth_axle_type`             varchar(20) default '-',
+  `fifth_axle_grouping`         varchar(20) default '-',
 
-  `sixth_axle_weight`           varchar(11) not null,
-  `sixth_axle_legal_weight`     varchar(11) not null,
-  `sixth_axle_type`             varchar(20) not null,
-  `sixth_axle_grouping`         varchar(20) not null,
+  `sixth_axle_weight`           decimal (11, 2) default 0,
+  `sixth_axle_legal_weight`     decimal (11, 2) default 0,
+  `sixth_axle_type`             varchar(20) default '-',
+  `sixth_axle_grouping`         varchar(20) default '-',
 
-  `seventh_axle_weight`         varchar(11) not null,
-  `seventh_axle_legal_weight`   varchar(11) not null,
-  `seventh_axle_type`           varchar(20) not null,
-  `seventh_axle_grouping`       varchar(20) not null,
+  `seventh_axle_weight`         decimal (11, 2) default 0,
+  `seventh_axle_legal_weight`   decimal (11, 2) default 0,
+  `seventh_axle_type`           varchar(20) default '-',
+  `seventh_axle_grouping`       varchar(20) default '-',
 
-  `wbt_1_Gross`                 varchar(11) default null,
-  `wbt_2_Gross`                 varchar(11) default null,
-  `wbt_operator`                varchar(20) default null,
-  `wbt_status`                  varchar(20) default null,
+  `vehicleGVM`                  decimal (11, 2) default 0,
+  `operator`                    varchar(100) default '-',
+  `wbt_status`                  varchar(20) default '-',
+  `wbt_direction`               varchar(11) default '-',
+  `wbt_bu`                      varchar(11) default '-',
+  `wbt_shift`                   varchar(20) default '-',
 
-  `wbt_direction`               varchar(11) default null,
-  `wbt_bu`                      varchar(11) default null,
-  `wbt_shift`                   varchar(20) default null,
-  `wbt_wbn`                     varchar(20) default null,
-  `created_on`                  timestamp null     default current_timestamp,
+  `origin`                      varchar(150) default '-',
+  `destination`                 varchar(150) default '-',
+  `cargo`                       varchar(150)  default '-',
+  `action_taken`                varchar(250) default '-',
+  `permit_no`                   varchar(50) default '-',
+  `created_on`                  timestamp null default current_timestamp,
 
   `weighbridge_no`              int(11) not null,
 

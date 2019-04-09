@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Weighing Transaction </title>
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title"> Transactions </h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/settings.html}">System</a></li>
+            <li class="active" th:text="#{page.system.settings}"></li>
+        </ol>
+    </div>
+
+    <div class="main-content">
+
+        <div class="xs-mt-0 xs-mb-5">
+
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div id="active" class="tab-pane active cont active table-responsive noSwipe">
+
+                            <table class="table table-striped table-hover table-fw-widget table-active">
+                                <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Ticket</th>
+                                    <th>Station</th>
+                                    <th>Reg. No</th>
+                                    <th>Axle Class</th>
+                                    <th>GVM</th>
+                                    <th>Cargo</th>
+                                    <th>1st Axle(Kg)</th>
+                                    <th>1st Axle Type</th>
+                                    <th>2nd Axle(Kg)</th>
+                                    <th>2nd Axle Type</th>
+                                    <th>3rd Axle(Kg)</th>
+                                    <th>3rd Axle Type</th>
+                                    <th>4th Axle(Kg)</th>
+                                    <th>4th Axle Type</th>
+                                    <th>5th Axle(Kg)</th>
+                                    <th>5th Axle Type</th>
+                                    <th>6th Axle(Kg)</th>
+                                    <th>6th Axle Type</th>
+                                    <th>7th Axle(Kg)</th>
+                                    <th>7th Axle Type</th>
+                                    <th>Operator</th>
+                                    <th>Shift</th>
+                                    <th>Origin</th>
+                                    <th>Destination</th>
+                                    <th>Action</th>
+                                    <th>Permit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="modals"></th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{js/weighing-transactions/weighing-transactions.js}"></script>
+</th:block>
+
+</body>
+</html>

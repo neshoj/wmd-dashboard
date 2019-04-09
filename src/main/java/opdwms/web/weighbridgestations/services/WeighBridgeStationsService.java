@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,6 +33,11 @@ public class WeighBridgeStationsService implements WeighbridgeStationsServiceInt
     @Override
     public List<WeighbridgeStations> fetchRecords(HttpServletRequest request) {
         return entityRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD );
+    }
+
+    @Override
+    public Optional<WeighbridgeStations> findByWBSCode(String request){
+        return entityRepository.findByStationCode(request);
     }
 
     /**

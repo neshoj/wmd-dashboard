@@ -10,32 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @category    Audit Logs
- * @package     Dev
- * @since       Nov 05, 2018
- * @author      Ignatius
- * @version     1.0.0
- *
+ * @author Ignatius
+ * @version 1.0.0
+ * @category Audit Logs
+ * @package Dev
+ * @since Nov 05, 2018
  */
 @Controller
 public class AuditLogController {
 
-    @Autowired
     private DatatablesInterface datatable;
 
+    @Autowired
+    public AuditLogController(DatatablesInterface datatable) {
+this.datatable = datatable;
+    }
+
     @RequestMapping("/audit-logs")
-    public ModelAndView index(HttpServletRequest request){
+    public ModelAndView index(HttpServletRequest request) {
         View view = new View("configs/audit-logs");
 
         // Fetch the table data
-        if ( AjaxUtils.isAjaxRequest( request ) ) {
+        if (AjaxUtils.isAjaxRequest(request)) {
 
             //Set-up data
             datatable
                     .select("str(a.createdOn; 'YYYY-MM-DD HH24:MI'), CONCAT(b.firstName; ' '; b.surname ), a.activity, a.status, a.oldValues, a.newValues ")
                     .from("AuditTrail a LEFT JOIN a.userLink b");
 
-            return view.sendJSON( datatable.showTable() );
+            return view.sendJSON(datatable.showTable());
         }
 
         return view.getView();

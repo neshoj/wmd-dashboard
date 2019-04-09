@@ -18,6 +18,8 @@ public interface WeighbridgeStationsRepository extends CrudRepository<Weighbridg
      */
     public Optional<WeighbridgeStations> findByName(String name);
 
+    public Optional<WeighbridgeStations> findByStationCode(String code);
+
     public List<WeighbridgeStations> findAllByFlag(String flag);
 
 }
