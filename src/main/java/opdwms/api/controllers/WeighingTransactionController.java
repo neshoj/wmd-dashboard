@@ -1,6 +1,7 @@
 package opdwms.api.controllers;
 
 import opdwms.api.ProcessingInboundWeighingTransactionsInterface;
+import opdwms.api.models.HSWIMTransactionRequest;
 import opdwms.api.models.TaggingTransactionsRequest;
 import opdwms.api.models.WeighbridgeTransactionsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,8 @@ public class WeighingTransactionController {
 
     @PostMapping(path = "/api/hswim-transaction", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    Map<String, Object> processHSWIMTransactionFromWeighbridgeStations(@RequestBody TaggingTransactionsRequest request) {
-        System.err.println("Tag Request = " + request.toString());
-        return processingInboundWeighingTransactionsInterface.saveTaggingTransaction(request);
+    Map<String, Object> processHSWIMTransactionFromWeighbridgeStations(@RequestBody HSWIMTransactionRequest request) {
+        System.err.println("HSWIM Request = " + request.toString());
+        return processingInboundWeighingTransactionsInterface.saveHSWIMTransaction(request);
     }
 }
