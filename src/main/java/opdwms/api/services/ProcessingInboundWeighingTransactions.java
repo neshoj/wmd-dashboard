@@ -2,13 +2,16 @@ package opdwms.api.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import opdwms.api.ProcessingInboundWeighingTransactionsInterface;
+import opdwms.api.models.HSWIMTransactionRequest;
 import opdwms.api.models.TaggingTransactionsRequest;
 import opdwms.api.models.WeighbridgeTransactionsRequest;
 import opdwms.web.weighbridgestations.WeighbridgeStationsServiceInterface;
 import opdwms.web.weighbridgestations.entities.WeighbridgeStations;
 import opdwms.web.weighingtransactions.WeighbridgeTransactionsServiceInterface;
+import opdwms.web.weighingtransactions.entities.HSWIMTransaction;
 import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.entities.WeighingTransactions;
+import opdwms.web.weighingtransactions.repositories.HSWIMTransactionsRepository;
 import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -26,16 +29,19 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
     private WeighbridgeStationsServiceInterface weighbridgeStationsServiceInterface;
     private WeighbridgeTransactionsServiceInterface weighbridgeTransactionsServiceInterface;
     private TaggingTransactionsRepository taggingTransactionsRepository;
+    private HSWIMTransactionsRepository hswimTransactionsRepository;
     private SimpMessagingTemplate messagingTemplate;
 
     @Autowired
     public ProcessingInboundWeighingTransactions(WeighbridgeStationsServiceInterface weighbridgeStationsServiceInterface,
                                                  WeighbridgeTransactionsServiceInterface weighbridgeTransactionsServiceInterface,
                                                  SimpMessagingTemplate messagingTemplate,
+                                                 HSWIMTransactionsRepository hswimTransactionsRepository,
                                                  TaggingTransactionsRepository taggingTransactionsRepository) {
         this.weighbridgeStationsServiceInterface = weighbridgeStationsServiceInterface;
         this.weighbridgeTransactionsServiceInterface = weighbridgeTransactionsServiceInterface;
         this.taggingTransactionsRepository = taggingTransactionsRepository;
+        this.hswimTransactionsRepository = hswimTransactionsRepository;
         this.messagingTemplate = messagingTemplate;
     }
 
@@ -181,6 +187,39 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
             results.put("status", "01");
             results.put("message", "Invalid or Unknown Station Code");
         }
+
+        return results;
+    }
+
+    @Override
+    public Map<String, Object> saveHSWIMTransaction(HSWIMTransactionRequest request) {
+        Map<String, Object> results = new HashMap<>();
+
+            try {
+                HSWIMTransaction transaction = new HSWIMTransaction()
+                        .setTransactionDate(request.getTransactionDate())
+                        .setAxleCount(request.getAxleCount())
+                        .setStationName(request.getStationName())
+                        .setVehicleSpeed(request.getVehicleSpeed())
+                        .setVehicleLength(request.getVehicleLength())
+                        .setTicketNo(request.getTicketNo())
+                        .setAxleOne(request.getAxleOne())
+                        .setAxleTwo(request.getAxleTwo())
+                        .setAxleThree(request.getAxleThree())
+                        .setAxleFour(request.getAxleFour())
+                        .setAxleFive(request.getAxleFive())
+                        .setAxleSix(request.getAxleSix())
+                        .setAxleSeven(request.getAxleSeven());
+
+                HSWIMTransaction hswimTransaction = hswimTransactionsRepository.save(transaction);
+
+                results.put("status", "00");
+                results.put("message", "Transaction saved successfully");
+
+            } catch (Exception e) {
+                System.out.println("e.getMessage() = " + e.getMessage());
+            }
+
 
         return results;
     }

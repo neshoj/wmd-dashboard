@@ -59,11 +59,14 @@
                     </ul>
                 </li>
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/weighing-transactions')}">
+                    th:classappend="${@viewTags.isActiveMenu('/weighing-transactions', '/hswim-transactions')}">
                     <a th:href="@{/weighing-transactions}"><i class="icon s7-note2"></i><span> Transactions </span></a>
                     <ul class="sub-menu">
                         <li th:classappend="${@viewTags.isActiveMenu('/weighing-transactions')}"><a
                                 th:href="@{/weighing-transactions}">Weigh Transactions</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/hswim-transactions')}"><a
+                                th:href="@{/hswim-transactions}">HSWIM Transactions</a>
                         </li>
                     </ul>
                 </li>

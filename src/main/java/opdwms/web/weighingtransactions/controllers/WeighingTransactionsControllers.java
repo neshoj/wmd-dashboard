@@ -22,13 +22,9 @@ public class WeighingTransactionsControllers {
             //Set-up data
             datatable
                     .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, a.stationCode, a.vehicleNo, ")
-                    .select(" a.axleConfiguration, a.vehicleGVM, a.cargo, ")
-                    .select("a.firstAxleWeight, a.firstAxleType, a.secondAxleWeight, a.secondAxleType, ")
-                    .select("a.thirdAxleWeight, a.thirdAxleType, a.fourthAxleWeight, a.fourthAxleType, ")
-                    .select("a.fifthAxleWeight, a.fifthAxleType, a.sixthAxleWeight, a.sixthAxleType, ")
-                    .select("a.seventhAxleWeight, a.seventhAxleType, ")
-                    .select("a.operator, a.operatorShift, ")
-                    .select(" a.origin, a.destination, a.actionTaken, a.permitNo")
+                    .select(" a.axleConfiguration, a.vehicleGVM,  ")
+                    .select("a.firstAxleWeight, a.secondAxleWeight, a.thirdAxleWeight, a.fourthAxleWeight, a.fifthAxleWeight, a.sixthAxleWeight, a.seventhAxleWeight, ")
+                    .select("a.operator, a.operatorShift, a.actionTaken, a.permitNo")
                     .from("WeighingTransactions a");
 
             return view.sendJSON( datatable.showTable() );
@@ -47,6 +43,23 @@ public class WeighingTransactionsControllers {
                     .select(" a.weighingReference, a.taggingSystem, a.taggingScene, ")
                     .select("a.tagStatus, a.tagOnChargeAmount, a.weighbridge, a.chargedReason ")
                     .from("TaggingTransactions a");
+
+            return view.sendJSON( datatable.showTable() );
+        }
+        return view.getView();
+    }
+
+    @RequestMapping("/hswim-transactions")
+    public ModelAndView HSWIMTransaction(HttpServletRequest request){
+        View view = new View("weighing-transactions/hswim-transactions");
+        // Fetch the table data
+        if ( AjaxUtils.isAjaxRequest( request ) ) {
+            //Set-up data
+            datatable
+                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, a.stationName,  a.vehicleSpeed, ")
+                    .select(" a.vehicleLength, a.axleCount, ")
+                    .select("a.axleOne, a.axleTwo, a.axleThree, a.axleFour, a.axleFive, a.axleSix, a.axleSeven ")
+                    .from("HSWIMTransaction a");
 
             return view.sendJSON( datatable.showTable() );
         }

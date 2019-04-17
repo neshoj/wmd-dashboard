@@ -39,4 +39,11 @@ public class WeighingTransactionController {
         System.err.println("Tag Request = " + request.toString());
         return processingInboundWeighingTransactionsInterface.saveTaggingTransaction(request);
     }
+
+    @PostMapping(path = "/api/hswim-transaction", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Map<String, Object> processHSWIMTransactionFromWeighbridgeStations(@RequestBody TaggingTransactionsRequest request) {
+        System.err.println("Tag Request = " + request.toString());
+        return processingInboundWeighingTransactionsInterface.saveTaggingTransaction(request);
+    }
 }
