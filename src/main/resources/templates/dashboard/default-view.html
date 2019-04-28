@@ -186,7 +186,7 @@
                 options: donutOptions
             };
             let donutChart = new Chart(donutChartCensusCtx, donutConfig);
-            donutChartCensusCtx.height = 200;
+
             // let token = $("meta[name='_csrf']").attr("content"),
             //     header = $("meta[name='_csrf_header']").attr("content");
             // $(document).ajaxSend(function (e, xhr, options) {
@@ -238,7 +238,6 @@
                 options: options
             };
             let censusChart = new Chart(lineChartCensusCtx, config);
-            lineChartCensusCtx.height = 200;
 
             let lineChart = document.getElementById('weighingLineChart').getContext('2d');
             let lables = [];
