@@ -17,6 +17,8 @@ create table `hswim_transactions` (
   `axle_six`          decimal (11, 2) default 0,
   `axle_seven`        decimal (11, 2) default 0,
   `transaction_date`  timestamp null  default current_timestamp,
+
+
   PRIMARY KEY (`ID`)
 )
   ENGINE = InnoDB

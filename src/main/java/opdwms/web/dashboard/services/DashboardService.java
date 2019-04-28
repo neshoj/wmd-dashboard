@@ -1,7 +1,8 @@
 package opdwms.web.dashboard.services;
 
+import opdwms.api.services.ProcessingInboundWeighingTransactions;
 import opdwms.web.dashboard.DashboardServiceInterface;
-import opdwms.web.dashboard.vm.DashboardStatitics;
+import opdwms.web.dashboard.vm.DashboardStatistics;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.joda.time.DateTime;
@@ -39,49 +40,33 @@ public class DashboardService implements DashboardServiceInterface {
      * @return Dashboard Statistics
      */
     @Override
-    public DashboardStatitics fetchStatistics(HttpServletRequest request){
+    public DashboardStatistics fetchStatistics(HttpServletRequest request){
         String parentType = (String)request.getSession().getAttribute("_userParentType");
         Long parentNo = (Long) request.getSession().getAttribute("_userParentNo");
         Session session = entityManager.unwrap( Session.class );
 
-        if( StringUtils.isEmpty( parentType ) )
-            return superAdminStats( session );
+//        if( StringUtils.isEmpty( parentType ) )
+            return statistics( session );
 
-        //When serving merchants
-        else
-            return merchantStats( session, parentNo );
+
     }
 
-    private DashboardStatitics superAdminStats( Session session ){
-        DashboardStatitics data = new DashboardStatitics();
+    private DashboardStatistics statistics(Session session ){
+        DashboardStatistics data = new DashboardStatistics();
 
-//        //1. No of users
-//        long users = (Long) session.createQuery("SELECT COUNT(a) FROM Users a WHERE a.flag = :flag ")
-//                .setParameter("flag", AppConstants.STATUS_ACTIVERECORD)
-//                .uniqueResult();
-//
-//        //No of merchants
-//        long merchants = (Long)session.createQuery("SELECT COUNT(a) FROM Merchants a WHERE a.flag = :flag ")
-//                .setParameter("flag", AppConstants.STATUS_ACTIVERECORD)
-//                .uniqueResult();
+        // Weighed vehicles
+        data.setWeighedVehicles( (Long) session.createQuery("SELECT COUNT(a) FROM WeighingTransactions a")
+                .uniqueResult());
 
-        return data;
-    }
+        // Overload vehicles
+        data.setOverloadVehicles( (Long) session.createQuery("SELECT COUNT(a) FROM WeighingTransactions a WHERE a.status = :flag ")
+                .setParameter("flag", ProcessingInboundWeighingTransactions.GVM_OVERLOAD)
+                .uniqueResult());
 
-    private DashboardStatitics merchantStats( Session session, Long merchantNo ){
-        DashboardStatitics data = new DashboardStatitics();
-
-//        //1. No of users
-//        long users = (Long) session.createQuery("SELECT COUNT(a) FROM Users a WHERE a.flag = :flag AND a.merchantUser.merchantNo = :parentNo ")
-//                .setParameter("flag", AppConstants.STATUS_ACTIVERECORD)
-//                .setParameter("parentNo", merchantNo)
-//                .uniqueResult();
-//
-//        //No of weigh bridge stations
-//        long weighbridgeStations = (Long)session.createQuery("SELECT COUNT(a) FROM WeighbridgeStations a WHERE a.flag = :flag AND a.merchantNo = :parentNo ")
-//                .setParameter("flag", AppConstants.STATUS_ACTIVERECORD)
-//                .setParameter("parentNo", merchantNo)
-//                .uniqueResult();
+        // Overload vehicles
+        data.setWeighedWithinLimits( (Long) session.createQuery("SELECT COUNT(a) FROM WeighingTransactions a WHERE a.status = :flag ")
+                .setParameter("flag", ProcessingInboundWeighingTransactions.GVM_WITHIN)
+                .uniqueResult());
 
         return data;
     }

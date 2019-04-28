@@ -18,6 +18,15 @@ public class TaggingTransactionsRequest {
     private String chargedReason;
     private String photoEvidence;
     private String evidenceId;
+    private String stationCode;
+
+    public String getStationCode() {
+        return stationCode;
+    }
+
+    public void setStationCode(String stationCode) {
+        this.stationCode = stationCode;
+    }
 
     public String getTagReference() {
         return tagReference;

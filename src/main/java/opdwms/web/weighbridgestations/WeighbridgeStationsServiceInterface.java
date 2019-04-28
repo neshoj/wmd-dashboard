@@ -12,4 +12,6 @@ public interface WeighbridgeStationsServiceInterface extends BaseServiceInterfac
     public List<WeighbridgeStations> fetchRecords(HttpServletRequest request);
 
     public Optional<WeighbridgeStations> findByWBSCode(String request);
+
+    public Optional<WeighbridgeStations> findByWBSId(String request);
 }

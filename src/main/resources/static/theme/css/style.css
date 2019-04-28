@@ -8528,7 +8528,8 @@ button:focus {
 @font-face {
     font-family: Raleway;
     src: url(../lib/raleway/regular/raleway-regular.eot);
-    src: url(../lib/raleway/regular/raleway-regular.eot?) format('embedded-opentype'), url(../lib/raleway/regular/raleway-regular.woff) format('woff'), url(../lib/raleway/regular/raleway-regular.ttf) format('truetype'), url(../lib/raleway/regular/raleway-regular.svg) format('svg');
+    src: url(../lib/raleway/regular/raleway-regular.eot?) format('embedded-opentype'),
+            url(../lib/raleway/regular/raleway-regular.svg) format('svg');
     font-weight: 400;
     font-style: normal
 }
@@ -8576,7 +8577,9 @@ button:focus {
 @font-face {
     font-family: 'Open Sans';
     src: url(../lib/open-sans/light/opensans-light-webfont.eot);
-    src: url(../lib/open-sans/light/opensans-light-webfont.eot?) format('embedded-opentype'), url(../lib/open-sans/light/opensans-light-webfont.woff) format('woff'), url(../lib/open-sans/light/opensans-light-webfont.ttf) format('truetype'), url(../lib/open-sans/light/opensans-light-webfont.svg) format('svg');
+    src: url(../lib/open-sans/light/opensans-light-webfont.eot?) format('embedded-opentype'),
+    url(../lib/open-sans/light/opensans-light-webfont.ttf) format('truetype'),
+    url(../lib/open-sans/light/opensans-light-webfont.svg) format('svg');
     font-weight: 300;
     font-style: normal
 }
@@ -8592,7 +8595,8 @@ button:focus {
 @font-face {
     font-family: 'Open Sans';
     src: url(../lib/open-sans/regular/opensans-regular-webfont.eot);
-    src: url(../lib/open-sans/regular/opensans-regular-webfont.eot?) format('embedded-opentype'), url(../lib/open-sans/regular/opensans-regular-webfont.woff) format('woff'), url(../lib/open-sans/regular/opensans-regular-webfont.ttf) format('truetype'), url(../lib/open-sans/regular/opensans-regular-webfont.svg) format('svg');
+    src: url(../lib/open-sans/regular/opensans-regular-webfont.eot?) format('embedded-opentype'),
+    url(../lib/open-sans/regular/opensans-regular-webfont.svg) format('svg');
     font-weight: 400;
     font-style: normal
 }
@@ -15311,7 +15315,8 @@ pre {
 }
 
 .btn-space {
-    margin-right: 5px
+    margin-right: 5px;
+    padding: 5px
 }
 
 .rtl .btn-space {
@@ -22554,6 +22559,10 @@ div.dataTables_wrapper div.dataTables_length label select {
 
 .d-none {
     display: none !important;
+}
+
+.p-reports {
+    padding: 15px 25px 0px 25px;
 }
 
 table{

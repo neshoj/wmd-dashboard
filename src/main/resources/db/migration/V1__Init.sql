@@ -45,7 +45,8 @@ insert into `app_settings` (`id`, `name`, `code`, `flag`, `value`, `description`
 values
 (1, 'Login Trials', 'LOGIN_TRIALS', 'settings', '5', 'INT of allowed login attempts'),
 (2, 'Lock out period', 'LOCK_OUT_PERIOD', 'settings', '30','Period(minutes) in which a locked account will be inaccessible'),
-(3, 'Reset code expiry period', 'RESET_EXPIRY', 'settings', '2','Period in hours in which a reset password token is valid');
+(3, 'Reset code expiry period', 'RESET_EXPIRY', 'settings', '2','Period in hours in which a reset password token is valid'),
+(4, 'Axle Weight Tolerance', 'AXLE_WEIGHT_TOLERANCE', 'settings', '5','A percentage tolerance is allowed on the permissible axle weights and the permissible axle group');
 
 --- Audit Trail Table
 drop table if exists `audit_trail`;

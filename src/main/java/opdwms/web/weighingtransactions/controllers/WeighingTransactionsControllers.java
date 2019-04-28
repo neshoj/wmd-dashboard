@@ -21,11 +21,11 @@ public class WeighingTransactionsControllers {
         if ( AjaxUtils.isAjaxRequest( request ) ) {
             //Set-up data
             datatable
-                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, a.stationCode, a.vehicleNo, ")
+                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, b.name, a.vehicleNo, ")
                     .select(" a.axleConfiguration, a.vehicleGVM,  ")
                     .select("a.firstAxleWeight, a.secondAxleWeight, a.thirdAxleWeight, a.fourthAxleWeight, a.fifthAxleWeight, a.sixthAxleWeight, a.seventhAxleWeight, ")
-                    .select("a.operator, a.operatorShift, a.actionTaken, a.permitNo")
-                    .from("WeighingTransactions a");
+                    .select("a.operator, a.operatorShift, a.actionTaken, a.permitNo ")
+                    .from("WeighingTransactions a LEFT JOIN a.weighbridgeStationsLink  b ");
 
             return view.sendJSON( datatable.showTable() );
         }

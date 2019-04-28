@@ -40,6 +40,11 @@ public class WeighBridgeStationsService implements WeighbridgeStationsServiceInt
         return entityRepository.findByStationCode(request);
     }
 
+    @Override
+    public Optional<WeighbridgeStations> findByWBSId(String request){
+        return entityRepository.findById(Long.valueOf(request));
+    }
+
     /**
      * Persist a new record
      *

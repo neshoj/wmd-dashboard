@@ -21,25 +21,29 @@
         });
 
         // Connect to back office via web socket
-        let connect = function () {
-            console.log('Attempting connection');
-            let socket = new SockJS('/gs-guide-websocket');
-            stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                connectBackOffice();
-                stompClient.subscribe('/topic/weighing-transactions', function (response) {
-                    console.log(JSON.parse(response.body));
-                    oTable.fnDraw();
-                });
-            });
-        }
+        // let connect = function () {
+        //     console.log('Attempting connection');
+        //     let socket = new SockJS('/gs-guide-websocket');
+        //     stompClient = Stomp.over(socket);
+        //     stompClient.connect({}, function (frame) {
+        //         connectBackOffice();
+        //         stompClient.subscribe('/topic/weighing-transactions', function (response) {
+        //             console.log(JSON.parse(response.body));
+        //             oTable.fnDraw();
+        //         });
+        //     });
+        // }
 
-        let connectBackOffice = function () {
-            stompClient.send("/app/connect", {}, JSON.stringify({'action': 'connect'}));
-        }
+        // let connectBackOffice = function () {
+        //     stompClient.send("/app/connect", {}, JSON.stringify({'action': 'connect'}));
+        // }
 
         // Connect to back office
-        connect();
+        // connect();
+
+        let timerId = setInterval(() =>  oTable.fnDraw(), 5000);
+
+
 
     });
 })(document, window, jQuery);

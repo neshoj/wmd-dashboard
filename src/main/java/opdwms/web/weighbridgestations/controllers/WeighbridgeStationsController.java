@@ -121,7 +121,7 @@ public class WeighbridgeStationsController {
 
 
             dataTable
-                    .select("a.name, a.stationCode, a.location, a.mobileNo, str(a.createdOn; 'YYYY-MM-DD HH24:MI:SS'), str(a.updatedOn; 'YYYY-MM-DD HH24:MI:SS'), a.id")
+                    .select("a.id, a.name, a.stationCode, a.location, a.mobileNo, str(a.createdOn; 'YYYY-MM-DD HH24:MI:SS'), str(a.updatedOn; 'YYYY-MM-DD HH24:MI:SS'), a.id")
                     .from("WeighbridgeStations a ")
                     .where("a.flag = :flag ")
                     .setParameter("flag", state);

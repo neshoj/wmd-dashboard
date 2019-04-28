@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import opdwms.web.weighbridgestations.entities.WeighbridgeStations;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table(name = "weighing_transactions")
-public class WeighingTransactions {
+public class WeighingTransactions  implements Serializable {
+
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,6 +39,12 @@ public class WeighingTransactions {
     //    First Axle
     @Column(name = "first_axle_weight", precision = 11, scale = 2)
     private BigDecimal firstAxleWeight;
+
+    @Column(name = "first_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal firstAxleWeightExceededPercent;
+
+    @Column(name = "first_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal firstAxleWeightExceededValue;
     
     @Column(name = "first_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal firstAxleLegalWeight;
@@ -50,6 +58,12 @@ public class WeighingTransactions {
     //    Second Axle
     @Column(name = "second_axle_weight", precision = 11, scale = 2)
     private BigDecimal secondAxleWeight;
+
+    @Column(name = "second_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal secondAxleWeightExceededPercent;
+
+    @Column(name = "second_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal secondAxleWeightExceededValue;
     
     @Column(name = "second_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal secondAxleLegalWeight;
@@ -64,6 +78,12 @@ public class WeighingTransactions {
     @Column(name = "third_axle_weight", precision = 11, scale = 2)
     private BigDecimal thirdAxleWeight;
 
+    @Column(name = "third_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal thirdAxleWeightExceededPercent;
+
+    @Column(name = "third_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal thirdAxleWeightExceededValue;
+
     @Column(name = "third_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal thirdAxleLegalWeight;
 
@@ -76,6 +96,12 @@ public class WeighingTransactions {
     //    Fourth Axle
     @Column(name = "fourth_axle_weight", precision = 11, scale = 2)
     private BigDecimal fourthAxleWeight;
+
+    @Column(name = "fourth_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal fourthAxleWeightExceededPercent;
+
+    @Column(name = "fourth_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal fourthAxleWeightExceededValue;
 
     @Column(name = "fourth_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal fourthAxleLegalWeight;
@@ -90,6 +116,12 @@ public class WeighingTransactions {
     @Column(name = "fifth_axle_weight", precision = 11, scale = 2)
     private BigDecimal fifthAxleWeight;
 
+    @Column(name = "fifth_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal fifthAxleWeightExceededPercent;
+
+    @Column(name = "fifth_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal fifthAxleWeightExceededValue;
+
     @Column(name = "fifth_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal fifthAxleLegalWeight;
 
@@ -103,6 +135,12 @@ public class WeighingTransactions {
     @Column(name = "sixth_axle_weight", precision = 11, scale = 2)
     private BigDecimal sixthAxleWeight;
 
+    @Column(name = "sixth_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal sixthAxleWeightExceededPercent;
+
+    @Column(name = "sixth_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal sixthAxleWeightExceededValue;
+
     @Column(name = "sixth_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal sixthAxleLegalWeight;
 
@@ -112,9 +150,15 @@ public class WeighingTransactions {
     @Column(name = "sixth_axle_grouping", length = 20)
     private String sixthAxleGrouping;
 
-    //    Sixth Axle
+    //    Seventh axle
     @Column(name = "seventh_axle_weight", precision = 11, scale = 2)
     private BigDecimal seventhAxleWeight;
+
+    @Column(name = "seventh_axle_weight_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal seventhAxleWeightExceededPercent;
+
+    @Column(name = "seventh_axle_weight_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal seventhAxleWeightExceededValue;
 
     @Column(name = "seventh_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal seventhAxleLegalWeight;
@@ -125,6 +169,11 @@ public class WeighingTransactions {
     @Column(name = "seventh_axle_grouping", length = 20)
     private String seventhAxleGrouping;
 
+    @Column(name = "gvw_exceeded_percent", precision = 4, scale = 2)
+    private BigDecimal gvwExceededPercent;
+
+    @Column(name = "gvw_exceeded_weight", precision = 11, scale = 2)
+    private BigDecimal gvwExceededWeight;
 
     @Column(name = "vehicleGVM", precision = 11, scale = 2)
     private BigDecimal vehicleGVM;
@@ -132,8 +181,17 @@ public class WeighingTransactions {
     @Column(name = "operator", length = 100)
     private String operator;
 
-    @Column(name = "wbt_status", length = 20)
+    @Column(name = "flag", length = 20)
+    private String flag;
+
+    @Column(name = "axle_weight_status", length = 2)
+    private String axleWeightStatus;
+
+    @Column(name = "status", length = 2)
     private String status;
+
+    @Column(name = "wbt_status", length = 20)
+    private String wbtStatus;
 
     @Column(name = "wbt_direction", length = 11)
     private String direction;
@@ -494,12 +552,12 @@ public class WeighingTransactions {
         return this;
     }
 
-    public String getStatus() {
-        return status;
+    public String getWbtStatus() {
+        return wbtStatus;
     }
 
-    public WeighingTransactions setStatus(String status) {
-        this.status = status;
+    public WeighingTransactions setWbtStatus(String wbtStatus) {
+        this.wbtStatus = wbtStatus;
         return this;
     }
 
@@ -591,6 +649,175 @@ public class WeighingTransactions {
     public WeighingTransactions setWeighbridgeNo(Long weighbridgeNo) {
         this.weighbridgeNo = weighbridgeNo;
         return this;
+    }
+
+    public BigDecimal getFirstAxleWeightExceededPercent() {
+        return firstAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setFirstAxleWeightExceededPercent(BigDecimal firstAxleWeightExceededPercent) {
+        this.firstAxleWeightExceededPercent = firstAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getFirstAxleWeightExceededValue() {
+        return firstAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setFirstAxleWeightExceededValue(BigDecimal firstAxleWeightExceededValue) {
+        this.firstAxleWeightExceededValue = firstAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getSecondAxleWeightExceededPercent() {
+        return secondAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setSecondAxleWeightExceededPercent(BigDecimal secondAxleWeightExceededPercent) {
+        this.secondAxleWeightExceededPercent = secondAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getSecondAxleWeightExceededValue() {
+        return secondAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setSecondAxleWeightExceededValue(BigDecimal secondAxleWeightExceededValue) {
+        this.secondAxleWeightExceededValue = secondAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getThirdAxleWeightExceededPercent() {
+        return thirdAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setThirdAxleWeightExceededPercent(BigDecimal thirdAxleWeightExceededPercent) {
+        this.thirdAxleWeightExceededPercent = thirdAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getThirdAxleWeightExceededValue() {
+        return thirdAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setThirdAxleWeightExceededValue(BigDecimal thirdAxleWeightExceededValue) {
+        this.thirdAxleWeightExceededValue = thirdAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getFourthAxleWeightExceededPercent() {
+        return fourthAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setFourthAxleWeightExceededPercent(BigDecimal fourthAxleWeightExceededPercent) {
+        this.fourthAxleWeightExceededPercent = fourthAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getFourthAxleWeightExceededValue() {
+        return fourthAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setFourthAxleWeightExceededValue(BigDecimal fourthAxleWeightExceededValue) {
+        this.fourthAxleWeightExceededValue = fourthAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getFifthAxleWeightExceededPercent() {
+        return fifthAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setFifthAxleWeightExceededPercent(BigDecimal fifthAxleWeightExceededPercent) {
+        this.fifthAxleWeightExceededPercent = fifthAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getFifthAxleWeightExceededValue() {
+        return fifthAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setFifthAxleWeightExceededValue(BigDecimal fifthAxleWeightExceededValue) {
+        this.fifthAxleWeightExceededValue = fifthAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getSixthAxleWeightExceededPercent() {
+        return sixthAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setSixthAxleWeightExceededPercent(BigDecimal sixthAxleWeightExceededPercent) {
+        this.sixthAxleWeightExceededPercent = sixthAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getSixthAxleWeightExceededValue() {
+        return sixthAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setSixthAxleWeightExceededValue(BigDecimal sixthAxleWeightExceededValue) {
+        this.sixthAxleWeightExceededValue = sixthAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getSeventhAxleWeightExceededPercent() {
+        return seventhAxleWeightExceededPercent;
+    }
+
+    public WeighingTransactions setSeventhAxleWeightExceededPercent(BigDecimal seventhAxleWeightExceededPercent) {
+        this.seventhAxleWeightExceededPercent = seventhAxleWeightExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getSeventhAxleWeightExceededValue() {
+        return seventhAxleWeightExceededValue;
+    }
+
+    public WeighingTransactions setSeventhAxleWeightExceededValue(BigDecimal seventhAxleWeightExceededValue) {
+        this.seventhAxleWeightExceededValue = seventhAxleWeightExceededValue;
+        return this;
+    }
+
+    public BigDecimal getGvwExceededPercent() {
+        return gvwExceededPercent;
+    }
+
+    public WeighingTransactions setGvwExceededPercent(BigDecimal gvwExceededPercent) {
+        this.gvwExceededPercent = gvwExceededPercent;
+        return this;
+    }
+
+    public BigDecimal getGvwExceededWeight() {
+        return gvwExceededWeight;
+    }
+
+    public WeighingTransactions setGvwExceededWeight(BigDecimal gvwExceededWeight) {
+        this.gvwExceededWeight = gvwExceededWeight;
+        return this;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public WeighingTransactions setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public String getAxleWeightStatus() {
+        return axleWeightStatus;
+    }
+
+    public void setAxleWeightStatus(String axleWeightStatus) {
+        this.axleWeightStatus = axleWeightStatus;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
     @JsonIgnore

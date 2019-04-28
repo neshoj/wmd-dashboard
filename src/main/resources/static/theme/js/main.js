@@ -6,27 +6,29 @@ function FastClick(a, b) {
     "use strict";
 
     function c(a, b) {
-        return function() {
+        return function () {
             return a.apply(b, arguments)
         }
     }
+
     var d;
     if (b = b || {}, this.trackingClick = !1, this.trackingClickStart = 0, this.targetElement = null, this.touchStartX = 0, this.touchStartY = 0, this.lastTouchIdentifier = 0, this.touchBoundary = b.touchBoundary || 10, this.layer = a, this.tapDelay = b.tapDelay || 200, !FastClick.notNeeded(a)) {
         for (var e = ["onMouse", "onClick", "onTouchStart", "onTouchMove", "onTouchEnd", "onTouchCancel"], f = this, g = 0, h = e.length; g < h; g++) f[e[g]] = c(f[e[g]], f);
-        deviceIsAndroid && (a.addEventListener("mouseover", this.onMouse, !0), a.addEventListener("mousedown", this.onMouse, !0), a.addEventListener("mouseup", this.onMouse, !0)), a.addEventListener("click", this.onClick, !0), a.addEventListener("touchstart", this.onTouchStart, !1), a.addEventListener("touchmove", this.onTouchMove, !1), a.addEventListener("touchend", this.onTouchEnd, !1), a.addEventListener("touchcancel", this.onTouchCancel, !1), Event.prototype.stopImmediatePropagation || (a.removeEventListener = function(b, c, d) {
+        deviceIsAndroid && (a.addEventListener("mouseover", this.onMouse, !0), a.addEventListener("mousedown", this.onMouse, !0), a.addEventListener("mouseup", this.onMouse, !0)), a.addEventListener("click", this.onClick, !0), a.addEventListener("touchstart", this.onTouchStart, !1), a.addEventListener("touchmove", this.onTouchMove, !1), a.addEventListener("touchend", this.onTouchEnd, !1), a.addEventListener("touchcancel", this.onTouchCancel, !1), Event.prototype.stopImmediatePropagation || (a.removeEventListener = function (b, c, d) {
             var e = Node.prototype.removeEventListener;
             "click" === b ? e.call(a, b, c.hijacked || c, d) : e.call(a, b, c, d)
-        }, a.addEventListener = function(b, c, d) {
+        }, a.addEventListener = function (b, c, d) {
             var e = Node.prototype.addEventListener;
-            "click" === b ? e.call(a, b, c.hijacked || (c.hijacked = function(a) {
+            "click" === b ? e.call(a, b, c.hijacked || (c.hijacked = function (a) {
                 a.propagationStopped || c(a)
             }), d) : e.call(a, b, c, d)
-        }), "function" == typeof a.onclick && (d = a.onclick, a.addEventListener("click", function(a) {
+        }), "function" == typeof a.onclick && (d = a.onclick, a.addEventListener("click", function (a) {
             d(a)
         }, !1), a.onclick = null)
     }
 }
-var App = function() {
+
+var App = function () {
         "use strict";
 
         function a(a) {
@@ -40,7 +42,7 @@ var App = function() {
         function b() {
             function a(a) {
                 var b = $(".sidebar-elements > li", k);
-                "undefined" != typeof a && (b = a), $.each(b, function(a, b) {
+                "undefined" != typeof a && (b = a), $.each(b, function (a, b) {
                     var c = $(this).find("> a span").html(),
                         d = $(this).find("> ul"),
                         e = $("> li", d),
@@ -67,61 +69,62 @@ var App = function() {
                     destroy: !0
                 }), f.nanoScroller(), d ? e.hasClass("parent") && c.preventDefault() : m.syncSubMenuOnHover && a(e)
             }
+
             var f = $(".sidebar-elements > li > a", k),
                 g = !(!k.hasClass(m.openLeftSidebarOnClickClass) && !m.openLeftSidebarOnClick);
-            if (a(), $(".am-toggle-left-sidebar").on("click", function(a) {
-                    o && i.hasClass(m.openLeftSidebarClass) ? c() : o || b(), a.stopPropagation(), a.preventDefault()
-                }), $(document).on("touchstart mousedown", function(a) {
-                    !$(a.target).closest(k).length && i.hasClass(m.openLeftSidebarClass) ? c() : $(a.target).closest(k).length || $.isXs() || $("ul.visible", k).removeClass("visible").parent().removeClass("open")
-                }), g ? f.on("click", function(a) {
-                    $.isXs() || e(this, a, !0)
-                }) : (f.on("mouseover", function(a) {
-                    e(this, a, !1)
-                }), f.on("touchstart", function(a) {
-                    $.isXs() || e(this, a, !0)
-                }), f.on("mouseleave", function() {
-                    var a = $(this),
-                        b = a.parent(),
-                        c = b.find("> ul");
-                    $.isXs() || (c.length > 0 ? setTimeout(function() {
-                        c.is(":hover") ? c.on("mouseleave", function() {
-                            setTimeout(function() {
-                                a.is(":hover") || (c.removeClass("visible"), b.removeClass("open"), c.off("mouseleave"))
-                            }, 300)
-                        }) : (c.removeClass("visible"), b.removeClass("open"))
-                    }, 300) : b.removeClass("open"))
-                })), $(".sidebar-elements li a", k).on("click", function(a) {
-                    if ($.isXs()) {
-                        var b, c = $(this),
-                            d = m.leftSidebarSlideSpeed,
-                            e = c.parent(),
-                            f = c.next();
-                        b = e.siblings(".open"), b && b.find("> ul:visible").slideUp({
-                            duration: d,
-                            complete: function() {
-                                b.toggleClass("open"), $(this).removeAttr("style").removeClass("visible")
-                            }
-                        }), e.hasClass("open") ? f.slideUp({
-                            duration: d,
-                            complete: function() {
-                                e.toggleClass("open"), $(this).removeAttr("style").removeClass("visible")
-                            }
-                        }) : f.slideDown({
-                            duration: d,
-                            complete: function() {
-                                e.toggleClass("open"), $(this).removeAttr("style").addClass("visible")
-                            }
-                        }), c.next().is("ul") && a.preventDefault()
-                    } else if (!g) {
-                        var h = $(".sidebar-elements > li > ul:visible", k);
-                        h.addClass("hide")
-                    }
-                }), $("li.active", k).parents(".parent").addClass("active"), j.hasClass("am-fixed-sidebar")) {
+            if (a(), $(".am-toggle-left-sidebar").on("click", function (a) {
+                o && i.hasClass(m.openLeftSidebarClass) ? c() : o || b(), a.stopPropagation(), a.preventDefault()
+            }), $(document).on("touchstart mousedown", function (a) {
+                !$(a.target).closest(k).length && i.hasClass(m.openLeftSidebarClass) ? c() : $(a.target).closest(k).length || $.isXs() || $("ul.visible", k).removeClass("visible").parent().removeClass("open")
+            }), g ? f.on("click", function (a) {
+                $.isXs() || e(this, a, !0)
+            }) : (f.on("mouseover", function (a) {
+                e(this, a, !1)
+            }), f.on("touchstart", function (a) {
+                $.isXs() || e(this, a, !0)
+            }), f.on("mouseleave", function () {
+                var a = $(this),
+                    b = a.parent(),
+                    c = b.find("> ul");
+                $.isXs() || (c.length > 0 ? setTimeout(function () {
+                    c.is(":hover") ? c.on("mouseleave", function () {
+                        setTimeout(function () {
+                            a.is(":hover") || (c.removeClass("visible"), b.removeClass("open"), c.off("mouseleave"))
+                        }, 300)
+                    }) : (c.removeClass("visible"), b.removeClass("open"))
+                }, 300) : b.removeClass("open"))
+            })), $(".sidebar-elements li a", k).on("click", function (a) {
+                if ($.isXs()) {
+                    var b, c = $(this),
+                        d = m.leftSidebarSlideSpeed,
+                        e = c.parent(),
+                        f = c.next();
+                    b = e.siblings(".open"), b && b.find("> ul:visible").slideUp({
+                        duration: d,
+                        complete: function () {
+                            b.toggleClass("open"), $(this).removeAttr("style").removeClass("visible")
+                        }
+                    }), e.hasClass("open") ? f.slideUp({
+                        duration: d,
+                        complete: function () {
+                            e.toggleClass("open"), $(this).removeAttr("style").removeClass("visible")
+                        }
+                    }) : f.slideDown({
+                        duration: d,
+                        complete: function () {
+                            e.toggleClass("open"), $(this).removeAttr("style").addClass("visible")
+                        }
+                    }), c.next().is("ul") && a.preventDefault()
+                } else if (!g) {
+                    var h = $(".sidebar-elements > li > ul:visible", k);
+                    h.addClass("hide")
+                }
+            }), $("li.active", k).parents(".parent").addClass("active"), j.hasClass("am-fixed-sidebar")) {
                 var h = $(".am-left-sidebar > .content");
                 h.wrap('<div class="am-scroller nano"></div>'), h.addClass("nano-content"), h.parent().nanoScroller()
             }
-            $(window).resize(function() {
-                q(function() {
+            $(window).resize(function () {
+                q(function () {
                     if (!$.isXs()) {
                         var a = $(".am-scroller");
                         $(".nano-content", a).css({
@@ -142,15 +145,16 @@ var App = function() {
             function b() {
                 i.removeClass(m.openRightSidebarClass).addClass(m.transitionClass), d()
             }
-            l.length > 0 && ($(".am-toggle-right-sidebar").on("click", function(c) {
+
+            l.length > 0 && ($(".am-toggle-right-sidebar").on("click", function (c) {
                 o && i.hasClass(m.openRightSidebarClass) ? b() : o || a(), c.stopPropagation(), c.preventDefault()
-            }), $(document).on("mousedown touchstart", function(a) {
+            }), $(document).on("mousedown touchstart", function (a) {
                 !$(a.target).closest(l).length && i.hasClass(m.openRightSidebarClass) && b()
             }))
         }
 
         function d() {
-            o = !0, setTimeout(function() {
+            o = !0, setTimeout(function () {
                 o = !1
             }, m.openSidebarDelay)
         }
@@ -163,18 +167,19 @@ var App = function() {
             function b() {
                 !o && l.length > 0 && (i.addClass(m.openRightSidebarClass + " " + m.transitionClass), o = !0)
             }
+
             var c = !1;
             j.swipe({
                 allowPageScroll: "vertical",
                 preventDefaultEvents: !1,
                 fallbackToMouseEvents: !1,
-                swipeRight: function(c) {
+                swipeRight: function (c) {
                     p ? b() : a()
                 },
-                swipeLeft: function(c) {
+                swipeLeft: function (c) {
                     p ? a() : b()
                 },
-                swipeStatus: function(a, b) {
+                swipeStatus: function (a, b) {
                     switch (b) {
                         case "start":
                             o && (c = !0);
@@ -205,6 +210,7 @@ var App = function() {
                     scrollTop: j.prop("scrollHeight")
                 }, 900, "swing"), g())
             }
+
             var d = $(".am-right-sidebar .tab-pane.chat"),
                 e = $(".chat-contacts", d),
                 f = $(".chat-window", d),
@@ -214,17 +220,17 @@ var App = function() {
                 k = $(".chat-input", f),
                 l = $("input", k),
                 m = $(".send-msg", k);
-            $(".user a", e).on("click", function(b) {
+            $(".user a", e).on("click", function (b) {
                 $(".am-scroller", e).nanoScroller({
                     stop: !0
                 }), a(), b.preventDefault()
-            }), $(".title .return", f).on("click", function(a) {
+            }), $(".title .return", f).on("click", function (a) {
                 b(), g()
-            }), l.keypress(function(a) {
+            }), l.keypress(function (a) {
                 var b = a.keyCode ? a.keyCode : a.which,
                     d = $(this).val();
                 "13" == b && (c(d, !0), $(this).val("")), a.stopPropagation()
-            }), m.on("click", function() {
+            }), m.on("click", function () {
                 var a = l.val();
                 c(a, !0), l.val("")
             })
@@ -238,14 +244,15 @@ var App = function() {
             var a = 220,
                 b = 500,
                 c = $('<div class="am-scroll-top"></div>');
-            c.appendTo("body"), $(window).on("scroll", function() {
+            c.appendTo("body"), $(window).on("scroll", function () {
                 $(this).scrollTop() > a ? c.fadeIn(b) : c.fadeOut(b)
-            }), c.on("touchstart mouseup", function(a) {
+            }), c.on("touchstart mouseup", function (a) {
                 $("html, body").animate({
                     scrollTop: 0
                 }, b), a.preventDefault()
             })
         }
+
         var i, j, k, l, m = {
                 assetsPath: "assets",
                 imgPath: "img",
@@ -267,37 +274,31 @@ var App = function() {
             n = {},
             o = !1,
             p = $("html").hasClass("rtl"),
-            q = function() {
+            q = function () {
                 var a = {};
-                return function(b, c, d) {
+                return function (b, c, d) {
                     d || (d = "x1x2x3x4"), a[d] && clearTimeout(a[d]), a[d] = setTimeout(b, c)
                 }
             }();
         return {
             conf: m,
             color: n,
-            init: function(d) {
-                j = $(".am-wrapper"), k = $(".am-left-sidebar"), l = $(".am-right-sidebar"), i = $("body"), $.extend(m, d), b(), FastClick.attach(document.body), c(), f(), m.enableSwipe && e(), k.on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function() {
+            init: function (d) {
+                j = $(".am-wrapper"), k = $(".am-left-sidebar"), l = $(".am-right-sidebar"), i = $("body"), $.extend(m, d), b(), FastClick.attach(document.body), c(), f(), m.enableSwipe && e(), k.on("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function () {
                     i.removeClass(m.transitionClass)
-                }), m.scrollTop && h(), n.primary = a("clr-primary"), n.success = a("clr-success"), n.info = a("clr-info"), n.warning = a("clr-warning"), n.danger = a("clr-danger"), n.alt1 = a("clr-alt1"), n.alt2 = a("clr-alt2"), n.alt3 = a("clr-alt3"), n.alt4 = a("clr-alt4"), $(".am-connections").on("click", function(a) {
+                }), m.scrollTop && h(), n.primary = a("clr-primary"), n.success = a("clr-success"), n.info = a("clr-info"), n.warning = a("clr-warning"), n.danger = a("clr-danger"), n.alt1 = a("clr-alt1"), n.alt2 = a("clr-alt2"), n.alt3 = a("clr-alt3"), n.alt4 = a("clr-alt4"), $(".am-connections").on("click", function (a) {
                     a.stopPropagation()
-                }), g(), $(".dropdown").on("shown.bs.dropdown", function() {
+                }), g(), $(".dropdown").on("shown.bs.dropdown", function () {
                     $(".am-scroller").nanoScroller()
-                }), $(".nav-tabs").on("shown.bs.tab", function(a) {
+                }), $(".nav-tabs").on("shown.bs.tab", function (a) {
                     $(".am-scroller").nanoScroller()
                 }), $('[data-toggle="tooltip"]').tooltip(), $('[data-toggle="popover"]').popover()
-                //     , $(".modal").on("show.bs.modal", function() {
-                //     $("html").addClass("am-modal-open")
-                //         })  ,
-                //     $(".modal").on("hidden.bs.modal", function() {
-                //     $("html").removeClass("am-modal-open")
-                // })
             },
             leftSidebarInit: b,
             rightSidebarInit: c,
-            closeSubMenu: function() {
+            closeSubMenu: function () {
                 var a = $(".sidebar-elements > li > ul:visible", k);
-                a.addClass("hide"), setTimeout(function() {
+                a.addClass("hide"), setTimeout(function () {
                     a.removeClass("hide")
                 }, 50)
             }
@@ -308,7 +309,7 @@ var App = function() {
     deviceIsIOS4 = deviceIsIOS && /OS 4_\d(_\d)?/.test(navigator.userAgent),
     deviceIsIOSWithBadTarget = deviceIsIOS && /OS ([6-9]|\d{2})_\d/.test(navigator.userAgent),
     deviceIsBlackBerry10 = navigator.userAgent.indexOf("BB10") > 0;
-FastClick.prototype.needsClick = function(a) {
+FastClick.prototype.needsClick = function (a) {
     "use strict";
     switch (a.nodeName.toLowerCase()) {
         case "button":
@@ -324,7 +325,7 @@ FastClick.prototype.needsClick = function(a) {
             return !0
     }
     return /\bneedsclick\b/.test(a.className)
-}, FastClick.prototype.needsFocus = function(a) {
+}, FastClick.prototype.needsFocus = function (a) {
     "use strict";
     switch (a.nodeName.toLowerCase()) {
         case "textarea":
@@ -345,18 +346,18 @@ FastClick.prototype.needsClick = function(a) {
         default:
             return /\bneedsfocus\b/.test(a.className)
     }
-}, FastClick.prototype.sendClick = function(a, b) {
+}, FastClick.prototype.sendClick = function (a, b) {
     "use strict";
     var c, d, e, f;
     document.activeElement && document.activeElement !== a && document.activeElement.blur(), f = b.changedTouches[0], e = document.createEvent("MouseEvents"), e.initMouseEvent("mousedown", !0, !0, window, 1, f.screenX, f.screenY, f.clientX, f.clientY, !1, !1, !1, !1, 0, null), e.forwardedTouchEvent = !0, a.dispatchEvent(e), d = document.createEvent("MouseEvents"), d.initMouseEvent("mouseup", !0, !0, window, 1, f.screenX, f.screenY, f.clientX, f.clientY, !1, !1, !1, !1, 0, null), d.forwardedTouchEvent = !0, a.dispatchEvent(d), c = document.createEvent("MouseEvents"), c.initMouseEvent(this.determineEventType(a), !0, !0, window, 1, f.screenX, f.screenY, f.clientX, f.clientY, !1, !1, !1, !1, 0, null), c.forwardedTouchEvent = !0, a.dispatchEvent(c)
-}, FastClick.prototype.determineEventType = function(a) {
+}, FastClick.prototype.determineEventType = function (a) {
     "use strict";
     return deviceIsAndroid && "select" === a.tagName.toLowerCase() ? "mousedown" : "click"
-}, FastClick.prototype.focus = function(a) {
+}, FastClick.prototype.focus = function (a) {
     "use strict";
     var b;
     deviceIsIOS && a.setSelectionRange && 0 !== a.type.indexOf("date") && "time" !== a.type ? (b = a.value.length, a.setSelectionRange(b, b)) : a.focus()
-}, FastClick.prototype.updateScrollParent = function(a) {
+}, FastClick.prototype.updateScrollParent = function (a) {
     "use strict";
     var b, c;
     if (b = a.fastClickScrollParent, !b || !b.contains(a)) {
@@ -370,10 +371,10 @@ FastClick.prototype.needsClick = function(a) {
         } while (c)
     }
     b && (b.fastClickLastScrollTop = b.scrollTop)
-}, FastClick.prototype.getTargetElementFromEventTarget = function(a) {
+}, FastClick.prototype.getTargetElementFromEventTarget = function (a) {
     "use strict";
     return a.nodeType === Node.TEXT_NODE ? a.parentNode : a
-}, FastClick.prototype.onTouchStart = function(a) {
+}, FastClick.prototype.onTouchStart = function (a) {
     "use strict";
     var b, c, d;
     if (a.targetTouches.length > 1) return !0;
@@ -385,18 +386,18 @@ FastClick.prototype.needsClick = function(a) {
         }
     }
     return this.trackingClick = !0, this.trackingClickStart = a.timeStamp, this.targetElement = b, this.touchStartX = c.pageX, this.touchStartY = c.pageY, a.timeStamp - this.lastClickTime < this.tapDelay && a.preventDefault(), !0
-}, FastClick.prototype.touchHasMoved = function(a) {
+}, FastClick.prototype.touchHasMoved = function (a) {
     "use strict";
     var b = a.changedTouches[0],
         c = this.touchBoundary;
     return Math.abs(b.pageX - this.touchStartX) > c || Math.abs(b.pageY - this.touchStartY) > c
-}, FastClick.prototype.onTouchMove = function(a) {
+}, FastClick.prototype.onTouchMove = function (a) {
     "use strict";
     return !this.trackingClick || ((this.targetElement !== this.getTargetElementFromEventTarget(a.target) || this.touchHasMoved(a)) && (this.trackingClick = !1, this.targetElement = null), !0)
-}, FastClick.prototype.findControl = function(a) {
+}, FastClick.prototype.findControl = function (a) {
     "use strict";
     return void 0 !== a.control ? a.control : a.htmlFor ? document.getElementById(a.htmlFor) : a.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")
-}, FastClick.prototype.onTouchEnd = function(a) {
+}, FastClick.prototype.onTouchEnd = function (a) {
     "use strict";
     var b, c, d, e, f, g = this.targetElement;
     if (!this.trackingClick) return !0;
@@ -408,21 +409,21 @@ FastClick.prototype.needsClick = function(a) {
         }
     } else if (this.needsFocus(g)) return a.timeStamp - c > 100 || deviceIsIOS && window.top !== window && "input" === d ? (this.targetElement = null, !1) : (this.focus(g), this.sendClick(g, a), deviceIsIOS && "select" === d || (this.targetElement = null, a.preventDefault()), !1);
     return !(!deviceIsIOS || deviceIsIOS4 || (e = g.fastClickScrollParent, !e || e.fastClickLastScrollTop === e.scrollTop)) || (this.needsClick(g) || (a.preventDefault(), this.sendClick(g, a)), !1)
-}, FastClick.prototype.onTouchCancel = function() {
+}, FastClick.prototype.onTouchCancel = function () {
     "use strict";
     this.trackingClick = !1, this.targetElement = null
-}, FastClick.prototype.onMouse = function(a) {
+}, FastClick.prototype.onMouse = function (a) {
     "use strict";
     return !(this.targetElement && !a.forwardedTouchEvent && a.cancelable && (!this.needsClick(this.targetElement) || this.cancelNextClick) && (a.stopImmediatePropagation ? a.stopImmediatePropagation() : a.propagationStopped = !0, a.stopPropagation(), a.preventDefault(), 1))
-}, FastClick.prototype.onClick = function(a) {
+}, FastClick.prototype.onClick = function (a) {
     "use strict";
     var b;
     return this.trackingClick ? (this.targetElement = null, this.trackingClick = !1, !0) : "submit" === a.target.type && 0 === a.detail || (b = this.onMouse(a), b || (this.targetElement = null), b)
-}, FastClick.prototype.destroy = function() {
+}, FastClick.prototype.destroy = function () {
     "use strict";
     var a = this.layer;
     deviceIsAndroid && (a.removeEventListener("mouseover", this.onMouse, !0), a.removeEventListener("mousedown", this.onMouse, !0), a.removeEventListener("mouseup", this.onMouse, !0)), a.removeEventListener("click", this.onClick, !0), a.removeEventListener("touchstart", this.onTouchStart, !1), a.removeEventListener("touchmove", this.onTouchMove, !1), a.removeEventListener("touchend", this.onTouchEnd, !1), a.removeEventListener("touchcancel", this.onTouchCancel, !1)
-}, FastClick.notNeeded = function(a) {
+}, FastClick.notNeeded = function (a) {
     "use strict";
     var b, c, d;
     if ("undefined" == typeof window.ontouchstart) return !0;
@@ -438,13 +439,13 @@ FastClick.prototype.needsClick = function(a) {
         if (document.documentElement.scrollWidth <= window.outerWidth) return !0
     }
     return "none" === a.style.msTouchAction
-}, FastClick.attach = function(a, b) {
+}, FastClick.attach = function (a, b) {
     "use strict";
     return new FastClick(a, b)
-}, "function" == typeof define && "object" == typeof define.amd && define.amd ? define(function() {
+}, "function" == typeof define && "object" == typeof define.amd && define.amd ? define(function () {
     "use strict";
     return FastClick
-}) : "undefined" != typeof module && module.exports ? (module.exports = FastClick.attach, module.exports.FastClick = FastClick) : window.FastClick = FastClick, ! function() {
+}) : "undefined" != typeof module && module.exports ? (module.exports = FastClick.attach, module.exports.FastClick = FastClick) : window.FastClick = FastClick, !function () {
     function a(c, d) {
         if (c = c ? c : "", d = d || {}, c instanceof a) return c;
         if (!(this instanceof a)) return new a(c, d);
@@ -510,6 +511,7 @@ FastClick.prototype.needsClick = function(a) {
         function d(a, b, c) {
             return 0 > c && (c += 1), c > 1 && (c -= 1), 1 / 6 > c ? a + 6 * (b - a) * c : .5 > c ? b : 2 / 3 > c ? a + 6 * (b - a) * (2 / 3 - c) : a
         }
+
         var e, f, g;
         if (a = y(a, 360), b = y(b, 100), c = y(c, 100), 0 === b) e = f = g = c;
         else {
@@ -805,6 +807,7 @@ FastClick.prototype.needsClick = function(a) {
             size: c
         }
     }
+
     var J = /^[\s,#]+/,
         K = /\s+$/,
         L = 0,
@@ -814,36 +817,36 @@ FastClick.prototype.needsClick = function(a) {
         P = M.max,
         Q = M.random;
     a.prototype = {
-        isDark: function() {
+        isDark: function () {
             return this.getBrightness() < 128
         },
-        isLight: function() {
+        isLight: function () {
             return !this.isDark()
         },
-        isValid: function() {
+        isValid: function () {
             return this._ok
         },
-        getOriginalInput: function() {
+        getOriginalInput: function () {
             return this._originalInput
         },
-        getFormat: function() {
+        getFormat: function () {
             return this._format
         },
-        getAlpha: function() {
+        getAlpha: function () {
             return this._a
         },
-        getBrightness: function() {
+        getBrightness: function () {
             var a = this.toRgb();
             return (299 * a.r + 587 * a.g + 114 * a.b) / 1e3
         },
-        getLuminance: function() {
+        getLuminance: function () {
             var a, b, c, d, e, f, g = this.toRgb();
             return a = g.r / 255, b = g.g / 255, c = g.b / 255, d = .03928 >= a ? a / 12.92 : Math.pow((a + .055) / 1.055, 2.4), e = .03928 >= b ? b / 12.92 : Math.pow((b + .055) / 1.055, 2.4), f = .03928 >= c ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4), .2126 * d + .7152 * e + .0722 * f
         },
-        setAlpha: function(a) {
+        setAlpha: function (a) {
             return this._a = x(a), this._roundA = N(100 * this._a) / 100, this
         },
-        toHsv: function() {
+        toHsv: function () {
             var a = f(this._r, this._g, this._b);
             return {
                 h: 360 * a.h,
@@ -852,14 +855,14 @@ FastClick.prototype.needsClick = function(a) {
                 a: this._a
             }
         },
-        toHsvString: function() {
+        toHsvString: function () {
             var a = f(this._r, this._g, this._b),
                 b = N(360 * a.h),
                 c = N(100 * a.s),
                 d = N(100 * a.v);
             return 1 == this._a ? "hsv(" + b + ", " + c + "%, " + d + "%)" : "hsva(" + b + ", " + c + "%, " + d + "%, " + this._roundA + ")"
         },
-        toHsl: function() {
+        toHsl: function () {
             var a = d(this._r, this._g, this._b);
             return {
                 h: 360 * a.h,
@@ -868,26 +871,26 @@ FastClick.prototype.needsClick = function(a) {
                 a: this._a
             }
         },
-        toHslString: function() {
+        toHslString: function () {
             var a = d(this._r, this._g, this._b),
                 b = N(360 * a.h),
                 c = N(100 * a.s),
                 e = N(100 * a.l);
             return 1 == this._a ? "hsl(" + b + ", " + c + "%, " + e + "%)" : "hsla(" + b + ", " + c + "%, " + e + "%, " + this._roundA + ")"
         },
-        toHex: function(a) {
+        toHex: function (a) {
             return h(this._r, this._g, this._b, a)
         },
-        toHexString: function(a) {
+        toHexString: function (a) {
             return "#" + this.toHex(a)
         },
-        toHex8: function() {
+        toHex8: function () {
             return i(this._r, this._g, this._b, this._a)
         },
-        toHex8String: function() {
+        toHex8String: function () {
             return "#" + this.toHex8()
         },
-        toRgb: function() {
+        toRgb: function () {
             return {
                 r: N(this._r),
                 g: N(this._g),
@@ -895,10 +898,10 @@ FastClick.prototype.needsClick = function(a) {
                 a: this._a
             }
         },
-        toRgbString: function() {
+        toRgbString: function () {
             return 1 == this._a ? "rgb(" + N(this._r) + ", " + N(this._g) + ", " + N(this._b) + ")" : "rgba(" + N(this._r) + ", " + N(this._g) + ", " + N(this._b) + ", " + this._roundA + ")"
         },
-        toPercentageRgb: function() {
+        toPercentageRgb: function () {
             return {
                 r: N(100 * y(this._r, 255)) + "%",
                 g: N(100 * y(this._g, 255)) + "%",
@@ -906,13 +909,13 @@ FastClick.prototype.needsClick = function(a) {
                 a: this._a
             }
         },
-        toPercentageRgbString: function() {
+        toPercentageRgbString: function () {
             return 1 == this._a ? "rgb(" + N(100 * y(this._r, 255)) + "%, " + N(100 * y(this._g, 255)) + "%, " + N(100 * y(this._b, 255)) + "%)" : "rgba(" + N(100 * y(this._r, 255)) + "%, " + N(100 * y(this._g, 255)) + "%, " + N(100 * y(this._b, 255)) + "%, " + this._roundA + ")"
         },
-        toName: function() {
+        toName: function () {
             return 0 === this._a ? "transparent" : !(this._a < 1) && (S[h(this._r, this._g, this._b, !0)] || !1)
         },
-        toFilter: function(b) {
+        toFilter: function (b) {
             var c = "#" + i(this._r, this._g, this._b, this._a),
                 d = c,
                 e = this._gradientType ? "GradientType = 1, " : "";
@@ -922,7 +925,7 @@ FastClick.prototype.needsClick = function(a) {
             }
             return "progid:DXImageTransform.Microsoft.gradient(" + e + "startColorstr=" + c + ",endColorstr=" + d + ")"
         },
-        toString: function(a) {
+        toString: function (a) {
             var b = !!a;
             a = a || this._format;
             var c = !1,
@@ -930,68 +933,68 @@ FastClick.prototype.needsClick = function(a) {
                 e = !b && d && ("hex" === a || "hex6" === a || "hex3" === a || "name" === a);
             return e ? "name" === a && 0 === this._a ? this.toName() : this.toRgbString() : ("rgb" === a && (c = this.toRgbString()), "prgb" === a && (c = this.toPercentageRgbString()), ("hex" === a || "hex6" === a) && (c = this.toHexString()), "hex3" === a && (c = this.toHexString(!0)), "hex8" === a && (c = this.toHex8String()), "name" === a && (c = this.toName()), "hsl" === a && (c = this.toHslString()), "hsv" === a && (c = this.toHsvString()), c || this.toHexString())
         },
-        _applyModification: function(a, b) {
+        _applyModification: function (a, b) {
             var c = a.apply(null, [this].concat([].slice.call(b)));
             return this._r = c._r, this._g = c._g, this._b = c._b, this.setAlpha(c._a), this
         },
-        lighten: function() {
+        lighten: function () {
             return this._applyModification(m, arguments)
         },
-        brighten: function() {
+        brighten: function () {
             return this._applyModification(n, arguments)
         },
-        darken: function() {
+        darken: function () {
             return this._applyModification(o, arguments)
         },
-        desaturate: function() {
+        desaturate: function () {
             return this._applyModification(j, arguments)
         },
-        saturate: function() {
+        saturate: function () {
             return this._applyModification(k, arguments)
         },
-        greyscale: function() {
+        greyscale: function () {
             return this._applyModification(l, arguments)
         },
-        spin: function() {
+        spin: function () {
             return this._applyModification(p, arguments)
         },
-        _applyCombination: function(a, b) {
+        _applyCombination: function (a, b) {
             return a.apply(null, [this].concat([].slice.call(b)))
         },
-        analogous: function() {
+        analogous: function () {
             return this._applyCombination(u, arguments)
         },
-        complement: function() {
+        complement: function () {
             return this._applyCombination(q, arguments)
         },
-        monochromatic: function() {
+        monochromatic: function () {
             return this._applyCombination(v, arguments)
         },
-        splitcomplement: function() {
+        splitcomplement: function () {
             return this._applyCombination(t, arguments)
         },
-        triad: function() {
+        triad: function () {
             return this._applyCombination(r, arguments)
         },
-        tetrad: function() {
+        tetrad: function () {
             return this._applyCombination(s, arguments)
         }
-    }, a.fromRatio = function(b, c) {
+    }, a.fromRatio = function (b, c) {
         if ("object" == typeof b) {
             var d = {};
             for (var e in b) b.hasOwnProperty(e) && (d[e] = "a" === e ? b[e] : E(b[e]));
             b = d
         }
         return a(b, c)
-    }, a.equals = function(b, c) {
+    }, a.equals = function (b, c) {
         return !(!b || !c) && a(b).toRgbString() == a(c).toRgbString()
-    }, a.random = function() {
+    }, a.random = function () {
         return a.fromRatio({
             r: Q(),
             g: Q(),
             b: Q()
         })
-    }, a.mix = function(b, c, d) {
+    }, a.mix = function (b, c, d) {
         d = 0 === d ? 0 : d || 50;
         var e, f = a(b).toRgb(),
             g = a(c).toRgb(),
@@ -1007,11 +1010,11 @@ FastClick.prototype.needsClick = function(a) {
                 a: g.a * h + f.a * (1 - h)
             };
         return a(l)
-    }, a.readability = function(b, c) {
+    }, a.readability = function (b, c) {
         var d = a(b),
             e = a(c);
         return (Math.max(d.getLuminance(), e.getLuminance()) + .05) / (Math.min(d.getLuminance(), e.getLuminance()) + .05)
-    }, a.isReadable = function(b, c, d) {
+    }, a.isReadable = function (b, c, d) {
         var e, f, g = a.readability(b, c);
         switch (f = !1, e = I(d), e.level + e.size) {
             case "AAsmall":
@@ -1025,7 +1028,7 @@ FastClick.prototype.needsClick = function(a) {
                 f = g >= 7
         }
         return f
-    }, a.mostReadable = function(b, c, d) {
+    }, a.mostReadable = function (b, c, d) {
         var e, f, g, h, i = null,
             j = 0;
         d = d || {}, f = d.includeFallbackColors, g = d.level, h = d.size;
@@ -1187,7 +1190,7 @@ FastClick.prototype.needsClick = function(a) {
             yellowgreen: "9acd32"
         },
         S = a.hexNames = w(R),
-        T = function() {
+        T = function () {
             var a = "[-\\+]?\\d+%?",
                 b = "[-\\+]?\\d*\\.\\d+%?",
                 c = "(?:" + b + ")|(?:" + a + ")",
@@ -1205,16 +1208,16 @@ FastClick.prototype.needsClick = function(a) {
                 hex8: /^([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/
             }
         }();
-    "undefined" != typeof module && module.exports ? module.exports = a : "function" == typeof define && define.amd ? define(function() {
+    "undefined" != typeof module && module.exports ? module.exports = a : "function" == typeof define && define.amd ? define(function () {
         return a
     }) : window.tinycolor = a
-}(), ! function(a) {
+}(), !function (a) {
     "function" == typeof define && define.amd && define.amd.jQuery ? define(["jquery"], a) : a("undefined" != typeof module && module.exports ? require("jquery") : jQuery)
-}(function(a) {
+}(function (a) {
     "use strict";
 
     function b(b) {
-        return !b || void 0 !== b.allowPageScroll || void 0 === b.swipe && void 0 === b.swipeStatus || (b.allowPageScroll = k), void 0 !== b.click && void 0 === b.tap && (b.tap = b.click), b || (b = {}), b = a.extend({}, a.fn.swipe.defaults, b), this.each(function() {
+        return !b || void 0 !== b.allowPageScroll || void 0 === b.swipe && void 0 === b.swipeStatus || (b.allowPageScroll = k), void 0 !== b.click && void 0 === b.tap && (b.tap = b.click), b || (b = {}), b = a.extend({}, a.fn.swipe.defaults, b), this.each(function () {
             var d = a(this),
                 e = d.data(C);
             e || (e = new c(this, b), d.data(C, e))
@@ -1228,7 +1231,7 @@ FastClick.prototype.needsClick = function(a) {
                 if (!d.pointerType || "mouse" != d.pointerType || 0 != c.fallbackToMouseEvents) {
                     var e, f = d.touches,
                         g = f ? f[0] : d;
-                    return Ua = v, f ? Va = f.length : c.preventDefaultEvents !== !1 && b.preventDefault(), Ja = 0, Ka = null, La = null, Ra = null, Ma = 0, Na = 0, Oa = 0, Pa = 1, Qa = 0, Sa = qa(), ha(), la(0, g), !f || Va === c.fingers || c.fingers === t || R() ? (Xa = za(), 2 == Va && (la(1, f[1]), Na = Oa = ta(Wa[0].start, Wa[1].start)), (c.swipeStatus || c.pinchStatus) && (e = J(d, Ua))) : e = !1, e === !1 ? (Ua = y, J(d, Ua), e) : (c.hold && (bb = setTimeout(a.proxy(function() {
+                    return Ua = v, f ? Va = f.length : c.preventDefaultEvents !== !1 && b.preventDefault(), Ja = 0, Ka = null, La = null, Ra = null, Ma = 0, Na = 0, Oa = 0, Pa = 1, Qa = 0, Sa = qa(), ha(), la(0, g), !f || Va === c.fingers || c.fingers === t || R() ? (Xa = za(), 2 == Va && (la(1, f[1]), Na = Oa = ta(Wa[0].start, Wa[1].start)), (c.swipeStatus || c.pinchStatus) && (e = J(d, Ua))) : e = !1, e === !1 ? (Ua = y, J(d, Ua), e) : (c.hold && (bb = setTimeout(a.proxy(function () {
                         Ta.trigger("hold", [d.target]), c.hold && (e = c.hold.call(Ta, d, d.target))
                     }, this), c.longTapThreshold)), ka(!0), null)
                 }
@@ -1247,7 +1250,8 @@ FastClick.prototype.needsClick = function(a) {
                         if (c.triggerOnTouchLeave) {
                             var i = Aa(this);
                             h = Ba(g.end, i)
-                        }!c.triggerOnTouchEnd && h ? Ua = I(w) : c.triggerOnTouchLeave && !h && (Ua = I(x)), Ua != y && Ua != x || J(b, Ua)
+                        }
+                        !c.triggerOnTouchEnd && h ? Ua = I(w) : c.triggerOnTouchLeave && !h && (Ua = I(x)), Ua != y && Ua != x || J(b, Ua)
                     }
                 } else Ua = y, J(b, Ua);
                 d === !1 && (Ua = y, J(b, Ua))
@@ -1322,7 +1326,7 @@ FastClick.prototype.needsClick = function(a) {
                         Ta.trigger("pinchOut", [Ra || null, Qa || 0, Ma || 0, Va, Pa, Wa]), c.pinchOut && (l = c.pinchOut.call(Ta, b, Ra || null, Qa || 0, Ma || 0, Va, Pa, Wa))
                 }
             }
-            return k == o ? d !== y && d !== x || (clearTimeout(ab), clearTimeout(bb), Z() && !aa() ? (_a = za(), ab = setTimeout(a.proxy(function() {
+            return k == o ? d !== y && d !== x || (clearTimeout(ab), clearTimeout(bb), Z() && !aa() ? (_a = za(), ab = setTimeout(a.proxy(function () {
                 _a = null, Ta.trigger("tap", [b.target]), c.tap && (l = c.tap.call(Ta, b, b.target))
             }, this), c.doubleTapThreshold)) : (_a = null, Ta.trigger("tap", [b.target]), c.tap && (l = c.tap.call(Ta, b, b.target)))) : k == p ? d !== y && d !== x || (clearTimeout(ab), clearTimeout(bb), _a = null, Ta.trigger("doubletap", [b.target]), c.doubleTap && (l = c.doubleTap.call(Ta, b, b.target))) : k == q && (d !== y && d !== x || (clearTimeout(ab), _a = null, Ta.trigger("longtap", [b.target]), c.longTap && (l = c.longTap.call(Ta, b, b.target)))), l
         }
@@ -1586,6 +1590,7 @@ FastClick.prototype.needsClick = function(a) {
         function Ca(a, b) {
             return a.x == b.x && a.y == b.y
         }
+
         var c = a.extend({}, c),
             Da = z || B || !c.fallbackToMouseEvents,
             Ea = Da ? B ? A ? "MSPointerDown" : "pointerdown" : "touchstart" : "mousedown",
@@ -1619,13 +1624,13 @@ FastClick.prototype.needsClick = function(a) {
         } catch (b) {
             a.error("events not supported " + Ea + "," + Ia + " on jQuery.swipe")
         }
-        this.enable = function() {
+        this.enable = function () {
             return this.disable(), Ta.bind(Ea, d), Ta.bind(Ia, F), Ta
-        }, this.disable = function() {
+        }, this.disable = function () {
             return H(), Ta
-        }, this.destroy = function() {
+        }, this.destroy = function () {
             H(), Ta.data(C, null), Ta = null
-        }, this.option = function(b, d) {
+        }, this.option = function (b, d) {
             if ("object" == typeof b) c = a.extend(c, b);
             else if (void 0 !== c[b]) {
                 if (void 0 === d) return c[b];
@@ -1637,6 +1642,7 @@ FastClick.prototype.needsClick = function(a) {
             return null
         }
     }
+
     var d = "1.6.18",
         e = "left",
         f = "right",
@@ -1693,7 +1699,7 @@ FastClick.prototype.needsClick = function(a) {
             excludedElements: ".noSwipe",
             preventDefaultEvents: !0
         };
-    a.fn.swipe = function(c) {
+    a.fn.swipe = function (c) {
         var d = a(this),
             e = d.data(C);
         if (e && "string" == typeof c) {
@@ -1727,342 +1733,32 @@ FastClick.prototype.needsClick = function(a) {
         FIVE: 5,
         ALL: t
     }
-}), ! function(a) {
-    a.isBreakpoint = function(b) {
+}), !function (a) {
+    a.isBreakpoint = function (b) {
         var c, d;
         return c = a("<div/>", {
             class: "visible-" + b
         }).appendTo("body"), d = c.is(":visible"), c.remove(), d
     }, a.extend(a, {
-        isXs: function() {
+        isXs: function () {
             return a.isBreakpoint("xs")
         },
-        isSm: function() {
+        isSm: function () {
             return a.isBreakpoint("sm")
         },
-        isMd: function() {
+        isMd: function () {
             return a.isBreakpoint("md")
         },
-        isLg: function() {
+        isLg: function () {
             return a.isBreakpoint("lg")
         }
     })
 }(jQuery);
-var App = function() {
+var     App = function () {
         "use strict";
-        return App.bootstrapSpinner = function() {
-            $('input[name="postfix"]').TouchSpin({
-                min: 0,
-                max: 100,
-                step: .1,
-                decimals: 2,
-                boostat: 5,
-                maxboostedstep: 10,
-                postfix: "%"
-            }), $("input[name='prefix']").TouchSpin({
-                min: -1e9,
-                max: 1e9,
-                stepinterval: 50,
-                maxboostedstep: 1e7,
-                prefix: "$"
-            }), $("input[name='vertical']").TouchSpin({
-                verticalbuttons: !0,
-                verticalupclass: "s7 s7-angle-up",
-                verticaldownclass: "s7 s7-angle-down"
-            }), $("input[name='v-custom-icons']").TouchSpin({
-                verticalbuttons: !0,
-                verticalupclass: "am-icon-plus",
-                verticaldownclass: "am-icon-times"
-            }), $("input[name='empty']").TouchSpin(), $("input[name='init']").TouchSpin({
-                initval: 40
-            }), $("input[name='sm-spinner']").TouchSpin({
-                postfix: "a button",
-                postfix_extraclass: "btn btn-default"
-            }), $("input[name='lg-spinner']").TouchSpin({
-                postfix: "a button",
-                postfix_extraclass: "btn btn-default"
-            }), $("input[name='btn-group-spinner']").TouchSpin({
-                prefix: "pre",
-                postfix: "post"
-            }), $("input[name='btn-class']").TouchSpin({
-                buttondown_class: "btn btn-primary",
-                buttonup_class: "btn btn-primary"
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.chartsMorris = function() {
+        return App.dashboard = function () {
             function a() {
-                var a = App.color.primary,
-                    b = tinycolor(App.color.primary).lighten(15).toString();
-                new Morris.Line({
-                    element: "line-chart",
-                    data: e,
-                    xkey: "period",
-                    ykeys: ["licensed", "sorned"],
-                    labels: ["Licensed", "Off the road"],
-                    lineColors: [a, b]
-                })
-            }
-
-            function b() {
-                var a = tinycolor(App.color.alt3).lighten(15).toString(),
-                    b = tinycolor(App.color.alt3).brighten(3).toString();
-                Morris.Bar({
-                    element: "bar-chart",
-                    data: [{
-                        device: "iPhone",
-                        geekbench: 136,
-                        macbench: 180
-                    }, {
-                        device: "iPhone 3G",
-                        geekbench: 137,
-                        macbench: 200
-                    }, {
-                        device: "iPhone 3GS",
-                        geekbench: 275,
-                        macbench: 350
-                    }, {
-                        device: "iPhone 4",
-                        geekbench: 380,
-                        macbench: 500
-                    }, {
-                        device: "iPhone 4S",
-                        geekbench: 655,
-                        macbench: 900
-                    }, {
-                        device: "iPhone 5",
-                        geekbench: 1571,
-                        macbench: 1700
-                    }],
-                    xkey: "device",
-                    ykeys: ["geekbench", "macbench"],
-                    labels: ["Geekbench", "Macbench"],
-                    barColors: [a, b],
-                    barRatio: .4,
-                    xLabelAngle: 35,
-                    hideHover: "auto"
-                })
-            }
-
-            function c() {
-                var a = App.color.alt2,
-                    b = (App.color.alt4, App.color.alt3),
-                    c = App.color.alt1,
-                    d = tinycolor(App.color.primary).lighten(5).toString();
-                Morris.Donut({
-                    element: "donut-chart",
-                    data: [{
-                        label: "Facebook",
-                        value: 25
-                    }, {
-                        label: "Google",
-                        value: 40
-                    }, {
-                        label: "Twitter",
-                        value: 25
-                    }, {
-                        label: "Pinterest",
-                        value: 10
-                    }],
-                    colors: [a, d, b, c],
-                    formatter: function(a) {
-                        return a + "%"
-                    }
-                })
-            }
-
-            function d() {
-                var a = App.color.alt2,
-                    b = (App.color.alt4, App.color.alt3, App.color.alt1),
-                    c = tinycolor(App.color.primary).lighten(5).toString();
-                Morris.Area({
-                    element: "area-chart",
-                    data: [{
-                        period: "2010 Q1",
-                        iphone: 2666,
-                        ipad: null,
-                        itouch: 2647
-                    }, {
-                        period: "2010 Q2",
-                        iphone: 2778,
-                        ipad: 2294,
-                        itouch: 2441
-                    }, {
-                        period: "2010 Q3",
-                        iphone: 4912,
-                        ipad: 1969,
-                        itouch: 2501
-                    }, {
-                        period: "2010 Q4",
-                        iphone: 3767,
-                        ipad: 3597,
-                        itouch: 5689
-                    }, {
-                        period: "2011 Q1",
-                        iphone: 6810,
-                        ipad: 1914,
-                        itouch: 2293
-                    }, {
-                        period: "2011 Q2",
-                        iphone: 5670,
-                        ipad: 4293,
-                        itouch: 1881
-                    }, {
-                        period: "2011 Q3",
-                        iphone: 4820,
-                        ipad: 3795,
-                        itouch: 1588
-                    }, {
-                        period: "2011 Q4",
-                        iphone: 15073,
-                        ipad: 5967,
-                        itouch: 5175
-                    }, {
-                        period: "2012 Q1",
-                        iphone: 10687,
-                        ipad: 4460,
-                        itouch: 2028
-                    }, {
-                        period: "2012 Q2",
-                        iphone: 8432,
-                        ipad: 5713,
-                        itouch: 1791
-                    }],
-                    xkey: "period",
-                    ykeys: ["iphone", "ipad", "itouch"],
-                    labels: ["iPhone", "iPad", "iPod Touch"],
-                    lineColors: [c, b, a],
-                    pointSize: 2,
-                    hideHover: "auto"
-                })
-            }
-            var e = [{
-                period: "2013",
-                licensed: 400,
-                sorned: 550
-            }, {
-                period: "2012",
-                licensed: 450,
-                sorned: 400
-            }, {
-                period: "2011",
-                licensed: 350,
-                sorned: 550
-            }, {
-                period: "2010",
-                licensed: 500,
-                sorned: 700
-            }, {
-                period: "2009",
-                licensed: 250,
-                sorned: 380
-            }, {
-                period: "2008",
-                licensed: 350,
-                sorned: 240
-            }, {
-                period: "2007",
-                licensed: 180,
-                sorned: 300
-            }, {
-                period: "2006",
-                licensed: 300,
-                sorned: 250
-            }, {
-                period: "2005",
-                licensed: 200,
-                sorned: 150
-            }];
-            a(), b(), c(), d()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.chartsSparklines = function() {
-            var a = tinycolor(App.color.primary),
-                b = tinycolor(App.color.alt1),
-                c = tinycolor(App.color.alt2),
-                d = tinycolor(App.color.alt3),
-                e = a.toString(),
-                f = b.toString(),
-                g = c.toString(),
-                h = d.toString();
-            $.fn.sparkline.defaults.common.lineColor = e, $.fn.sparkline.defaults.common.fillColor = a.setAlpha(.3).toString(), $.fn.sparkline.defaults.line.spotColor = e, $.fn.sparkline.defaults.line.minSpotColor = e, $.fn.sparkline.defaults.line.maxSpotColor = e, $.fn.sparkline.defaults.line.highlightSpotColor = e, $.fn.sparkline.defaults.line.highlightLineColor = e, $.fn.sparkline.defaults.bar.barColor = e, $.fn.sparkline.defaults.bar.negBarColor = f, $.fn.sparkline.defaults.bar.stackedBarColor[0] = e, $.fn.sparkline.defaults.bar.stackedBarColor[1] = f, $.fn.sparkline.defaults.tristate.posBarColor = e, $.fn.sparkline.defaults.tristate.negBarColor = f, $.fn.sparkline.defaults.discrete.thresholdColor = f, $.fn.sparkline.defaults.bullet.targetColor = e, $.fn.sparkline.defaults.bullet.performanceColor = f, $.fn.sparkline.defaults.bullet.rangeColors[0] = b.setAlpha(.2).toString(), $.fn.sparkline.defaults.bullet.rangeColors[1] = b.setAlpha(.5).toString(), $.fn.sparkline.defaults.bullet.rangeColors[2] = b.setAlpha(.45).toString(), $.fn.sparkline.defaults.pie.sliceColors[0] = e, $.fn.sparkline.defaults.pie.sliceColors[1] = f, $.fn.sparkline.defaults.pie.sliceColors[2] = g, $.fn.sparkline.defaults.box.medianColor = e, $.fn.sparkline.defaults.box.boxFillColor = b.setAlpha(.5).toString(), $.fn.sparkline.defaults.box.boxLineColor = e, $.fn.sparkline.defaults.box.whiskerColor = h, $(".compositebar").sparkline("html", {
-                type: "bar",
-                barColor: f
-            }), $(".compositebar").sparkline([4, 1, 5, 7, 9, 9, 8, 7, 6, 6, 4, 7, 8, 4, 3, 2, 2, 5, 6, 7], {
-                composite: !0,
-                fillColor: !1
-            }), $(".sparkline").sparkline(), $(".linecustom").sparkline("html", {
-                height: "1.5em",
-                width: "8em",
-                lineColor: g,
-                fillColor: c.setAlpha(.4).toString(),
-                minSpotColor: !1,
-                maxSpotColor: !1,
-                spotColor: h,
-                spotRadius: 3
-            }), $(".sparkbar").sparkline("html", {
-                type: "bar"
-            }), $(".sparktristate").sparkline("html", {
-                type: "tristate"
-            }), $(".compositeline").sparkline("html", {
-                fillColor: !1,
-                changeRangeMin: 0,
-                chartRangeMax: 10
-            }), $(".compositeline").sparkline([4, 1, 5, 7, 9, 9, 8, 7, 6, 6, 4, 7, 8, 4, 3, 2, 2, 5, 6, 7], {
-                composite: !0,
-                fillColor: !1,
-                lineColor: f,
-                changeRangeMin: 0,
-                chartRangeMax: 10
-            }), $(".normalline").sparkline("html", {
-                fillColor: !1,
-                normalRangeMin: -1,
-                normalRangeMax: 8
-            }), $(".discrete1").sparkline("html", {
-                type: "discrete",
-                xwidth: 18
-            }), $(".discrete2").sparkline("html", {
-                type: "discrete",
-                thresholdValue: 4
-            }), $(".sparkbullet").sparkline("html", {
-                type: "bullet"
-            }), $(".sparkpie").sparkline("html", {
-                type: "pie",
-                height: "1.0em"
-            }), $(".sparkboxplot").sparkline("html", {
-                type: "box"
-            }), $("#line-chart").sparkline([4, 3.5, 5, 7, 9, 9, 8, 7, 6, 6, 5, 7, 8, 4, 3, 4, 4, 5, 6, 7, 5, 6, 7, 8, 8.2, 7.5, 7.4, 7.2, 7], {
-                width: "100%",
-                height: "220px",
-                lineWidth: 1.7,
-                spotRadius: 3,
-                fillColor: a.setAlpha(.2).toString()
-            }), $("#pie-chart").sparkline([2, 5, 2.5], {
-                type: "pie",
-                sliceColors: [g, f, e],
-                height: "200px"
-            }), $("#bar-chart").sparkline([4, 3.5, 5, 7, 9, 9, 8, 7, 8, 4, 3, 4, 4, 5, 6, 7, 5, 6, 7, 8, 8.2, 7.5, 7.4], {
-                type: "bar",
-                barColor: h,
-                barWidth: 8,
-                width: "100%",
-                height: "200px"
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.charts = function() {
-            function a() {
-                return Math.floor(31 * Math.random()) + 10
-            }
-
-            function b() {
-                $('[data-toggle="counter"]').each(function(a, b) {
+                $('[data-toggle="counter"]').each(function (a, b) {
                     var c = $(this),
                         d = "",
                         e = "",
@@ -2076,800 +1772,6 @@ var App = function() {
                         prefix: d
                     });
                     j.start()
-                })
-            }
-
-            function c() {
-                var a = App.color.alt2;
-                $.plot($("#line-chart1"), [{
-                    data: [
-                        [0, 30],
-                        [1, 25],
-                        [2, 22],
-                        [3, 20],
-                        [4, 19],
-                        [5, 15],
-                        [6, 12],
-                        [7, 10]
-                    ],
-                    label: "Page Views"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 2,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .2
-                                }, {
-                                    opacity: .2
-                                }]
-                            }
-                        },
-                        points: {
-                            show: !0
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: {
-                            left: -8,
-                            right: -8,
-                            top: 0,
-                            bottom: 0
-                        },
-                        show: !1,
-                        labelMargin: 15,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function d() {
-                var a = [{
-                        label: "Google",
-                        data: 45
-                    }, {
-                        label: "Dribbble",
-                        data: 25
-                    }, {
-                        label: "Twitter",
-                        data: 20
-                    }, {
-                        label: "Facebook",
-                        data: 10
-                    }],
-                    b = tinycolor(App.color.primary).brighten(9).toString(),
-                    c = tinycolor(App.color.primary).lighten(13).toString(),
-                    d = tinycolor(App.color.primary).lighten(20).toString(),
-                    e = tinycolor(App.color.primary).lighten(27).toString();
-                $.plot("#pie-chart4", a, {
-                    series: {
-                        pie: {
-                            show: !0,
-                            innerRadius: .27,
-                            shadow: {
-                                top: 5,
-                                left: 15,
-                                alpha: .3
-                            },
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: !0,
-                                formatter: function(a, b) {
-                                    return '<div style="font-size:12px;text-align:center;padding:2px;color:#333;">' + a + "</div>"
-                                }
-                            },
-                            highlight: {
-                                opacity: .08
-                            }
-                        }
-                    },
-                    grid: {
-                        hoverable: !0,
-                        clickable: !0
-                    },
-                    colors: [b, c, d, e],
-                    legend: {
-                        show: !1
-                    }
-                })
-            }
-
-            function e() {
-                var a = tinycolor(App.color.alt3).lighten(15).toString(),
-                    b = tinycolor(App.color.alt3).brighten(3).toString();
-                $.plot($("#bar-chart1"), [{
-                    data: [
-                        [0, 15],
-                        [1, 15],
-                        [2, 19],
-                        [3, 28],
-                        [4, 30],
-                        [5, 37],
-                        [6, 35],
-                        [7, 38],
-                        [8, 48],
-                        [9, 43],
-                        [10, 38],
-                        [11, 32],
-                        [12, 38]
-                    ],
-                    label: "Page Views"
-                }, {
-                    data: [
-                        [0, 7],
-                        [1, 10],
-                        [2, 15],
-                        [3, 23],
-                        [4, 24],
-                        [5, 29],
-                        [6, 25],
-                        [7, 33],
-                        [8, 35],
-                        [9, 38],
-                        [10, 32],
-                        [11, 27],
-                        [12, 32]
-                    ],
-                    label: "Unique Visitor"
-                }], {
-                    series: {
-                        bars: {
-                            align: "center",
-                            show: !0,
-                            lineWidth: 1,
-                            barWidth: .6,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: 1
-                                }, {
-                                    opacity: 1
-                                }]
-                            }
-                        },
-                        shadowSize: 2
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: 0,
-                        show: !1,
-                        labelMargin: 10,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, b],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function f() {
-                var a = [{
-                        label: "Premium Purchases",
-                        data: 15
-                    }, {
-                        label: "Standard Plans",
-                        data: 25
-                    }, {
-                        label: "Services",
-                        data: 60
-                    }],
-                    b = tinycolor(App.color.primary).lighten(5).toString(),
-                    c = App.color.alt2,
-                    d = App.color.alt1,
-                    e = $("#widget-top-1").parent().next().find(".legend");
-                $.plot("#widget-top-1", a, {
-                    series: {
-                        pie: {
-                            show: !0,
-                            highlight: {
-                                opacity: .1
-                            }
-                        }
-                    },
-                    grid: {
-                        hoverable: !0
-                    },
-                    legend: {
-                        container: e
-                    },
-                    colors: [b, c, d]
-                })
-            }
-
-            function g() {
-                var a = tinycolor(App.color.alt1).lighten(7).toString(),
-                    b = App.color.alt1,
-                    c = [
-                        [1, 20],
-                        [2, 60],
-                        [3, 35],
-                        [4, 70],
-                        [5, 45]
-                    ],
-                    d = [
-                        [1, 60],
-                        [2, 20],
-                        [3, 65],
-                        [4, 35],
-                        [5, 65]
-                    ];
-                $.plot("#linechart-mini1", [{
-                    data: c,
-                    canvasRender: !0
-                }, {
-                    data: d,
-                    canvasRender: !0
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 0,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .7
-                                }, {
-                                    opacity: .7
-                                }]
-                            }
-                        },
-                        fillColor: "rgba(0, 0, 0, 1)",
-                        shadowSize: 0,
-                        curvedLines: {
-                            apply: !0,
-                            active: !0,
-                            monotonicFit: !0
-                        }
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        show: !1,
-                        hoverable: !0,
-                        clickable: !0
-                    },
-                    colors: [a, b],
-                    xaxis: {
-                        autoscaleMargin: 0,
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 5,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function h() {
-                function a() {
-                    for (d.length > 0 && (d = d.slice(1)); d.length < e;) {
-                        var a = d.length > 0 ? d[d.length - 1] : 50,
-                            b = a + 10 * Math.random() - 5;
-                        b < 0 ? b = 0 : b > 100 && (b = 100), d.push(b)
-                    }
-                    for (var c = [], f = 0; f < d.length; ++f) c.push([f, d[f]]);
-                    return c
-                }
-
-                function b() {
-                    g.setData([a()]), g.draw(), setTimeout(b, f)
-                }
-                var c = App.color.alt2,
-                    d = [],
-                    e = 300,
-                    f = 30,
-                    g = $.plot("#live-data", [a()], {
-                        series: {
-                            shadowSize: 0,
-                            lines: {
-                                show: !0,
-                                lineWidth: 2,
-                                fill: !0,
-                                fillColor: {
-                                    colors: [{
-                                        opacity: .2
-                                    }, {
-                                        opacity: .2
-                                    }]
-                                }
-                            }
-                        },
-                        grid: {
-                            show: !0,
-                            margin: {
-                                top: 3,
-                                bottom: 0,
-                                left: 0,
-                                right: 0
-                            },
-                            labelMargin: 0,
-                            axisMargin: 0,
-                            hoverable: !0,
-                            clickable: !0,
-                            tickColor: "rgba(0,0,0,0)",
-                            borderWidth: 0,
-                            minBorderMargin: 0
-                        },
-                        colors: [c],
-                        yaxis: {
-                            show: !1,
-                            autoscaleMargin: .2,
-                            ticks: 5,
-                            tickDecimals: 0
-                        },
-                        xaxis: {
-                            show: !1,
-                            autoscaleMargin: 0
-                        }
-                    });
-                b()
-            }
-
-            function i() {
-                var b = tinycolor(App.color.primary).lighten(22),
-                    c = App.color.primary,
-                    d = [
-                        [1, a()],
-                        [2, a()],
-                        [3, 2 + a()],
-                        [4, 3 + a()],
-                        [5, 5 + a()],
-                        [6, 10 + a()],
-                        [7, 15 + a()],
-                        [8, 20 + a()],
-                        [9, 25 + a()],
-                        [10, 30 + a()],
-                        [11, 35 + a()],
-                        [12, 25 + a()],
-                        [13, 15 + a()],
-                        [14, 20 + a()],
-                        [15, 45 + a()],
-                        [16, 50 + a()],
-                        [17, 65 + a()],
-                        [18, 70 + a()],
-                        [19, 85 + a()],
-                        [20, 80 + a()],
-                        [21, 75 + a()],
-                        [22, 80 + a()],
-                        [23, 75 + a()]
-                    ],
-                    e = [
-                        [1, a()],
-                        [2, a()],
-                        [3, 10 + a()],
-                        [4, 15 + a()],
-                        [5, 20 + a()],
-                        [6, 25 + a()],
-                        [7, 30 + a()],
-                        [8, 35 + a()],
-                        [9, 40 + a()],
-                        [10, 45 + a()],
-                        [11, 50 + a()],
-                        [12, 55 + a()],
-                        [13, 60 + a()],
-                        [14, 70 + a()],
-                        [15, 75 + a()],
-                        [16, 80 + a()],
-                        [17, 85 + a()],
-                        [18, 90 + a()],
-                        [19, 95 + a()],
-                        [20, 100 + a()],
-                        [21, 110 + a()],
-                        [22, 120 + a()],
-                        [23, 130 + a()]
-                    ];
-                $.plot($("#line-chart-live"), [{
-                    data: e,
-                    showLabels: !0,
-                    label: "New Visitors",
-                    labelPlacement: "below",
-                    canvasRender: !0,
-                    cColor: "#FFFFFF"
-                }, {
-                    data: d,
-                    showLabels: !0,
-                    label: "Old Visitors",
-                    labelPlacement: "below",
-                    canvasRender: !0,
-                    cColor: "#FFFFFF"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 1.5,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .5
-                                }, {
-                                    opacity: .5
-                                }]
-                            }
-                        },
-                        fillColor: "rgba(0, 0, 0, 1)",
-                        points: {
-                            show: !1,
-                            fill: !0
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        show: !0,
-                        margin: {
-                            top: -20,
-                            bottom: 0,
-                            left: 0,
-                            right: 0
-                        },
-                        labelMargin: 0,
-                        axisMargin: 0,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0)",
-                        borderWidth: 0,
-                        minBorderMargin: 0
-                    },
-                    colors: [b, c],
-                    xaxis: {
-                        autoscaleMargin: 0,
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .2,
-                        ticks: 5,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function j() {
-                var a = App.color.alt3,
-                    b = $("#line-chart2"),
-                    c = b.parent().find(".counter .value").get(0),
-                    d = [
-                        [1, 10],
-                        [2, 30],
-                        [3, 55],
-                        [4, 36],
-                        [5, 57],
-                        [6, 80],
-                        [7, 65],
-                        [8, 50],
-                        [9, 80],
-                        [10, 70],
-                        [11, 90],
-                        [12, 67],
-                        [12, 67]
-                    ],
-                    e = ($.plot("#line-chart2", [{
-                        data: d,
-                        showLabels: !0,
-                        label: "New Visitors",
-                        labelPlacement: "below",
-                        canvasRender: !0,
-                        cColor: "#FFFFFF"
-                    }], {
-                        series: {
-                            lines: {
-                                show: !0,
-                                lineWidth: 2,
-                                fill: !0,
-                                fillColor: {
-                                    colors: [{
-                                        opacity: .6
-                                    }, {
-                                        opacity: .6
-                                    }]
-                                }
-                            },
-                            fillColor: "rgba(0, 0, 0, 1)",
-                            points: {
-                                show: !0,
-                                fill: !0,
-                                fillColor: a
-                            },
-                            shadowSize: 0
-                        },
-                        legend: {
-                            show: !1
-                        },
-                        grid: {
-                            show: !1,
-                            margin: {
-                                left: -8,
-                                right: -8,
-                                top: 0,
-                                botttom: 0
-                            },
-                            labelMargin: 0,
-                            axisMargin: 0,
-                            hoverable: !0,
-                            clickable: !0,
-                            tickColor: "rgba(0, 0, 0, 0)",
-                            borderWidth: 0
-                        },
-                        colors: [a],
-                        xaxis: {
-                            autoscaleMargin: 0,
-                            ticks: 11,
-                            tickDecimals: 0
-                        },
-                        yaxis: {
-                            autoscaleMargin: .5,
-                            ticks: 5,
-                            tickDecimals: 0
-                        }
-                    }), new CountUp(c, 0, 80, 0, 2.5, {
-                        suffix: "%"
-                    }));
-                e.start()
-            }
-
-            function k() {
-                var a = tinycolor(App.color.primary).lighten(5).toString();
-                $.plot($("#line-chart3"), [{
-                    data: [
-                        [0, 20],
-                        [1, 30],
-                        [2, 25],
-                        [3, 39],
-                        [4, 35],
-                        [5, 40],
-                        [6, 30],
-                        [7, 45]
-                    ],
-                    label: "Page Views"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 2,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .1
-                                }, {
-                                    opacity: .1
-                                }]
-                            }
-                        },
-                        points: {
-                            show: !0
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        labelMargin: 15,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        ticks: 4,
-                        tickSize: 15,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function l() {
-                var a = App.color.alt3,
-                    b = tinycolor(App.color.alt3).lighten(22).toString();
-                $.plot($("#bar-chart2"), [{
-                    data: [
-                        [0, 7],
-                        [1, 13],
-                        [2, 17],
-                        [3, 20],
-                        [4, 26],
-                        [5, 37],
-                        [6, 35],
-                        [7, 28],
-                        [8, 38],
-                        [9, 38],
-                        [10, 32]
-                    ],
-                    label: "Page Views"
-                }, {
-                    data: [
-                        [0, 15],
-                        [1, 10],
-                        [2, 15],
-                        [3, 25],
-                        [4, 30],
-                        [5, 29],
-                        [6, 25],
-                        [7, 33],
-                        [8, 45],
-                        [9, 43],
-                        [10, 38]
-                    ],
-                    label: "Unique Visitor"
-                }], {
-                    series: {
-                        bars: {
-                            order: 2,
-                            align: "center",
-                            show: !0,
-                            lineWidth: 1,
-                            barWidth: .35,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: 1
-                                }, {
-                                    opacity: 1
-                                }]
-                            }
-                        },
-                        shadowSize: 2
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        labelMargin: 10,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, b],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-            b(), c(), d(), e(), f(), g(), h(), i(), j(), k(), l()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.dashboard = function() {
-            function a() {
-                $('[data-toggle="counter"]').each(function(a, b) {
-                    var c = $(this),
-                        d = "",
-                        e = "",
-                        f = 0,
-                        g = 0,
-                        h = 0,
-                        i = 2.5;
-                    c.data("prefix") && (d = c.data("prefix")), c.data("suffix") && (e = c.data("suffix")), c.data("start") && (f = c.data("start")), c.data("end") && (g = c.data("end")), c.data("decimals") && (h = c.data("decimals")), c.data("duration") && (i = c.data("duration"));
-                    var j = new CountUp(c.get(0), f, g, h, i, {
-                        suffix: e,
-                        prefix: d
-                    });
-                    j.start()
-                })
-            }
-
-            function b() {
-                var a = [{
-                        label: "Overloads",
-                        data: 15
-                    }, {
-                        label: "Within allowed %",
-                        data: 25
-                    }, {
-                        label: "Within Limit",
-                        data: 60
-                    }],
-                    b = tinycolor(App.color.primary).lighten(5).toString(),
-                    c = App.color.alt2,
-                    d = App.color.alt1,
-                    e = $("#widget-top-1").parent().next().find(".legend");
-                $.plot("#widget-top-1", a, {
-                    series: {
-                        pie: {
-                            show: !0,
-                            highlight: {
-                                opacity: .1
-                            }
-                        }
-                    },
-                    grid: {
-                        hoverable: !0
-                    },
-                    legend: {
-                        container: e
-                    },
-                    colors: [b, c, d]
-                })
-            }
-
-            function c() {
-                var a = [{
-                        label: "Trucks",
-                        data: 20
-                    }, {
-                        label: "Buses",
-                        data: 15
-                    }, {
-                        label: "Cars",
-                        data: 15
-                    }],
-                    b = App.color.alt2,
-                    c = App.color.alt4,
-                    d = App.color.alt3,
-                    e = App.color.alt1,
-                    f = tinycolor(App.color.primary).lighten(5).toString(),
-                    g = $("#widget-top-2").parent().next().find(".legend");
-                $.plot("#widget-top-2", a, {
-                    series: {
-                        pie: {
-                            innerRadius: .5,
-                            show: !0,
-                            highlight: {
-                                opacity: .1
-                            }
-                        }
-                    },
-                    grid: {
-                        hoverable: !0
-                    },
-                    legend: {
-                        container: g
-                    },
-                    colors: [b, c, d, e, f]
                 })
             }
 
@@ -2879,7 +1781,7 @@ var App = function() {
                         data: 70
                     }, {
                         label: "Facebook",
-                        data: 30
+                        data: 10
                     }],
                     b = App.color.alt3,
                     c = tinycolor(App.color.alt4).lighten(6.5).toString();
@@ -2905,432 +1807,7 @@ var App = function() {
                 })
             }
 
-            function f() {
-                var a = ($("#line-chart1"), [
-                        [0, 30],
-                        [1, 25],
-                        [2, 22],
-                        [3, 20],
-                        [4, 19],
-                        [5, 15],
-                        [6, 12],
-                        [7, 10]
-                    ]),
-                    b = App.color.alt3;
-                $.plot("#line-chart1", [{
-                    data: a,
-                    showLabels: !0,
-                    label: "New Visitors",
-                    labelPlacement: "below",
-                    canvasRender: !0,
-                    cColor: "#FFFFFF"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 2,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .6
-                                }, {
-                                    opacity: .6
-                                }]
-                            }
-                        },
-                        fillColor: "rgba(0, 0, 0, 1)",
-                        points: {
-                            show: !0,
-                            fill: !0,
-                            fillColor: b
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        show: !1,
-                        margin: {
-                            left: -8,
-                            right: -8,
-                            top: 0,
-                            botttom: 0
-                        },
-                        labelMargin: 0,
-                        axisMargin: 0,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0, 0, 0, 0)",
-                        borderWidth: 0
-                    },
-                    colors: [b, "#1fb594"],
-                    xaxis: {
-                        autoscaleMargin: 0,
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 5,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function h() {
-                var a = [
-                        [1, 20],
-                        [2, 60],
-                        [3, 35],
-                        [4, 70],
-                        [5, 45]
-                    ],
-                    b = [
-                        [1, 60],
-                        [2, 20],
-                        [3, 65],
-                        [4, 35],
-                        [5, 65]
-                    ],
-                    c = App.color.alt2;
-                $.plot("#linechart-mini1", [{
-                    data: a,
-                    canvasRender: !0
-                }, {
-                    data: b,
-                    canvasRender: !0
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 0,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .7
-                                }, {
-                                    opacity: .7
-                                }]
-                            }
-                        },
-                        fillColor: "rgba(0, 0, 0, 1)",
-                        shadowSize: 0,
-                        curvedLines: {
-                            apply: !0,
-                            active: !0,
-                            monotonicFit: !0
-                        }
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        show: !1,
-                        hoverable: !0,
-                        clickable: !0
-                    },
-                    colors: [c, c],
-                    xaxis: {
-                        autoscaleMargin: 0,
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 5,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function i() {
-                var a = tinycolor(App.color.primary).lighten(23).toString(),
-                    b = tinycolor(App.color.primary).brighten(5).toString();
-                $.plot($("#barchart-mini1"), [{
-                    data: [
-                        [0, 15],
-                        [1, 15],
-                        [2, 19],
-                        [3, 28],
-                        [4, 30],
-                        [5, 37],
-                        [6, 35],
-                        [7, 38],
-                        [8, 48],
-                        [9, 43],
-                        [10, 38],
-                        [11, 32],
-                        [12, 38]
-                    ],
-                    label: "Page Views"
-                }, {
-                    data: [
-                        [0, 7],
-                        [1, 10],
-                        [2, 15],
-                        [3, 23],
-                        [4, 24],
-                        [5, 29],
-                        [6, 25],
-                        [7, 33],
-                        [8, 35],
-                        [9, 38],
-                        [10, 32],
-                        [11, 27],
-                        [12, 32]
-                    ],
-                    label: "Unique Visitor"
-                }], {
-                    series: {
-                        bars: {
-                            align: "center",
-                            show: !0,
-                            lineWidth: 1,
-                            barWidth: .8,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: 1
-                                }, {
-                                    opacity: 1
-                                }]
-                            }
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: 0,
-                        show: !1,
-                        labelMargin: 10,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, b],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-              function e() {
-                var a = tinycolor(App.color.primary).lighten(5).toString();
-                $.plot($("#line-chart2"), [{
-                    data: [
-                        [0, 20],
-                        [1, 30],
-                        [2, 25],
-                        [3, 39],
-                        [4, 35],
-                        [5, 40],
-                        [6, 60],
-                        [7, 70]
-                    ],
-                    label: "Page Views"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 2,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .1
-                                }, {
-                                    opacity: .1
-                                }]
-                            }
-                        },
-                        points: {
-                            show: !0
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: {
-                            left: -8,
-                            right: -8,
-                            top: 0,
-                            bottom: 0
-                        },
-                        show: !1,
-                        labelMargin: 15,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, "#95D9F0", "#FFDC7A"],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function g() {
-                var a = [{
-                        label: "2A",
-                        data: 415
-                    }, {
-                        label: "3D",
-                        data: 205
-                    }, {
-                        label: "4C",
-                        data: 161
-                    }, {
-                        label: "5B",
-                        data: 385
-                    },{
-                        label: "6*SDDWWW",
-                        data: 670
-                    }, {
-                        label: "7C",
-                        data: 1000
-                    }],
-                    b = tinycolor(App.color.primary).brighten(9).toString(),
-                    c = tinycolor(App.color.primary).lighten(13).toString(),
-                    d = tinycolor(App.color.primary).lighten(20).toString(),
-                    e = tinycolor(App.color.primary).lighten(27).toString();
-                $.plot("#pie-chart4", a, {
-                    series: {
-                        pie: {
-                            show: !0,
-                            innerRadius: .27,
-                            shadow: {
-                                top: 5,
-                                left: 15,
-                                alpha: .3
-                            },
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: !0,
-                                formatter: function(a, b) {
-                                    return '<div style="font-size:12px;text-align:center;padding:2px;color:#333;">' + a + "</div>"
-                                }
-                            },
-                            highlight: {
-                                opacity: .08
-                            }
-                        }
-                    },
-                    grid: {
-                        hoverable: !0,
-                        clickable: !0
-                    },
-                    colors: [b, c, d, e],
-                    legend: {
-                        show: !1
-                    }
-                })
-            }
-
-            function j() {
-                var a = tinycolor(App.color.primary).lighten(23).toString(),
-                    b = tinycolor(App.color.primary).brighten(5).toString();
-                $.plot($("#bar-chart1"), [{
-                    data: [
-                        [0, 1],
-                        [1, 1],
-                        [2, 1],
-                        [3, 1],
-                        [4, 1],
-                        [5, 1],
-                        [6, 1],
-                        [7, 1],
-                        [8, 1],
-                        [9, 1],
-                        [10, 1],
-                        [11, 1],
-                        [12, 1]
-                    ],
-                    label: "Page Views"
-                }, {
-                    data: [
-                        [0, 38],
-                        [1, 20],
-                        [2, 15],
-                        [3, 12],
-                        [4, 12],
-                        [5, 13],
-                        [6, 10],
-                        [7, 9],
-                        [8, 6],
-                        [9, 4],
-                        [10, 3],
-                        [11, 3],
-                        [12, 2]
-                    ],
-                    label: "Unique Visitor"
-                }], {
-                    series: {
-                        bars: {
-                            align: "center",
-                            show: !0,
-                            lineWidth: 1,
-                            barWidth: .6,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: 1
-                                }, {
-                                    opacity: 1
-                                }]
-                            }
-                        },
-                        shadowSize: 2
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: 0,
-                        show: !1,
-                        labelMargin: 10,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, b],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }	
-
-
-            a(), b(), c(), d(), e(), g(), j();
+            a();
 
             var k = App.color.alt2,
                 l = tinycolor(App.color.primary).lighten(5).toString();
@@ -3344,1125 +1821,6 @@ var App = function() {
                 width: "80px",
                 height: "30px",
                 barColor: l
-            }), f(), h(), i()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.dashboard2 = function() {
-            function a() {
-                return Math.floor(31 * Math.random()) + 10
-            }
-
-            function b() {
-                $('[data-toggle="counter"]').each(function(a, b) {
-                    var c = $(this),
-                        d = "",
-                        e = "",
-                        f = 0,
-                        g = 0,
-                        h = 0,
-                        i = 2.5;
-                    c.data("prefix") && (d = c.data("prefix")), c.data("suffix") && (e = c.data("suffix")), c.data("start") && (f = c.data("start")), c.data("end") && (g = c.data("end")), c.data("decimals") && (h = c.data("decimals")), c.data("duration") && (i = c.data("duration"));
-                    var j = new CountUp(c.get(0), f, g, h, i, {
-                        suffix: e,
-                        prefix: d
-                    });
-                    j.start()
-                })
-            }
-
-            function c() {
-                var b = [
-                        [1, a()],
-                        [2, a()],
-                        [3, 2 + a()],
-                        [4, 3 + a()],
-                        [5, 5 + a()],
-                        [6, 10 + a()],
-                        [7, 15 + a()],
-                        [8, 20 + a()],
-                        [9, 25 + a()],
-                        [10, 30 + a()],
-                        [11, 35 + a()],
-                        [12, 25 + a()],
-                        [13, 15 + a()],
-                        [14, 20 + a()],
-                        [15, 45 + a()],
-                        [16, 50 + a()],
-                        [17, 65 + a()],
-                        [18, 70 + a()],
-                        [19, 85 + a()],
-                        [20, 80 + a()],
-                        [21, 75 + a()],
-                        [22, 80 + a()],
-                        [23, 75 + a()]
-                    ],
-                    c = [
-                        [1, a()],
-                        [2, a()],
-                        [3, 10 + a()],
-                        [4, 15 + a()],
-                        [5, 20 + a()],
-                        [6, 25 + a()],
-                        [7, 30 + a()],
-                        [8, 35 + a()],
-                        [9, 40 + a()],
-                        [10, 45 + a()],
-                        [11, 50 + a()],
-                        [12, 55 + a()],
-                        [13, 60 + a()],
-                        [14, 70 + a()],
-                        [15, 75 + a()],
-                        [16, 80 + a()],
-                        [17, 85 + a()],
-                        [18, 90 + a()],
-                        [19, 95 + a()],
-                        [20, 100 + a()],
-                        [21, 110 + a()],
-                        [22, 120 + a()],
-                        [23, 130 + a()]
-                    ],
-                    d = tinycolor(App.color.primary).lighten(22),
-                    e = App.color.primary;
-                $.plot($("#line-chart-live"), [{
-                    data: c,
-                    showLabels: !0,
-                    label: "New Visitors",
-                    labelPlacement: "below",
-                    canvasRender: !0,
-                    cColor: "#FFFFFF"
-                }, {
-                    data: b,
-                    showLabels: !0,
-                    label: "Old Visitors",
-                    labelPlacement: "below",
-                    canvasRender: !0,
-                    cColor: "#FFFFFF"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 1.5,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .5
-                                }, {
-                                    opacity: .5
-                                }]
-                            }
-                        },
-                        fillColor: "rgba(0, 0, 0, 1)",
-                        points: {
-                            show: !1,
-                            fill: !0
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        show: !0,
-                        margin: {
-                            top: -20,
-                            bottom: 0,
-                            left: 0,
-                            right: 0
-                        },
-                        labelMargin: 0,
-                        axisMargin: 0,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0)",
-                        borderWidth: 0,
-                        minBorderMargin: 0
-                    },
-                    colors: [d, e],
-                    xaxis: {
-                        autoscaleMargin: 0,
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .2,
-                        ticks: 5,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function d() {
-                var a = tinycolor(App.color.primary).lighten(5).toString();
-                $.plot($("#line-chart1"), [{
-                    data: [
-                        [0, 20],
-                        [1, 30],
-                        [2, 25],
-                        [3, 39],
-                        [4, 35],
-                        [5, 40],
-                        [6, 30],
-                        [7, 45]
-                    ],
-                    label: "Page Views"
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 2,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .1
-                                }, {
-                                    opacity: .1
-                                }]
-                            }
-                        },
-                        points: {
-                            show: !0
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: {
-                            left: -8,
-                            right: -8,
-                            top: 0,
-                            bottom: 0
-                        },
-                        show: !1,
-                        labelMargin: 15,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, "#95D9F0", "#FFDC7A"],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function e() {
-                var a = [{
-                        label: "2A",
-                        data: 415
-                    }, {
-                        label: "3D",
-                        data: 205
-                    }, {
-                        label: "4C",
-                        data: 161
-                    }, {
-                        label: "5B",
-                        data: 385
-                    },{
-                        label: "6*SDDWWW",
-                        data: 670
-                    }, {
-                        label: "7C",
-                        data: 1000
-                    }],
-                    b = tinycolor(App.color.primary).brighten(9).toString(),
-                    c = tinycolor(App.color.primary).lighten(13).toString(),
-                    d = tinycolor(App.color.primary).lighten(20).toString(),
-                    e = tinycolor(App.color.primary).lighten(27).toString();
-                $.plot("#pie-chart4", a, {
-                    series: {
-                        pie: {
-                            show: !0,
-                            innerRadius: .27,
-                            shadow: {
-                                top: 5,
-                                left: 15,
-                                alpha: .3
-                            },
-                            stroke: {
-                                width: 0
-                            },
-                            label: {
-                                show: !0,
-                                formatter: function(a, b) {
-                                    return '<div style="font-size:12px;text-align:center;padding:2px;color:#333;">' + a + "</div>"
-                                }
-                            },
-                            highlight: {
-                                opacity: .08
-                            }
-                        }
-                    },
-                    grid: {
-                        hoverable: !0,
-                        clickable: !0
-                    },
-                    colors: [b, c, d, e],
-                    legend: {
-                        show: !1
-                    }
-                })
-            }
-
-            function f() {
-                var a = tinycolor(App.color.primary).lighten(23).toString(),
-                    b = tinycolor(App.color.primary).brighten(5).toString();
-                $.plot($("#bar-chart1"), [{
-                    data: [
-                        [0, 15],
-                        [1, 15],
-                        [2, 19],
-                        [3, 28],
-                        [4, 30],
-                        [5, 37],
-                        [6, 35],
-                        [7, 38],
-                        [8, 48],
-                        [9, 43],
-                        [10, 38],
-                        [11, 32],
-                        [12, 1]
-                    ],
-                    label: "Page Views"
-                }, {
-                    data: [
-                        [0, 7],
-                        [1, 10],
-                        [2, 15],
-                        [3, 23],
-                        [4, 24],
-                        [5, 29],
-                        [6, 25],
-                        [7, 33],
-                        [8, 35],
-                        [9, 38],
-                        [10, 32],
-                        [11, 27],
-                        [12, 1]
-                    ],
-                    label: "Unique Visitor"
-                }], {
-                    series: {
-                        bars: {
-                            align: "center",
-                            show: !0,
-                            lineWidth: 1,
-                            barWidth: .6,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: 1
-                                }, {
-                                    opacity: 1
-                                }]
-                            }
-                        },
-                        shadowSize: 2
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: 0,
-                        show: !1,
-                        labelMargin: 10,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: [a, b],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function g() {
-                var a = $(".widget-calendar"),
-                    b = $(".cal-notes", a),
-                    c = $(".day", b),
-                    d = $(".date", b),
-                    e = new Date,
-                    f = new Array(7);
-                f[0] = "Sunday", f[1] = "Monday", f[2] = "Tuesday", f[3] = "Wednesday", f[4] = "Thursday", f[5] = "Friday", f[6] = "Saturday";
-                var g = f[e.getDay()];
-                c.html(g);
-                var h = new Array;
-                h[0] = "January", h[1] = "February", h[2] = "March", h[3] = "April", h[4] = "May", h[5] = "June", h[6] = "July", h[7] = "August", h[8] = "September", h[9] = "October", h[10] = "November", h[11] = "December";
-                var i = h[e.getMonth()],
-                    j = e.getDate();
-                d.html(i + " " + j), "undefined" != typeof jQuery.ui && $(".ui-datepicker").datepicker({
-                    onSelect: function(a, b) {
-                        var e = new Date(a),
-                            g = f[e.getDay()],
-                            i = h[e.getMonth()],
-                            j = e.getDate();
-                        c.html(g), d.html(i + " " + j)
-                    }
-                })
-            }
-
-            function h() {
-                var a = $(".widget-weather"),
-                    b = new Skycons({
-                        color: "#555555"
-                    });
-                b.add($(".icon1", a)[0], Skycons.CLEAR_DAY), b.add($(".icon2", a)[0], Skycons.PARTLY_CLOUDY_DAY), b.add($(".icon3", a)[0], Skycons.RAIN), b.play()
-            }
-            b(), c(), d(), e(), f(), g(), h()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.emailCompose = function() {
-            $(".tags").select2({
-                tags: 0,
-                width: "100%"
-            }), $("#email-editor").summernote({
-                height: 200
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.formElements = function() {
-            $(".datetimepicker").datetimepicker({
-                autoclose: !0,
-                componentIcon: ".s7-date",
-                navIcons: {
-                    rightIcon: "s7-angle-right",
-                    leftIcon: "s7-angle-left"
-                }
-            }), $(".select2").select2({
-                width: "100%"
-            }), $(".tags").select2({
-                tags: !0,
-                width: "100%"
-            }), $(".bslider").bootstrapSlider()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.masks = function() {
-            $("[data-mask='date']").mask("99/99/9999"), $("[data-mask='phone']").mask("(999) 999-9999"), $("[data-mask='phone-ext']").mask("(999) 999-9999? x99999"), $("[data-mask='phone-int']").mask("+33 999 999 999"), $("[data-mask='taxid']").mask("99-9999999"), $("[data-mask='ssn']").mask("999-99-9999"), $("[data-mask='product-key']").mask("a*-999-a999"), $("[data-mask='percent']").mask("99%"), $("[data-mask='currency']").mask("$999,999,999.99")
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.wizard = function() {
-            $(".wizard-ux").wizard(), $(".wizard-ux").on("changed.fu.wizard", function() {
-                $(".bslider").slider()
-            }), $(".wizard-next").click(function(a) {
-                var b = $(this).data("wizard");
-                $(b).wizard("next"), a.preventDefault()
-            }), $(".wizard-previous").click(function(a) {
-                var b = $(this).data("wizard");
-                $(b).wizard("previous"), a.preventDefault()
-            }), $(".select2").select2({
-                width: "100%"
-            }), $(".tags").select2({
-                tags: !0,
-                width: "100%"
-            }), $("#credit_slider").slider().on("slide", function(a) {
-                $("#credits").html("$" + a.value)
-            }), $("#rate_slider").slider().on("slide", function(a) {
-                $("#rate").html(a.value + "%")
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.textEditors = function() {
-            $("#editor1").summernote({
-                height: 300
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.emailInbox = function() {
-            $(".am-select-all input").on("change", function() {
-                var a = $(".email-list").find('input[type="checkbox"]');
-                $(this).is(":checked") ? a.prop("checked", !0) : a.prop("checked", !1)
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.mapsGoogle = function() {
-            var a, b = {
-                zoom: 14,
-                center: new google.maps.LatLng(-33.877827, 151.188598),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            a = new google.maps.Map(document.getElementById("map_one"), b);
-            var c, b = {
-                zoom: 14,
-                center: new google.maps.LatLng(-33.877827, 151.188598),
-                mapTypeId: google.maps.MapTypeId.HYBRID
-            };
-            c = new google.maps.Map(document.getElementById("map_two"), b);
-            var d, b = {
-                zoom: 14,
-                center: new google.maps.LatLng(-33.877827, 151.188598),
-                mapTypeId: google.maps.MapTypeId.TERRAIN
-            };
-            d = new google.maps.Map(document.getElementById("map_three"), b)
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.mapsVector = function() {
-            var a = App.color.alt3,
-                b = App.color.alt2,
-                c = App.color.primary,
-                d = App.color.alt4,
-                e = tinycolor(App.color.alt1).lighten(3).toString(),
-                f = App.color.success,
-                g = tinycolor(App.color.alt4).lighten(5).toString();
-            $("#usa-map").vectorMap({
-                map: "us_merc_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: a
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            }), $("#france-map").vectorMap({
-                map: "fr_merc_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: b
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            }), $("#uk-map").vectorMap({
-                map: "uk_mill_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: c
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            }), $("#chicago-map").vectorMap({
-                map: "us-il-chicago_mill_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: d
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            }), $("#australia-map").vectorMap({
-                map: "au_mill_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: e
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            }), $("#india-map").vectorMap({
-                map: "in_mill_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: f
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            }), $("#vector-map").vectorMap({
-                map: "map",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: g,
-                        "fill-opacity": .8,
-                        stroke: "none",
-                        "stroke-width": 0,
-                        "stroke-opacity": 1
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                },
-                markerStyle: {
-                    initial: {
-                        r: 10
-                    }
-                },
-                markers: [{
-                    coords: [100, 100],
-                    name: "Marker 1",
-                    style: {
-                        fill: "#acb1b6",
-                        stroke: "#cfd5db",
-                        "stroke-width": 3
-                    }
-                }, {
-                    coords: [200, 200],
-                    name: "Marker 2",
-                    style: {
-                        fill: "#acb1b6",
-                        stroke: "#cfd5db",
-                        "stroke-width": 3
-                    }
-                }]
-            }), $("#canada-map").vectorMap({
-                map: "ca_lcc_en",
-                backgroundColor: "transparent",
-                regionStyle: {
-                    initial: {
-                        fill: a
-                    },
-                    hover: {
-                        "fill-opacity": .8
-                    }
-                }
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.pageCalendar = function() {
-            function a() {
-                var a = $(".widget-weather"),
-                    b = new Skycons({
-                        color: "#555555"
-                    });
-                b.add($(".icon1", a)[0], Skycons.CLEAR_DAY), b.add($(".icon2", a)[0], Skycons.PARTLY_CLOUDY_DAY), b.add($(".icon3", a)[0], Skycons.RAIN), b.play()
-            }
-            $("#external-events .external-event").each(function() {
-                $(this).data("event", {
-                    title: $.trim($(this).text()),
-                    stick: !0
-                }), $(this).draggable({
-                    zIndex: 999,
-                    revert: !0,
-                    revertDuration: 0
-                })
-            });
-            var b = new Date,
-                c = b.getDate(),
-                d = b.getMonth(),
-                e = b.getFullYear();
-            $("#calendar").fullCalendar({
-                header: {
-                    left: "title",
-                    center: "",
-                    right: "month,agendaWeek,agendaDay, today, prev,next"
-                },
-                defaultDate: b,
-                editable: !0,
-                eventLimit: !0,
-                droppable: !0,
-                drop: function() {
-                    $("#drop-remove").is(":checked") && $(this).remove()
-                },
-                events: [{
-                    title: "All Day Event",
-                    start: new Date(e, d, c - 1)
-                }, {
-                    title: "Long Event",
-                    start: new Date(e, d, c - 5),
-                    end: new Date(e, d, c - 1)
-                }, {
-                    id: 999,
-                    title: "Repeating Event",
-                    start: new Date(e, d, c - 3, 16, 0),
-                    allDay: !1
-                }, {
-                    id: 999,
-                    title: "Repeating Event",
-                    start: new Date(e, d, c + 4, 16, 0),
-                    allDay: !1
-                }, {
-                    title: "Meeting",
-                    start: new Date(e, d, c, 10, 30),
-                    allDay: !1
-                }, {
-                    title: "Lunch",
-                    start: new Date(e, d, c, 12, 0),
-                    end: new Date(e, d, c, 14, 0),
-                    allDay: !1
-                }, {
-                    title: "Birthday Party",
-                    start: new Date(e, d, c + 1, 19, 0),
-                    end: new Date(e, d, c + 1, 22, 30),
-                    allDay: !1
-                }, {
-                    title: "Click for Google",
-                    start: new Date(e, d, 28),
-                    end: new Date(e, d, 30),
-                    url: "http://google.com/"
-                }]
-            }), a()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.pageGallery = function() {
-            var a = $(".gallery-container");
-            a.masonry({
-                columnWidth: 0,
-                itemSelector: ".item"
-            }), $("#sidebar-collapse").click(function() {
-                a.masonry()
-            }), $(".image-zoom").magnificPopup({
-                type: "image",
-                mainClass: "mfp-with-zoom",
-                zoom: {
-                    enabled: !0,
-                    duration: 300,
-                    easing: "ease-in-out",
-                    opener: function(a) {
-                        var b = $(a).parents("div.img");
-                        return b
-                    }
-                }
-            }), a.masonry()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.pageProfile = function() {
-            function a() {
-                var a = [
-                        [1, 20],
-                        [2, 60],
-                        [3, 35],
-                        [4, 70],
-                        [5, 45]
-                    ],
-                    b = [
-                        [1, 60],
-                        [2, 20],
-                        [3, 65],
-                        [4, 35],
-                        [5, 65]
-                    ];
-                $.plot("#linechart-mini1", [{
-                    data: a,
-                    canvasRender: !0
-                }, {
-                    data: b,
-                    canvasRender: !0
-                }], {
-                    series: {
-                        lines: {
-                            show: !0,
-                            lineWidth: 0,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: .7
-                                }, {
-                                    opacity: .7
-                                }]
-                            }
-                        },
-                        fillColor: "rgba(0, 0, 0, 1)",
-                        shadowSize: 0,
-                        curvedLines: {
-                            apply: !0,
-                            active: !0,
-                            monotonicFit: !0
-                        }
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        show: !1,
-                        hoverable: !0,
-                        clickable: !0
-                    },
-                    colors: ["#FFDC7A", "#FFDC7A"],
-                    xaxis: {
-                        autoscaleMargin: 0,
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 5,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function b() {
-                $.plot($("#barchart-mini1"), [{
-                    data: [
-                        [0, 15],
-                        [1, 15],
-                        [2, 19],
-                        [3, 28],
-                        [4, 30],
-                        [5, 37],
-                        [6, 35],
-                        [7, 38],
-                        [8, 48],
-                        [9, 43],
-                        [10, 38],
-                        [11, 32],
-                        [12, 38]
-                    ],
-                    label: "Page Views"
-                }, {
-                    data: [
-                        [0, 7],
-                        [1, 10],
-                        [2, 15],
-                        [3, 23],
-                        [4, 24],
-                        [5, 29],
-                        [6, 25],
-                        [7, 33],
-                        [8, 35],
-                        [9, 38],
-                        [10, 32],
-                        [11, 27],
-                        [12, 32]
-                    ],
-                    label: "Unique Visitor"
-                }], {
-                    series: {
-                        bars: {
-                            align: "center",
-                            show: !0,
-                            lineWidth: 1,
-                            barWidth: .8,
-                            fill: !0,
-                            fillColor: {
-                                colors: [{
-                                    opacity: 1
-                                }, {
-                                    opacity: 1
-                                }]
-                            }
-                        },
-                        shadowSize: 0
-                    },
-                    legend: {
-                        show: !1
-                    },
-                    grid: {
-                        margin: 0,
-                        show: !1,
-                        labelMargin: 10,
-                        axisMargin: 500,
-                        hoverable: !0,
-                        clickable: !0,
-                        tickColor: "rgba(0,0,0,0.15)",
-                        borderWidth: 0
-                    },
-                    colors: ["#ADC0D8", "#88A3C6"],
-                    xaxis: {
-                        ticks: 11,
-                        tickDecimals: 0
-                    },
-                    yaxis: {
-                        autoscaleMargin: .5,
-                        ticks: 4,
-                        tickDecimals: 0
-                    }
-                })
-            }
-
-            function c() {
-                var a = $(".widget-calendar"),
-                    b = $(".cal-notes", a),
-                    c = $(".day", b),
-                    d = $(".date", b),
-                    e = new Date,
-                    f = new Array(7);
-                f[0] = "Sunday", f[1] = "Monday", f[2] = "Tuesday", f[3] = "Wednesday", f[4] = "Thursday", f[5] = "Friday", f[6] = "Saturday";
-                var g = f[e.getDay()];
-                c.html(g);
-                var h = new Array;
-                h[0] = "January", h[1] = "February", h[2] = "March", h[3] = "April", h[4] = "May", h[5] = "June", h[6] = "July", h[7] = "August", h[8] = "September", h[9] = "October", h[10] = "November", h[11] = "December";
-                var i = h[e.getMonth()],
-                    j = e.getDate();
-                d.html(i + " " + j), "undefined" != typeof jQuery.ui && $(".ui-datepicker").datepicker({
-                    onSelect: function(a, b) {
-                        var e = new Date(a),
-                            g = f[e.getDay()],
-                            i = h[e.getMonth()],
-                            j = e.getDate();
-                        c.html(g), d.html(i + " " + j)
-                    }
-                })
-            }
-            a(), b(), c()
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.dataTables = function() {
-            $.extend(!0, $.fn.dataTable.defaults, {
-                dom: "<'row am-datatable-header'<'col-sm-6'l><'col-sm-6'f>><'row am-datatable-body'<'col-sm-12'tr>><'row am-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
-            }), $("#table1").dataTable(), $("#table2").dataTable({
-                pageLength: 6,
-                dom: "<'row am-datatable-body'<'col-sm-12'tr>><'row am-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
-            }), $("#table3").dataTable({
-                buttons: ["copy", "excel", "pdf", "print"],
-                lengthMenu: [
-                    [6, 10, 25, 50, -1],
-                    [6, 10, 25, 50, "All"]
-                ],
-                dom: "<'row am-datatable-header'<'col-sm-6'l><'col-sm-6 text-right'B>><'row am-datatable-body'<'col-sm-12'tr>><'row am-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.uiNestableLists = function() {
-            function a(a, b) {
-                var c = $(a).nestable("serialize");
-                $(b).html(window.JSON.stringify(c))
-            }
-            $(".dd").nestable(), a("#list1", "#out1"), a("#list2", "#out2"), $("#list1").on("change", function() {
-                a("#list1", "#out1")
-            }), $("#list2").on("change", function() {
-                a("#list2", "#out2")
-            })
-        }, App
-    }(App || {}),
-    App = function() {
-        "use strict";
-        return App.uiNotifications = function() {
-            $("html").hasClass("rtl") && $.extend($.gritter.options, {
-                position: "top-left"
-            }), $("#not-basic").click(function() {
-                return $.gritter.add({
-                    title: "Samantha new msg!",
-                    text: "You have a new Thomas message, let's checkout your inbox.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/avatar.jpg",
-                    time: "",
-                    class_name: "img-rounded"
-                }), !1
-            }), $("#not-theme").click(function() {
-                return $.gritter.add({
-                    title: "Welcome home!",
-                    text: "You can start your day checking the new messages.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/avatar6.jpg",
-                    class_name: "clean img-rounded",
-                    time: ""
-                }), !1
-            }), $("#not-sticky").click(function() {
-                return $.gritter.add({
-                    title: "Sticky Note",
-                    text: "Your daily goal is 130 new code lines, don't forget to update your work.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/slack_logo.png",
-                    class_name: "clean",
-                    sticky: !0,
-                    time: ""
-                }), !1
-            }), $("#not-text").click(function() {
-                return $.gritter.add({
-                    title: "Just Text",
-                    text: "This is a simple Gritter Notification. Etiam efficitur efficitur nisl eu dictum, nullam non orci elementum.",
-                    class_name: "clean",
-                    time: ""
-                }), !1
-            }), $("#not-tr").click(function() {
-                return $.extend($.gritter.options, {
-                    position: "top-right"
-                }), $.gritter.add({
-                    title: "Top Right",
-                    text: "This is a simple Gritter Notification. Etiam efficitur efficitur nisl eu dictum, nullam non orci elementum",
-                    class_name: "clean"
-                }), !1
-            }), $("#not-tl").click(function() {
-                return $.extend($.gritter.options, {
-                    position: "top-left"
-                }), $.gritter.add({
-                    title: "Top Left",
-                    text: "This is a simple Gritter Notification. Etiam efficitur efficitur nisl eu dictum, nullam non orci elementum",
-                    class_name: "clean"
-                }), !1
-            }), $("#not-bl").click(function() {
-                return $.extend($.gritter.options, {
-                    position: "bottom-left"
-                }), $.gritter.add({
-                    title: "Bottom Left",
-                    text: "This is a simple Gritter Notification. Etiam efficitur efficitur nisl eu dictum, nullam non orci elementum",
-                    class_name: "clean"
-                }), !1
-            }), $("#not-br").click(function() {
-                return $.extend($.gritter.options, {
-                    position: "bottom-right"
-                }), $.gritter.add({
-                    title: "Bottom Right",
-                    text: "This is a simple Gritter Notification. Etiam efficitur efficitur nisl eu dictum, nullam non orci elementum",
-                    class_name: "clean"
-                }), !1
-            }), $("#not-facebook").click(function() {
-                return $.gritter.add({
-                    title: "You have comments!",
-                    text: "You can start your day checking the new messages.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/fb-icon.png",
-                    class_name: "color facebook"
-                }), !1
-            }), $("#not-twitter").click(function() {
-                return $.gritter.add({
-                    title: "You have new followers!",
-                    text: "You can start your day checking the new messages.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/tw-icon.png",
-                    class_name: "color twitter"
-                }), !1
-            }), $("#not-google-plus").click(function() {
-                return $.gritter.add({
-                    title: "You have new +1!",
-                    text: "You can start your day checking the new messages.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/gp-icon.png",
-                    class_name: "color google-plus"
-                }), !1
-            }), $("#not-dribbble").click(function() {
-                return $.gritter.add({
-                    title: "You have new comments!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/db-icon.png",
-                    class_name: "color dribbble"
-                }), !1
-            }), $("#not-flickr").click(function() {
-                return $.gritter.add({
-                    title: "You have new comments!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/fl-icon.png",
-                    class_name: "color flickr"
-                }), !1
-            }), $("#not-linkedin").click(function() {
-                return $.gritter.add({
-                    title: "You have new comments!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/in-icon.png",
-                    class_name: "color linkedin"
-                }), !1
-            }), $("#not-youtube").click(function() {
-                return $.gritter.add({
-                    title: "You have new comments!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/yt-icon.png",
-                    class_name: "color youtube"
-                }), !1
-            }), $("#not-pinterest").click(function() {
-                return $.gritter.add({
-                    title: "You have new comments!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/pi-icon.png",
-                    class_name: "color pinterest"
-                }), !1
-            }), $("#not-github").click(function() {
-                return $.gritter.add({
-                    title: "You have new forks!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/gh-icon.png",
-                    class_name: "color github"
-                }), !1
-            }), $("#not-tumblr").click(function() {
-                return $.gritter.add({
-                    title: "You have new comments!",
-                    text: "You can start your day checking the new comments.",
-                    image: App.conf.assetsPath + "/" + App.conf.imgPath + "/tu-icon.png",
-                    class_name: "color tumblr"
-                }), !1
-            }), $("#not-primary").click(function() {
-                $.gritter.add({
-                    title: "Primary",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color primary"
-                })
-            }), $("#not-success").click(function() {
-                $.gritter.add({
-                    title: "Success",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color success"
-                })
-            }), $("#not-info").click(function() {
-                $.gritter.add({
-                    title: "Info",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color info"
-                })
-            }), $("#not-warning").click(function() {
-                $.gritter.add({
-                    title: "Warning",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color warning"
-                })
-            }), $("#not-danger").click(function() {
-                $.gritter.add({
-                    title: "Danger",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color danger"
-                })
-            }), $("#not-ac1").click(function() {
-                $.gritter.add({
-                    title: "Alt Color 1",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color alt1"
-                })
-            }), $("#not-ac2").click(function() {
-                $.gritter.add({
-                    title: "Alt Color 2",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color alt2"
-                })
-            }), $("#not-ac3").click(function() {
-                $.gritter.add({
-                    title: "Alt Color 3",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color alt3"
-                })
-            }), $("#not-ac4").click(function() {
-                $.gritter.add({
-                    title: "Alt Color 4",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color alt4"
-                })
-            }), $("#not-dark").click(function() {
-                $.gritter.add({
-                    title: "Dark Color",
-                    text: "This is a simple Gritter Notification.",
-                    class_name: "color dark"
-                })
             })
         }, App
     }(App || {});

@@ -2,7 +2,7 @@ package opdwms.web.dashboard;
 
 
 
-import opdwms.web.dashboard.vm.DashboardStatitics;
+import opdwms.web.dashboard.vm.DashboardStatistics;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -20,9 +20,9 @@ public interface DashboardServiceInterface {
      * Fetch dashboard statistics
      *
      * @param request
-     * @return DashboardStatitics
+     * @return DashboardStatistics
      */
-    public DashboardStatitics fetchStatistics(HttpServletRequest request);
+    public DashboardStatistics fetchStatistics(HttpServletRequest request);
 
     /**
      * Fetch calendar data

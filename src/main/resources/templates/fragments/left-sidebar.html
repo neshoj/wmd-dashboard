@@ -29,11 +29,14 @@
                     </ul>
                 </li>
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations')}">
+                    th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations', '/axle-classification')}">
                     <a th:href="@{/weighbridge-stations}"><i class="icon s7-config"></i><span>Setup</span></a>
                     <ul class="sub-menu">
                         <li th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations')}"><a
                                 th:href="@{/weighbridge-stations}">Weighbridge Stations</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/axle-classification')}"><a
+                                th:href="@{/axle-classification}">Axle Classification</a>
                         </li>
                     </ul>
                 </li>
@@ -71,10 +74,10 @@
                     </ul>
                 </li>
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/daily-reports')}">
+                    th:classappend="${@viewTags.isActiveMenu('/transaction-report')}">
                     <a th:href="@{/daily-reports}"><i class="icon s7-news-paper"></i><span>Reports</span></a>
                     <ul class="sub-menu">
-                        <li th:classappend="${@viewTags.isActiveMenu('/daily-reports')}"><a th:href="@{/daily-reports}">Daily</a>
+                        <li th:classappend="${@viewTags.isActiveMenu('/transaction-report')}"><a th:href="@{/transaction-report}">Transaction Reports</a>
                         </li>
                     </ul>
                 </li>

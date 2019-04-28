@@ -6,6 +6,9 @@
 <head>
     <meta charset="utf-8"/>
     <title>OPD-WMS &middot; Dashboard</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{theme/lib/chartjs/Chart.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{theme/lib/formvalidation/formValidation.min.css}"/>
 </head>
 <body>
 
@@ -13,157 +16,74 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div class="widget widget-pie">
-                <div class="widget-head"><span class="title">Sum Weighing Statistics</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-6">
-                        <div id="widget-top-1" class="chart"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="legend"></div>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-4"><span class="title">Within Limits</span><span data-toggle="counter" data-end="2342100" data-suffix="kg"  class="number">0</span></div>
-                    <div class="col-xs-4"><span class="title">Allowed %</span><span data-toggle="counter" data-end="1333500" data-suffix="kg" class="number">$0</span></div>
-                    <div class="col-xs-4"><span class="title">Overload</span><span data-toggle="counter" data-end="235300" data-suffix="kg"  class="number">0</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="widget widget-pie">
-                <div class="widget-head"><span class="title">Clerk Census</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-6">
-                        <div id="widget-top-2" class="chart"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="legend"></div>
+            <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <select class="form-control">
+                            <option value=""> Select Weighbridge Station</option>
+                            <option th:each="item : ${weighbridges}"
+                                    th:value="${item.id}"
+                                    th:text="${item.name}"></option>
+                        </select>
                     </div>
                 </div>
-                <div class="row chart-info">
-                    <div class="col-xs-4"><span class="title">Impounds</span><span data-toggle="counter" data-end="300" class="number">0</span></div>
-                    <div class="col-xs-4"><span class="title">Prosecuted</span><span data-toggle="counter" data-end="150" class="number">0</span></div>
-                    <div class="col-xs-4"><span class="title">Cleared</span><span data-toggle="counter" data-end="4000"  class="number">0</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="widget widget-pie widget-pie-stats">
-                <div class="widget-head"><span class="title">Trend</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-6">
-                        <div id="widget-top-3" class="chart"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="legend">
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td class="legendColorBox">
-                                        <div>
-                                            <div style="width:10px;height:10px;overflow:hidden" class="clr-alt4"></div>
-                                        </div>
-                                    </td>
-                                    <td class="legendLabel">Tagged</td>
-                                    <td class="legendData">444,400</td>
-                                </tr>
-                                <tr>
-                                    <td class="legendColorBox">
-                                        <div>
-                                            <div style="width:10px;height:10px;overflow:hidden" class="clr-alt3"></div>
-                                        </div>
-                                    </td>
-                                    <td class="legendLabel">Untagged</td>
-                                    <td class="legendData">7,454,352</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-6">
-                        <div id="spk1" class="sparkline"></div><span class="title">Within Limits</span><span data-toggle="counter" data-end="91" data-suffix="%" class="number">0%</span>
-                    </div>
-                    <div class="col-xs-6">
-                        <div id="spk2" class="sparkline"></div><span class="title">Overload</span><span data-toggle="counter" data-end="9" data-suffix="%" class="number">0%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="widget widget-fullwidth widget-small">
-                <div class="widget-head">
-                    <div class="tools"><span class="value">25.3M</span></div><span class="title">Total Fees Collected</span>
-                </div>
-                <div class="chart-container">
-                    <div id="linechart-mini1" style="height: 92px;"></div>
-                </div>
-            </div>
-            <div class="widget widget-fullwidth widget-small">
-                <div class="widget-head">
-                    <div class="tools"><span class="value">5.3M</span></div><span class="title">Unpaid Fees</span>
-                </div>
-                <div class="chart-container">
-                    <div id="barchart-mini1" style="height: 92px;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="widget widget-fullwidth line-chart">
-                <div class="widget-head">
-                    <span class="title">Vehicle Tagging Trend</span>
-                </div>
-                <div class="chart-container">
-                    <div class="counter">
-                        <div class="value">60%</div>
-                        <div class="desc">Less tagging</div>
-                    </div>
-                    <div id="line-chart1" style="height: 260px;"></div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
+            <div class="widget widget-pie">
+                <div class="widget-head"><span class="title">Weighing</span></div>
+                <div class="row chart-container">
+                    <div class="col-md-12"  style="height: 80px !important   ">
+                        <canvas id="donutWeighingStatusChart" class="chart" style="display: block; width: 161px !important; height: 80px !important;" width="161" height="80"></canvas>
+                    </div>
+                </div>
+                <div class="row chart-info">
+                    <div class="col-xs-4"><span class="title">Weighed Vehicles</span><span
+                            th:text="${data.weighedVehicles}" class="number"
+                    >0</span></div>
+                    <div class="col-xs-4"><span class="title">Overloads</span><span
+                            th:text="${data.overloadVehicles}" class="number"
+                    ></span></div>
+                    <div class="col-xs-4"><span class="title">Within Limit</span><span
+                            th:text="${data.weighedWithinLimits}" class="number">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="widget widget-pie widget-pie-stats">
+                <div class="widget-head"><span class="title">Vehicle Census</span></div>
+                <div class="row chart-container">
+                    <div class="col-md-12" style="height: 80px">
+                        <canvas id="barChartCensus" class="chart"  style="display: block; width: 161px !important; height: 80px !important;" width="161" height="80"></canvas>
+                    </div>
+                </div>
+                <div class="row chart-info">
+                    <div class="col-xs-6">
+                        <div id="spk1" class="sparkline"></div>
+                        <span class="title">Within Limits</span><span data-toggle="counter" data-end="91"
+                                                                      data-suffix="%" class="number">0%</span>
+                    </div>
+                    <div class="col-xs-6">
+                        <div id="spk2" class="sparkline"></div>
+                        <span class="title">Overload</span><span data-toggle="counter" data-end="9" data-suffix="%"
+                                                                 class="number">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="widget widget-fullwidth line-chart">
                 <div class="widget-head">
-                    <span class="title">Weighing Trend</span>
+                    <span class="title">Vehicle Weighing</span>
                 </div>
                 <div class="chart-container">
-                    <div class="counter">
-                        <div class="value">30%</div>
-                        <div class="desc">More Weighing</div>
-                    </div>
-                    <div id="line-chart2" style="height: 290px;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="widget">
-                <div class="widget-head">
-                    <span class="title">Vehicle Configurations</span>
-                </div>
-                <div class="chart-container">
-                    <div id="pie-chart4" style="height: 260px;"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="widget widget-fullwidth">
-                <div class="widget-head">
-                    <span class="title">Cases</span>
-                </div>
-                <div class="chart-container">
-                    <div class="counter">
-                        <div class="value">2%</div>
-                        <div class="desc">Less Cases</div>
-                    </div>
-                    <div id="bar-chart1" style="height: 290px;"></div>
+                    <canvas id="weighingLineChart" style="height: 260px"></canvas>
                 </div>
             </div>
         </div>
@@ -174,6 +94,8 @@
 
 <th:block layout:fragment="script">
     <script th:src="@{theme/js/main.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/formvalidation/formValidation.min.js}"
             type="text/javascript"></script>
     <script th:src="@{theme/lib/jquery-flot/jquery.flot.js}"
             type="text/javascript"></script>
@@ -189,15 +111,188 @@
             type="text/javascript"></script>
     <script th:src="@{theme/lib/jquery-ui/jquery-ui.min.js}"
             type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery.blockUI.js}"
+            type="text/javascript"></script>
     <script th:src="@{theme/lib/countup/countUp.min.js}"
             type="text/javascript"></script>
     <script th:src="@{theme/lib/chartjs/Chart.min.js}"
             type="text/javascript"></script>
+
+    <script th:src="@{js/app-util.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+
+        var chartData = /*[[${chartData}]]*/'chartData';
+
+        /*]]>*/
+    </script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             //initialize the javascript
             App.init();
             App.dashboard();
+
+            let backgroundColors = [
+                'rgb(244, 67, 54)',
+                'rgb(233, 30, 99)',
+                'rgb(156, 39, 176)',
+                'rgb(103, 58, 183)',
+                'rgb(63, 81, 181)',
+                'rgb(33, 150, 243)',
+                'rgb(3, 169, 244)',
+                'rgb(0, 188, 212)',
+                'rgb(0, 150, 136)',
+                'rgb(76, 175, 80)',
+                'rgb(139, 195, 74)',
+                'rgb(205, 220, 57)',
+                'rgb(255, 235, 59)',
+                'rgb(255, 193, 7)',
+                'rgb(255, 152, 0)',
+                'rgb(255, 87, 34)',
+                'rgb(121, 85, 72)',
+                'rgb(158, 158, 158)',
+                'rgb(96, 125, 139)'
+            ];
+            //    ====================== Donut Chart ==================
+
+            let donutChartCensusCtx = document.getElementById('donutWeighingStatusChart').getContext('2d');
+            let weighStatusLabel = [];
+            let weighStatusData = [];
+            chartData.pieChartData.forEach((data) => {
+                weighStatusLabel.push(data.label);
+                weighStatusData.push(data.data);
+            });
+
+            let donutOptions = {
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            };
+            let donutConfig = {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: weighStatusData,
+                        backgroundColor: backgroundColors,
+                        label: 'Vehicle Census'
+                    }],
+                    labels: weighStatusLabel,
+                },
+                options: donutOptions
+            };
+            let donutChart = new Chart(donutChartCensusCtx, donutConfig);
+            donutChartCensusCtx.height = 200;
+            // let token = $("meta[name='_csrf']").attr("content"),
+            //     header = $("meta[name='_csrf_header']").attr("content");
+            // $(document).ajaxSend(function (e, xhr, options) {
+            //     xhr.setRequestHeader(header, token);
+            //     xhr.setRequestHeader("Accept", "application/json");
+            // });
+            //
+            //
+            // utils.http.jsonRequest($(".wrapper"),
+            //     {
+            //         action: 'fetch-line-chart'
+            //     })
+            //     .done(function (o) {
+
+
+            //         } else {
+            //             utils.alert.error(o.message);
+            //         }
+            //     });
+
+            let lineChartCensusCtx = document.getElementById('barChartCensus').getContext('2d');
+            let axleConfiguration = [];
+            let axleConfigurationCount = [];
+            chartData.censusBarChartData.forEach((data) => {
+                axleConfiguration.push(data.axleConfiguration);
+                axleConfigurationCount.push(data.count);
+            });
+
+            let options = {
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
+                }
+            };
+            let config = {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: axleConfigurationCount,
+                        backgroundColor: backgroundColors,
+                        label: 'Vehicle Census'
+                    }],
+                    labels: axleConfiguration,
+                },
+                options: options
+            };
+            let censusChart = new Chart(lineChartCensusCtx, config);
+            lineChartCensusCtx.height = 200;
+
+            let lineChart = document.getElementById('weighingLineChart').getContext('2d');
+            let lables = [];
+            let overloadWeights = [];
+            let withinLimitsWeights = [];
+
+            if (chartData.withinLimit.length > chartData.overload.length) {
+                for (let i = 0; i < chartData.withinLimit.length; i++) {
+                    lables.push(chartData.withinLimit[i].month);
+                }
+            } else {
+                for (let i = 0; i < chartData.overload.length; i++) {
+                    lables.push(chartData.overload[i].month);
+                }
+            }
+
+            for (let i = 0; i < lables.length; i++) {
+                overloadWeights.push(chartData.overload[i] ? chartData.overload[i].count : 0);
+                withinLimitsWeights.push(chartData.withinLimit[i] ? chartData.withinLimit[i].count : 0);
+            }
+
+            let chart = new Chart(lineChart, {
+                type: 'line',
+                data: {
+                    labels: lables,
+                    datasets: [{
+                        label: 'Overloads',
+                        backgroundColor: 'rgb(244, 67, 54)',
+                        borderColor: 'rgb(244, 67, 54)',
+                        data: overloadWeights,
+                        fill: false
+                    }, {
+                        label: 'Within Limit',
+                        backgroundColor: 'rgb(76, 175, 80)',
+                        borderColor: 'rgb(76, 175, 80)',
+                        data: withinLimitsWeights,
+                        fill: false
+                    }
+                    ]
+                },
+
+                // Configuration options go here
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Weighed Vehicles Per Month'
+                    }
+                }
+            });
         });
     </script>
 </th:block>
