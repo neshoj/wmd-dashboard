@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 /**
  * The utility used to export a excel file from a given set of parameters
@@ -43,7 +42,7 @@ public class ExportFileGenerator extends AbstractExport {
         checkParams("hql");
 
         // Set the appropriate headers
-        setHeaders(_fileName,format);
+        setHeaders(_fileName, format);
 
         Map<String, Object> params = new HashMap<>();
         params.put("date", _reportMetaData.getDate());
@@ -75,7 +74,7 @@ public class ExportFileGenerator extends AbstractExport {
             BufferedOutputStream ostream = new BufferedOutputStream(_response.getOutputStream());
             SimpleOutputStreamExporterOutput c = new SimpleOutputStreamExporterOutput(ostream);
 
-            switch (format.toLowerCase()){
+            switch (format.toLowerCase()) {
                 case "pdf":
                     JRPdfExporter pdfExporter = new JRPdfExporter();
                     pdfExporter.setExporterInput(new SimpleExporterInput(p));
@@ -147,6 +146,7 @@ public class ExportFileGenerator extends AbstractExport {
         params.put("ItemDataSource", itemsJRBean);
         return params;
     }
+
     /**
      * Full transaction table report
      *
@@ -161,10 +161,10 @@ public class ExportFileGenerator extends AbstractExport {
             record.put("date", cell[0]);
             record.put("vehicle", cell[1]);
             record.put("ticketNo", cell[2]);
-            record.put("station", cell[3]);
-            record.put("operator", cell[4]);
+            record.put("station", cell[3] == null ? "-" : cell[3]);
+            record.put("operator", cell[4] == null ? "-" : cell[4]);
             record.put("shift", cell[5]);
-            record.put("action", cell[6]);
+            record.put("action", cell[6] == null ? "-" : cell[6].replaceAll("Remedial action required:", ""));
             record.put("class", cell[7]);
             record.put("gvm", cell[8]);
             record.put("axle1", cell[9]);
@@ -267,7 +267,7 @@ public class ExportFileGenerator extends AbstractExport {
      */
     protected void setHeaders(String fileName, String extension) {
         _response.setContentType("application/pdf;charset=utf-8");
-        _response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "."+extension+"\"");
+        _response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "." + extension + "\"");
     }
 
 }
