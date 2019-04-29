@@ -60,76 +60,13 @@ public class ExportFileGenerator extends AbstractExport {
         try {
             String sourceFileName = "";
             switch (jasperReportTemplate) {
-                case "AxleConfigurationReport":
-                    if (_columns.length == 3) {
-                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/AxleConfigurationReport.jasper";
-                    } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
-                case "CargoReport":
-                    if (_columns.length == 3) {
-                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/CargoReport.jasper";
-                    } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
-                case "OperatorReport":
-                    if (_columns.length == 3) {
-                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/OperatorReport.jasper";
-                    } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
                 case "DailyReport":
-                    if (_columns.length == 4) {
-                        params = quadColumnTransactionTableProcessor(params, listItems, it);
+                    if (_columns.length == 3) {
+                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
                         sourceFileName = "config/jasper/DailyReport.jasper";
                     } else {
                         params = fullColumnTransactionTableProcessor(params, listItems, it);
                         sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
-                case "TransporterReport":
-                    if (_columns.length == 4) {
-                        params = quadColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransporterReport.jasper";
-                    } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
-                case "VehicleReport":
-                    if (_columns.length == 4) {
-                        params = quadColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/VehicleReport.jasper";
-                    } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
-                case "OriginReport":
-                    if (_columns.length == 3) {
-                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/OriginReport.jasper";
-                    } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/TransactionReport.jasper";
-                    }
-                    break;
-                case "SpecialLoadPermitReport":
-                    if (_columns.length == 3) {
-                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/SpecialLoadReport.jasper";
-                    } else {
-                        params = fullColumnSpecialLoadTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/SpecialLoadPermitTransactionReport.jasper";
                     }
                     break;
             }
@@ -223,18 +160,21 @@ public class ExportFileGenerator extends AbstractExport {
             Map<String, String> record = new HashMap<>();
             record.put("date", cell[0]);
             record.put("vehicle", cell[1]);
-            record.put("receiptNo", cell[2]);
-            record.put("axleConf", cell[3]);
-            record.put("axleOverload", cell[4]);
-            record.put("readGVM", cell[5]);
-            record.put("gvmOverload", cell[6]);
-            record.put("transporter", cell[7]);
-            record.put("cargo", cell[8]);
-            record.put("origin", cell[9]);
-            record.put("destination", cell[10]);
-            record.put("fee", cell[11]);
-            record.put("demerits", cell[12]);
-            record.put("operator", cell[13]);
+            record.put("ticketNo", cell[2]);
+            record.put("station", cell[3]);
+            record.put("operator", cell[4]);
+            record.put("shift", cell[5]);
+            record.put("action", cell[6].replaceAll("Remedial action required:", ""));
+            record.put("class", cell[7]);
+            record.put("gvm", cell[8]);
+            record.put("axle1", cell[9]);
+            record.put("axle2", cell[10]);
+            record.put("axle3", cell[11]);
+            record.put("axle4", cell[12]);
+            record.put("axle5", cell[13]);
+            record.put("axle6", cell[14]);
+            record.put("axle7", cell[15]);
+            record.put("permit", cell[16]);
             listItems.add(record);
         }
         JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);

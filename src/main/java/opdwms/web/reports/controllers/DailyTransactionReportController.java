@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class TransactionReportController extends AbstractReportController {
+public class DailyTransactionReportController extends AbstractReportController {
 
     @Autowired
     private WeighbridgeStationsRepository weighbridgeStationsRepository;
@@ -54,9 +54,9 @@ public class TransactionReportController extends AbstractReportController {
             reportMetaData.setStationName(weighbridgeStations.getName())
                     .setStationCode(weighbridgeStations.getStationCode())
                     .setWbsLocation(weighbridgeStations.getLocation())
-                    .setReportTitle("TRANSACTION BASED REPORT");
+                    .setReportTitle("DAILY WEIGHING REPORT");
         }
-        generateDoc(request, response, "transaction-report_" + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()), format, "DailyReport", reportMetaData);
+        generateDoc(request, response, "daily-transaction-report_" + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()), format, "DailyReport", reportMetaData);
 
 
     }
@@ -93,7 +93,6 @@ public class TransactionReportController extends AbstractReportController {
 
             setWeighActionVerdict(request, "a");
 
-
             setWeighbridgeStationNo(request, "a");
 
         }
@@ -104,9 +103,12 @@ public class TransactionReportController extends AbstractReportController {
             // Define the columns
             columns = new String[]{
                     "Date",
+                    "Reg. No",
                     "Ticket",
                     "Station",
-                    "Reg. No",
+                    "Operator",
+                    "Shift",
+                    "Action",
                     "Axle Class",
                     "GVM",
                     "1st Axle(Kg)",
@@ -116,15 +118,12 @@ public class TransactionReportController extends AbstractReportController {
                     "5th Axle(Kg)",
                     "6th Axle(Kg)",
                     "7th Axle(Kg)",
-                    "Operator",
-                    "Shift",
-                    "Action",
                     "Permit"
             };
 
             dataTable
                     .nativeSQL(true)
-                    .select("DATE_FORMAT(a.transaction_date; '%Y-%m-%d %H:%i'), a.ticket_no, b.name, a.vehicle_no, a.axle_configuration, a.vehicleGVM, a.first_axle_weight, a.second_axle_weight, a.third_axle_weight, a.fourth_axle_weight, a.fifth_axle_weight, a.sixth_axle_weight, a.seventh_axle_weight, a.operator, a.wbt_shift, a.action_taken, a.permit_no ")
+                    .select("DATE_FORMAT(a.transaction_date; '%Y-%m-%d %H:%i'),  a.vehicle_no, a.ticket_no, b.name,a.operator, a.wbt_shift, a.action_taken, a.axle_configuration, a.vehicleGVM, a.first_axle_weight, a.second_axle_weight, a.third_axle_weight, a.fourth_axle_weight, a.fifth_axle_weight, a.sixth_axle_weight, a.seventh_axle_weight,  a.permit_no ")
                     .from("weighing_transactions a LEFT JOIN weighbridge_stations  b ON b.id = a.weighbridge_no ")
                     .where("DATE( a.transaction_date) = :createdOn ")
                     .setParameter("createdOn", transactionDate);
