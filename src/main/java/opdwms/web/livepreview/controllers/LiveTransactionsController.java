@@ -39,9 +39,9 @@ public class LiveTransactionsController {
 
             //Set-up data
             datatable
-                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, a.stationCode, a.vehicleNo, a.axleConfiguration, a.vehicleGVM, ")
+                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, b.name, a.vehicleNo, a.axleConfiguration, a.vehicleGVM, ")
                     .select("a.operator, a.origin, a.destination, a.actionTaken")
-                    .from("WeighingTransactions a");
+                    .from("WeighingTransactions a LEFT JOIN WeighbridgeStations b ON b.id = a.stationCode");
 
             return view.sendJSON( datatable.showTable() );
         }

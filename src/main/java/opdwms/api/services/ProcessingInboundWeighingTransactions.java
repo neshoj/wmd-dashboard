@@ -21,6 +21,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -364,7 +365,7 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
      * @return
      */
     private BigDecimal calculateTolerableWeight(BigDecimal legalWeight, int permissiblePercentage) {
-        return (legalWeight.multiply(new BigDecimal(100 + permissiblePercentage))).divide(new BigDecimal(100));
+        return (legalWeight.multiply(new BigDecimal(100 + permissiblePercentage))).divide(new BigDecimal(100), RoundingMode.HALF_UP);
     }
 
     /**
@@ -391,7 +392,7 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
         if (permissibleWeight.compareTo(readAxleWeight) < 0) {
             // Overload: Get overload weight
             BigDecimal weightOverload = readAxleWeight.subtract(permissibleWeight);
-            return (weightOverload.multiply(new BigDecimal(100))).divide(permissibleWeight);
+            return (weightOverload.multiply(new BigDecimal(100))).divide(permissibleWeight, RoundingMode.HALF_UP);
         }
         return new BigDecimal(0);
     }

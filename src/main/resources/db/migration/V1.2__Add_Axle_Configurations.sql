@@ -33,28 +33,28 @@ create table `axle_classifications` (
 --  Update transaction table
 -- ---------------------------------
 ALTER TABLE `weighing_transactions`
-      ADD COLUMN  `first_axle_weight_exceeded_percent`    decimal (4, 2) default 0,
+      ADD COLUMN  `first_axle_weight_exceeded_percent`    decimal (11, 2) default 0,
       ADD COLUMN  `first_axle_weight_exceeded_weight`     decimal (11, 2) default 0,
 
-      ADD COLUMN  `second_axle_weight_exceeded_percent`   decimal (4, 2) default 0,
+      ADD COLUMN  `second_axle_weight_exceeded_percent`   decimal (11, 2) default 0,
       ADD COLUMN  `second_axle_weight_exceeded_weight`    decimal (11, 2) default 0,
 
-      ADD COLUMN  `third_axle_weight_exceeded_percent`    decimal (4, 2) default 0,
+      ADD COLUMN  `third_axle_weight_exceeded_percent`    decimal (11, 2) default 0,
       ADD COLUMN  `third_axle_weight_exceeded_weight`     decimal (11, 2) default 0,
 
-      ADD COLUMN  `fourth_axle_weight_exceeded_percent`   decimal (4, 2) default 0,
+      ADD COLUMN  `fourth_axle_weight_exceeded_percent`   decimal (11, 2) default 0,
       ADD COLUMN  `fourth_axle_weight_exceeded_weight`    decimal (11, 2) default 0,
 
-      ADD COLUMN  `fifth_axle_weight_exceeded_percent`    decimal (4, 2) default 0,
+      ADD COLUMN  `fifth_axle_weight_exceeded_percent`    decimal (11, 2) default 0,
       ADD COLUMN  `fifth_axle_weight_exceeded_weight`     decimal (11, 2) default 0,
 
-      ADD COLUMN  `sixth_axle_weight_exceeded_percent`    decimal (4, 2) default 0,
+      ADD COLUMN  `sixth_axle_weight_exceeded_percent`    decimal (11, 2) default 0,
       ADD COLUMN  `sixth_axle_weight_exceeded_weight`     decimal (11, 2) default 0,
 
-      ADD COLUMN  `seventh_axle_weight_exceeded_percent`  decimal (4, 2) default 0,
+      ADD COLUMN  `seventh_axle_weight_exceeded_percent`  decimal (11, 2) default 0,
       ADD COLUMN  `seventh_axle_weight_exceeded_weight`   decimal (11, 2) default 0,
 
-      ADD COLUMN  `gvw_exceeded_percent`                  decimal (4, 2) default 0,
+      ADD COLUMN  `gvw_exceeded_percent`                  decimal (11, 2) default 0,
       ADD COLUMN  `gvw_exceeded_weight`                   decimal (11, 2) default 0,
       ADD COLUMN  `flag`                                  int(2) default 0,
       ADD COLUMN  `axle_weight_status`                    int(2) default 0,
