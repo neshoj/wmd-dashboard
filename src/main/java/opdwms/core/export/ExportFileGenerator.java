@@ -164,7 +164,7 @@ public class ExportFileGenerator extends AbstractExport {
             record.put("station", cell[3]);
             record.put("operator", cell[4]);
             record.put("shift", cell[5]);
-            record.put("action", cell[6].replaceAll("Remedial action required:", ""));
+            record.put("action", cell[6]);
             record.put("class", cell[7]);
             record.put("gvm", cell[8]);
             record.put("axle1", cell[9]);
