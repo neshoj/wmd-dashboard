@@ -32,16 +32,18 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="widget widget-pie">
                 <div class="widget-head"><span class="title">Weighing</span></div>
                 <div class="row chart-container">
-                    <div class="col-md-12"  style="height: 80px !important   ">
-                        <canvas id="donutWeighingStatusChart" class="chart" style="display: block; width: 161px !important; height: 80px !important;" width="161" height="80"></canvas>
+                    <div class="col-md-12" style="height: 80px !important   ">
+                        <canvas id="donutWeighingStatusChart" class="chart"
+                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
+                                height="80"></canvas>
                     </div>
                 </div>
                 <div class="row chart-info">
-                    <div class="col-xs-4"><span class="title">Weighed Vehicles</span><span
+                    <div class="col-xs-4"><span class="title">T/T Weighed</span><span
                             th:text="${data.weighedVehicles}" class="number"
                     >0</span></div>
                     <div class="col-xs-4"><span class="title">Overloads</span><span
@@ -53,12 +55,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="widget widget-pie widget-pie-stats">
                 <div class="widget-head"><span class="title">Vehicle Census</span></div>
                 <div class="row chart-container">
                     <div class="col-md-12" style="height: 80px">
-                        <canvas id="barChartCensus" class="chart"  style="display: block; width: 161px !important; height: 80px !important;" width="161" height="80"></canvas>
+                        <canvas id="vehicleChartCensus" class="chart"
+                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
+                                height="80"></canvas>
                     </div>
                 </div>
                 <div class="row chart-info">
@@ -71,6 +75,26 @@
                         <div id="spk2" class="sparkline"></div>
                         <span class="title">Overload</span><span data-toggle="counter" data-end="9" data-suffix="%"
                                                                  class="number">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget widget-pie widget-pie-stats">
+                <div class="widget-head"><span class="title">Vehicle Tagging</span></div>
+                <div class="row chart-container">
+                    <div class="col-md-12" style="height: 80px">
+                        <canvas id="tag-chart" class="chart"
+                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
+                                height="80"></canvas>
+                    </div>
+                </div>
+                <div class="row chart-info">
+                    <div class="col-xs-6"><span class="title">Cleared</span><span
+                            th:text="${chartData.clearTags}" class="number"
+                    >0</span></div>
+                    <div class="col-xs-6"><span class="title">Pending</span><span
+                            th:text="${chartData.pendingTags}" class="number">0</span>
                     </div>
                 </div>
             </div>
@@ -207,7 +231,7 @@
             //         }
             //     });
 
-            let lineChartCensusCtx = document.getElementById('barChartCensus').getContext('2d');
+            let lineChartCensusCtx = document.getElementById('vehicleChartCensus').getContext('2d');
             let axleConfiguration = [];
             let axleConfigurationCount = [];
             chartData.censusBarChartData.forEach((data) => {
@@ -238,6 +262,37 @@
                 options: options
             };
             let censusChart = new Chart(lineChartCensusCtx, config);
+
+
+            let tagChartConfig = {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [
+                            chartData.clearTags,
+                            chartData.pendingTags
+                        ],
+                        backgroundColor: [
+                            'rgb(76, 175, 80)',
+                            'rgb(255, 87, 34)'
+                        ],
+                        label: 'Tagging'
+                    }],
+                    labels: [
+                        'Cleared Tags',
+                        'Pending Tags'
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false
+                    }
+                }
+            };
+
+            let tagctx = document.getElementById('tag-chart').getContext('2d');
+            let tagChart = new Chart(tagctx, tagChartConfig);
 
             let lineChart = document.getElementById('weighingLineChart').getContext('2d');
             let lables = [];

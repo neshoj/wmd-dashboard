@@ -10,6 +10,7 @@ import opdwms.web.dashboard.vm.CencusBarChartData;
 import opdwms.web.dashboard.vm.ChartDataPie;
 import opdwms.web.usermanager.entities.UserTypes;
 import opdwms.web.weighbridgestations.repository.WeighbridgeStationsRepository;
+import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.modal.LineChartData;
 import opdwms.web.weighingtransactions.repositories.WeighbridgeTransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,23 +79,27 @@ public class DashboardController {
     }
 
 
-
     private Map<String, Object> fetchLineChartData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(  ProcessingInboundWeighingTransactions.GVM_OVERLOAD);
-        Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(  ProcessingInboundWeighingTransactions.GVM_WITHIN);
+        Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD);
+        Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN);
 
         ArrayList<ChartDataPie> pieChartData = new ArrayList<>();
         pieChartData.add(new ChartDataPie("Within Limit", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN)));
-        pieChartData.add(new ChartDataPie("Within tolerance",weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN_PERMISSIBLE)));
-        pieChartData.add(new ChartDataPie("Overloads",weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_OVERLOAD)));
+        pieChartData.add(new ChartDataPie("Within tolerance", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN_PERMISSIBLE)));
+        pieChartData.add(new ChartDataPie("Overloads", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_OVERLOAD)));
 
         List<CencusBarChartData> censusBarChartData = weighbridgeTransactionsRepository.fetchAxleConfigurationCensus();
 
-        map.put("censusBarChartData",censusBarChartData);
-        map.put("pieChartData",pieChartData);
-        map.put("withinLimit",withinLimitData);
-        map.put("overload",overloadData);
+        Long clearTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.CLEARED_TAGS);
+        Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.PENDING_TAGS);
+
+        map.put("censusBarChartData", censusBarChartData);
+        map.put("pieChartData", pieChartData);
+        map.put("withinLimit", withinLimitData);
+        map.put("overload", overloadData);
+        map.put("clearTags", clearTags);
+        map.put("pendingTags", pendingTags);
         map.put("status", "00");
 
 
