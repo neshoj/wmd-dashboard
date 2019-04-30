@@ -13,6 +13,7 @@ import opdwms.web.weighbridgestations.repository.WeighbridgeStationsRepository;
 import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.modal.LineChartData;
 import opdwms.web.weighingtransactions.repositories.WeighbridgeTransactionsRepository;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -81,8 +84,12 @@ public class DashboardController {
 
     private Map<String, Object> fetchLineChartData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD);
-        Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN);
+        try {
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+            Date parse = sdf.parse(new LocalDate().minusMonths(6).withDayOfMonth(1).toString("YYYY-MM-DD"));
+
+        Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD,parse);
+        Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN,parse);
 
         ArrayList<ChartDataPie> pieChartData = new ArrayList<>();
         pieChartData.add(new ChartDataPie("Within Limit", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN)));
@@ -102,6 +109,9 @@ public class DashboardController {
         map.put("pendingTags", pendingTags);
         map.put("status", "00");
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         return map;
     }

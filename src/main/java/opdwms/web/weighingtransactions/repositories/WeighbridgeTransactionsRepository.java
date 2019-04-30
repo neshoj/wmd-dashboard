@@ -7,17 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface WeighbridgeTransactionsRepository extends CrudRepository<WeighingTransactions, Long> {
 
 
-    @Query( "SELECT NEW opdwms.web.weighingtransactions.modal.LineChartData( DATE_FORMAT(a.transactionDate, '%Y-%m') , count(a.id)) FROM WeighingTransactions a where a.status = ?1  GROUP BY DATE_FORMAT(a.transactionDate, '%Y-%m')")
-    public List<LineChartData> fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(String status);
-
-    @Query( "SELECT count(a.id) FROM WeighingTransactions a  where  status = ?1 AND stationCode = ?2")
-    public Long fetchCountOfWeighingBasedOnStatusAndStationCode(String status, String stationCode);
+    @Query( "SELECT NEW opdwms.web.weighingtransactions.modal.LineChartData( DATE_FORMAT(a.transactionDate, '%Y-%m-%d') , count(a.id)) FROM WeighingTransactions a where a.status = ?1 AND a.transactionDate >= ?2  GROUP BY DATE_FORMAT(a.transactionDate, '%Y-%m-%d')")
+    public List<LineChartData> fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(String status, Date daysAgo);
 
     @Query( "SELECT count(a.id) FROM WeighingTransactions a  where  a.status = ?1")
     public Long fetchCountOfWeighingBasedOnStatus(String status);
@@ -27,5 +25,11 @@ public interface WeighbridgeTransactionsRepository extends CrudRepository<Weighi
 
     @Query( "SELECT count(a.id) FROM TaggingTransactions a WHERE a.tagStatus= ?1")
     public Long fetchCountOfTaggingBasedOnStatus(String status);
+
+
+    // Station specific
+
+    @Query( "SELECT count(a.id) FROM WeighingTransactions a  where  status = ?1 AND stationCode = ?2")
+    public Long fetchCountOfWeighingBasedOnStatusAndStationCode(String status, String stationCode);
 
 }
