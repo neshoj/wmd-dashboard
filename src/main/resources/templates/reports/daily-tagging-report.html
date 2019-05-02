@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/report-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Daily Tagging Reports </title>
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title" th:text="#{page.report.tagging.date}"></h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/daily-tagging-report}">Reports</a></li>
+            <li class="active" th:text="#{page.report.tagging.date}"></li>
+        </ol>
+    </div>
+
+    <div class="main-content">
+
+        <div class="row">
+            <div class="col-sm-12  parent-panel">
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div class="tab-pane active cont active">
+
+                            <div class="text-center float-e-margins">
+                                <div class="heading-elements">
+                                    <button class="btn  btn-space  btn-success"> Refresh</button>
+
+                                    <div class="btn-group weighbridge-station-no">
+                                        <button type="button"
+                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Weighbridge stations
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button data-index="" class="dropdown-item" type="button"> -- Select
+                                                Weighbridge Station --
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button th:each="item : ${weighbridgestations}"
+                                                    data-filter="weighbridge-station-no"
+                                                    th:data-index="${item.id}"
+                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-group action-taken">
+                                        <button type="button"
+                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Tagging Status
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button data-index="" class="dropdown-item" type="button"> -- Action Taken
+                                                --
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"
+                                                    type="button"> Pending Tags
+                                            </button>
+                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"
+                                                    type="button"> Cleared Tags
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-flat btn-space btn-default date-range"
+                                            title="Specify Range ">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        <span>Jan 1, 2019 - Dec 31, 2019</span>
+                                    </button>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-space  btn-warning dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <svg class="svg-inline--fa fa-download fa-w-16" aria-hidden="true"
+                                                 data-prefix="fa" data-icon="download" role="img"
+                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                 data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                      d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path>
+                                            </svg><!-- <i class="fa fa-download"></i> -->
+                                        </button>
+                                        <ul class="dropdown-menu pull-right download-report">
+                                            <li><a data-action="pdf" href="/daily-weighing-report/pdf" target="_blank">
+                                                PDF </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane active show">
+                                <div class="panel-body">
+                                    <div class="table-responsive ">
+                                        <table class="table table-striped table-bordered table-hover  parent-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Vehicles Tagged</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 child-panel d-none">
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div class="tab-pane active cont active">
+
+                            <div class="text-center float-e-margins">
+                                <div class="heading-elements">
+                                    <button class="btn  btn-space   btn-info"> Back</button>
+                                    <button class="btn  btn-space  btn-success"> Refresh</button>
+
+                                    <div class="btn-group weighbridge-station-no">
+                                        <button type="button"
+                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Weighbridge stations
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button data-index="" class="dropdown-item" type="button"> -- Select
+                                                Weighbridge Station --
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button th:each="item : ${weighbridgestations}"
+                                                    data-filter="weighbridge-station-no"
+                                                    th:data-index="${item.id}"
+                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-group action-taken">
+                                        <button type="button"
+                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Tagging Status
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button data-index="" class="dropdown-item" type="button"> -- Action Taken
+                                                --
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"
+                                                    type="button"> Pending Tags
+                                            </button>
+                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"
+                                                    type="button"> Cleared Tags
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-flat btn-space btn-default date-range"
+                                            title="Specify Range ">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                        <span>Jan 1, 2019 - Dec 31, 2019</span>
+                                    </button>
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-space  btn-warning dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <svg class="svg-inline--fa fa-download fa-w-16" aria-hidden="true"
+                                                 data-prefix="fa" data-icon="download" role="img"
+                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                 data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                      d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path>
+                                            </svg><!-- <i class="fa fa-download"></i> -->
+                                        </button>
+                                        <ul class="dropdown-menu pull-right download-report">
+                                            <li><a data-action="pdf" href="/daily-weighing-report/pdf" target="_blank">
+                                                PDF </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane active show">
+                                <div class="panel-body">
+                                    <div class="table-responsive ">
+                                        <table class="table table-striped table-bordered table-hover child-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Reg. No</th>
+                                                <th>Ticket No.</th>
+                                                <th>Transgression</th>
+                                                <th>Tag Location</th>
+                                                <th>Tagging System</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="modals"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+</body>
+</html>

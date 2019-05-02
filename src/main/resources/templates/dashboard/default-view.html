@@ -43,14 +43,15 @@
                     </div>
                 </div>
                 <div class="row chart-info">
-                    <div class="col-xs-4"><span class="title">T/T Weighed</span><span
-                            th:text="${data.weighedVehicles}" class="number"
-                    >0</span></div>
-                    <div class="col-xs-4"><span class="title">Overloads</span><span
+                    <div class="col-xs-4"><span class="title">T/T Weighed</span>
+                        <a th:href="@{/weighing-transactions}"><span th:text="${data.weighedVehicles}"
+                                                                     class="number">0</span></a>
+                    </div>
+                    <div class="col-xs-4"><span class="title">Overloads</span><a th:href="@{/weighing-transactions}"><span
                             th:text="${data.overloadVehicles}" class="number"
-                    ></span></div>
-                    <div class="col-xs-4"><span class="title">Within Limit</span><span
-                            th:text="${data.weighedWithinLimits}" class="number">0</span>
+                    ></span></a></div>
+                    <div class="col-xs-4"><span class="title">Within Limit</span><a th:href="@{/weighing-transactions}"><span
+                            th:text="${data.weighedWithinLimits}" class="number">0</span></a>
                     </div>
                 </div>
             </div>
@@ -90,11 +91,11 @@
                     </div>
                 </div>
                 <div class="row chart-info">
-                    <div class="col-xs-6"><span class="title">Cleared</span><span
+                    <div class="col-xs-6"><span class="title">Cleared</span><a th:href="@{/tagging-transactions}"><span
                             th:text="${chartData.clearTags}" class="number"
-                    >0</span></div>
-                    <div class="col-xs-6"><span class="title">Pending</span><span
-                            th:text="${chartData.pendingTags}" class="number">0</span>
+                    >0</span></a></div>
+                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/weighing-transactions}"><span
+                            th:text="${chartData.pendingTags}" class="number">0</span></a>
                     </div>
                 </div>
             </div>

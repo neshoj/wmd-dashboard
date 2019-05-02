@@ -5,18 +5,18 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8"/>
-    <title>OPD-WMS &middot; Transaction Reports </title>
+    <title>OPD-WMS &middot; Daily Weighing Reports </title>
 
 </head>
 <body>
 
 <th:block layout:fragment="content">
     <div class="page-head">
-        <h2 class="page-head-title" th:text="#{page.transaction.reports}"></h2>
+        <h2 class="page-head-title" th:text="#{page.report.weighing.date}"></h2>
         <ol class="breadcrumb">
             <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/transaction-report}">Reports</a></li>
-            <li class="active" th:text="#{page.transaction.reports}"></li>
+            <li><a th:href="@{/daily-weighing-report}">Reports</a></li>
+            <li class="active" th:text="#{page.report.weighing.date}"></li>
         </ol>
     </div>
 
@@ -79,24 +79,23 @@
                                         <span>Jan 1, 2019 - Dec 31, 2019</span>
                                     </button>
 
-                                    <!--<div class="btn-group">-->
-                                        <!--<button type="button"-->
-                                                <!--class="btn btn-flat  btn-space  btn-primary dropdown-toggle"-->
-                                                <!--data-toggle="dropdown">-->
-                                            <!--<svg class="svg-inline&#45;&#45;fa fa-download fa-w-16" aria-hidden="true"-->
-                                                 <!--data-prefix="fa" data-icon="download" role="img"-->
-                                                 <!--xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"-->
-                                                 <!--data-fa-i2svg="">-->
-                                                <!--<path fill="currentColor"-->
-                                                      <!--d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path>-->
-                                            <!--</svg>&lt;!&ndash; <i class="fa fa-download"></i> &ndash;&gt;-->
-                                        <!--</button>-->
-                                        <!--<ul class="dropdown-menu pull-right download-report">-->
-                                            <!--<li><a data-action="pdf" href="/transaction-report/pdf" target="_blank">-->
-                                                <!--PDF </a>-->
-                                            <!--</li>-->
-                                        <!--</ul>-->
-                                    <!--</div>-->
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-space  btn-warning dropdown-toggle"
+                                                data-toggle="dropdown">
+                                            <svg class="svg-inline--fa fa-download fa-w-16" aria-hidden="true"
+                                                 data-prefix="fa" data-icon="download" role="img"
+                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                 data-fa-i2svg="">
+                                                <path fill="currentColor"
+                                                      d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"></path>
+                                            </svg><!-- <i class="fa fa-download"></i> -->
+                                        </button>
+                                        <ul class="dropdown-menu pull-right download-report">
+                                            <li><a data-action="pdf" href="/daily-weighing-report/pdf" target="_blank">
+                                                PDF </a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
                                 </div>
                             </div>
@@ -108,7 +107,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Date</th>
-                                                <th>No Of Transactions</th>
+                                                <th>Vehicles Weighed</th>
                                                 <th>Total GVM (kg)</th>
                                             </tr>
                                             </thead>
@@ -193,7 +192,7 @@
                                             </svg><!-- <i class="fa fa-download"></i> -->
                                         </button>
                                         <ul class="dropdown-menu pull-right download-report">
-                                            <li><a data-action="pdf" href="/transaction-report/pdf" target="_blank">
+                                            <li><a data-action="pdf" href="/daily-weighing-report/pdf" target="_blank">
                                                 PDF </a>
                                             </li>
                                         </ul>
@@ -214,16 +213,8 @@
                                                 <th>Station</th>
                                                 <th>Operator</th>
                                                 <th>Shift</th>
-                                                <th>Action</th>
                                                 <th>Axle Class</th>
                                                 <th>GVM</th>
-                                                <th>1st Axle(Kg)</th>
-                                                <th>2nd Axle(Kg)</th>
-                                                <th>3rd Axle(Kg)</th>
-                                                <th>4th Axle(Kg)</th>
-                                                <th>5th Axle(Kg)</th>
-                                                <th>6th Axle(Kg)</th>
-                                                <th>7th Axle(Kg)</th>
                                                 <th>Permit</th>
                                             </tr>
                                             </thead>

@@ -58,9 +58,8 @@ public class LiveTransactionsController {
 
             //Set-up data
             datatable
-                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo,  a.confirmedVehicle_no, a.transgression, ")
-                    .select(" a.weighingReference, a.taggingSystem, a.taggingScene, ")
-                    .select("a.tagStatus, a.tagOnChargeAmount, a.weighbridge, a.chargedReason ")
+                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
+                    .select(" a.taggingSystem, a.taggingScene, a.weighbridge ")
                     .from("TaggingTransactions a");
 
             return view.sendJSON( datatable.showTable() );

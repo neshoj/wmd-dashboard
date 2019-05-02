@@ -76,6 +76,17 @@ AbstractReportController {
                 .setParameter("status", actionTaken.trim());
     }
 
+    protected void setTaggingStatus(HttpServletRequest request, String transactionAlias) {
+        String actionTaken = request.getParameter("actionTaken");
+
+        // If the payment mode have not been defined, end here
+        if (StringUtils.isEmpty(actionTaken)) return;
+
+        dataTable
+                .where(String.format("%s.tag_status = :status", transactionAlias))
+                .setParameter("status", actionTaken.trim());
+    }
+
     protected void setWeighbridgeStationNo(HttpServletRequest request, String transactionAlias) {
         String weighbridgeStationNo = request.getParameter("wbsNo");
 

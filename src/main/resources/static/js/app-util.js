@@ -373,6 +373,7 @@ var utils = (function (p) {
         refreshTable: () => standardTableDt.fnDraw()
     };
 
+
     //Maker-Checker handler
     const makerChecker = {
 

@@ -3944,9 +3944,9 @@ fieldset[disabled] a.btn {
 }
 
 .btn-primary {
-    color: #000;
-    background-color: #ada9a9;
-    border-color: #ada9a9
+    color: #fff;
+    background-color: #ec4b4b;
+    border-color: #ec4b4b
 }
 
 .btn-primary.focus,

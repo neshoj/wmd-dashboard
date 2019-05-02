@@ -23,15 +23,15 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class DailyTransactionReportController extends AbstractReportController {
+public class DailyTaggingReportController extends AbstractReportController {
 
     @Autowired
     private WeighbridgeStationsRepository weighbridgeStationsRepository;
 
-    @RequestMapping(value = "/daily-weighing-report")
+    @RequestMapping(value = "/daily-tagging-report")
     public ModelAndView index(HttpServletRequest request) {
         String parentType = (String) request.getSession().getAttribute("_userParentType");
-        View view = new View("reports/daily-weighing-report");
+        View view = new View("reports/daily-tagging-report");
 
         if (AjaxUtils.isAjaxRequest(request)) {
             return fetchTableData(request, view);
@@ -42,7 +42,7 @@ public class DailyTransactionReportController extends AbstractReportController {
                 .getView();
     }
 
-    @RequestMapping(value = "/daily-weighing-report/{format}", method = RequestMethod.GET)
+    @RequestMapping(value = "/daily-tagging-report/{format}", method = RequestMethod.GET)
     public void export(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -52,9 +52,9 @@ public class DailyTransactionReportController extends AbstractReportController {
         if (stationsRepositoryAllByFlag.size() > 0) {
             WeighbridgeStations weighbridgeStations = stationsRepositoryAllByFlag.get(0);
             reportMetaData.setStationName(weighbridgeStations.getName())
-                    .setReportTitle("DAILY WEIGHING REPORT");
+                    .setReportTitle("DAILY TAGGING REPORT");
         }
-        generateDoc(request, response, "daily-transaction-report_" + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()), format, "DailyWeighingReport", reportMetaData);
+        generateDoc(request, response, "daily-tagging-report_" + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()), format, "DailyTaggingReport", reportMetaData);
 
 
     }
@@ -76,20 +76,19 @@ public class DailyTransactionReportController extends AbstractReportController {
             // Define the columns
             columns = new String[]{
                     "Date",
-                    "Vehicles Weighed",
-                    "Total GVM (kg)"
+                    "Vehicles Tagged"
             };
 
             dataTable
                     .nativeSQL(true)
-                    .select("DATE_FORMAT(a.transaction_date; '%Y-%m-%d'), COALESCE(COUNT(a.id); 0), FORMAT(sum(a.vehicleGVM) ; 0), DATE_FORMAT(a.transaction_date; '%Y-%m-%d') ")
-                    .from("weighing_transactions a ")
+                    .select("DATE_FORMAT(a.transaction_date; '%Y-%m-%d'), COALESCE(COUNT(a.id); 0), DATE_FORMAT(a.transaction_date; '%Y-%m-%d') ")
+                    .from("tagging_transactions a ")
                     .groupBy("DATE_FORMAT(a.transaction_date, '%Y-%m-%d')");
 
             //Set Date Filters
             setDateFilters(request, "a");
 
-            setWeighActionVerdict(request, "a");
+            setTaggingStatus(request, "a");
 
             setWeighbridgeStationNo(request, "a");
 
@@ -102,27 +101,24 @@ public class DailyTransactionReportController extends AbstractReportController {
             columns = new String[]{
                     "Date",
                     "Reg. No",
-                    "Ticket",
-                    "Station",
-                    "Operator",
-                    "Shift",
-                    "Axle Class",
-                    "GVM",
-                    "Permit"
+                    "Ticket No.",
+                    "Transgression",
+                    "Tag Location",
+                    "Tagging System"
             };
 
             dataTable
                     .nativeSQL(true)
-                    .select("DATE_FORMAT(a.transaction_date; '%Y-%m-%d %H:%i'), a.vehicle_no, a.ticket_no, b.name, a.operator, a.wbt_shift,  a.axle_configuration, FORMAT(a.vehicleGVM; 0), a.permit_no ")
-                    .from("weighing_transactions a LEFT JOIN weighbridge_stations  b ON b.id = a.weighbridge_no ")
+                    .select("DATE_FORMAT(a.transaction_date; '%Y-%m-%d %H:%i'), a.vehicle_no, a.tag_reference, a.transgression, a.weighbridge, a.tagging_system ")
+                    .from("tagging_transactions a LEFT JOIN weighbridge_stations  b ON b.id = a.weighbridge_no ")
                     .where("DATE( a.transaction_date) = :createdOn ")
                     .setParameter("createdOn", transactionDate);
 
             //Set Date Filters
-//            setDateFilters(request, "a");
-
-            setWeighActionVerdict(request, "a");
-
+            setDateFilters(request, "a");
+            // Tagging Status
+            setTaggingStatus(request, "a");
+            // Select Station
             setWeighbridgeStationNo(request, "a");
         }
 

@@ -36,11 +36,7 @@
                     k++;
                     if (aData.length === k)
                         $(nRow).children('td:eq(-1)').html( actions(aData[i]));
-                    else  if(k === 1)
-                        aData[k] === 2 ?
-                            $(nRow).find('td:eq(' + k + ')').html('<button type="button" class="btn btn-space btn-danger"><i class="icon s7-close"></i></button>'):
-                            $(nRow).find('td:eq(' + k + ')').html('<button type="button" class="btn btn-space btn-success"><i class="icon s7-check"></i></button>');
-                });
+                     });
 
                 //Handle table events
                 $(".view", nRow).click( function( e ){

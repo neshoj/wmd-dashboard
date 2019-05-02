@@ -46,9 +46,7 @@ public class ExportFileGenerator extends AbstractExport {
 
         Map<String, Object> params = new HashMap<>();
         params.put("date", _reportMetaData.getDate());
-        params.put("wbsLocation", _reportMetaData.getWbsLocation().toUpperCase());
         params.put("stationName", _reportMetaData.getStationName().toUpperCase());
-        params.put("stationCode", _reportMetaData.getStationCode().toUpperCase());
         params.put("reportTitle", _reportMetaData.getReportTitle().toUpperCase());
         params.put("reportFilter", (null == _bag.get("actionId")) ? "ALL" : getReportFilter((String) _bag.get("actionId")).toUpperCase());
         params.put("period", (null == _bag.get("startDate")) ? "CURRENT YEAR" : (_bag.get("startDate")) + " to " + _bag.get("endDate"));
@@ -59,13 +57,22 @@ public class ExportFileGenerator extends AbstractExport {
         try {
             String sourceFileName = "";
             switch (jasperReportTemplate) {
-                case "DailyReport":
+                case "DailyWeighingReport":
                     if (_columns.length == 3) {
-                        params = tripleColumnTransactionTableProcessor(params, listItems, it);
-                        sourceFileName = "config/jasper/DailyReport.jasper";
+                        params = jasperTemplateColumnPopulator(params, listItems, it);
+                        sourceFileName = "config/jasper/DailyWeighingReport.jasper";
                     } else {
-                        params = fullColumnTransactionTableProcessor(params, listItems, it);
+                        params = jasperTemplateColumnPopulator(params, listItems, it);
                         sourceFileName = "config/jasper/TransactionReport.jasper";
+                    }
+                    break;
+                case "DailyTaggingReport":
+                    if (_columns.length == 2) {
+                        params = jasperTemplateColumnPopulator(params, listItems, it);
+                        sourceFileName = "config/jasper/DailyTaggingReport.jasper";
+                    } else {
+                        params = jasperTemplateColumnPopulator(params, listItems, it);
+                        sourceFileName = "config/jasper/TaggingTransactionReport.jasper";
                     }
                     break;
             }
@@ -90,6 +97,7 @@ public class ExportFileGenerator extends AbstractExport {
             }
 
         } catch (Exception e) {
+            System.out.println("e = " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -116,132 +124,19 @@ public class ExportFileGenerator extends AbstractExport {
     }
 
     /**
-     * Full transaction table report
-     *
+     * Dynamically populate table data on the templates
+     * @param params
      * @param listItems
      * @param it
      * @return
      */
-    private Map<String, Object> fullColumnSpecialLoadTransactionTableProcessor(Map<String, Object> params, List<Map<String, String>> listItems, Iterator<Object[]> it) {
+    private Map<String, Object> jasperTemplateColumnPopulator(Map<String, Object> params, List<Map<String, String>> listItems, Iterator<Object[]> it) {
         while (it.hasNext()) {
             String[] cell = rowArraySplitter(it);
             Map<String, String> record = new HashMap<>();
-            record.put("date", cell[0]);
-            record.put("vehicle", cell[1]);
-            record.put("receiptNo", cell[2]);
-            record.put("loadPermit", cell[3]);
-            record.put("axleConf", cell[4]);
-            record.put("axleOverload", cell[5]);
-            record.put("readGVM", cell[6]);
-            record.put("gvmOverload", cell[7]);
-            record.put("transporter", cell[8]);
-            record.put("cargo", cell[9]);
-            record.put("origin", cell[10]);
-            record.put("destination", cell[11]);
-            record.put("demerits", cell[12]);
-            record.put("operator", cell[13]);
-            listItems.add(record);
-        }
-        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);
-        params.put("ItemDataSource", itemsJRBean);
-        return params;
-    }
-
-    /**
-     * Full transaction table report
-     *
-     * @param listItems
-     * @param it
-     * @return
-     */
-    private Map<String, Object> fullColumnTransactionTableProcessor(Map<String, Object> params, List<Map<String, String>> listItems, Iterator<Object[]> it) {
-        while (it.hasNext()) {
-            String[] cell = rowArraySplitter(it);
-            Map<String, String> record = new HashMap<>();
-            record.put("date", cell[0]);
-            record.put("vehicle", cell[1]);
-            record.put("ticketNo", cell[2]);
-            record.put("station", cell[3] == null ? "-" : cell[3]);
-            record.put("operator", cell[4] == null ? "-" : cell[4]);
-            record.put("shift", cell[5]);
-            record.put("action", cell[6] == null ? "-" : cell[6].replaceAll("Remedial action required:", ""));
-            record.put("class", cell[7]);
-            record.put("gvm", cell[8]);
-            record.put("axle1", cell[9]);
-            record.put("axle2", cell[10]);
-            record.put("axle3", cell[11]);
-            record.put("axle4", cell[12]);
-            record.put("axle5", cell[13]);
-            record.put("axle6", cell[14]);
-            record.put("axle7", cell[15]);
-            record.put("permit", cell[16]);
-            listItems.add(record);
-        }
-        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);
-        params.put("ItemDataSource", itemsJRBean);
-        return params;
-    }
-
-    /**
-     * Four column tables report
-     *
-     * @param listItems
-     * @param it
-     * @return
-     */
-    private Map<String, Object> quadColumnTransactionTableProcessor(Map<String, Object> params, List<Map<String, String>> listItems, Iterator<Object[]> it) {
-        while (it.hasNext()) {
-            String[] cell = rowArraySplitter(it);
-            Map<String, String> record = new HashMap<>();
-            record.put("columnOne", cell[0]);
-            record.put("columnTwo", cell[1]);
-            record.put("columnThree", cell[2]);
-            record.put("columnFour", cell[3]);
-            listItems.add(record);
-        }
-
-        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);
-        params.put("ItemDataSource", itemsJRBean);
-        return params;
-    }
-
-
-    /**
-     * Triple column tables report
-     *
-     * @param listItems
-     * @param it
-     * @return
-     */
-    private Map<String, Object> tripleColumnTransactionTableProcessor(Map<String, Object> params, List<Map<String, String>> listItems, Iterator<Object[]> it) {
-        while (it.hasNext()) {
-            String[] cell = rowArraySplitter(it);
-            Map<String, String> record = new HashMap<>();
-            record.put("columnOne", cell[0]);
-            record.put("columnTwo", cell[1]);
-            record.put("columnThree", cell[2]);
-            listItems.add(record);
-        }
-
-        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);
-        params.put("ItemDataSource", itemsJRBean);
-        return params;
-    }
-
-
-    /**
-     * Double column tables report
-     *
-     * @param listItems
-     * @param it
-     * @return
-     */
-    private Map<String, Object> doubleColumnTransactionTableProcessor(Map<String, Object> params, List<Map<String, String>> listItems, Iterator<Object[]> it) {
-        while (it.hasNext()) {
-            String[] cell = rowArraySplitter(it);
-            Map<String, String> record = new HashMap<>();
-            record.put("columnOne", cell[0]);
-            record.put("columnTwo", cell[1]);
+            for (int i = 0; i < cell.length; i++) {
+                record.put("column" + (i + 1), cell[i] == null ? "-" : cell[i]);
+            }
             listItems.add(record);
         }
 

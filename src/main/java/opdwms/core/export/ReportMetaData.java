@@ -5,9 +5,7 @@ import java.util.Date;
 
 public class ReportMetaData {
     private String date = new SimpleDateFormat("yyyy-mm-dd hh:mm a").format(new Date());
-    private String wbsLocation = "N/A";
     private String stationName = "N/A";
-    private String stationCode = "N/A";
     private String reportTitle = "N/A";
 
     public String getDate() {
@@ -19,30 +17,12 @@ public class ReportMetaData {
         return this;
     }
 
-    public String getWbsLocation() {
-        return wbsLocation;
-    }
-
-    public ReportMetaData setWbsLocation(String wbsLocation) {
-        this.wbsLocation = wbsLocation;
-        return this;
-    }
-
     public String getStationName() {
         return stationName;
     }
 
     public ReportMetaData setStationName(String stationName) {
         this.stationName = stationName;
-        return this;
-    }
-
-    public String getStationCode() {
-        return stationCode;
-    }
-
-    public ReportMetaData setStationCode(String stationCode) {
-        this.stationCode = stationCode;
         return this;
     }
 

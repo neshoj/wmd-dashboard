@@ -86,7 +86,7 @@ public class DashboardController {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
-            Date parse = sdf.parse(new LocalDate().minusMonths(6).withDayOfMonth(1).toString("YYYY-MM-DD"));
+            Date parse = sdf.parse(new LocalDate().minusMonths(2).withDayOfMonth(1).toString("YYYY-MM-DD"));
 
         Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD,parse);
         Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN,parse);

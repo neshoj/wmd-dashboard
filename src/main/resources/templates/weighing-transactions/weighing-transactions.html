@@ -39,22 +39,16 @@
                                 <thead>
                                 <tr>
                                     <th>Date</th>
-                                    <th>Ticket</th>
+                                    <th>Status</th>
+                                    <th>Ticket No</th>
                                     <th>Station</th>
                                     <th>Reg. No</th>
                                     <th>Axle Class</th>
                                     <th>GVM</th>
-                                    <th>1st Axle(Kg)</th>
-                                    <th>2nd Axle(Kg)</th>
-                                    <th>3rd Axle(Kg)</th>
-                                    <th>4th Axle(Kg)</th>
-                                    <th>5th Axle(Kg)</th>
-                                    <th>6th Axle(Kg)</th>
-                                    <th>7th Axle(Kg)</th>
                                     <th>Operator</th>
                                     <th>Shift</th>
-                                    <th>Action</th>
                                     <th>Permit</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -70,7 +64,41 @@
     </div>
 </th:block>
 
-<th:block layout:fragment="modals"></th:block>
+<th:block layout:fragment="modals">
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.ticket.transaction}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+                        <div role="alert" class="alert alert-success alert-dismissible">
+                            <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><span class="icon s7-check"></span><strong>Good news!</strong> This feature will be available soon.
+                        </div>
+                        <!--<div class="form-group m-form__group">-->
+                            <!--<label class="control-label">Module</label>-->
+                            <!--<input type="text" name="module" class="form-control m-input" readonly required="required"/>-->
+                        <!--</div>-->
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>
 
 
 <th:block layout:fragment="script">
