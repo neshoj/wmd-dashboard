@@ -11,7 +11,15 @@
 
         let ui = $(".edit-view"), oTable,
             fnEdit = function (o) {
-                // $('[name="id"]').val( o.id );
+            console.log(o.vehicleNo)
+                $('#ticketNo').text( o.tagReference );
+                $('#ticketDate').text( o.transactionDate );
+
+                $('#plateNo').text( o.vehicleNo );
+                $('#taggingSystem').text( o.taggingSystem );
+
+                $('#transgression').text( o.transgression );
+                $('#taggingStation').text( o.weighbridge );
                 ui.modal("show");
             },
             actions = function( o ){
@@ -44,7 +52,7 @@
                     utils.http
                         .jsonRequest(".panel", {'action':'fetch-record', 'index':index })
                         .done( function( o ){
-                            if("00" === o.status ) fnEdit( o );
+                            if("00" === o.status ) fnEdit( o.data );
                             else utils.alert.error( o.message );
                         });
                 });

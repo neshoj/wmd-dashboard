@@ -12878,7 +12878,7 @@ li.L9 {
 
 .invoice {
     background-color: #fff;
-    padding: 100px 100px 70px;
+    padding: 35px 25px 15px;
     color: #8c8c8c
 }
 
@@ -12890,7 +12890,7 @@ li.L9 {
     line-height: 80px;
     height: 54px;
     min-width: 206px;
-    background-image: url(../img/logo-invoice-big.png);
+    background-image: url(../img/logo.png);
     background-repeat: no-repeat;
     background-position: 0
 }
@@ -12902,7 +12902,7 @@ li.L9 {
 @media (min-width:768px) and (max-width:991px),
 (max-width:767px) {
     .invoice {
-        padding: 50px 50px 35px
+        padding: 35px 25px 15px
     }
     .invoice-header {
         margin-bottom: 50px
@@ -12910,7 +12910,7 @@ li.L9 {
     .invoice-logo {
         height: 34px;
         min-width: 144px;
-        background-image: url(../img/logo-invoice.png)
+        background-image: url(../img/logo.png)
     }
 }
 
@@ -12954,7 +12954,7 @@ li.L9 {
     }
 }
 
-.incoice-date {
+.invoice-date {
     display: block;
     font-size: 18px
 }
@@ -12965,7 +12965,7 @@ li.L9 {
 
 @media (min-width:768px) and (max-width:991px),
 (max-width:767px) {
-    .incoice-date {
+    .invoice-date {
         font-size: 13px
     }
     .invoice-data {
@@ -13172,7 +13172,8 @@ li.L9 {
 }
 
 .invoice-company-info {
-    margin-bottom: 70px
+    margin-bottom: 70px;
+    margin-top: 20px
 }
 
 .invoice-company-info>div {
@@ -13183,7 +13184,8 @@ li.L9 {
 @media (max-width:767px),
 (max-width:480px) {
     .invoice-company-info {
-        margin-bottom: 35px
+        margin-bottom: 35px;
+        margin-top: 10px
     }
     .invoice-company-info>div {
         border: none;
@@ -19396,7 +19398,7 @@ fieldset[disabled] .btn-social.btn-tumblr:hover {
 }
 
 .modal-full-width {
-    width: 95%;
+    width: 75%;
     max-width: none;
     margin-left: auto;
     margin-right: auto
@@ -19409,7 +19411,7 @@ fieldset[disabled] .btn-social.btn-tumblr:hover {
 
 @media (max-width:480px) {
     .modal-full-width {
-        width: 100%;
+        width: 80%;
         margin: 0;
         padding: 10px
     }

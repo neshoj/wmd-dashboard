@@ -63,11 +63,11 @@
 
 
 <th:block layout:fragment="modals">
-    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+    <div class="modal modal-colored-header modal-colored-header-danger fade edit-view"
          tabindex="-1"
          role="dialog" aria-labelledby="editViewModal"
          aria-hidden="true">
-        <div class="modal-dialog custom-width">
+        <div class="modal-dialog modal-full-width">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
@@ -77,18 +77,78 @@
                 <form autocomplete="off">
                     <div class="modal-body form">
 
-                        <div role="alert" class="alert alert-success alert-dismissible">
-                            <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><span class="icon s7-check"></span><strong>Good news!</strong> This feature will be available soon.
+                        <div class="invoice">
+                            <div class="row invoice-header">
+                                <div class="col-xs-7">
+                                    <div class="invoice-logos"></div>
+                                </div>
+                                <div class="col-xs-5 invoice-order"><span class="invoice-id">Ticket #<span
+                                        id="ticketNo">0</span></span><span
+                                        class="invoice-date" id="ticketDate">--/--/----</span></div>
+                            </div>
+                            <div class="row invoice-data">
+                                <div class="col-sm-6 invoice-person">
+                                    <span class="name">Vehicle No.</span>
+                                    <span>Tagging System</span>
+                                </div>
+                                <div class="col-sm-6 invoice-person">
+                                    <span class="name" id="plateNo">-</span>
+                                    <span id="taggingSystem">-</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="invoice-details">
+                                        <tr>
+                                            <th style="width:60%">Transgression</th>
+                                            <th style="width:25%" class="hours">Weighbridge Station</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="description" id="transgression">-</td>
+                                            <td class="hours" id="taggingStation">-</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row invoice-company-info">
+                                <div class="col-sm-3 phone">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Rear View</li>
+                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3 email">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Rear View</li>
+                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3 phone">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Plate Image</li>
+                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3 email">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Plate Image</li>
+                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row invoice-footer">
+                                <div class="col-md-12">
+                                    <button class="btn btn-lg btn-space btn-primary" data-dismiss="modal"><span class="fa fa-print"></span>
+                                        Print Ticket
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <!--<div class="form-group m-form__group">-->
-                        <!--<label class="control-label">Module</label>-->
-                        <!--<input type="text" name="module" class="form-control m-input" readonly required="required"/>-->
-                        <!--</div>-->
 
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                        <button type="button" class="btn btn-space btn-default" data-dismiss="modal"
                                 th:text="#{core.close}"></button>
                     </div>
                 </form>
