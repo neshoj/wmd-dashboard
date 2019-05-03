@@ -23,12 +23,19 @@ import java.util.Optional;
 @Transactional
 public class WeighBridgeStationsService implements WeighbridgeStationsServiceInterface {
 
-    @Autowired
+
     private WeighbridgeStationsForm entityForm;
-    @Autowired
     private WeighbridgeStationsRepository entityRepository;
-    @Autowired
     private AuditTrailRepository auditTrailRepository;
+
+    @Autowired
+    public WeighBridgeStationsService(WeighbridgeStationsForm entityForm,
+                                      WeighbridgeStationsRepository entityRepository,
+                                      AuditTrailRepository auditTrailRepository){
+        this.entityForm = entityForm;
+        this.entityRepository = entityRepository;
+        this.auditTrailRepository = auditTrailRepository;
+    }
 
     @Override
     public List<WeighbridgeStations> fetchRecords(HttpServletRequest request) {

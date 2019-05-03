@@ -88,8 +88,8 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-8 invoice-order"><span class="invoice-id">Ticket No# <span
-                                        id="ticketNo">-</span></span><span
-                                        class="invoice-date" id="ticketDate">--/--/----</span></div>
+                                        id="ticket-no">-</span></span><span
+                                        class="invoice-date" id="ticket-date">--/--/----</span></div>
                             </div>
 
                             <div class="row">
@@ -106,17 +106,23 @@
                                                 <th>GVW</th>
                                                 <th>OPERATOR</th>
                                                 <th>SHIFT</th>
+                                                <th>CARGO</th>
+                                                <th>ORIGIN</th>
+                                                <th>DESTINATION</th>
                                                 <th>WEIGHBRIDGE</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <td>KCE 415Q</td>
-                                                <td>2A</td>
-                                                <td class="number">7580</td>
-                                                <td>Ojiambo</td>
-                                                <td>Shift B</td>
-                                                <td>Gilgil Nairobi Bound</td>
+                                                <td id="vehicle-no">-</td>
+                                                <td id="axle-class">-</td>
+                                                <td class="number" id="gvw">0</td>
+                                                <td id="operator">-</td>
+                                                <td id="shift">-</td>
+                                                <td id="cargo">-</td>
+                                                <td id="origin">-</td>
+                                                <td id="destination">-</td>
+                                                <td id="weighbridge"></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -130,34 +136,16 @@
                                         <div class="panel-title">Axle Weight Details</div>
                                     </div>
                                     <div class="panel-body">
-                                        <table class="table table-condensed table-hover table-bordered table-striped">
+                                        <table id="tblAxleWeights" class="table table-condensed table-hover table-bordered table-striped">
                                             <thead>
                                             <tr>
                                                 <th>Axle Group</th>
                                                 <th>Legal Weight</th>
-                                                <th>Adjusted Weight</th>
                                                 <th>Weight</th>
                                                 <th>Overload</th>
-                                                <th>Result</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="number">7580</td>
-                                                <td class="number">7580</td>
-                                                <td class="number">7580</td>
-                                                <td class="number">7580</td>
-                                                <td>Overload</td>
-                                            </tr>
-                                            <tr class="danger">
-                                                <td>2</td>
-                                                <td class="number">7580</td>
-                                                <td class="number">7580</td>
-                                                <td class="number">7580</td>
-                                                <td class="number">7580</td>
-                                                <td>Overload</td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -203,11 +191,8 @@
                                 </div>
                             </div>
                             <div class="row invoice-footer">
-                                <div class="col-md-12">
-                                    <button class="btn btn-lg btn-space btn-primary" data-dismiss="modal"><span
-                                            class="fa fa-print"></span>
-                                        Print Ticket
-                                    </button>
+                                <div class="col-md-12" id="print-btn">
+
                                 </div>
                             </div>
                         </div>
@@ -215,8 +200,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-space btn-default" data-dismiss="modal"
-                                th:text="#{core.close}"></button>
+                        <a href="" type="button" class="btn btn-space btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></a>
                     </div>
                 </form>
             </div>

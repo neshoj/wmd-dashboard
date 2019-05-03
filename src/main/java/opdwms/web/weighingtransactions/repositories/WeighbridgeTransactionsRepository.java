@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface WeighbridgeTransactionsRepository extends CrudRepository<WeighingTransactions, Long> {
@@ -26,9 +27,7 @@ public interface WeighbridgeTransactionsRepository extends CrudRepository<Weighi
     @Query( "SELECT count(a.id) FROM TaggingTransactions a WHERE a.tagStatus= ?1")
     public Long fetchCountOfTaggingBasedOnStatus(String status);
 
-
     // Station specific
-
     @Query( "SELECT count(a.id) FROM WeighingTransactions a  where  status = ?1 AND stationCode = ?2")
     public Long fetchCountOfWeighingBasedOnStatusAndStationCode(String status, String stationCode);
 

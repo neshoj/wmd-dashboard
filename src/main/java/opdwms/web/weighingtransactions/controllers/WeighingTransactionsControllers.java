@@ -1,26 +1,54 @@
 package opdwms.web.weighingtransactions.controllers;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import opdwms.core.template.AjaxUtils;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
 import opdwms.web.weighingtransactions.entities.TaggingTransactions;
+import opdwms.web.weighingtransactions.entities.WeighingTransactions;
+import opdwms.web.weighingtransactions.forms.WeighingTransactionsForm;
 import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepository;
+import opdwms.web.weighingtransactions.repositories.WeighbridgeTransactionsRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class WeighingTransactionsControllers {
-    @Autowired
+
     private DatatablesInterface datatable;
-    @Autowired
     private TaggingTransactionsRepository taggingTransactionsRepository;
+    private WeighbridgeTransactionsRepository weighbridgeTransactionsRepository;
+    private WeighingTransactionsForm weighingTransactionsForm;
+
+    @Autowired
+    public WeighingTransactionsControllers(DatatablesInterface datatable,
+                                           TaggingTransactionsRepository taggingTransactionsRepository,
+                                           WeighbridgeTransactionsRepository weighbridgeTransactionsRepository,
+                                           WeighingTransactionsForm weighingTransactionsForm) {
+        this.datatable = datatable;
+        this.taggingTransactionsRepository = taggingTransactionsRepository;
+        this.weighbridgeTransactionsRepository = weighbridgeTransactionsRepository;
+        this.weighingTransactionsForm = weighingTransactionsForm;
+    }
+
 
     @RequestMapping("/weighing-transactions")
     public ModelAndView weighingTransaction(HttpServletRequest request) {
@@ -47,23 +75,159 @@ public class WeighingTransactionsControllers {
         return view.getView();
     }
 
-    private Map<String, Object> fetchTicketData(HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("status", "00");
-        return map;
+    @RequestMapping(value = "/weighing-transactions/{index}", method = RequestMethod.GET)
+    public void export(
+            javax.servlet.http.HttpServletRequest request,
+            HttpServletResponse response,
+            @PathVariable("index") Long index) throws IOException {
+        try {
+            Optional<WeighingTransactions> weighbridgeTransactionsOptional = weighbridgeTransactionsRepository.findById(index);
+            if (weighbridgeTransactionsOptional.isPresent()) {
+                String sourceFileName = "config/jasper/WeighingTicket.jasper";
+
+                WeighingTransactions weighingTransactions = weighbridgeTransactionsOptional.get();
+
+
+                Map<String, Object> params = new HashMap<>();
+                params.put("ticketDate", new SimpleDateFormat("MM-DD-YYYY").format(weighingTransactions.getTransactionDate()));
+                params.put("ticketTime", new SimpleDateFormat("HH:mm a").format(weighingTransactions.getTransactionDate()));
+                params.put("stationName", weighingTransactions.getWeighbridgeStationsLink().getName().toUpperCase());
+                params.put("ticketRef", weighingTransactions.getTicketNo().toUpperCase());
+
+                params.put("transporterName", "N/A");
+                params.put("tripDestination", weighingTransactions.getDestination().isEmpty() ? "N/A" : weighingTransactions.getOrigin());
+                params.put("tripOrigin", weighingTransactions.getOrigin().isEmpty() ? "N/A" : weighingTransactions.getOrigin());
+                params.put("axleClass", weighingTransactions.getAxleConfiguration());
+
+                params.put("driverName", "N/A");
+                params.put("vehicleRegNo", weighingTransactions.getVehicleNo());
+                params.put("specialLoadPermitNo", weighingTransactions.getPermitNo().equals("0") ? "N/A" : weighingTransactions.getPermitNo());
+                params.put("tripCargo", weighingTransactions.getCargo().isEmpty() ? "N/A" : weighingTransactions.getCargo());
+
+                params.put("shift", "N/A");
+                params.put("operator", weighingTransactions.getOperator() == null ? "N/A" : weighingTransactions.getOperator());
+
+                List<Map<String, String>> listItems = new ArrayList<>();
+                Map<String, String> axleOne = new HashMap<>();
+                axleOne.put("column1", weighingTransactions.getFirstAxleType());
+                axleOne.put("column2", String.valueOf(weighingTransactions.getFirstAxleLegalWeight().intValue()));
+                axleOne.put("column3", String.valueOf(weighingTransactions.getFirstAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                axleOne.put("column4", String.valueOf(weighingTransactions.getFirstAxleWeight().intValue()));
+                axleOne.put("column5", weighingTransactions.getFirstAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getFirstAxleWeightExceededValue().intValue()));
+                axleOne.put("column6", weighingTransactions.getFirstAxleWeightExceededValue() == null ?
+                        "legal" : weighingTransactions.getFirstAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                listItems.add(axleOne);
+
+                Map<String, String> axleTwo = new HashMap<>();
+                axleTwo.put("column1", weighingTransactions.getSecondAxleType());
+                axleTwo.put("column2", String.valueOf(weighingTransactions.getSecondAxleLegalWeight().intValue()));
+                axleTwo.put("column3", String.valueOf(weighingTransactions.getSecondAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                axleTwo.put("column4", String.valueOf(weighingTransactions.getSecondAxleWeight().intValue()));
+                axleTwo.put("column5", weighingTransactions.getSecondAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getSecondAxleWeightExceededValue().intValue()));
+                axleTwo.put("column6", weighingTransactions.getSecondAxleWeightExceededValue() == null ?
+                        "legal" : weighingTransactions.getSecondAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                listItems.add(axleTwo);
+
+                if (weighingTransactions.getThirdAxleWeight().intValue() != 0) {
+
+                    Map<String, String> record = new HashMap<>();
+                    record.put("column1", weighingTransactions.getThirdAxleType());
+                    record.put("column2", String.valueOf(weighingTransactions.getThirdAxleLegalWeight().intValue()));
+                    record.put("column3", String.valueOf(weighingTransactions.getThirdAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                    record.put("column4", String.valueOf(weighingTransactions.getThirdAxleWeight().intValue()));
+                    record.put("column5", weighingTransactions.getThirdAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getThirdAxleWeightExceededValue().intValue()));
+                    record.put("column6", weighingTransactions.getThirdAxleWeightExceededValue() == null ?
+                            "legal" : weighingTransactions.getThirdAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                    listItems.add(record);
+                }
+
+                if (weighingTransactions.getFourthAxleWeight().intValue() != 0) {
+                    Map<String, String> record = new HashMap<>();
+                    record.put("column1", weighingTransactions.getFourthAxleType());
+                    record.put("column2", String.valueOf(weighingTransactions.getFourthAxleLegalWeight().intValue()));
+                    record.put("column3", String.valueOf(weighingTransactions.getFourthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                    record.put("column4", String.valueOf(weighingTransactions.getFourthAxleWeight().intValue()));
+                    record.put("column5", weighingTransactions.getFourthAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getFourthAxleWeightExceededValue().intValue()));
+                    record.put("column6", weighingTransactions.getFourthAxleWeightExceededValue() == null ?
+                            "legal" : weighingTransactions.getFourthAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                    listItems.add(record);
+                }
+
+                if (weighingTransactions.getFifthAxleWeight().intValue() != 0) {
+                    Map<String, String> record = new HashMap<>();
+                    record.put("column1", weighingTransactions.getFifthAxleType());
+                    record.put("column2", String.valueOf( weighingTransactions.getFifthAxleLegalWeight().intValue()) );
+                    record.put("column3", String.valueOf( weighingTransactions.getFifthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                    record.put("column4", String.valueOf( weighingTransactions.getFifthAxleWeight().intValue()));
+                    record.put("column5", weighingTransactions.getFifthAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getFifthAxleWeightExceededValue().intValue()));
+                    record.put("column6", weighingTransactions.getFifthAxleWeightExceededValue() == null ?
+                            "legal" : weighingTransactions.getFifthAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                    listItems.add(record);
+                }
+
+                if (weighingTransactions.getSixthAxleWeight().intValue() != 0) {
+                    Map<String, String> record = new HashMap<>();
+                    record.put("column1", weighingTransactions.getSixthAxleType());
+                    record.put("column2", String.valueOf( weighingTransactions.getSixthAxleWeight().intValue() ) );
+                    record.put("column3", String.valueOf( weighingTransactions.getSixthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue() ));
+                    record.put("column4", String.valueOf( weighingTransactions.getSixthAxleWeight().intValue()));
+                    record.put("column5", weighingTransactions.getSixthAxleWeightExceededValue() == null ? "0" : String.valueOf( weighingTransactions.getSixthAxleWeightExceededValue().intValue()) );
+                    record.put("column6", weighingTransactions.getSixthAxleWeightExceededValue() == null ?
+                            "legal" : weighingTransactions.getSixthAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                    listItems.add(record);
+                }
+
+                if (weighingTransactions.getSeventhAxleWeight().intValue() != 0) {
+                    Map<String, String> record = new HashMap<>();
+                    record.put("column1", weighingTransactions.getSeventhAxleType());
+                    record.put("column2", String.valueOf(weighingTransactions.getSeventhAxleWeight().intValue()));
+                    record.put("column3", String.valueOf(weighingTransactions.getSeventhAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                    record.put("column4", String.valueOf(weighingTransactions.getSeventhAxleWeight().intValue()));
+                    record.put("column5", weighingTransactions.getSeventhAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getSeventhAxleWeightExceededValue().intValue()));
+                    record.put("column6", weighingTransactions.getSeventhAxleWeightExceededValue() == null ?
+                            "legal" : weighingTransactions.getSeventhAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
+                    listItems.add(record);
+                }
+
+                Map<String, String> record = new HashMap<>();
+                record.put("column1", "GVW");
+                record.put("column2", "-");
+                record.put("column3", "-");
+                record.put("column4", weighingTransactions.getVehicleGVM().toString());
+                record.put("column5", weighingTransactions.getGvwExceededWeight().toString());
+                record.put("column6", weighingTransactions.getGvwExceededWeight() == null ?
+                        "legal" : weighingTransactions.getGvwExceededWeight().intValue() > 0 ? "overload" : "legal");
+                listItems.add(record);
+
+                JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);
+                params.put("ItemDataSource", itemsJRBean);
+
+                JasperPrint p = JasperFillManager.fillReport(sourceFileName, params, new JREmptyDataSource());
+                BufferedOutputStream ostream = new BufferedOutputStream(response.getOutputStream());
+                SimpleOutputStreamExporterOutput c = new SimpleOutputStreamExporterOutput(ostream);
+
+                JRPdfExporter pdfExporter = new JRPdfExporter();
+                pdfExporter.setExporterInput(new SimpleExporterInput(p));
+                pdfExporter.setExporterOutput(c);
+                pdfExporter.exportReport();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private Map<String, Object> fetchTaggingTicketData(HttpServletRequest request) {
+    private Map<String, Object> fetchTicketData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
-
-        Optional<TaggingTransactions> taggingTransactionsRepositoryById = taggingTransactionsRepository.findById(Long.valueOf(request.getParameter("index")));
-        if (taggingTransactionsRepositoryById.isPresent()) {
+        Optional<WeighingTransactions> weighbridgeTransactionsOptional = weighbridgeTransactionsRepository.findById(Long.valueOf(request.getParameter("index")));
+        if (weighbridgeTransactionsOptional.isPresent()) {
+            WeighingTransactions weighingTransactions = weighbridgeTransactionsOptional.get();
+            map = weighingTransactionsForm.transformEntity(weighingTransactions);
             map.put("status", "00");
-            map.put("message", "Transaction successful");
-            map.put("data", taggingTransactionsRepositoryById.get());
-        }else{
+            map.put("message", "Transaction processed successfully");
+            map.put("weighbridge", weighingTransactions.getWeighbridgeStationsLink().getName());
+        } else {
             map.put("status", "01");
-            map.put("message", "Invalid Transaction ID requested");
+            map.put("message", "Invalid Transaction Id provided");
         }
         return map;
     }
@@ -92,6 +256,23 @@ public class WeighingTransactionsControllers {
         }
         return view.getView();
     }
+
+
+    private Map<String, Object> fetchTaggingTicketData(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        Optional<TaggingTransactions> taggingTransactionsRepositoryById = taggingTransactionsRepository.findById(Long.valueOf(request.getParameter("index")));
+        if (taggingTransactionsRepositoryById.isPresent()) {
+            map.put("status", "00");
+            map.put("message", "Transaction successful");
+            map.put("data", taggingTransactionsRepositoryById.get());
+        } else {
+            map.put("status", "01");
+            map.put("message", "Invalid Transaction ID requested");
+        }
+        return map;
+    }
+
 
     @RequestMapping("/hswim-transactions")
     public ModelAndView HSWIMTransaction(HttpServletRequest request) {
