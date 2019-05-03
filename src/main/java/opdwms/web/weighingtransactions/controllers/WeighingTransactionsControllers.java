@@ -17,6 +17,10 @@ import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepositor
 import opdwms.web.weighingtransactions.repositories.WeighbridgeTransactionsRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -76,7 +81,7 @@ public class WeighingTransactionsControllers {
     }
 
     @RequestMapping(value = "/weighing-transactions/{index}", method = RequestMethod.GET)
-    public void export(
+    public ResponseEntity<InputStreamResource> export(
             javax.servlet.http.HttpServletRequest request,
             HttpServletResponse response,
             @PathVariable("index") Long index) throws IOException {
@@ -202,18 +207,29 @@ public class WeighingTransactionsControllers {
                 JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(listItems);
                 params.put("ItemDataSource", itemsJRBean);
 
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Disposition", "inline; filename=wms-" + weighingTransactions.getTicketNo().toUpperCase() + ".pdf");
                 JasperPrint p = JasperFillManager.fillReport(sourceFileName, params, new JREmptyDataSource());
-                BufferedOutputStream ostream = new BufferedOutputStream(response.getOutputStream());
-                SimpleOutputStreamExporterOutput c = new SimpleOutputStreamExporterOutput(ostream);
+                JRPdfExporter exporter = new JRPdfExporter();
+                exporter.setExporterInput(new SimpleExporterInput(p));
 
-                JRPdfExporter pdfExporter = new JRPdfExporter();
-                pdfExporter.setExporterInput(new SimpleExporterInput(p));
-                pdfExporter.setExporterOutput(c);
-                pdfExporter.exportReport();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                SimpleOutputStreamExporterOutput c = new SimpleOutputStreamExporterOutput(outputStream);
+                exporter.setExporterOutput(c);
+
+                exporter.exportReport();
+                ByteArrayInputStream bis = new ByteArrayInputStream(outputStream.toByteArray());
+
+                return ResponseEntity
+                        .ok()
+                        .headers(headers)
+                        .contentType(MediaType.APPLICATION_PDF)
+                        .body(new InputStreamResource(bis));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return ResponseEntity.status(500).contentType(MediaType.APPLICATION_PDF).body(null);
     }
 
     private Map<String, Object> fetchTicketData(HttpServletRequest request) {
