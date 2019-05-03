@@ -19,9 +19,9 @@
                 $('#gvw').text(o.vehicleGVM);
                 $('#operator').text(o.operator === null ? 'N/A' : o.operator);
                 $('#shift').text(o.operatorShift);
-                $('#cargo').text(o.cargo);
-                $('#origin').text(o.origin);
-                $('#destination').text(o.destination);
+                // $('#cargo').text(o.cargo);
+                // $('#origin').text(o.origin);
+                // $('#destination').text(o.destination);
                 $('#weighbridge').text(o.weighbridge);
 
                 $('#action').text(o.actionTaken === null ? 'N/A' : o.operator);

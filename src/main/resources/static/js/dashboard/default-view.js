@@ -165,7 +165,6 @@
                 }
                 ]
             },
-
             // Configuration options go here
             options: {
                 responsive: true,

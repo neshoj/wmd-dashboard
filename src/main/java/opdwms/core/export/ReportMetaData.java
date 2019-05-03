@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ReportMetaData {
-    private String date = new SimpleDateFormat("yyyy-mm-dd hh:mm a").format(new Date());
+    private String date = new SimpleDateFormat("YYY-MM-dd HH:mm a").format(new Date());
     private String stationName = "N/A";
     private String reportTitle = "N/A";
 
