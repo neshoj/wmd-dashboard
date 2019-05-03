@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; User Profile </title>
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+    <div class="main-content">
+        <div class="user-profile">
+            <div class="user-display">
+                <div class="photo"><img th:src="@{theme/img/profile.jpg}"></div>
+                <div class="bottom">
+                    <div class="user-avatar"><span class="status"></span><img th:src="@{theme/img/avatar.jpg}"></div>
+                    <div class="user-info">
+                        <h4 th:text="${userDetails.firstName} + ' ' + ${userDetails.surname} "></h4>
+                        <span th:text="${userDetails.parent}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="info-block panel panel-default">
+                        <div class="panel-heading">
+                            <h4>About me</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="no-border no-strip skills">
+                                <tbody class="no-border-x no-border-y">
+                                <tr>
+                                    <td class="item">System Role<span class="icon s7-portfolio"></span></td>
+                                    <td th:text="${userDetails.userType}"></td>
+                                    <td ></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">Mobile<span class="icon s7-phone"></span></td>
+                                    <td th:text="${userDetails.phone}"></td>
+                                    <td > <button class="btn btn-space btn-info edit-phone"><i class="fas fa-pen"></i></button> </td>
+                                </tr>
+                                <tr>
+                                    <td class="item">Email<span class="icon s7-mail-open"></span></td>
+                                    <td th:text="${userDetails.email}"> </td>
+                                    <td > <button class="btn btn-space btn-info edit-phone"><span class="fa fa-pen"></span> </button> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="panel panel-default panel-tabs card-view">
+                        <div class="panel-wrapper collapse in">
+                            <div class="panel-body">
+                                <div class="tab-content" id="reason-codes-tab-content">
+
+                                    <div id="active" class="tab-pane  active fade in" role="tabpanel">
+                                        <div class="table-wrap">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-fw-widget table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Time</th>
+                                                        <th>Activity</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--End Active Table-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+<th:block layout:fragment="modals">
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.weighbridge.stations}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+                        <div class="form-group m-form__group">
+                            <label> Name </label>
+                            <input type="text" name="name" class="form-control m-input" placeholder="Name"
+                                   required="required"/>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label> Station Code </label>
+                            <input type="text" name="stationCode" class="form-control m-input"
+                                   placeholder="Station Code" required="required"/>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label> Location </label>
+                            <input type="text" name="location" class="form-control m-input" placeholder="Location"
+                                   required="required"/>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label> Mobile Number </label>
+                            <input type="text" name="mobileNo" class="form-control m-input" placeholder="Mobile Number"
+                                   required="required"/>
+                        </div>
+
+                        <div class="form-group m-form__group">
+                            <label> Weighbridge Type </label>
+                            <select name="weighbridgeTypeNo" class="form-control">
+                                <option value=""> Select Weighbridge Type</option>
+                                <option th:each="item : ${weighbridgetypes}"
+                                        th:value="${item.id}"
+                                        th:text="${item.name}"></option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="action" value="new" />
+                        <input type="hidden" name="id" value="" />
+                        <button type="submit" class="btn btn-space  btn-success" th:text="#{core.save}"></button>
+                        <button type="button" class="btn btn-space  btn-danger" data-dismiss="modal"  th:text="#{core.close}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{theme/lib/multiselect.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{js/user-manager/profile.js}"
+            rel="script"
+            type="application/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //initialize the javascript
+            // App.init();
+            // App.dataTables();
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

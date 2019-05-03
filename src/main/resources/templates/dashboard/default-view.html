@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/dashboard-layout}"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <meta charset="utf-8"/>
     <title>OPD-WMS &middot; Dashboard</title>
@@ -13,13 +13,12 @@
 <body>
 
 <th:block layout:fragment="content">
-
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <select class="form-control">
+                    <div class="col-sm-4">
+                        <select class="form-control weighbridges">
                             <option value=""> Select Weighbridge Station</option>
                             <option th:each="item : ${weighbridges}"
                                     th:value="${item.id}"
@@ -47,7 +46,8 @@
                         <a th:href="@{/weighing-transactions}"><span th:text="${data.weighedVehicles}"
                                                                      class="number">0</span></a>
                     </div>
-                    <div class="col-xs-4"><span class="title">Overloads</span><a th:href="@{/weighing-transactions}"><span
+                    <div class="col-xs-4"><span class="title">Overloads</span><a
+                            th:href="@{/weighing-transactions}"><span
                             th:text="${data.overloadVehicles}" class="number"
                     ></span></a></div>
                     <div class="col-xs-4"><span class="title">Within Limit</span><a th:href="@{/weighing-transactions}"><span
@@ -69,13 +69,12 @@
                 <div class="row chart-info">
                     <div class="col-xs-6">
                         <div id="spk1" class="sparkline"></div>
-                        <span class="title">Within Limits</span><span data-toggle="counter" data-end="91"
-                                                                      data-suffix="%" class="number">0%</span>
+                        <span class="title">Within Limits</span><span
+                            th:text="${data.percentageWthinLimit}+ '%'">0%</span>
                     </div>
                     <div class="col-xs-6">
                         <div id="spk2" class="sparkline"></div>
-                        <span class="title">Overload</span><span data-toggle="counter" data-end="9" data-suffix="%"
-                                                                 class="number">0%</span>
+                        <span class="title">Overload</span><span th:text="${data.percentageOverload}+ '%'">0%</span>
                     </div>
                 </div>
             </div>
@@ -94,7 +93,7 @@
                     <div class="col-xs-6"><span class="title">Cleared</span><a th:href="@{/tagging-transactions}"><span
                             th:text="${chartData.clearTags}" class="number"
                     >0</span></a></div>
-                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/weighing-transactions}"><span
+                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/tagging-transactions}"><span
                             th:text="${chartData.pendingTags}" class="number">0</span></a>
                     </div>
                 </div>
@@ -105,10 +104,10 @@
         <div class="col-md-12">
             <div class="widget widget-fullwidth line-chart">
                 <div class="widget-head">
-                    <span class="title">Vehicle Weighing</span>
+                    <span class="title">Vehicle Weighing Statistics</span>
                 </div>
                 <div class="chart-container">
-                    <canvas id="weighingLineChart" style="height: 260px"></canvas>
+                    <canvas id="weighingLineChart" style="height: 340px"></canvas>
                 </div>
             </div>
         </div>
@@ -144,10 +143,11 @@
             type="text/javascript"></script>
 
     <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{js/dashboard/default-view.js}"></script>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
 
-        var chartData = /*[[${chartData}]]*/'chartData';
+        let chartData = /*[[${chartData}]]*/'chartData';
 
         /*]]>*/
     </script>
@@ -156,198 +156,6 @@
             //initialize the javascript
             App.init();
             App.dashboard();
-
-            let backgroundColors = [
-                'rgb(244, 67, 54)',
-                'rgb(233, 30, 99)',
-                'rgb(156, 39, 176)',
-                'rgb(103, 58, 183)',
-                'rgb(63, 81, 181)',
-                'rgb(33, 150, 243)',
-                'rgb(3, 169, 244)',
-                'rgb(0, 188, 212)',
-                'rgb(0, 150, 136)',
-                'rgb(76, 175, 80)',
-                'rgb(139, 195, 74)',
-                'rgb(205, 220, 57)',
-                'rgb(255, 235, 59)',
-                'rgb(255, 193, 7)',
-                'rgb(255, 152, 0)',
-                'rgb(255, 87, 34)',
-                'rgb(121, 85, 72)',
-                'rgb(158, 158, 158)',
-                'rgb(96, 125, 139)'
-            ];
-            //    ====================== Donut Chart ==================
-
-            let donutChartCensusCtx = document.getElementById('donutWeighingStatusChart').getContext('2d');
-            let weighStatusLabel = [];
-            let weighStatusData = [];
-            chartData.pieChartData.forEach((data) => {
-                weighStatusLabel.push(data.label);
-                weighStatusData.push(data.data);
-            });
-
-            let donutOptions = {
-                responsive: true,
-                legend: {
-                    display: false
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            };
-            let donutConfig = {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: weighStatusData,
-                        backgroundColor: backgroundColors,
-                        label: 'Vehicle Census'
-                    }],
-                    labels: weighStatusLabel,
-                },
-                options: donutOptions
-            };
-            let donutChart = new Chart(donutChartCensusCtx, donutConfig);
-
-            // let token = $("meta[name='_csrf']").attr("content"),
-            //     header = $("meta[name='_csrf_header']").attr("content");
-            // $(document).ajaxSend(function (e, xhr, options) {
-            //     xhr.setRequestHeader(header, token);
-            //     xhr.setRequestHeader("Accept", "application/json");
-            // });
-            //
-            //
-            // utils.http.jsonRequest($(".wrapper"),
-            //     {
-            //         action: 'fetch-line-chart'
-            //     })
-            //     .done(function (o) {
-
-
-            //         } else {
-            //             utils.alert.error(o.message);
-            //         }
-            //     });
-
-            let lineChartCensusCtx = document.getElementById('vehicleChartCensus').getContext('2d');
-            let axleConfiguration = [];
-            let axleConfigurationCount = [];
-            chartData.censusBarChartData.forEach((data) => {
-                axleConfiguration.push(data.axleConfiguration);
-                axleConfigurationCount.push(data.count);
-            });
-
-            let options = {
-                responsive: true,
-                legend: {
-                    display: false
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            };
-            let config = {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: axleConfigurationCount,
-                        backgroundColor: backgroundColors,
-                        label: 'Vehicle Census'
-                    }],
-                    labels: axleConfiguration,
-                },
-                options: options
-            };
-            let censusChart = new Chart(lineChartCensusCtx, config);
-
-
-            let tagChartConfig = {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: [
-                            chartData.clearTags,
-                            chartData.pendingTags
-                        ],
-                        backgroundColor: [
-                            'rgb(76, 175, 80)',
-                            'rgb(255, 87, 34)'
-                        ],
-                        label: 'Tagging'
-                    }],
-                    labels: [
-                        'Cleared Tags',
-                        'Pending Tags'
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    legend: {
-                        display: false
-                    }
-                }
-            };
-
-            let tagctx = document.getElementById('tag-chart').getContext('2d');
-            let tagChart = new Chart(tagctx, tagChartConfig);
-
-            let lineChart = document.getElementById('weighingLineChart').getContext('2d');
-            let lables = [];
-            let overloadWeights = [];
-            let withinLimitsWeights = [];
-
-            if (chartData.withinLimit.length > chartData.overload.length) {
-                for (let i = 0; i < chartData.withinLimit.length; i++) {
-                    lables.push(chartData.withinLimit[i].month);
-                }
-            } else {
-                for (let i = 0; i < chartData.overload.length; i++) {
-                    lables.push(chartData.overload[i].month);
-                }
-            }
-
-            for (let i = 0; i < lables.length; i++) {
-                overloadWeights.push(chartData.overload[i] ? chartData.overload[i].count : 0);
-                withinLimitsWeights.push(chartData.withinLimit[i] ? chartData.withinLimit[i].count : 0);
-            }
-
-            let chart = new Chart(lineChart, {
-                type: 'line',
-                data: {
-                    labels: lables,
-                    datasets: [{
-                        label: 'Overloads',
-                        backgroundColor: 'rgb(244, 67, 54)',
-                        borderColor: 'rgb(244, 67, 54)',
-                        data: overloadWeights,
-                        fill: false
-                    }, {
-                        label: 'Within Limit',
-                        backgroundColor: 'rgb(76, 175, 80)',
-                        borderColor: 'rgb(76, 175, 80)',
-                        data: withinLimitsWeights,
-                        fill: false
-                    }
-                    ]
-                },
-
-                // Configuration options go here
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: {
-                        position: 'bottom',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Weighed Vehicles Per Month'
-                    }
-                }
-            });
         });
     </script>
 </th:block>

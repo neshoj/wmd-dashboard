@@ -13,7 +13,7 @@
             fnEdit = function (o) {
             console.log(o.vehicleNo)
                 $('#ticketNo').text( o.tagReference );
-                $('#ticketDate').text( o.transactionDate );
+                $('#ticketDate').text( moment(o.transactionDate).format("dddd, MMMM Do YYYY HH:mm A"));
 
                 $('#plateNo').text( o.vehicleNo );
                 $('#taggingSystem').text( o.taggingSystem );

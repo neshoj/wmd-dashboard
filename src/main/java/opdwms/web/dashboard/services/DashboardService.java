@@ -68,6 +68,8 @@ public class DashboardService implements DashboardServiceInterface {
                 .setParameter("flag", ProcessingInboundWeighingTransactions.GVM_WITHIN)
                 .uniqueResult());
 
+        data.setPercentage();
+
         return data;
     }
 

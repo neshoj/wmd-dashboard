@@ -28,7 +28,7 @@
             };
 
         oTable = utils.dataTable({
-            table : $(".table"),
+            table : $(".table-active"),
             fnRowCallback: function(nRow, aData){
                 //Process data
                 let k = 0;

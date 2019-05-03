@@ -11,6 +11,8 @@ public class DashboardStatistics {
     private long weighedVehicles = 0;
     private long overloadVehicles = 2;
     private long weighedWithinLimits = 3 ;
+    private long percentageOverload = 0 ;
+    private long percentageWithinLimit = 0 ;
 
     public long getWeighedVehicles() {
         return weighedVehicles;
@@ -34,5 +36,26 @@ public class DashboardStatistics {
 
     public void setWeighedWithinLimits(long weighedWithinLimits) {
         this.weighedWithinLimits = weighedWithinLimits;
+    }
+
+    public long getPercentageOverload() {
+        return percentageOverload;
+    }
+
+    public void setPercentageOverload(long percentageOverload) {
+        this.percentageOverload = percentageOverload;
+    }
+
+    public long getPercentageWthinLimit() {
+        return percentageWithinLimit;
+    }
+
+    public void setPercentageWthinLimit(long percentageWthinLimit) {
+        this.percentageWithinLimit = percentageWthinLimit;
+    }
+
+    public void setPercentage() {
+        this.percentageOverload = (overloadVehicles * 100)/ weighedVehicles;
+        this.percentageWithinLimit = 100 - percentageOverload;
     }
 }

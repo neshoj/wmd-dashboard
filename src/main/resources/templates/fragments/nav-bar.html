@@ -24,18 +24,18 @@
                     </span>
                 </a><a th:src="@{/}" class="navbar-brand"></a>
             </div>
-            <a href="index.php#" class="am-toggle-right-sidebar">
-                <span class="icon s7-menu2"></span>
-            </a>
-            <a href="index.php#" data-toggle="collapse" data-target="#am-navbar-collapse" class="am-toggle-top-header-menu collapsed">
+            <!--<a th:src="@{/}" class="am-toggle-right-sidebar">-->
+                <!--<span class="icon s7-menu2"></span>-->
+            <!--</a>-->
+            <a th:src="@{/}" data-toggle="collapse" data-target="#am-navbar-collapse" class="am-toggle-top-header-menu collapsed">
                 <span class="icon s7-angle-down"></span>
             </a>
             <div id="am-navbar-collapse" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav am-user-nav">
-                    <li class="dropdown"><a href="index.php#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img th:src="@{theme/img/avatar.jpg}"><span class="user-name">Jane Doe</span><span class="angle-down s7-angle-down"></span></a>
+                    <li class="dropdown"><a th:src="@{/}" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
+                        <img th:src="@{theme/img/avatar.jpg}"><span class="user-name">Jane Doe</span><span class="angle-down s7-angle-down"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a th:href="@{/profile}"> <span class="icon s7-user"></span>My profile</a></li>
-                            <li><a th:href="@{/settings}"> <span class="icon s7-config"></span>Settings</a></li>
                             <li><a th:href="@{/help}"> <span class="icon s7-help1"></span>Help</a></li>
                             <li>
                                 <a th:href="@{#}">
@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="footer"> <a href="index.php#">View all notifications</a></div>
+                                <div class="footer"> <a th:src="@{/tagging-transactions}">View all notifications</a></div>
                             </li>
                         </ul>
                     </li>

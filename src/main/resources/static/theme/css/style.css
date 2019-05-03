@@ -12883,16 +12883,16 @@ li.L9 {
 }
 
 .invoice-header {
-    margin-bottom: 100px
+    margin-bottom: 80px
 }
 
 .invoice-logo {
-    line-height: 80px;
-    height: 54px;
-    min-width: 206px;
-    background-image: url(../img/logo.png);
-    background-repeat: no-repeat;
-    background-position: 0
+    height: 34px;
+    min-width: 144px;
+}
+
+.invoice-logo > img{
+    height: 80px;
 }
 
 .rtl .invoice-logo {
@@ -12910,7 +12910,9 @@ li.L9 {
     .invoice-logo {
         height: 34px;
         min-width: 144px;
-        background-image: url(../img/logo.png)
+    }
+    .invoice-logo > img{
+        height: 80px;
     }
 }
 
@@ -12931,8 +12933,11 @@ li.L9 {
         width: 100%
     }
     .invoice-logo {
-        margin: 0 auto 20px;
-        float: none
+        height: 34px;
+        min-width: 144px;
+    }
+    .invoice-logo > img{
+        height: 80px;
     }
     .invoice-order,
     .rtl .invoice-order {
@@ -12942,15 +12947,15 @@ li.L9 {
 
 .invoice-id {
     display: block;
-    font-size: 30px;
-    line-height: 30px
+    font-size: 20px;
+    line-height: 20px
 }
 
 @media (min-width:768px) and (max-width:991px),
 (max-width:767px) {
     .invoice-id {
-        font-size: 15px;
-        line-height: 18px
+        font-size: 10px;
+        line-height: 13px
     }
 }
 
@@ -12960,7 +12965,7 @@ li.L9 {
 }
 
 .invoice-data {
-    margin-bottom: 110px
+    margin-bottom: 40px
 }
 
 @media (min-width:768px) and (max-width:991px),

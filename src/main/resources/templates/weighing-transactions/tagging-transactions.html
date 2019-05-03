@@ -61,7 +61,6 @@
     </div>
 </th:block>
 
-
 <th:block layout:fragment="modals">
     <div class="modal modal-colored-header modal-colored-header-danger fade edit-view"
          tabindex="-1"
@@ -79,10 +78,12 @@
 
                         <div class="invoice">
                             <div class="row invoice-header">
-                                <div class="col-xs-7">
-                                    <div class="invoice-logos"></div>
+                                <div class="col-xs-4">
+                                    <div class="invoice-logo">
+                                        <img th:src="@{/theme/img/logo.png}">
+                                    </div>
                                 </div>
-                                <div class="col-xs-5 invoice-order"><span class="invoice-id">Ticket #<span
+                                <div class="col-xs-8 invoice-order"><span class="invoice-id">Ticket No# <span
                                         id="ticketNo">0</span></span><span
                                         class="invoice-date" id="ticketDate">--/--/----</span></div>
                             </div>
@@ -114,25 +115,25 @@
                                 <div class="col-sm-3 phone">
                                     <ul class="list-unstyled text-center">
                                         <li>Rear View</li>
-                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-3 email">
                                     <ul class="list-unstyled text-center">
                                         <li>Rear View</li>
-                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-3 phone">
                                     <ul class="list-unstyled text-center">
                                         <li>Plate Image</li>
-                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-3 email">
                                     <ul class="list-unstyled text-center">
                                         <li>Plate Image</li>
-                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -158,10 +159,10 @@
 
 </th:block>
 
-
 <th:block layout:fragment="script">
     <script th:src="@{js/app-util.js}"></script>
     <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{theme/lib/moment.js/min/moment.min.js}"></script>
     <script th:src="@{js/weighing-transactions/tagging-transactions.js}"></script>
 </th:block>
 

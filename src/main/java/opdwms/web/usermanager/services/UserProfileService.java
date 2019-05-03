@@ -67,8 +67,16 @@ public class UserProfileService implements UserProfileServiceInterface {
             String parent = "" ;
 
             switch ( userType.getCode() ){
+                case UserTypes.AEA_ADMIN:
+                case UserTypes.AEA_OPERATIONS_MANAGER:
+                case UserTypes.AEA_WEIGHBRIDGE_MANAGER:
+                    parent = "AEA LIMITED";
+                    break;
+                case UserTypes.KENHA_ADMIN:
+                case UserTypes.KENHA_AXLE_LOAD_CONTROL_OFFICER:
+                    parent = "Kenya National Highways Authority";
                 default:
-                    parent = "Binary Limited";
+                    parent = "AEA LIMITED";
                     break;
             }
 
