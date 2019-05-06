@@ -52,12 +52,14 @@
                     </ul>
                 </li>
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/tagging-transactions')}">
-                    <a th:href="@{/cleared-tags}"><i class="icon s7-car"></i><span> Vehicle Tags</span></a>
+                    th:classappend="${@viewTags.isActiveMenu('/tagging-cleared-transactions','/tagging-open-transactions')}">
+                    <a th:href="@{/tagging-open-transactions}"><i class="icon s7-car"></i><span> Vehicle Tags</span></a>
                     <ul class="sub-menu">
-                        <li th:classappend="${@viewTags.isActiveMenu('/tagging-transactions')}"><a
-                                th:href="@{/tagging-transactions}">All
-                            Tags</a>
+                        <li th:classappend="${@viewTags.isActiveMenu('/tagging-open-transactions')}"><a
+                                th:href="@{/tagging-open-transactions}"> Open Tags </a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/tagging-cleared-transactions')}"><a
+                                th:href="@{/tagging-cleared-transactions}"> Cleared Tags </a>
                         </li>
                     </ul>
                 </li>

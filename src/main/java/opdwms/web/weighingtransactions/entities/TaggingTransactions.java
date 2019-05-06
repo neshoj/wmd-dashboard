@@ -12,7 +12,7 @@ import java.util.Date;
 public class TaggingTransactions {
 
     public static String CLEARED_TAGS = "1";
-    public static String PENDING_TAGS = "0";
+    public static String OPEN_TAGS = "0";
 
     private static final long serialVersionUID = 1L;
     @Id

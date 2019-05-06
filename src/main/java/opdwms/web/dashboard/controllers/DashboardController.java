@@ -99,7 +99,7 @@ public class DashboardController {
             List<CencusBarChartData> censusBarChartData = weighbridgeTransactionsRepository.fetchAxleConfigurationCensus();
 
             Long clearTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.CLEARED_TAGS);
-            Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.PENDING_TAGS);
+            Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.OPEN_TAGS);
 
             map.put("censusBarChartData", censusBarChartData);
             map.put("pieChartData", pieChartData);

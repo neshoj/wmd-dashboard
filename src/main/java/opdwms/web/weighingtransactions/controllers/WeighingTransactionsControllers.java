@@ -10,9 +10,12 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import opdwms.core.template.AjaxUtils;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
+import opdwms.web.weighingtransactions.entities.TaggingClearanceReport;
 import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.entities.WeighingTransactions;
+import opdwms.web.weighingtransactions.forms.TaggingClearanceReportForm;
 import opdwms.web.weighingtransactions.forms.WeighingTransactionsForm;
+import opdwms.web.weighingtransactions.repositories.TaggingClearanceReportRepository;
 import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepository;
 import opdwms.web.weighingtransactions.repositories.WeighbridgeTransactionsRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -41,17 +44,23 @@ public class WeighingTransactionsControllers {
     private DatatablesInterface datatable;
     private TaggingTransactionsRepository taggingTransactionsRepository;
     private WeighbridgeTransactionsRepository weighbridgeTransactionsRepository;
+    private TaggingClearanceReportRepository taggingClearanceReportRepository;
     private WeighingTransactionsForm weighingTransactionsForm;
+    private TaggingClearanceReportForm taggingClearanceReportForm;
 
     @Autowired
     public WeighingTransactionsControllers(DatatablesInterface datatable,
                                            TaggingTransactionsRepository taggingTransactionsRepository,
                                            WeighbridgeTransactionsRepository weighbridgeTransactionsRepository,
-                                           WeighingTransactionsForm weighingTransactionsForm) {
+                                           WeighingTransactionsForm weighingTransactionsForm,
+                                           TaggingClearanceReportForm taggingClearanceReportForm,
+                                           TaggingClearanceReportRepository taggingClearanceReportRepository) {
         this.datatable = datatable;
         this.taggingTransactionsRepository = taggingTransactionsRepository;
         this.weighbridgeTransactionsRepository = weighbridgeTransactionsRepository;
         this.weighingTransactionsForm = weighingTransactionsForm;
+        this.taggingClearanceReportForm = taggingClearanceReportForm;
+        this.taggingClearanceReportRepository = taggingClearanceReportRepository;
     }
 
 
@@ -161,9 +170,9 @@ public class WeighingTransactionsControllers {
                 if (weighingTransactions.getFifthAxleWeight().intValue() != 0) {
                     Map<String, String> record = new HashMap<>();
                     record.put("column1", weighingTransactions.getFifthAxleType());
-                    record.put("column2", String.valueOf( weighingTransactions.getFifthAxleLegalWeight().intValue()) );
-                    record.put("column3", String.valueOf( weighingTransactions.getFifthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
-                    record.put("column4", String.valueOf( weighingTransactions.getFifthAxleWeight().intValue()));
+                    record.put("column2", String.valueOf(weighingTransactions.getFifthAxleLegalWeight().intValue()));
+                    record.put("column3", String.valueOf(weighingTransactions.getFifthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                    record.put("column4", String.valueOf(weighingTransactions.getFifthAxleWeight().intValue()));
                     record.put("column5", weighingTransactions.getFifthAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getFifthAxleWeightExceededValue().intValue()));
                     record.put("column6", weighingTransactions.getFifthAxleWeightExceededValue() == null ?
                             "legal" : weighingTransactions.getFifthAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
@@ -173,10 +182,10 @@ public class WeighingTransactionsControllers {
                 if (weighingTransactions.getSixthAxleWeight().intValue() != 0) {
                     Map<String, String> record = new HashMap<>();
                     record.put("column1", weighingTransactions.getSixthAxleType());
-                    record.put("column2", String.valueOf( weighingTransactions.getSixthAxleWeight().intValue() ) );
-                    record.put("column3", String.valueOf( weighingTransactions.getSixthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue() ));
-                    record.put("column4", String.valueOf( weighingTransactions.getSixthAxleWeight().intValue()));
-                    record.put("column5", weighingTransactions.getSixthAxleWeightExceededValue() == null ? "0" : String.valueOf( weighingTransactions.getSixthAxleWeightExceededValue().intValue()) );
+                    record.put("column2", String.valueOf(weighingTransactions.getSixthAxleWeight().intValue()));
+                    record.put("column3", String.valueOf(weighingTransactions.getSixthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
+                    record.put("column4", String.valueOf(weighingTransactions.getSixthAxleWeight().intValue()));
+                    record.put("column5", weighingTransactions.getSixthAxleWeightExceededValue() == null ? "0" : String.valueOf(weighingTransactions.getSixthAxleWeightExceededValue().intValue()));
                     record.put("column6", weighingTransactions.getSixthAxleWeightExceededValue() == null ?
                             "legal" : weighingTransactions.getSixthAxleWeightExceededValue().intValue() > 0 ? "overload" : "legal");
                     listItems.add(record);
@@ -232,6 +241,7 @@ public class WeighingTransactionsControllers {
         return ResponseEntity.status(500).contentType(MediaType.APPLICATION_PDF).body(null);
     }
 
+
     private Map<String, Object> fetchTicketData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         Optional<WeighingTransactions> weighbridgeTransactionsOptional = weighbridgeTransactionsRepository.findById(Long.valueOf(request.getParameter("index")));
@@ -248,9 +258,63 @@ public class WeighingTransactionsControllers {
         return map;
     }
 
-    @RequestMapping("/tagging-transactions")
+    @RequestMapping("/tagging-open-transactions")
     public ModelAndView taggingTransaction(HttpServletRequest request) {
         View view = new View("weighing-transactions/tagging-transactions");
+
+
+        String action = request.getParameter("action");
+        // Fetch the table data
+        if (AjaxUtils.isAjaxRequest(request)) {
+            if (null != action && "fetch-record".equals(action)) {
+                return view.sendJSON(fetchTaggingTicketData(request));
+            } else if (null != action && "clear-tag".equals(action)) {
+                return view.sendJSON(clearTaggingTransaction(request));
+            } else {
+                //Set-up data
+                datatable
+                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
+                        .select("a.taggingSystem, a.taggingScene, ")
+                        .select(" a.weighbridge, a.chargedReason, a.id ")
+                        .from("TaggingTransactions a ")
+                        .where("a.tagStatus = :state")
+                        .setParameter("state", TaggingTransactions.OPEN_TAGS);
+                return view.sendJSON(datatable.showTable());
+            }
+        }
+        return view.getView();
+    }
+
+    private Map<String, Object> clearTaggingTransaction(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        Long userId = (Long) request.getSession().getAttribute("_userNo");
+        TaggingClearanceReport clearanceReport = taggingClearanceReportForm.handleRequests(request);
+        clearanceReport.createdOn(userId);
+
+        // Get tagging transaction
+        Optional<TaggingTransactions> optionalTaggingTransactions = taggingTransactionsRepository.findById(Long.valueOf(request.getParameter("taggingTransactionsNo")));
+        if (optionalTaggingTransactions.isPresent()) {
+            TaggingTransactions taggingTransactions = optionalTaggingTransactions.get();
+            // set its id
+            clearanceReport.setId(taggingTransactions.getId())
+            .setReferenceNo(taggingTransactions.getWeighingReference());
+            // change tag status
+            taggingTransactions.setTagStatus(TaggingTransactions.CLEARED_TAGS);
+            // save both transactions
+            taggingTransactionsRepository.save(taggingTransactions);
+            taggingClearanceReportRepository.save(clearanceReport);
+            map.put("status", "00");
+            map.put("message", "Transaction cleared");
+        } else {
+            map.put("status", "01");
+            map.put("message", "Invalid Transaction ID");
+        }
+        return map;
+    }
+
+    @RequestMapping("/tagging-cleared-transactions")
+    public ModelAndView taggingClearedTransaction(HttpServletRequest request) {
+        View view = new View("weighing-transactions/tagging-cleared-transactions");
 
 
         String action = request.getParameter("action");
@@ -262,10 +326,12 @@ public class WeighingTransactionsControllers {
             } else {
                 //Set-up data
                 datatable
-                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
-                        .select("a.taggingSystem, a.taggingScene, ")
-                        .select(" a.weighbridge, a.chargedReason, a.id ")
-                        .from("TaggingTransactions a");
+                        .select("str(a.createdOn; 'YYYY-MM-DD HH24:MI'), c.email, a.narration, b.transgression, ")
+                        .select("b.tagReference, b.vehicleNo, b.id  ")
+                        .from("TaggingClearanceReport a ")
+                        .from("LEFT JOIN TaggingTransactions b ON b.id = a.taggingTransactionsNo")
+                        .from("LEFT JOIN Users c ON c.id = a.createdBy")
+                        .setParameter("state", TaggingTransactions.CLEARED_TAGS);
 
                 return view.sendJSON(datatable.showTable());
             }

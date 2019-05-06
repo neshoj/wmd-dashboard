@@ -4,6 +4,7 @@ import opdwms.core.template.AjaxUtils;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
 import opdwms.web.livepreview.models.OperatorRequest;
+import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -21,21 +22,21 @@ public class LiveTransactionsController {
     @MessageMapping("/connect")
     @SendTo("/topic/weighing-transactions")
     public void initiateConnection(OperatorRequest request) throws Exception {
-        System.out.println("Connection request made "+ request.getAction());
+        System.out.println("Connection request made " + request.getAction());
     }
 
     @MessageMapping("/connect-tags")
     @SendTo("/topic/tags-transactions")
     public void initiateTagsConnection(OperatorRequest request) throws Exception {
-        System.out.println("Tags Connection request made "+ request.getAction());
+        System.out.println("Tags Connection request made " + request.getAction());
     }
 
     @RequestMapping("/live-preview")
-    public ModelAndView weighingTransactionLivePreview(HttpServletRequest request){
+    public ModelAndView weighingTransactionLivePreview(HttpServletRequest request) {
         View view = new View("live-preview/live-preview");
 
         // Fetch the table data
-        if ( AjaxUtils.isAjaxRequest( request ) ) {
+        if (AjaxUtils.isAjaxRequest(request)) {
 
             //Set-up data
             datatable
@@ -43,26 +44,28 @@ public class LiveTransactionsController {
                             " a.axleConfiguration, a.vehicleGVM, a.actionTaken")
                     .from("WeighingTransactions a LEFT JOIN WeighbridgeStations b ON b.id = a.stationCode");
 
-            return view.sendJSON( datatable.showTable() );
+            return view.sendJSON(datatable.showTable());
         }
 
         return view.getView();
     }
 
     @RequestMapping("/tags-live-preview")
-    public ModelAndView tagsLivePreview(HttpServletRequest request){
+    public ModelAndView tagsLivePreview(HttpServletRequest request) {
         View view = new View("live-preview/tags-live-preview");
 
         // Fetch the table data
-        if ( AjaxUtils.isAjaxRequest( request ) ) {
+        if (AjaxUtils.isAjaxRequest(request)) {
 
             //Set-up data
             datatable
                     .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
                     .select(" a.taggingSystem, a.taggingScene, a.weighbridge ")
-                    .from("TaggingTransactions a");
+                    .from("TaggingTransactions a ")
+                    .where("a.tagStatus = :state")
+                    .setParameter("state", TaggingTransactions.OPEN_TAGS);
 
-            return view.sendJSON( datatable.showTable() );
+            return view.sendJSON(datatable.showTable());
         }
 
         return view.getView();
