@@ -26,17 +26,17 @@
 
                 $('#action').text(o.actionTaken === null ? 'N/A' : o.operator);
 
-                let GVW = 0, tableRows ='';
+                let GVW = 0, tableRows = '';
                 $("#tblAxleWeights tbody").empty();
 
                 // Populate table data
-                 tableRows = `<tr>` +
+                tableRows = `<tr>` +
                     `<td>` + o.firstAxleType + `</td>` +
                     `<td class="number">` + o.firstAxleLegalWeight + `</td>` +
                     `<td class="number">` + o.firstAxleWeight + `</td>` +
                     `<td class="number">` + o.firstAxleWeightExceededValue + `</td>` +
                     `</tr>`;
-                GVW +=o.firstAxleLegalWeight;
+                GVW += o.firstAxleLegalWeight;
 
                 // second axle
                 tableRows += `<tr>` +
@@ -45,62 +45,62 @@
                     `<td class="number">` + o.secondAxleWeight + `</td>` +
                     `<td class="number">` + o.secondAxleWeightExceededValue + `</td>` +
                     `</tr>`;
-                GVW +=o.secondAxleLegalWeight;
+                GVW += o.secondAxleLegalWeight;
 
-                if(o.thirdAxleWeight){
+                if (o.thirdAxleWeight) {
                     tableRows += `<tr>` +
                         `<td>` + o.thirdAxleType + `</td>` +
                         `<td class="number">` + o.thirdAxleLegalWeight + `</td>` +
                         `<td class="number">` + o.thirdAxleWeight + `</td>` +
                         `<td class="number">` + o.thirdAxleWeightExceededValue + `</td>` +
                         `</tr>`;
-                    GVW +=o.thirdAxleLegalWeight;
+                    GVW += o.thirdAxleLegalWeight;
                 }
 
-                if(o.fourthAxleWeight){
+                if (o.fourthAxleWeight) {
                     tableRows += `<tr>` +
                         `<td>` + o.fourthAxleType + `</td>` +
                         `<td class="number">` + o.fourthAxleLegalWeight + `</td>` +
                         `<td class="number">` + o.fourthAxleWeight + `</td>` +
                         `<td class="number">` + o.fourthAxleWeightExceededValue + `</td>` +
                         `</tr>`;
-                    GVW +=o.fourthAxleLegalWeight;
+                    GVW += o.fourthAxleLegalWeight;
                 }
 
-                if(o.fifthAxleWeight){
+                if (o.fifthAxleWeight) {
                     tableRows += `<tr>` +
                         `<td>` + o.fifthAxleType + `</td>` +
                         `<td class="number">` + o.fifthAxleLegalWeight + `</td>` +
                         `<td class="number">` + o.fifthAxleWeight + `</td>` +
                         `<td class="number">` + o.fifthAxleWeightExceededValue + `</td>` +
                         `</tr>`;
-                    GVW +=o.fifthAxleLegalWeight;
+                    GVW += o.fifthAxleLegalWeight;
                 }
 
-                if(o.sixthAxleWeight){
+                if (o.sixthAxleWeight) {
                     tableRows += `<tr>` +
                         `<td>` + o.sixthAxleType + `</td>` +
                         `<td class="number">` + o.sixthAxleLegalWeight + `</td>` +
                         `<td class="number">` + o.sixthAxleWeight + `</td>` +
                         `<td class="number">` + o.sixthAxleWeightExceededValue + `</td>` +
                         `</tr>`;
-                    GVW +=o.sixthAxleLegalWeight;
+                    GVW += o.sixthAxleLegalWeight;
                 }
 
-                if(o.seventhAxleWeight){
+                if (o.seventhAxleWeight) {
                     tableRows += `<tr>` +
                         `<td>` + o.seventhAxleType + `</td>` +
                         `<td class="number">` + o.seventhAxleLegalWeight + `</td>` +
                         `<td class="number">` + o.seventhAxleWeight + `</td>` +
                         `<td class="number">` + o.seventhAxleWeightExceededValue + `</td>` +
                         `</tr>`;
-                    GVW +=o.seventhAxleLegalWeight;
+                    GVW += o.seventhAxleLegalWeight;
                 }
 
 
                 tableRows += `<tr>` +
                     `<td>GVW</td>` +
-                    `<td class="number">`+GVW+`</td>` +
+                    `<td class="number">` + GVW + `</td>` +
                     `<td class="number">` + o.vehicleGVM + `</td>` +
                     `<td class="number">` + o.gvwExceededWeight + `</td>` +
                     `</tr>`;
@@ -136,8 +136,7 @@
                     if (aData.length === k)
                         $(nRow).children('td:eq(-1)').html(actions(aData[i]));
                     else if (k === 1)
-                        aData[k] === 2 ?
-                            $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x red"></i>') :
+                        aData[k] === "2" ? $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x red"></i>') :
                             $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x green"></i>');
                 });
 

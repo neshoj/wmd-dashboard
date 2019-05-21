@@ -55,7 +55,7 @@ public class DashboardStatistics {
     }
 
     public void setPercentage() {
-        this.percentageOverload = (overloadVehicles * 100)/ weighedVehicles;
-        this.percentageWithinLimit = 100 - percentageOverload;
+        this.percentageOverload = overloadVehicles != 0 ? (overloadVehicles * 100)/ weighedVehicles : 0;
+        this.percentageWithinLimit = percentageOverload != 0 ?100 - percentageOverload : 0;
     }
 }
