@@ -41,7 +41,7 @@
         // // Connect to back office
         // connect();
 
-        let timerId = setInterval(() =>  oTable.fnDraw(), 5000);
+        let timerId = setInterval(() =>  oTable.fnDraw(), 120000);
 
     });
 })(document, window, jQuery);
