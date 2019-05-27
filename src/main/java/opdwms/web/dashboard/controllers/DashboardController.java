@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -84,35 +82,27 @@ public class DashboardController {
 
     private Map<String, Object> fetchLineChartData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
-            Date parse = sdf.parse(new LocalDate().minusMonths(6).withDayOfMonth(1).toString("YYYY-MM-DD"));
+        Date parse = new LocalDate().minusMonths(6).withDayOfMonth(1).toDate();
+        Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD, parse);
+        Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN, parse);
 
-            Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD, parse);
-            Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN, parse);
+        ArrayList<ChartDataPie> pieChartData = new ArrayList<>();
+        pieChartData.add(new ChartDataPie("Within Limit", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN)));
+        pieChartData.add(new ChartDataPie("Within tolerance", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN_PERMISSIBLE)));
+        pieChartData.add(new ChartDataPie("Overloads", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_OVERLOAD)));
 
-            ArrayList<ChartDataPie> pieChartData = new ArrayList<>();
-            pieChartData.add(new ChartDataPie("Within Limit", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN)));
-            pieChartData.add(new ChartDataPie("Within tolerance", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN_PERMISSIBLE)));
-            pieChartData.add(new ChartDataPie("Overloads", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_OVERLOAD)));
+        List<CencusBarChartData> censusBarChartData = weighbridgeTransactionsRepository.fetchAxleConfigurationCensus();
 
-            List<CencusBarChartData> censusBarChartData = weighbridgeTransactionsRepository.fetchAxleConfigurationCensus();
+        Long clearTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.CLEARED_TAGS);
+        Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.OPEN_TAGS);
 
-            Long clearTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.CLEARED_TAGS);
-            Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.OPEN_TAGS);
-
-            map.put("censusBarChartData", censusBarChartData);
-            map.put("pieChartData", pieChartData);
-            map.put("withinLimit", withinLimitData);
-            map.put("overload", overloadData);
-            map.put("clearTags", clearTags);
-            map.put("pendingTags", pendingTags);
-            map.put("status", "00");
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        map.put("censusBarChartData", censusBarChartData);
+        map.put("pieChartData", pieChartData);
+        map.put("withinLimit", withinLimitData);
+        map.put("overload", overloadData);
+        map.put("clearTags", clearTags);
+        map.put("pendingTags", pendingTags);
+        map.put("status", "00");
         return map;
     }
 

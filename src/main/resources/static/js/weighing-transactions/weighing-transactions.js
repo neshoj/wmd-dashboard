@@ -24,7 +24,7 @@
                 // $('#destination').text(o.destination);
                 $('#weighbridge').text(o.weighbridge);
 
-                $('#action').text(o.actionTaken === null ? 'N/A' : o.operator);
+                $('#action').text(o.actionTaken ? 'N/A' : o.actionTaken);
 
                 let GVW = 0, tableRows = '';
                 $("#tblAxleWeights tbody").empty();
