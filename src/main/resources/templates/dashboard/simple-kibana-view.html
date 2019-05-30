@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/dashboard-layout}"
+>
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Dashboard</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{theme/lib/chartjs/Chart.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{theme/lib/formvalidation/formValidation.min.css}"/>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <iframe src="http://localhost:5601/app/kibana#/dashboard/623f34d0-821e-11e9-ae4e-cd818dff4a9f?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2019-02-01T21:00:00.000Z',to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:18,i:'1',w:24,x:0,y:0),id:dca3fba0-8211-11e9-ae4e-cd818dff4a9f,panelIndex:'1',type:visualization,version:'7.1.1'),(embeddableConfig:(),gridData:(h:18,i:'3',w:48,x:0,y:45),id:f85da560-821d-11e9-ae4e-cd818dff4a9f,panelIndex:'3',type:visualization,version:'7.1.1'),(embeddableConfig:(),gridData:(h:12,i:'5',w:48,x:0,y:33),id:cd2a8890-821d-11e9-ae4e-cd818dff4a9f,panelIndex:'5',type:visualization,version:'7.1.1'),(embeddableConfig:(),gridData:(h:15,i:'6',w:48,x:0,y:18),id:b2234ed0-8225-11e9-ae4e-cd818dff4a9f,panelIndex:'6',type:visualization,version:'7.1.1'),(embeddableConfig:(),gridData:(h:18,i:'7',w:24,x:24,y:0),id:a74b8a50-8224-11e9-ae4e-cd818dff4a9f,panelIndex:'7',type:visualization,version:'7.1.1'),(embeddableConfig:(),gridData:(h:10,i:'8',w:48,x:0,y:63),id:f6ecf0d0-823d-11e9-ae4e-cd818dff4a9f,panelIndex:'8',type:visualization,version:'7.1.1')),query:(language:kuery,query:''),timeRestore:!f,title:'Simple+Dashboard',viewMode:view)"
+                    style="background: #555;"
+                    height="800" width="1340"></iframe>
+
+        </div>
+    </div>
+
+
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{theme/js/main.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/formvalidation/formValidation.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery-flot/jquery.flot.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery-flot/jquery.flot.pie.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery-flot/jquery.flot.resize.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery-flot/plugins/jquery.flot.orderBars.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery-flot/plugins/curvedLines.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery.sparkline/jquery.sparkline.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery-ui/jquery-ui.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/jquery.blockUI.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/countup/countUp.min.js}"
+            type="text/javascript"></script>
+    <script th:src="@{theme/lib/chartjs/Chart.min.js}"
+            type="text/javascript"></script>
+
+    <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{js/dashboard/default-view.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+
+        let chartData = /*[[${chartData}]]*/'chartData';
+
+        /*]]>*/
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //initialize the javascript
+            App.init();
+            App.dashboard();
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

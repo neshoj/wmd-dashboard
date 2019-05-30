@@ -22584,3 +22584,7 @@ table{
     width: 100% !important;
 }
 
+iframe {
+    border: none;
+    background-color: #555;
+}

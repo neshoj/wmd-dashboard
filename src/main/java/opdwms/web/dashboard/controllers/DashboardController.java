@@ -145,4 +145,9 @@ public class DashboardController {
     }
 
 
+    @RequestMapping("/simple-kibana-view")
+    public ModelAndView simpleKibanaView(HttpServletRequest request) throws Exception {
+        View view = new View("dashboard/simple-kibana-view");
+        return view.getView();
+    }
 }
