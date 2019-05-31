@@ -12,10 +12,10 @@ import java.util.Date;
 @Table(name = "virtual_stations_transactions")
 public class VirtualStationTransactions implements Serializable {
 
-    static final String UNKNOWN_STATE = "UNKNOWN STATE";
+    public static final String UNKNOWN_STATE = "UNKNOWN STATE";
     static final String WITHIN_ALLOWED_LIMIT = "WITHIN ALLOWED LIMIT";
-    static final String WITHIN_TOLERABLE_OVERLOAD = "WITHIN TOLERABLE OVERLOAD";
-    static final String ABOVE_TOLERABLE_OVERLOAD = "ABOVE TOLERABLE OVERLOAD";
+    public static final String WITHIN_TOLERABLE_OVERLOAD = "WITHIN TOLERABLE OVERLOAD";
+    public static final String ABOVE_TOLERABLE_OVERLOAD = "ABOVE TOLERABLE OVERLOAD";
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -106,26 +106,25 @@ public class VirtualStationTransactions implements Serializable {
     @Column(name = "ninth_axle_load", precision = 11, scale = 2)
     private BigDecimal ninthAxleLoad;
 
-
     @Column(name = "front_plate_binary_image")
     @Lob
     private Blob frontPlateBinaryImage;
 
-    @Column(name = "back_plate_binary_image")
-    @Lob
-    private Blob backPlateBinaryImage;
-
-    @Column(name = "detail_image")
-    @Lob
-    private Blob detailImage;
-
-    @Column(name = "detail_image_back")
-    @Lob
-    private Blob detailImageBack;
-
-    @Column(name = "overviewImage")
-    @Lob
-    private Blob overviewImage;
+//    @Column(name = "back_plate_binary_image")
+//    @Lob
+//    private Blob backPlateBinaryImage;
+//
+//    @Column(name = "detail_image")
+//    @Lob
+//    private Blob detailImage;
+//
+//    @Column(name = "detail_image_back")
+//    @Lob
+//    private Blob detailImageBack;
+//
+//    @Column(name = "overviewImage")
+//    @Lob
+//    private Blob overviewImage;
 
     @Column(name = "flag", length = 30)
     private String flag;
@@ -359,19 +358,6 @@ public class VirtualStationTransactions implements Serializable {
         return this;
     }
 
-    public Blob getBackplateBinaryImage() {
-        return backPlateBinaryImage;
-    }
-
-    public VirtualStationTransactions setBackplateBinaryImage(byte[] backplateBinaryImage) {
-        try {
-            this.backPlateBinaryImage = new SerialBlob(backplateBinaryImage);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
-
     public Blob getFrontPlateBinaryImage() {
         return frontPlateBinaryImage;
     }
@@ -385,44 +371,58 @@ public class VirtualStationTransactions implements Serializable {
         return this;
     }
 
-    public Blob getDetailImage() {
-        return detailImage;
-    }
 
-    public VirtualStationTransactions setDetailImage(byte[] detailImage) {
-        try {
-            this.detailImage = new SerialBlob(detailImage);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
-
-    public Blob getDetailImageBack() {
-        return detailImageBack;
-    }
-
-    public VirtualStationTransactions setDetailImageBack(byte[] detailImageBack) {
-        try {
-            this.detailImageBack = new SerialBlob(detailImageBack);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
-
-    public Blob getOverviewImage() {
-        return overviewImage;
-    }
-
-    public VirtualStationTransactions setOverviewImage(byte[] overviewImage) {
-        try {
-            this.overviewImage = new SerialBlob(overviewImage);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+//
+//    public Blob getBackplateBinaryImage() {
+//        return backPlateBinaryImage;
+//    }
+//
+//    public VirtualStationTransactions setBackplateBinaryImage(byte[] backplateBinaryImage) {
+//        try {
+//            this.backPlateBinaryImage = new SerialBlob(backplateBinaryImage);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return this;
+//    }
+//    public Blob getDetailImage() {
+//        return detailImage;
+//    }
+//
+//    public VirtualStationTransactions setDetailImage(byte[] detailImage) {
+//        try {
+//            this.detailImage = new SerialBlob(detailImage);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return this;
+//    }
+//
+//    public Blob getDetailImageBack() {
+//        return detailImageBack;
+//    }
+//
+//    public VirtualStationTransactions setDetailImageBack(byte[] detailImageBack) {
+//        try {
+//            this.detailImageBack = new SerialBlob(detailImageBack);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return this;
+//    }
+//
+//    public Blob getOverviewImage() {
+//        return overviewImage;
+//    }
+//
+//    public VirtualStationTransactions setOverviewImage(byte[] overviewImage) {
+//        try {
+//            this.overviewImage = new SerialBlob(overviewImage);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return this;
+//    }
 
     public String getFlag() {
         return flag;
