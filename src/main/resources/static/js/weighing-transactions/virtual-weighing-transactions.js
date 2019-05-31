@@ -11,105 +11,39 @@
 
         let ui = $(".edit-view"), oTable,
             fnEdit = function (o) {
-                $('#ticket-no').text(o.ticketNo);
-                $('#ticket-date').text(moment(o.transactionDate).format("dddd, MMMM Do YYYY HH:mm A"));
+                $('#ticket-no').text(o.virtualStationTransactionId);
+                $('#ticket-date').text(moment(o.dateTime).format("dddd, MMMM Do YYYY HH:mm A"));
 
-                $('#vehicle-no').text(o.vehicleNo);
-                $('#axle-class').text(o.axleConfiguration);
-                $('#gvw').text(o.vehicleGVM);
-                $('#operator').text(o.operator === null ? 'N/A' : o.operator);
-                $('#shift').text(o.operatorShift);
-                // $('#cargo').text(o.cargo);
-                // $('#origin').text(o.origin);
-                // $('#destination').text(o.destination);
-                $('#weighbridge').text(o.weighbridge);
+                $('#vehicle-no').text(o.frontPlate);
+                $('#axle-class').text(o.axleDescription);
+                $('#gvw').text(o.totalWeight);
+                $('#speed').text(o.velocity);
+                $('#verdict').text(o.flag);
 
-                $('#action').text(o.actionTaken ? 'N/A' : o.actionTaken);
+                $('#action').text(o.virtualStation);
 
                 let GVW = 0, tableRows = '';
                 $("#tblAxleWeights tbody").empty();
 
                 // Populate table data
                 tableRows = `<tr>` +
-                    `<td>` + o.firstAxleType + `</td>` +
-                    `<td class="number">` + o.firstAxleLegalWeight + `</td>` +
-                    `<td class="number">` + o.firstAxleWeight + `</td>` +
-                    `<td class="number">` + o.firstAxleWeightExceededValue + `</td>` +
+                    `<td class="number">` + o.firstAxleLoad + `</td>` +
+                    `<td class="number">` + o.secondAxleLoad + `</td>` +
+                    `<td class="number">` + o.thirdAxleLoad + `</td>` +
+                    `<td class="number">` + o.fourthAxleLoad + `</td>` +
+                    `<td class="number">` + o.fifthAxleLoad + `</td>` +
+                    `<td class="number">` + o.sixthAxleLoad + `</td>` +
+                    `<td class="number">` + o.seventhAxleLoad + `</td>` +
+                    `<td class="number">` + o.eighthAxleLoad + `</td>` +
+                    `<td class="number">` + o.ninthAxleLoad + `</td>` +
                     `</tr>`;
-                GVW += o.firstAxleLegalWeight;
 
-                // second axle
-                tableRows += `<tr>` +
-                    `<td>` + o.secondAxleType + `</td>` +
-                    `<td class="number">` + o.secondAxleLegalWeight + `</td>` +
-                    `<td class="number">` + o.secondAxleWeight + `</td>` +
-                    `<td class="number">` + o.secondAxleWeightExceededValue + `</td>` +
-                    `</tr>`;
-                GVW += o.secondAxleLegalWeight;
-
-                if (o.thirdAxleWeight) {
-                    tableRows += `<tr>` +
-                        `<td>` + o.thirdAxleType + `</td>` +
-                        `<td class="number">` + o.thirdAxleLegalWeight + `</td>` +
-                        `<td class="number">` + o.thirdAxleWeight + `</td>` +
-                        `<td class="number">` + o.thirdAxleWeightExceededValue + `</td>` +
-                        `</tr>`;
-                    GVW += o.thirdAxleLegalWeight;
-                }
-
-                if (o.fourthAxleWeight) {
-                    tableRows += `<tr>` +
-                        `<td>` + o.fourthAxleType + `</td>` +
-                        `<td class="number">` + o.fourthAxleLegalWeight + `</td>` +
-                        `<td class="number">` + o.fourthAxleWeight + `</td>` +
-                        `<td class="number">` + o.fourthAxleWeightExceededValue + `</td>` +
-                        `</tr>`;
-                    GVW += o.fourthAxleLegalWeight;
-                }
-
-                if (o.fifthAxleWeight) {
-                    tableRows += `<tr>` +
-                        `<td>` + o.fifthAxleType + `</td>` +
-                        `<td class="number">` + o.fifthAxleLegalWeight + `</td>` +
-                        `<td class="number">` + o.fifthAxleWeight + `</td>` +
-                        `<td class="number">` + o.fifthAxleWeightExceededValue + `</td>` +
-                        `</tr>`;
-                    GVW += o.fifthAxleLegalWeight;
-                }
-
-                if (o.sixthAxleWeight) {
-                    tableRows += `<tr>` +
-                        `<td>` + o.sixthAxleType + `</td>` +
-                        `<td class="number">` + o.sixthAxleLegalWeight + `</td>` +
-                        `<td class="number">` + o.sixthAxleWeight + `</td>` +
-                        `<td class="number">` + o.sixthAxleWeightExceededValue + `</td>` +
-                        `</tr>`;
-                    GVW += o.sixthAxleLegalWeight;
-                }
-
-                if (o.seventhAxleWeight) {
-                    tableRows += `<tr>` +
-                        `<td>` + o.seventhAxleType + `</td>` +
-                        `<td class="number">` + o.seventhAxleLegalWeight + `</td>` +
-                        `<td class="number">` + o.seventhAxleWeight + `</td>` +
-                        `<td class="number">` + o.seventhAxleWeightExceededValue + `</td>` +
-                        `</tr>`;
-                    GVW += o.seventhAxleLegalWeight;
-                }
-
-
-                tableRows += `<tr>` +
-                    `<td>GVW</td>` +
-                    `<td class="number">` + GVW + `</td>` +
-                    `<td class="number">` + o.vehicleGVM + `</td>` +
-                    `<td class="number">` + o.gvwExceededWeight + `</td>` +
-                    `</tr>`;
 
                 $("#tblAxleWeights tbody").append(tableRows);
 
-                $('#print-btn').html(
-                    '<a class="btn btn-danger btn-space" target="_blank" href="weighing-transactions/' + o.id + '" ><i class="fa fa-print"></i> Print Ticket </a>'
-                );
+                // $('#print-btn').html(
+                //     '<a class="btn btn-danger btn-space" target="_blank" href="weighing-transactions/' + o.id + '" ><i class="fa fa-print"></i> Print Ticket </a>'
+                // );
 
                 ui.modal("show");
             },

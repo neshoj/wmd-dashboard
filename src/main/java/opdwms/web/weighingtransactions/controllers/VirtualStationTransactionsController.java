@@ -49,7 +49,7 @@ public class VirtualStationTransactionsController {
                 //Set-up data
                 datatable
                         .select("str(a.dateTime; 'YYYY-MM-DD HH24:MI'), a.flag, a.virtualStation, " +
-                                "a.frontPlate, a.totalWeight, a.percentageOverload, a.axleConfiguration, a.velocity, a.id ")
+                                "a.frontPlate, a.totalWeight, a.axleConfiguration, a.velocity, a.id ")
                         .from("VirtualStationTransactions a");
 
                 return view.sendJSON(datatable.showTable());

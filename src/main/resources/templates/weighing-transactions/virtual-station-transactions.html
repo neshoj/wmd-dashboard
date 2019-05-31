@@ -42,7 +42,6 @@
                                     <th>V. Station</th>
                                     <th>Reg. No</th>
                                     <th>GVW</th>
-                                    <th>% Overload</th>
                                     <th>Axle Class</th>
                                     <th>Speed (Km/h)</th>
                                     <th>Action</th>
@@ -100,13 +99,9 @@
                                             <tr>
                                                 <th>VEHICLE NO.</th>
                                                 <th>AXLE CLASS</th>
-                                                <th>GVW</th>
-                                                <th>OPERATOR</th>
-                                                <th>SHIFT</th>
-                                                <!--<th>CARGO</th>-->
-                                                <!--<th>ORIGIN</th>-->
-                                                <!--<th>DESTINATION</th>-->
-                                                <th>WEIGHBRIDGE</th>
+                                                <th  class="number" >GVW</th>
+                                                <th  class="number" >SPEED</th>
+                                                <th>VERDICT</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -114,12 +109,8 @@
                                                 <td id="vehicle-no">-</td>
                                                 <td id="axle-class">-</td>
                                                 <td class="number" id="gvw">0</td>
-                                                <td id="operator">-</td>
-                                                <td id="shift">-</td>
-                                                <!--<td id="cargo">-</td>-->
-                                                <!--<td id="origin">-</td>-->
-                                                <!--<td id="destination">-</td>-->
-                                                <td id="weighbridge"></td>
+                                                <td  class="number"  id="speed">-</td>
+                                                <td id="verdict">-</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -136,10 +127,15 @@
                                         <table id="tblAxleWeights" class="table table-condensed table-hover table-bordered table-striped">
                                             <thead>
                                             <tr>
-                                                <th>Axle Group</th>
-                                                <th>Legal Weight</th>
-                                                <th>Weight</th>
-                                                <th>Overload</th>
+                                                <th>1st Axle</th>
+                                                <th>2nd Axle</th>
+                                                <th>3rd Axle</th>
+                                                <th>4th Axle</th>
+                                                <th>5th Axle</th>
+                                                <th>6th Axle</th>
+                                                <th>7th Axle</th>
+                                                <th>8th Axle</th>
+                                                <th>9th Axle</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -153,7 +149,7 @@
                                 <div class="col-md-12">
                                     <table class="invoice-details">
                                         <tr>
-                                            <th style="width:60%">Action</th>
+                                            <th style="width:60%">Weighbridge Stations</th>
                                         </tr>
                                         <tr>
                                             <td class="description" id="action">-</td>
