@@ -1,11 +1,8 @@
 package opdwms.web.weighingtransactions.entities;
 
 import javax.persistence.*;
-import javax.sql.rowset.serial.SerialBlob;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.Date;
 
 @Entity
@@ -13,7 +10,7 @@ import java.util.Date;
 public class VirtualStationTransactions implements Serializable {
 
     public static final String UNKNOWN_STATE = "UNKNOWN STATE";
-    static final String WITHIN_ALLOWED_LIMIT = "WITHIN ALLOWED LIMIT";
+    public static final String WITHIN_ALLOWED_LIMIT = "WITHIN ALLOWED LIMIT";
     public static final String WITHIN_TOLERABLE_OVERLOAD = "WITHIN TOLERABLE OVERLOAD";
     public static final String ABOVE_TOLERABLE_OVERLOAD = "ABOVE TOLERABLE OVERLOAD";
 
@@ -105,10 +102,10 @@ public class VirtualStationTransactions implements Serializable {
     //    ninth axle
     @Column(name = "ninth_axle_load", precision = 11, scale = 2)
     private BigDecimal ninthAxleLoad;
-
-    @Column(name = "front_plate_binary_image")
-    @Lob
-    private Blob frontPlateBinaryImage;
+//
+//    @Column(name = "front_plate_binary_image")
+//    @Lob
+//    private Blob frontPlateBinaryImage;
 
 //    @Column(name = "back_plate_binary_image")
 //    @Lob
@@ -358,18 +355,18 @@ public class VirtualStationTransactions implements Serializable {
         return this;
     }
 
-    public Blob getFrontPlateBinaryImage() {
-        return frontPlateBinaryImage;
-    }
-
-    public VirtualStationTransactions setFrontPlateBinaryImage(byte[] frontPlateBinaryImage) {
-        try {
-            this.frontPlateBinaryImage = new SerialBlob(frontPlateBinaryImage);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+//    public Blob getFrontPlateBinaryImage() {
+//        return frontPlateBinaryImage;
+//    }
+//
+//    public VirtualStationTransactions setFrontPlateBinaryImage(byte[] frontPlateBinaryImage) {
+//        try {
+//            this.frontPlateBinaryImage = new SerialBlob(frontPlateBinaryImage);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return this;
+//    }
 
 
 //
