@@ -136,7 +136,7 @@
                     if (aData.length === k)
                         $(nRow).children('td:eq(-1)').html(actions(aData[i]));
                     else if (k === 1)
-                        aData[k] === "2" ? $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x red"></i>') :
+                        aData[k] === 'ABOVE TOLERABLE OVERLOAD' ? $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x red"></i>') :
                             $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x green"></i>');
                 });
 

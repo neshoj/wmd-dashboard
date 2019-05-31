@@ -46,7 +46,7 @@ public class VirtualStationTransactions implements Serializable {
     @Column(name = "total_weight", precision = 11, scale = 2)
     private BigDecimal totalWeight;
 
-    @Column(name = "limit", precision = 11, scale = 2)
+    @Column(name = "weight_limit", precision = 11, scale = 2)
     private BigDecimal weightLimit;
 
     @Column(name = "percentage_overload", precision = 11, scale = 2)
