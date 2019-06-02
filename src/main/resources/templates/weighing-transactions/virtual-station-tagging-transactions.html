@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Virtual Station Tagging Transaction </title>
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title"> Transactions </h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/virtual-station-tagging-transactions}">Transactions</a></li>
+            <li class="active" th:text="#{page.weigh.virtual.tagging.transactions}"></li>
+        </ol>
+    </div>
+
+    <div class="main-content">
+
+        <div class="xs-mt-0 xs-mb-5">
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div id="active" class="tab-pane active cont active table-responsive noSwipe">
+
+                            <table class="table table-striped table-hover table-fw-widget table-active">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>V. Station</th>
+                                    <th>Reg. No</th>
+                                    <th>GVW</th>
+                                    <th>Axle Class</th>
+                                    <th>Speed (Km/h)</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+
+
+<th:block layout:fragment="modals">
+    <div class="modal modal-colored-header modal-colored-header-danger fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-full-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.ticket.weighing}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+                        <div class="invoice">
+                            <div class="row invoice-header">
+                                <div class="col-xs-4">
+                                    <div class="invoice-logo">
+                                        <img th:src="@{/theme/img/logo.png}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-8 invoice-order"><span class="invoice-id">Ticket No# <span
+                                        id="ticket-no">-</span></span><span
+                                        class="invoice-date" id="ticket-date">--/--/----</span></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">Ticket Details</div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-condensed table-hover table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>VEHICLE NO.</th>
+                                                <th>AXLE CLASS</th>
+                                                <th  class="number" >GVW</th>
+                                                <th  class="number" >SPEED</th>
+                                                <th>VERDICT</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td id="vehicle-no">-</td>
+                                                <td id="axle-class">-</td>
+                                                <td class="number" id="gvw">0</td>
+                                                <td  class="number"  id="speed">-</td>
+                                                <td id="verdict">-</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <div class="panel-title">Axle Weight Details</div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table id="tblAxleWeights" class="table table-condensed table-hover table-bordered table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>1st Axle</th>
+                                                <th>2nd Axle</th>
+                                                <th>3rd Axle</th>
+                                                <th>4th Axle</th>
+                                                <th>5th Axle</th>
+                                                <th>6th Axle</th>
+                                                <th>7th Axle</th>
+                                                <th>8th Axle</th>
+                                                <th>9th Axle</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="invoice-details">
+                                        <tr>
+                                            <th style="width:60%">Weighbridge Stations</th>
+                                        </tr>
+                                        <tr>
+                                            <td class="description" id="action">-</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row invoice-company-info">
+                                <div class="col-sm-3 phone">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Front View</li>
+                                        <li><span class="fa fa-car fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3 email">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Rear View</li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3 phone">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Plate Image</li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-3 email">
+                                    <ul class="list-unstyled text-center">
+                                        <li>Plate Image</li>
+                                        <li><span class="fa fa-truck-moving fa-4x"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row invoice-footer">
+                                <div class="col-md-12" id="print-btn">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" type="button" class="btn btn-space btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.js}"></script>
+    <script th:src="@{theme/lib/moment.js/min/moment.min.js}"></script>
+    <script th:src="@{js/weighing-transactions/virtual-weighing-transactions.js}"></script>
+</th:block>
+
+</body>
+</html>

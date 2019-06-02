@@ -59,7 +59,12 @@
                             <li><a th:href="@{/tagging-open-transactions}">Tagged Vehicles</a></li>
                         </ul>
                     </li>
-                    <li><a th:href="@{/virtual-station-transactions}">Virtual Station</a></li>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Virtual Stations<span class="angle-down s7-angle-down"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a th:href="@{/virtual-station-transactions}"> Transactions </a></li>
+                            <li><a th:href="@{/virtual-station-tagging-transactions}"> Tagged Vehicles </a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav am-icons-nav">
                     <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-bell"></span><span class="indicator"></span></a>

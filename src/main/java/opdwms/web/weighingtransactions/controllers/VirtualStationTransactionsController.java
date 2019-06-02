@@ -72,4 +72,31 @@ public class VirtualStationTransactionsController {
         }
         return map;
     }
+
+
+    @RequestMapping("/virtual-station-tagging-transactions")
+    public ModelAndView virtualStationTaggingTransactions(HttpServletRequest request) {
+        View view = new View("weighing-transactions/virtual-station-tagging-transactions");
+        // Fetch the table data
+        if (AjaxUtils.isAjaxRequest(request)) {
+
+            String action = request.getParameter("action");
+            //When creating a record
+            if (null != action && "fetch-record".equals(action)) {
+                return view.sendJSON(fetchDetailedTransactionData(request));
+
+            } else {
+                //Set-up data
+                datatable
+                        .select("str(a.dateTime; 'YYYY-MM-DD HH24:MI'), a.flag, a.virtualStation, " +
+                                "a.frontPlate, a.totalWeight, a.axleConfiguration, a.velocity, a.id ")
+                        .from("VirtualStationTransactions a ")
+                        .where("a.flag = :flag")
+                        .setParameter("flag", VirtualStationTransactions.ABOVE_TOLERABLE_OVERLOAD );
+
+                return view.sendJSON(datatable.showTable());
+            }
+        }
+        return view.getView();
+    }
 }
