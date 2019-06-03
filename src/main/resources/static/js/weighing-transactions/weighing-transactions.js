@@ -111,6 +111,8 @@
                     '<a class="btn btn-danger btn-space" target="_blank" href="weighing-transactions/' + o.id + '" ><i class="fa fa-print"></i> Print Ticket </a>'
                 );
 
+
+
                 ui.modal("show");
             },
             actions = function (o) {

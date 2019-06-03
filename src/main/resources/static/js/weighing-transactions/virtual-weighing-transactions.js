@@ -10,6 +10,12 @@
     $(document).ready(function ($) {
 
         let ui = $(".edit-view"), oTable,
+            toggleImageDisplayBasedOnImagePresence = function (base64ImageInput) {
+                if (base64ImageInput)
+                    return '<img class=\'img-responsive\' src=\'data:image/jpg;base64, ' + base64ImageInput + '\' />';
+                else
+                    return '<span class="fa fa-truck-moving fa-4x"></span>';
+            },
             fnEdit = function (o) {
                 $('#ticket-no').text(o.virtualStationTransactionId);
                 $('#ticket-date').text(moment(o.dateTime).format("dddd, MMMM Do YYYY HH:mm A"));
@@ -41,6 +47,18 @@
 
                 $("#tblAxleWeights tbody").append(tableRows);
 
+                if (o.frontPlateBinaryImage)
+                    $('.front-lp-image').html(toggleImageDisplayBasedOnImagePresence(o.frontPlateBinaryImage));
+
+                if (o.backPlateBinaryImage)
+                    $('.back-lp-image').html(toggleImageDisplayBasedOnImagePresence(o.backPlateBinaryImage));
+
+                if (o.detailImage)
+                    $('.detail-image').html(toggleImageDisplayBasedOnImagePresence(o.detailImage));
+
+                if (o.detailImageBack)
+                    $('.detail-image-back').html(toggleImageDisplayBasedOnImagePresence(o.detailImageBack));
+
                 // $('#print-btn').html(
                 //     '<a class="btn btn-danger btn-space" target="_blank" href="weighing-transactions/' + o.id + '" ><i class="fa fa-print"></i> Print Ticket </a>'
                 // );
@@ -59,6 +77,7 @@
 
 
             };
+
 
         oTable = utils.dataTable({
             table: $(".table-active"),
