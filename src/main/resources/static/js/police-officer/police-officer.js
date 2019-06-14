@@ -92,6 +92,23 @@
             });
         };
 
+        let $form = $('form', ui);
+        $form.find('[name="firstName"]').bind("keyup change", function () {
+            $(this).val(function (i, v) {
+                return v.toUpperCase();
+            });
+        });
+        $form.find('[name="surname"]').bind("keyup change", function () {
+            $(this).val(function (i, v) {
+                return v.toUpperCase();
+            });
+        });
+        $form.find('[name="policeNo"]').bind("keyup change", function () {
+            $(this).val(function (i, v) {
+                return v.toUpperCase();
+            });
+        });
+
         //Form validation
         $('form', ui)
             .formValidation({

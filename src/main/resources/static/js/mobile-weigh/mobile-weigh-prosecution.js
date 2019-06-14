@@ -1,4 +1,4 @@
-(function($, window){
+(function ($, window) {
     'use strict';
     let token = $("meta[name='_csrf']").attr("content"),
         header = $("meta[name='_csrf_header']").attr("content");
@@ -7,22 +7,23 @@
         xhr.setRequestHeader("Accept", "application/json");
     });
 
-    $(function(){
+    $(function () {
         let ui = $(".edit-view"), panel = $(".wrapper");
-        function fnEdit( o ){
-            $('input[name="id"]', ui).val( o.id );
-            $('input[name="transactionDate"]', ui).val( o.transactionDate );
-            $('input[name="vehicleNo"]', ui).val( o.vehicleNo );
-            $('input[name="transporter"]', ui).val( o.transporter );
-            $('input[name="excessGVW"]', ui).val( o.excessGVW );
-            $('input[name="excessAxleWeight"]', ui).val( o.excessAxleWeight );
-            $('input[name="cargo"]', ui).val( o.cargo );
-            $('input[name="origin"]', ui).val( o.origin );
-            $('input[name="destination"]', ui).val( o.destination );
-            $('textarea[name="action"]', ui).val( o.action );
+
+        function fnEdit(o) {
+            $('input[name="id"]', ui).val(o.id);
+            $('input[name="transactionDate"]', ui).val(o.transactionDate);
+            $('input[name="vehicleNo"]', ui).val(o.vehicleNo);
+            $('input[name="transporter"]', ui).val(o.transporter);
+            $('input[name="excessGVW"]', ui).val(o.excessGVW);
+            $('input[name="excessAxleWeight"]', ui).val(o.excessAxleWeight);
+            $('input[name="cargo"]', ui).val(o.cargo);
+            $('input[name="origin"]', ui).val(o.origin);
+            $('input[name="destination"]', ui).val(o.destination);
+            $('textarea[name="action"]', ui).val(o.action);
             $('input[name="action"]', ui).val("edit");
-        ui.modal('show');
-    }
+            ui.modal('show');
+        }
 
         //When handling a standard table
         let customStandardTableDt = null;
@@ -85,10 +86,10 @@
             refreshTable: () => customStandardTableDt.fnDraw()
         };
 
-        customStandardTable.init( fnEdit );
+        customStandardTable.init(fnEdit);
 
         //When to refresh table info
-        $('[data-action="refresh"]').click( function(){
+        $('[data-action="refresh"]').click(function () {
             setTimeout(function () {
                 utils.standardTable.refreshTable();
             });
@@ -147,29 +148,33 @@
             framework: 'bootstrap',
             excluded: ':disabled',
             fields: {
-                transactionDate: {validators: {notEmpty: {message: 'Transaction Date is required'}}},
+                paymentDate: {validators: {notEmpty: {message: 'Payment Date is required'}}},
                 vehicleNo: {validators: {notEmpty: {message: 'Vehicle No is required'}}},
                 transporter: {validators: {notEmpty: {message: 'Transporter is required'}}},
-                excessGVW: {validators: {notEmpty: {message: 'Excess GVW is required'}}},
+                axleClass: {validators: {notEmpty: {message: 'Transporter is required'}}},
+                excessGVW: {validators: {notEmpty: {message: 'Axle Class is required'}}},
+                prohibitionNo: {validators: {notEmpty: {message: 'Prohibition No is required'}}},
+                expectedAmount: {validators: {notEmpty: {message: 'Expected Amount is required'}}},
+                actualAmount: {validators: {notEmpty: {message: 'Actual Amount is required'}}},
                 excessAxleWeight: {validators: {notEmpty: {message: 'Excess Axle Weight is required'}}},
                 cargo: {validators: {notEmpty: {message: 'Cargo is required'}}},
                 origin: {validators: {notEmpty: {message: 'Origin is required'}}},
                 destination: {validators: {notEmpty: {message: 'Destination is required'}}},
-                description: {validators: {notEmpty: {message: 'Description is required'}}}
+                receiptNo: {validators: {notEmpty: {message: 'Receipt No is required'}}},
+                officer: {validators: {notEmpty: {message: 'Officer No is required'}}}
             }
         }).on('success.form.fv', function (e) {
             e.preventDefault();
             $("form", ui).data('formValidation').resetForm();
             ui.hide();
             utils.http.jsonRequest(panel, $(this).serializeArray())
-                .done( function( o ){
-                    if( o.status === "00"){
-                        utils.alert.success( o.message );
+                .done(function (o) {
+                    if (o.status === "00") {
+                        utils.alert.success(o.message);
                         customStandardTable.refreshTable();
                         ui.modal("hide");
-                    }
-                    else{
-                        utils.alert.error(o.message, function(){
+                    } else {
+                        utils.alert.error(o.message, function () {
                             ui.show();
                         });
                     }
@@ -177,8 +182,8 @@
         });
 
         //House keep
-        ui.on('hidden.bs.modal', function(){
-            utils.houseKeep( ui );
+        ui.on('hidden.bs.modal', function () {
+            utils.houseKeep(ui);
             $("form", ui).data('formValidation').resetForm();
             //always have this default action
             $('input[name="action"]', ui).val('new');
