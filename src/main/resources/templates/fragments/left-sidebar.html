@@ -33,7 +33,7 @@
                     </ul>
                 </li>
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations', '/axle-classification')}">
+                    th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations', '/axle-classification', '/police-officers ')}">
                     <a th:href="@{/weighbridge-stations}"><i class="icon s7-config"></i><span>Setup</span></a>
                     <ul class="sub-menu">
                         <li th:classappend="${@viewTags.isActiveMenu('/weighbridge-stations')}"><a
@@ -41,6 +41,9 @@
                         </li>
                         <li th:classappend="${@viewTags.isActiveMenu('/axle-classification')}"><a
                                 th:href="@{/axle-classification}">Axle Classification</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/police-officers')}"><a
+                                th:href="@{/police-officers}">Police Officers</a>
                         </li>
                     </ul>
                 </li>
@@ -52,6 +55,18 @@
                             Groups</a>
                         </li>
                         <li th:classappend="${@viewTags.isActiveMenu('/users')}"><a th:href="@{/users}">Users</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="parent"
+                    th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-arrest','/mobile-weigh-prosecution')}">
+                    <a th:href="@{/mobile-weigh-arrest}"><i class="icon s7-phone"></i><span> Mobile </span></a>
+                    <ul class="sub-menu">
+                        <li th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-arrest')}">
+                            <a th:href="@{/mobile-weigh-arrest}"> Mobile Weigh Arrest </a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-prosecution')}">
+                            <a th:href="@{/mobile-weigh-prosecution}"> Mobile Weigh Prosecution </a>
                         </li>
                     </ul>
                 </li>

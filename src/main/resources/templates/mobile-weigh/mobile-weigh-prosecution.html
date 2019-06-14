@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>OPD-WMS &middot; Mobile Weigh Prosecution</title>
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{theme/lib/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.css}"/>
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title"> Mobile Weigh Prosecution </h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/mobile-weigh-arrest}">Mobile</a></li>
+            <li class="active" th:text="#{page.mobile-weigh.prosecution}"></li>
+        </ol>
+    </div>
+
+
+    <div class="main-content">
+        <div class="xs-mt-0 xs-mb-5">
+            <button type="button" class="btn btn-rounded btn-space btn-success" data-toggle="modal"
+                    data-target=".edit-view"><i class="icon icon-left s7-plus"></i> Add New
+            </button>
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-tabs card-view">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="tab-content" id="reason-codes-tab-content">
+
+                                <div id="active" class="tab-pane  active fade in" role="tabpanel">
+                                    <div class="table-wrap">
+
+                                        <div class="table-responsive">
+                                            <table id="datable_active"
+                                                   class="table-records table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Payment Date</th>
+                                                    <th>Vehicle No</th>
+                                                    <th>Transporter</th>
+                                                    <th>Expected Amnt</th>
+                                                    <th>Actual Amnt</th>
+                                                    <th>Axle Class</th>
+                                                    <th>Receipt No</th>
+                                                    <th>Police ID</th>
+                                                    <th>Cargo</th>
+                                                    <th>Origin</th>
+                                                    <th>Destination</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--End Active Table-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</th:block>
+
+<th:block layout:fragment="modals">
+
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.mobile-weigh.prosecution}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Transporter </label>
+                                    <input type="text" name="transporter" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Axle Class </label>
+                                    <input type="text" name="axleClass" class="form-control" placeholder="2A">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Excess Axle Weight </label>
+                                    <input type="text" name="excessAxleWeight" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Excess GVW </label>
+                                    <input type="text" name="excessGVW" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Vehicle No </label>
+                                    <input type="text" name="vehicleNo" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Prohibition No </label>
+                                    <input type="text" name="prohibitionNo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Expected Amount </label>
+                                    <input type="text" name="expectedAmount" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Actual Amount </label>
+                                    <input type="text" name="actualAmount" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group date">
+                                    <label class="control-label "> Payment Date </label>
+                                    <input type="text" name="paymentDate" class="form-control transactionDate">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Cargo </label>
+                                    <input type="text" name="cargo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Origin </label>
+                                    <input type="text" name="origin" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Destination </label>
+                                    <input type="text" name="destination" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Receipt No </label>
+                                    <input type="text" name="receiptNo" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Officer </label>
+                                    <select class="form-control selectpicker" name="officer">
+                                        <option value=""> Select Officer</option>
+                                        <option th:each="item : ${officers}"
+                                                th:value="${item.id}"
+                                                th:text="${item.firstName +' ' + item.surname + ' (' + item.policeNo + ')'}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="action" value="new"/>
+                        <input type="hidden" name="id" value=""/>
+                        <button type="submit" class="btn btn-success" th:text="#{core.save}"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/app-util.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{/js/mobile-weigh/mobile-weigh-prosecution.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{theme/lib/bootstrap-select/js/bootstrap-select.min.js}"
+            rel="script"
+            type="application/javascript"></script>
+    <script th:src="@{theme/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.min.js}"
+            charset="UTF-8"></script>
+    <script>
+        $('.transactionDate').datepicker({
+            format: 'yyyy-mm-dd',
+            endDate: '0d',
+            autoclose: true
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

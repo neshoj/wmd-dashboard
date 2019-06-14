@@ -1,11 +1,10 @@
-package opdwms.web.weighbridgestations.controllers;
+package opdwms.web.policeofficers.controllers;
 
 import opdwms.core.template.AjaxUtils;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
 import opdwms.web.configs.ReasonCodeServiceInterface;
-import opdwms.web.weighbridgestations.WeighbridgeStationsServiceInterface;
-import opdwms.web.weighbridgestations.WeighbridgeTypesServiceInterface;
+import opdwms.web.policeofficers.PoliceOfficerServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,22 +15,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class WeighbridgeStationsController {
-
-    @Autowired
-    private WeighbridgeStationsServiceInterface entityService;
-    @Autowired
+public class PoliceOfficersControllers {
     private DatatablesInterface dataTable;
-    @Autowired
     private ReasonCodeServiceInterface reasonCodeService;
+    private PoliceOfficerServiceInterface entityService;
 
     @Autowired
-    private WeighbridgeTypesServiceInterface weighbridgeTypesServiceInterface;
+    public PoliceOfficersControllers(DatatablesInterface dataTable,
+                                     ReasonCodeServiceInterface reasonCodeService,
+                                     PoliceOfficerServiceInterface entityService){
+        this.dataTable = dataTable;
+        this.reasonCodeService = reasonCodeService;
+        this.entityService = entityService;
+    }
 
-
-    @RequestMapping(value = "/weighbridge-stations")
+    @RequestMapping(value = "/police-officers")
     public ModelAndView index(HttpServletRequest request) {
-        View view = new View("weighbridge-stations/weighbridges-view");
+        View view = new View("police-officers/police-officers");
         String parentType = (String) request.getSession().getAttribute("_userParentType");
 
         if (AjaxUtils.isAjaxRequest(request)) {
@@ -39,26 +39,15 @@ public class WeighbridgeStationsController {
 
             if (null != action)
                 return handleRequests(request, view);
-
-                //When fetching table data
+            // When fetching table data
             else
                 return fetchTableInfo(request, view);
-
         }
-
         return view
-                .addAttribute("weighbridgetypes", weighbridgeTypesServiceInterface.fetchRecords(request))
                 .addAttribute("reasoncodes", reasonCodeService.fetchRecords())
                 .getView();
     }
 
-    /**
-     * Handle various client requests
-     *
-     * @param request Current Request
-     * @param view    Current view
-     * @return ModelAndView
-     */
     private ModelAndView handleRequests(HttpServletRequest request, View view) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
@@ -97,7 +86,6 @@ public class WeighbridgeStationsController {
                     || "delete".equals(action) || "decline-new".equals(action))
                 map = this.entityService.flagRecords(request);
 
-
         } catch (Exception e) {
             e.printStackTrace();
             map.put("status", "01");
@@ -119,10 +107,9 @@ public class WeighbridgeStationsController {
         Long parentNo = (Long) request.getSession().getAttribute("_userParentNo");
         String parentType = (String) request.getSession().getAttribute("_userParentType");
 
-
         dataTable
-                .select("a.id, a.name, a.stationCode, a.location, a.mobileNo, str(a.createdOn; 'YYYY-MM-DD HH24:MI:SS'), str(a.updatedOn; 'YYYY-MM-DD HH24:MI:SS'), a.id")
-                .from("WeighbridgeStations a ")
+                .select("a.firstName, a.surname, a.policeNo, str(a.createdOn; 'YYYY-MM-DD HH24:MI:SS'), str(a.updatedOn; 'YYYY-MM-DD HH24:MI:SS'), a.id")
+                .from("PoliceOfficers a ")
                 .where("a.flag = :flag ")
                 .setParameter("flag", state);
 

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>OPD-WMS &middot; Mobile Weigh Arrest</title>
+
+    <link rel="stylesheet" type="text/css"
+          th:href="@{theme/lib/bootstrap-datepicker/css/bootstrap-datepicker3.standalone.css}"/>
+</head>
+<body>
+
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title"> Mobile Weigh Arrest </h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/mobile-weigh-arrest}">Mobile</a></li>
+            <li class="active" th:text="#{page.mobile-weigh.arrest}"></li>
+        </ol>
+    </div>
+
+
+    <div class="main-content">
+        <div class="xs-mt-0 xs-mb-5">
+            <button type="button" class="btn btn-rounded btn-space btn-success" data-toggle="modal"
+                    data-target=".edit-view"><i class="icon icon-left s7-plus"></i> Add New
+            </button>
+            <button type="button" class="btn btn-rounded btn-space btn-info" data-action="refresh"><i
+                    class="icon icon-left s7-refresh"></i> Refresh
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-tabs card-view">
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <div class="tab-content" id="reason-codes-tab-content">
+
+                                <div id="active" class="tab-pane  active fade in" role="tabpanel">
+                                    <div class="table-wrap">
+
+                                        <div class="table-responsive">
+                                            <table id="datable_active"
+                                                   class="table-records table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Vehicle No</th>
+                                                    <th>Transporter</th>
+                                                    <th>Excess GVW</th>
+                                                    <th>Excess Axle</th>
+                                                    <th>Cargo</th>
+                                                    <th>Origin</th>
+                                                    <th>Destination</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--End Active Table-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</th:block>
+
+<th:block layout:fragment="modals">
+
+    <div class="modal modal-colored-header modal-colored-header-info fade edit-view"
+         tabindex="-1"
+         role="dialog" aria-labelledby="editViewModal"
+         aria-hidden="true">
+        <div class="modal-dialog custom-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i
+                            class="icon s7-close"></i></button>
+                    <h3 class="modal-title"><span th:text="#{page.mobile-weigh.arrest}"></span></h3>
+                </div>
+                <form autocomplete="off">
+                    <div class="modal-body form">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group date">
+                                    <label class="control-label "> Transaction Date </label>
+                                    <input type="text" name="transactionDate" class="form-control transactionDate">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Vehicle No </label>
+                                    <input type="text" name="vehicleNo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Transporter </label>
+                                    <input type="text" name="transporter" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Excess GVW </label>
+                                    <input type="text" name="excessGVW" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Excess Axle Weight </label>
+                                    <input type="text" name="excessAxleWeight" class="form-control" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Cargo </label>
+                                    <input type="text" name="cargo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Origin </label>
+                                    <input type="text" name="origin" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label "> Destination </label>
+                                    <input type="text" name="destination" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"> Action Taken </label>
+                            <textarea type="text" class="form-control" rows="3" name="description"
+                                      placeholder="Action Taken"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="action" value="new"/>
+                        <input type="hidden" name="id" value=""/>
+                        <button type="submit" class="btn btn-success" th:text="#{core.save}"></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                th:text="#{core.close}"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{/js/app-util.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{/js/mobile-weigh/mobile-weigh-arrest.js}" rel="script" type="application/javascript"></script>
+    <script th:src="@{theme/lib/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+    <script th:src="@{theme/lib/bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.min.js}"
+            charset="UTF-8"></script>
+    <script>
+        $('.transactionDate').datepicker({
+            format: 'yyyy-mm-dd',
+            endDate: '0d',
+            autoclose: true
+        });
+    </script>
+</th:block>
+
+</body>
+</html>
