@@ -14,6 +14,8 @@ import opdwms.web.weighingtransactions.WeighbridgeTransactionsServiceInterface;
 import opdwms.web.weighingtransactions.entities.HSWIMTransaction;
 import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.entities.WeighingTransactions;
+import opdwms.web.weighingtransactions.es.documents.StaticStationTransaction;
+import opdwms.web.weighingtransactions.es.repositories.StaticStationTransactionRepo;
 import opdwms.web.weighingtransactions.repositories.HSWIMTransactionsRepository;
 import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,7 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
     private AxleClassificationRepository axleClassificationRepository;
     private SettingsRepository settingsRepository;
     private SimpMessagingTemplate messagingTemplate;
+    private StaticStationTransactionRepo staticStationTransactionRepo;
 
     @Autowired
     public ProcessingInboundWeighingTransactions(WeighbridgeStationsServiceInterface weighbridgeStationsServiceInterface,
@@ -56,7 +59,8 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
                                                  HSWIMTransactionsRepository hswimTransactionsRepository,
                                                  TaggingTransactionsRepository taggingTransactionsRepository,
                                                  AxleClassificationRepository axleClassificationRepository,
-                                                 SettingsRepository settingsRepository) {
+                                                 SettingsRepository settingsRepository,
+                                                 StaticStationTransactionRepo staticStationTransactionRepo) {
         this.weighbridgeStationsServiceInterface = weighbridgeStationsServiceInterface;
         this.weighbridgeTransactionsServiceInterface = weighbridgeTransactionsServiceInterface;
         this.taggingTransactionsRepository = taggingTransactionsRepository;
@@ -64,6 +68,7 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
         this.messagingTemplate = messagingTemplate;
         this.axleClassificationRepository = axleClassificationRepository;
         this.settingsRepository = settingsRepository;
+        this.staticStationTransactionRepo = staticStationTransactionRepo;
     }
 
     /**
@@ -274,7 +279,7 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
                 transaction.setAxleWeightStatus( AXLE_WEIGHT_OVERLOAD_ABOVE_TOLERANCE );
             }
 
-            WeighingTransactions weighbridgeStations = weighbridgeTransactionsServiceInterface.saveWeighbridgeTransaction(transaction);
+            WeighingTransactions weighingTransactions = weighbridgeTransactionsServiceInterface.saveWeighbridgeTransaction(transaction);
 
             results.put("status", "00");
             results.put("message", "Transaction saved successfully");
@@ -282,11 +287,16 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
             results.put("status", "01");
             results.put("message", "Unknown axle classification has been used");
             transaction.setFlag(PROCESSED_FAILED);
-            WeighingTransactions weighbridgeStations = weighbridgeTransactionsServiceInterface.saveWeighbridgeTransaction(transaction);
+
+            WeighingTransactions weighingTransactions = weighbridgeTransactionsServiceInterface.saveWeighbridgeTransaction(transaction);
+
         }
+
 
         return results;
     }
+
+
 
     private WeighingTransactions handleSevenAxleRequest(WeighingTransactions transaction, AxleClassification axleClassification, int percentageTolerance) {
         transaction = handleSixAxleRequest(transaction, axleClassification, percentageTolerance);

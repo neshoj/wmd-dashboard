@@ -6,12 +6,12 @@ import opdwms.core.template.datatables.DatatablesInterface;
 import opdwms.web.weighingtransactions.entities.VirtualStationTransactions;
 import opdwms.web.weighingtransactions.forms.VirtualStationWeighingTransactionsForm;
 import opdwms.web.weighingtransactions.repositories.VirtualStationTransactionRepository;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

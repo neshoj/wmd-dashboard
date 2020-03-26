@@ -3,11 +3,12 @@ package opdwms.web.configs.controllers;
 import opdwms.core.template.AjaxUtils;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Ignatius
