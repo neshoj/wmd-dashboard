@@ -28,6 +28,11 @@ import java.util.function.Function;
  */
 public interface DatatablesInterface {
 
+    DataTable esDocument(String docName);
+
+    DataTable esFields(String... fields);
+    Map<String, Object> showEsTable();
+
     /**
      * When one just wants to return an empty result set
      *
