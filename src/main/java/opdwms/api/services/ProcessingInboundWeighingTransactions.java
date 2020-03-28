@@ -14,8 +14,6 @@ import opdwms.web.weighingtransactions.WeighbridgeTransactionsServiceInterface;
 import opdwms.web.weighingtransactions.entities.HSWIMTransaction;
 import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.entities.WeighingTransactions;
-import opdwms.web.weighingtransactions.es.documents.StaticStationTransaction;
-import opdwms.web.weighingtransactions.es.repositories.StaticStationTransactionRepo;
 import opdwms.web.weighingtransactions.repositories.HSWIMTransactionsRepository;
 import opdwms.web.weighingtransactions.repositories.TaggingTransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +48,6 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
     private AxleClassificationRepository axleClassificationRepository;
     private SettingsRepository settingsRepository;
     private SimpMessagingTemplate messagingTemplate;
-    private StaticStationTransactionRepo staticStationTransactionRepo;
 
     @Autowired
     public ProcessingInboundWeighingTransactions(WeighbridgeStationsServiceInterface weighbridgeStationsServiceInterface,
@@ -59,8 +56,7 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
                                                  HSWIMTransactionsRepository hswimTransactionsRepository,
                                                  TaggingTransactionsRepository taggingTransactionsRepository,
                                                  AxleClassificationRepository axleClassificationRepository,
-                                                 SettingsRepository settingsRepository,
-                                                 StaticStationTransactionRepo staticStationTransactionRepo) {
+                                                 SettingsRepository settingsRepository) {
         this.weighbridgeStationsServiceInterface = weighbridgeStationsServiceInterface;
         this.weighbridgeTransactionsServiceInterface = weighbridgeTransactionsServiceInterface;
         this.taggingTransactionsRepository = taggingTransactionsRepository;
@@ -68,7 +64,6 @@ public class ProcessingInboundWeighingTransactions implements ProcessingInboundW
         this.messagingTemplate = messagingTemplate;
         this.axleClassificationRepository = axleClassificationRepository;
         this.settingsRepository = settingsRepository;
-        this.staticStationTransactionRepo = staticStationTransactionRepo;
     }
 
     /**

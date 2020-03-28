@@ -78,8 +78,8 @@ public class WeighingTransactionsControllers {
             } else {
                 //Set-up data
                 datatable.esDocument("static_station_trans")
-                        .esFields("transaction_date", "status", "ticket_no", "station_name", "vehicle_no", "axle_configuration",
-                                "vehicle_GVM", "operator", "operator_shift", "permit_no", "id");
+                        .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
+                                "vehicleGVM", "operator", "operatorShift", "permitNo", "id");
                 return view.sendJSON(datatable.showEsTable());
 //                datatable
 //                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.status, a.ticketNo, b.name, a.vehicleNo, ")
