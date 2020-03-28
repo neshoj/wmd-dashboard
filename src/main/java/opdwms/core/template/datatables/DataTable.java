@@ -397,10 +397,11 @@ public class DataTable implements DatatablesInterface {
 //        map.put("iTotalDisplayRecords", buildResultSet("filtered-total").iterator().next());
 
         Object[] totals = buildResultSet("total").iterator().next();
-        map.put("iTotalRecords", totals);
-        map.put("iTotalDisplayRecords", totals);
+        map.put("iTotalRecords", totals.length);
+        map.put("iTotalDisplayRecords", totals.length);
         if (!_footerColumns.isEmpty()) {
-            map.put("footerTotals", buildResultSet("footer-totals"));
+            map.put("footerTotals", totals.length);
+//            map.put("footerTotals", buildResultSet("footer-totals"));
         }
 
         // If the formatter has not been set
