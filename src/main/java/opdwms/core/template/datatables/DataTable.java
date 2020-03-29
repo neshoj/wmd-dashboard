@@ -88,7 +88,7 @@ public class DataTable implements DatatablesInterface {
     @Override
     public Map<String, Object> showEsTable() {
         Map<String, Object> resp = new HashMap<>();
-        String s = _request.getParameter("sSearch");
+        String s = _request.getParameter("sSearch").toLowerCase();
         SearchRequest request = new SearchRequest(_esDocument);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
