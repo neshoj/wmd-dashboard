@@ -86,7 +86,7 @@ public class WeighingTransactionsControllers {
 //                        .select(" a.axleConfiguration, a.vehicleGVM,  ")
 //                        .select("a.operator, a.operatorShift, a.permitNo, a.id ")
 //                        .from("WeighingTransactions a LEFT JOIN a.weighbridgeStationsLink  b ");
-//
+
 //                return view.sendJSON(datatable.showTable());
             }
         }
