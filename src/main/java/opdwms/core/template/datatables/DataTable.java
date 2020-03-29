@@ -24,6 +24,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
 
@@ -97,7 +99,9 @@ public class DataTable implements DatatablesInterface {
         } else {
             BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
             for (String field : _esDocFields) {
-                boolBuilder = boolBuilder.should(QueryBuilders.wildcardQuery(field, "*".concat(s).concat("*")));
+                if(!field.toLowerCase().contains("date")){
+                    boolBuilder = boolBuilder.should(QueryBuilders.wildcardQuery(field, "*".concat(s).concat("*")));
+                }
             }
             sourceBuilder.query(boolBuilder);
         }
@@ -117,14 +121,33 @@ public class DataTable implements DatatablesInterface {
         resp.put("sEcho", sEcho);
         try {
             SearchResponse response = client.search(request, RequestOptions.DEFAULT);
-            System.out.println("totalHits: " + response.getHits().getTotalHits());
             SearchHit[] searchHits = response.getHits().getHits();
             for (SearchHit hit : searchHits) {
                 // do something with the SearchHit
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
                 Object[] docValues = new Object[_esDocFields.length];
+                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
                 for (int x = 0; x < _esDocFields.length; x++) {
-                    docValues[x] = sourceAsMap.get(_esDocFields[x]);
+                    //TODO use regex later on
+                    if (_esDocFields[x].toLowerCase().contains("date")) {
+                        Date date = parser.parse((String) sourceAsMap.get(_esDocFields[x]));
+                        docValues[x] = formatter.format(date);
+//                        if (sourceAsMap.get(_esDocFields[x]) instanceof Integer) {
+//                            Date date = new Date((long) ((Integer) sourceAsMap.get(_esDocFields[x])) * 1000);
+//                            docValues[x] = formatter.format(date);
+//                        } else if (sourceAsMap.get(_esDocFields[x]) instanceof Long) {
+//                            Date date = new Date((long) sourceAsMap.get(_esDocFields[x]));
+//                            docValues[x] = formatter.format(date);
+//                        } else {
+//                            docValues[x] = sourceAsMap.get(_esDocFields[x]);
+//                        }
+
+                    } else {
+                        docValues[x] = sourceAsMap.get(_esDocFields[x]);
+                    }
+
                 }
                 data.add(docValues);
             }
@@ -133,7 +156,7 @@ public class DataTable implements DatatablesInterface {
             resp.put("iTotalRecords", response.getHits().getTotalHits());
             resp.put("iTotalDisplayRecords", response.getHits().getTotalHits());
 
-        } catch (IOException e) {
+        } catch (IOException |ParseException e) {
             e.printStackTrace();
 
             resp.put("iTotalRecords", 0);
@@ -398,9 +421,9 @@ public class DataTable implements DatatablesInterface {
 
 //        List<Object[]> total = buildResultSet("total");
         map.put("iTotalRecords", 0);
-        map.put("iTotalDisplayRecords",  0);
+        map.put("iTotalDisplayRecords", 0);
         if (!_footerColumns.isEmpty()) {
-            map.put("footerTotals",  0);
+            map.put("footerTotals", 0);
 //            map.put("footerTotals", buildResultSet("footer-totals"));
         }
 
