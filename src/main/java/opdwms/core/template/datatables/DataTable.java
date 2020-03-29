@@ -396,11 +396,11 @@ public class DataTable implements DatatablesInterface {
 //        map.put("iTotalRecords", buildResultSet("total").iterator().next());
 //        map.put("iTotalDisplayRecords", buildResultSet("filtered-total").iterator().next());
 
-        List<Object[]> total = buildResultSet("total");
-        map.put("iTotalRecords", total.iterator().next());
-        map.put("iTotalDisplayRecords",  total.iterator().next());
+//        List<Object[]> total = buildResultSet("total");
+        map.put("iTotalRecords", 0);
+        map.put("iTotalDisplayRecords",  0);
         if (!_footerColumns.isEmpty()) {
-            map.put("footerTotals",  total.iterator().next());
+            map.put("footerTotals",  0);
 //            map.put("footerTotals", buildResultSet("footer-totals"));
         }
 

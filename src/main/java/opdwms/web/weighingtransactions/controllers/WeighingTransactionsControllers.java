@@ -77,17 +77,17 @@ public class WeighingTransactionsControllers {
 
             } else {
                 //Set-up data
-//                datatable.esDocument("static_station_trans")
-//                        .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
-//                                "vehicleGVM", "operator", "operatorShift", "permitNo", "id");
-//                return view.sendJSON(datatable.showEsTable());
-                datatable
-                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.status, a.ticketNo, b.name, a.vehicleNo, ")
-                        .select(" a.axleConfiguration, a.vehicleGVM,  ")
-                        .select("a.operator, a.operatorShift, a.permitNo, a.id ")
-                        .from("WeighingTransactions a LEFT JOIN a.weighbridgeStationsLink  b ");
+                datatable.esDocument("static_station_trans")
+                        .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
+                                "vehicleGVM", "operator", "operatorShift", "permitNo", "id");
+                return view.sendJSON(datatable.showEsTable());
+//                datatable
+//                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.status, a.ticketNo, b.name, a.vehicleNo, ")
+//                        .select(" a.axleConfiguration, a.vehicleGVM,  ")
+//                        .select("a.operator, a.operatorShift, a.permitNo, a.id ")
+//                        .from("WeighingTransactions a LEFT JOIN a.weighbridgeStationsLink  b ");
 
-                return view.sendJSON(datatable.showTable());
+//                return view.sendJSON(datatable.showTable());
             }
         }
         return view.getView();
