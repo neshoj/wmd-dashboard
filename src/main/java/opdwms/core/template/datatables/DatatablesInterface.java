@@ -31,6 +31,9 @@ public interface DatatablesInterface {
     DataTable esDocument(String docName);
 
     DataTable esFields(String... fields);
+
+    DataTable esDateFields(String... fields);
+
     Map<String, Object> showEsTable();
 
     /**
