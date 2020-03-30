@@ -64,6 +64,7 @@ public class DataTable implements DatatablesInterface {
     private String _groupBy = "";
     private String _esDocument;
     private String[] _esDocFields;
+    private String[] _esDateFields;
     @Autowired
     private HttpServletRequest _request;
     @Autowired
@@ -82,7 +83,13 @@ public class DataTable implements DatatablesInterface {
     @Override
     public DataTable esFields(String... fields) {
 
-        this._esDocFields = fields.clone();
+        this._esDocFields = fields;
+        return this;
+    }
+
+    @Override
+    public DataTable esDateFields(String... fields){
+        this._esDateFields = fields;
         return this;
     }
 
@@ -99,7 +106,7 @@ public class DataTable implements DatatablesInterface {
         } else {
             BoolQueryBuilder boolBuilder = QueryBuilders.boolQuery();
             for (String field : _esDocFields) {
-                if(!field.toLowerCase().contains("date")){
+                if(!Arrays.asList(_esDateFields).contains(field)){
                     boolBuilder = boolBuilder.should(QueryBuilders.wildcardQuery(field, "*".concat(s).concat("*")));
                 }
             }
@@ -126,24 +133,15 @@ public class DataTable implements DatatablesInterface {
                 // do something with the SearchHit
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
                 Object[] docValues = new Object[_esDocFields.length];
-                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                parser.setTimeZone(TimeZone.getTimeZone("UTC"));
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
                 for (int x = 0; x < _esDocFields.length; x++) {
                     //TODO use regex later on
-                    if (_esDocFields[x].toLowerCase().contains("date")) {
+                    if (Arrays.asList(_esDateFields).contains(_esDocFields[x])) {
                         Date date = parser.parse((String) sourceAsMap.get(_esDocFields[x]));
                         docValues[x] = formatter.format(date);
-//                        if (sourceAsMap.get(_esDocFields[x]) instanceof Integer) {
-//                            Date date = new Date((long) ((Integer) sourceAsMap.get(_esDocFields[x])) * 1000);
-//                            docValues[x] = formatter.format(date);
-//                        } else if (sourceAsMap.get(_esDocFields[x]) instanceof Long) {
-//                            Date date = new Date((long) sourceAsMap.get(_esDocFields[x]));
-//                            docValues[x] = formatter.format(date);
-//                        } else {
-//                            docValues[x] = sourceAsMap.get(_esDocFields[x]);
-//                        }
-
                     } else {
                         docValues[x] = sourceAsMap.get(_esDocFields[x]);
                     }
@@ -156,7 +154,7 @@ public class DataTable implements DatatablesInterface {
             resp.put("iTotalRecords", response.getHits().getTotalHits());
             resp.put("iTotalDisplayRecords", response.getHits().getTotalHits());
 
-        } catch (IOException |ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
 
             resp.put("iTotalRecords", 0);
