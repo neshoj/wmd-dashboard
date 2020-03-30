@@ -4,6 +4,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
@@ -117,7 +119,9 @@ public class DataTable implements DatatablesInterface {
         int page = Integer.parseInt(_request.getParameter("iDisplayStart"));
         String sortDir = _request.getParameter("sSortDir_0");
 
-        sourceBuilder.from(page)
+        sourceBuilder
+                .timeout(new TimeValue(60, TimeUnit.SECONDS))
+                .from(page)
                 .size(limit)
                 .sort(new FieldSortBuilder(_esDocFields[sortFieldIndex]).order(SortOrder.fromString(sortDir)));
 
@@ -128,6 +132,7 @@ public class DataTable implements DatatablesInterface {
         resp.put("sEcho", sEcho);
         try {
             SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
             SearchHit[] searchHits = response.getHits().getHits();
             for (SearchHit hit : searchHits) {
                 // do something with the SearchHit
@@ -153,7 +158,7 @@ public class DataTable implements DatatablesInterface {
             resp.put("aaData", data);
             resp.put("iTotalRecords", response.getHits().getTotalHits());
             resp.put("iTotalDisplayRecords", response.getHits().getTotalHits());
-
+            client.close();
         } catch (IOException | ParseException e) {
             e.printStackTrace();
 
