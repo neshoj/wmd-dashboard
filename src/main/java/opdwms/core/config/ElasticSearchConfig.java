@@ -12,6 +12,8 @@ import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfig
 import org.springframework.data.elasticsearch.core.ElasticsearchEntityMapper;
 import org.springframework.data.elasticsearch.core.EntityMapper;
 
+import java.time.Duration;
+
 @Configuration
 public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
 
@@ -23,6 +25,8 @@ public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
     public RestHighLevelClient elasticsearchClient() {
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(environment.getProperty("wms.elasticsearch.ip")+":"+ environment.getProperty("wms.elasticsearch.port"))
+                .withSocketTimeout(Duration.ofSeconds(80))
+                .withConnectTimeout(Duration.ofSeconds(60))
                 .build();
         return RestClients.create(clientConfiguration).rest();
     }
