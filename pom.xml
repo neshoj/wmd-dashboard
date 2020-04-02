@@ -183,11 +183,11 @@
             <artifactId>core</artifactId>
             <version>3.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>3.4.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.zaxxer</groupId>-->
+            <!--<artifactId>HikariCP</artifactId>-->
+            <!--<version>3.4.2</version>-->
+        <!--</dependency>-->
 
 <!--        <dependency>-->
 <!--            <groupId>org.hibernate.search</groupId>-->
@@ -201,11 +201,24 @@
 <!--        </dependency>-->
 
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-elasticsearch</artifactId>
-            <version>3.2.5.RELEASE</version>
-    </dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>7.6.1</version>
+        </dependency>
 
+        <!--https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client-->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>7.6.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>7.6.1</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
