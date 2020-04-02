@@ -2,7 +2,6 @@ package opdwms.web.dashboard.controllers;
 
 import opdwms.api.services.ProcessingInboundWeighingTransactions;
 import opdwms.core.template.AjaxUtils;
-import opdwms.core.template.AppConstants;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
 import opdwms.web.dashboard.DashboardServiceInterface;
@@ -73,9 +72,9 @@ public class DashboardController {
         }
 
         return view
-                .addAttribute("data", dashboardService.fetchStatistics(request))
-                .addAttribute("weighbridges", weighbridgeStationsRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD))
-                .addAttribute("chartData", fetchLineChartData(request))
+//                .addAttribute("data", dashboardService.fetchStatistics(request))
+//                .addAttribute("weighbridges", weighbridgeStationsRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD))
+//                .addAttribute("chartData", fetchLineChartData(request))
                 .getView();
     }
 

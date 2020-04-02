@@ -9,25 +9,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-
 @Configuration
-public class ElasticSearchConfig  {
+public class ElasticSearchConfig {
 
-    @Autowired
-    private Environment environment;
+  @Autowired private Environment environment;
 
-    @Bean
-    public RestHighLevelClient elasticsearchClient() {
-        RestClientBuilder builder = RestClient.builder(
-                new HttpHost(environment.getProperty("wms.elasticsearch.ip"), Integer.valueOf(environment.getProperty("wms.elasticsearch.port"))))
-                .setRequestConfigCallback(
-                        (requestConfigBuilder) -> (
-                                requestConfigBuilder
-                                        .setConnectTimeout(Integer.valueOf(environment.getProperty("wms.elasticsearch.connectiontimeout")))
-                                        .setSocketTimeout(Integer.valueOf(environment.getProperty("wms.elasticsearch.sockettimeout")))
-
-                        ));
-        return new RestHighLevelClient(builder);
-    }
-
+  @Bean
+  public RestHighLevelClient elasticsearchClient() {
+    RestClientBuilder builder =
+        RestClient.builder(
+                new HttpHost(
+                    environment.getProperty("wms.elasticsearch.ip"),
+                    Integer.valueOf(environment.getProperty("wms.elasticsearch.port"))))
+            .setRequestConfigCallback(
+                (requestConfigBuilder) ->
+                    (requestConfigBuilder
+                        .setConnectTimeout(
+                            Integer.valueOf(
+                                environment.getProperty("wms.elasticsearch.connectiontimeout")))
+                        .setSocketTimeout(
+                            Integer.valueOf(
+                                environment.getProperty("wms.elasticsearch.sockettimeout")))));
+    return new RestHighLevelClient(builder);
+  }
 }
