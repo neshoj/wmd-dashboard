@@ -156,8 +156,8 @@ public class DataTable implements DatatablesInterface {
             }
 
             resp.put("aaData", data);
-            resp.put("iTotalRecords", response.getHits().getTotalHits());
-            resp.put("iTotalDisplayRecords", response.getHits().getTotalHits());
+            resp.put("iTotalRecords", response.getHits().getTotalHits().value);
+            resp.put("iTotalDisplayRecords", response.getHits().getTotalHits().value);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
 
