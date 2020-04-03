@@ -14,7 +14,7 @@ public class ElasticSearchConfig {
 
   @Autowired private Environment environment;
 
-  @Bean
+  @Bean(name = "dataTablesEsClient")
   public RestHighLevelClient elasticsearchClient() {
     RestClientBuilder builder =
         RestClient.builder(
