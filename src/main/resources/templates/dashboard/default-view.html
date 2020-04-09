@@ -14,104 +14,204 @@
 
 <th:block layout:fragment="content">
     <div class="row">
-        <div class="col-md-12">
-            <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
-                <div class="form-group">
-                    <div class="col-sm-4">
-                        <select class="form-control weighbridges">
-                            <option value=""> Select Weighbridge Station</option>
-                            <option th:each="item : ${weighbridges}"
-                                    th:value="${item.id}"
-                                    th:text="${item.name}"></option>
-                        </select>
+        <div class="col-md-7">
+            <div class="widget widget-fullwidth line-chart">
+                <div class="widget-head">
+                    <div class="tools"><span class="icon s7-graph2"></span></div><span class="title">Vehicle Weighing</span>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-container" style="height: 285px; padding: 0px; position: relative;">
+                                            <canvas id="weighingLineChart" width="948" height="285" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 948px; height: 285px;" ></canvas>
+                                        </div>
+<!--                    <div id="line-chart-live" style="height: 285px; padding: 0px; position: relative;">-->
+<!--                        <canvas class="flot-base" width="998" height="285" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 998px; height: 285px;">-->
+
+<!--                        </canvas>-->
+<!--                        <div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);">-->
+<!--                            <div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 45px; text-align: center;">2</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 136px; text-align: center;">4</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 227px; text-align: center;">6</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 318px; text-align: center;">8</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 408px; text-align: center;">10</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 499px; text-align: center;">12</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 590px; text-align: center;">14</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 680px; text-align: center;">16</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 771px; text-align: center;">18</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 862px; text-align: center;">20</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; max-width: 76px; top: 285px; left: 953px; text-align: center;">22</div></div>-->
+<!--                            <div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;">-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 285px; left: 0px; text-align: right;">0</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 214px; left: 0px; text-align: right;">50</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 143px; left: 0px; text-align: right;">100</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 71px; left: 0px; text-align: right;">150</div>-->
+<!--                                <div class="flot-tick-label tickLabel" style="position: absolute; top: 0px; left: 0px; text-align: right;">200</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <canvas class="flot-overlay" width="998" height="285" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 998px; height: 285px;"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="8" class="value">8</div>
+                            <div class="desc">No Of Stations</div>
+                        </div>
+                        <div class="icon"><span class="s7-map-marker"></span></div>
                     </div>
                 </div>
-            </form>
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="33"  class="value">33</div>
+                            <div class="desc">Hardware Monitor</div>
+                        </div>
+                        <div class="icon"><span class="s7-share"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="156" class="value">156</div>
+                            <div class="desc">Tagged Vehicles</div>
+                        </div>
+                        <div class="icon"><span class="s7-ticket"></span></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="500"  class="value">500</div>
+                            <div class="desc">Census</div>
+                        </div>
+                        <div class="icon"><span class="s7-search"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget widget-tile widget-tile-wide">
+                        <div class="tile-info">
+                            <div class="icon"><span class="s7-car"></span></div>
+                            <div class="data-info">
+                                <div class="title">Total Weighed</div>
+                                <div class="desc">Today's weigh numbers</div>
+                            </div>
+                        </div>
+                        <div class="tile-value"><span data-toggle="counter" data-end="28458" >28,458.00</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="widget widget-pie">
-                <div class="widget-head"><span class="title">Weighing</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-12" style="height: 80px !important   ">
-                        <canvas id="donutWeighingStatusChart" class="chart"
-                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
-                                height="80"></canvas>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-4"><span class="title">T/T Weighed</span>
-                        <a th:href="@{/weighing-transactions}"><span th:text="${data.weighedVehicles}"
-                                                                     class="number">0</span></a>
-                    </div>
-                    <div class="col-xs-4"><span class="title">Overloads</span><a
-                            th:href="@{/weighing-transactions}"><span
-                            th:text="${data.overloadVehicles}" class="number"
-                    ></span></a></div>
-                    <div class="col-xs-4"><span class="title">Within Limit</span><a th:href="@{/weighing-transactions}"><span
-                            th:text="${data.weighedWithinLimits}" class="number">0</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="widget widget-pie widget-pie-stats">
-                <div class="widget-head"><span class="title">Vehicle Census</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-12" style="height: 80px">
-                        <canvas id="vehicleChartCensus" class="chart"
-                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
-                                height="80"></canvas>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-6">
-                        <div id="spk1" class="sparkline"></div>
-                        <span class="title">Within Limits</span><span
-                            th:text="${data.percentageWthinLimit}+ '%'">0%</span>
-                    </div>
-                    <div class="col-xs-6">
-                        <div id="spk2" class="sparkline"></div>
-                        <span class="title">Overload</span><span th:text="${data.percentageOverload}+ '%'">0%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="widget widget-pie widget-pie-stats">
-                <div class="widget-head"><span class="title">Vehicle Tagging</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-12" style="height: 80px">
-                        <canvas id="tag-chart" class="chart"
-                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
-                                height="80"></canvas>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-6"><span class="title">Cleared</span><a th:href="@{/tagging-transactions}"><span
-                            th:text="${chartData.clearTags}" class="number"
-                    >0</span></a></div>
-                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/tagging-transactions}"><span
-                            th:text="${chartData.pendingTags}" class="number">0</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="widget widget-fullwidth line-chart">
-                <div class="widget-head">
-                    <span class="title">Vehicle Weighing Statistics</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="weighingLineChart" style="height: 340px"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+
+<!--    <div class="row">-->
+<!--        <div class="col-md-12">-->
+<!--            <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">-->
+<!--                <div class="form-group">-->
+<!--                    <div class="col-sm-4">-->
+<!--                        <select class="form-control weighbridges">-->
+<!--                            <option value=""> Select Weighbridge Station</option>-->
+<!--                            <option th:each="item : ${weighbridges}"-->
+<!--                                    th:value="${item.id}"-->
+<!--                                    th:text="${item.name}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="row">-->
+<!--        <div class="col-md-4">-->
+<!--            <div class="widget widget-pie">-->
+<!--                <div class="widget-head"><span class="title">Weighing</span></div>-->
+<!--                <div class="row chart-container">-->
+<!--                    <div class="col-md-12" style="height: 80px !important   ">-->
+<!--                        <canvas id="donutWeighingStatusChart" class="chart"-->
+<!--                                style="display: block; width: 161px !important; height: 80px !important;" width="161"-->
+<!--                                height="80"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row chart-info">-->
+<!--                    <div class="col-xs-4"><span class="title">T/T Weighed</span>-->
+<!--                        <a th:href="@{/weighing-transactions}"><span th:text="${data.weighedVehicles}"-->
+<!--                                                                     class="number">0</span></a>-->
+<!--                    </div>-->
+<!--                    <div class="col-xs-4"><span class="title">Overloads</span><a-->
+<!--                            th:href="@{/weighing-transactions}"><span-->
+<!--                            th:text="${data.overloadVehicles}" class="number"-->
+<!--                    ></span></a></div>-->
+<!--                    <div class="col-xs-4"><span class="title">Within Limit</span><a th:href="@{/weighing-transactions}"><span-->
+<!--                            th:text="${data.weighedWithinLimits}" class="number">0</span></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--            <div class="widget widget-pie widget-pie-stats">-->
+<!--                <div class="widget-head"><span class="title">Vehicle Census</span></div>-->
+<!--                <div class="row chart-container">-->
+<!--                    <div class="col-md-12" style="height: 80px">-->
+<!--                        <canvas id="vehicleChartCensus" class="chart"-->
+<!--                                style="display: block; width: 161px !important; height: 80px !important;" width="161"-->
+<!--                                height="80"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row chart-info">-->
+<!--                    <div class="col-xs-6">-->
+<!--                        <div id="spk1" class="sparkline"></div>-->
+<!--                        <span class="title">Within Limits</span><span-->
+<!--                            th:text="${data.percentageWthinLimit}+ '%'">0%</span>-->
+<!--                    </div>-->
+<!--                    <div class="col-xs-6">-->
+<!--                        <div id="spk2" class="sparkline"></div>-->
+<!--                        <span class="title">Overload</span><span th:text="${data.percentageOverload}+ '%'">0%</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--            <div class="widget widget-pie widget-pie-stats">-->
+<!--                <div class="widget-head"><span class="title">Vehicle Tagging</span></div>-->
+<!--                <div class="row chart-container">-->
+<!--                    <div class="col-md-12" style="height: 80px">-->
+<!--                        <canvas id="tag-chart" class="chart"-->
+<!--                                style="display: block; width: 161px !important; height: 80px !important;" width="161"-->
+<!--                                height="80"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row chart-info">-->
+<!--                    <div class="col-xs-6"><span class="title">Cleared</span><a th:href="@{/tagging-transactions}"><span-->
+<!--                            th:text="${chartData.clearTags}" class="number"-->
+<!--                    >0</span></a></div>-->
+<!--                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/tagging-transactions}"><span-->
+<!--                            th:text="${chartData.pendingTags}" class="number">0</span></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-12">-->
+<!--            <div class="widget widget-fullwidth line-chart">-->
+<!--                <div class="widget-head">-->
+<!--                    <span class="title">Vehicle Weighing Statistics</span>-->
+<!--                </div>-->
+<!--                <div class="chart-container">-->
+<!--                    <canvas id="weighingLineChart" style="height: 340px"></canvas>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 </th:block>
 

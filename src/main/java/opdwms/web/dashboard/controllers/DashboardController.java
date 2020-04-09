@@ -2,15 +2,11 @@ package opdwms.web.dashboard.controllers;
 
 import opdwms.api.services.ProcessingInboundWeighingTransactions;
 import opdwms.core.template.AjaxUtils;
-import opdwms.core.template.AppConstants;
 import opdwms.core.template.View;
 import opdwms.core.template.datatables.DatatablesInterface;
 import opdwms.web.dashboard.DashboardServiceInterface;
-import opdwms.web.dashboard.vm.CencusBarChartData;
-import opdwms.web.dashboard.vm.ChartDataPie;
 import opdwms.web.usermanager.entities.UserTypes;
 import opdwms.web.weighbridgestations.repository.WeighbridgeStationsRepository;
-import opdwms.web.weighingtransactions.entities.TaggingTransactions;
 import opdwms.web.weighingtransactions.modal.LineChartData;
 import opdwms.web.weighingtransactions.repositories.WeighbridgeTransactionsRepository;
 import org.joda.time.LocalDate;
@@ -21,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Ignatius
@@ -73,8 +72,8 @@ public class DashboardController {
         }
 
         return view
-                .addAttribute("data", dashboardService.fetchStatistics(request))
-                .addAttribute("weighbridges", weighbridgeStationsRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD))
+//                .addAttribute("data", dashboardService.fetchStatistics(request))
+//                .addAttribute("weighbridges", weighbridgeStationsRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD))
                 .addAttribute("chartData", fetchLineChartData(request))
                 .getView();
     }
@@ -82,26 +81,29 @@ public class DashboardController {
 
     private Map<String, Object> fetchLineChartData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Date parse = new LocalDate().minusMonths(6).withDayOfMonth(1).toDate();
+        Date parse = new LocalDate().minusMonths(1).withDayOfMonth(1).toDate();
+
+    System.err.println("parse = " + parse);
+
         Collection<LineChartData> overloadData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_OVERLOAD, parse);
         Collection<LineChartData> withinLimitData = weighbridgeTransactionsRepository.fetchWeighingCountBasedOnStatusGroupedByMonthlyDate(ProcessingInboundWeighingTransactions.GVM_WITHIN, parse);
 
-        ArrayList<ChartDataPie> pieChartData = new ArrayList<>();
-        pieChartData.add(new ChartDataPie("Within Limit", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN)));
-        pieChartData.add(new ChartDataPie("Within tolerance", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN_PERMISSIBLE)));
-        pieChartData.add(new ChartDataPie("Overloads", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_OVERLOAD)));
+//        ArrayList<ChartDataPie> pieChartData = new ArrayList<>();
+//        pieChartData.add(new ChartDataPie("Within Limit", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN)));
+//        pieChartData.add(new ChartDataPie("Within tolerance", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_WITHIN_PERMISSIBLE)));
+//        pieChartData.add(new ChartDataPie("Overloads", weighbridgeTransactionsRepository.fetchCountOfWeighingBasedOnStatus(ProcessingInboundWeighingTransactions.GVM_OVERLOAD)));
+//
+//        List<CencusBarChartData> censusBarChartData = weighbridgeTransactionsRepository.fetchAxleConfigurationCensus();
 
-        List<CencusBarChartData> censusBarChartData = weighbridgeTransactionsRepository.fetchAxleConfigurationCensus();
+//        Long clearTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.CLEARED_TAGS);
+//        Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.OPEN_TAGS);
 
-        Long clearTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.CLEARED_TAGS);
-        Long pendingTags = weighbridgeTransactionsRepository.fetchCountOfTaggingBasedOnStatus(TaggingTransactions.OPEN_TAGS);
-
-        map.put("censusBarChartData", censusBarChartData);
-        map.put("pieChartData", pieChartData);
+//        map.put("censusBarChartData", censusBarChartData);
+//        map.put("pieChartData", pieChartData);
         map.put("withinLimit", withinLimitData);
         map.put("overload", overloadData);
-        map.put("clearTags", clearTags);
-        map.put("pendingTags", pendingTags);
+//        map.put("clearTags", clearTags);
+//        map.put("pendingTags", pendingTags);
         map.put("status", "00");
         return map;
     }
