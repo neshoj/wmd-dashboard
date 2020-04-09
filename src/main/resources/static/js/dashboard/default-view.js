@@ -180,22 +180,34 @@
         });
         // End vehicle weighing statistics chart
 
-        $('.weighbridges').change(function (e) {
-            let weighbridgeId = $(this).find("option:selected").val();
-
-            console.log('Weighbridge id ' + weighbridgeId);
-            utils.http.jsonRequest($(".am-wrapper"),
-                {
-                    action: 'fetch-line-chart',
-                    index: weighbridgeId
-                })
-                .done(function (o) {
-                    if (o.status === '00') {
-                        console.log(JSON.stringify(o))
-                    } else {
-                        utils.alert.error(o.message);
-                    }
-                });
+        //Set up calendar
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title'
+            },
+            height: 500,
+            events: window.location.pathname,
+            handleWindowResize: true,
+            defaultView: 'month'
         });
+
+        // $('.weighbridges').change(function (e) {
+        //     let weighbridgeId = $(this).find("option:selected").val();
+        //
+        //     console.log('Weighbridge id ' + weighbridgeId);
+        //     utils.http.jsonRequest($(".am-wrapper"),
+        //         {
+        //             action: 'fetch-line-chart',
+        //             index: weighbridgeId
+        //         })
+        //         .done(function (o) {
+        //             if (o.status === '00') {
+        //                 console.log(JSON.stringify(o))
+        //             } else {
+        //                 utils.alert.error(o.message);
+        //             }
+        //         });
+        // });
     });
 }

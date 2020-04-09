@@ -81,7 +81,7 @@ public class DashboardController {
 
     private Map<String, Object> fetchLineChartData(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
-        Date parse = new LocalDate().minusMonths(1).withDayOfMonth(1).toDate();
+        Date parse = new LocalDate().minusWeeks(2).withDayOfWeek(1).toDate();
 
     System.err.println("parse = " + parse);
 
