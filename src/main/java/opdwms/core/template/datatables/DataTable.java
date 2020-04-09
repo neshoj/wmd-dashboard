@@ -14,6 +14,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,7 @@ public class DataTable implements DatatablesInterface {
     @Autowired
     private HttpServletRequest _request;
     @Autowired
+    @Qualifier("dataTablesEsClient")
     private RestHighLevelClient client;
 
     @PersistenceContext
@@ -120,6 +122,7 @@ public class DataTable implements DatatablesInterface {
         String sortDir = _request.getParameter("sSortDir_0");
 
         sourceBuilder
+                .trackTotalHits(true)
                 .timeout(new TimeValue(60, TimeUnit.SECONDS))
                 .from(page)
                 .size(limit)
