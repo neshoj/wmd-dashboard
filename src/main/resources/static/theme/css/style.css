@@ -13795,11 +13795,11 @@ li.L9 {
 }
 
 .widget-weather .wt-container .wt-hour {
-    background-color: #ff7373;
+    background-color: #474646;
     color: #fff;
     font-size: 35px;
     font-weight: 300;
-    padding: 20px;
+    padding: 10px;
     text-align: center
 }
 
@@ -13831,11 +13831,12 @@ li.L9 {
 
 .widget-weather .wt-container .wt-info .wt-day span.day {
     margin-bottom: 10px;
-    color: #f4e415
+    color: #6E4C1EFF;
 }
 
 .widget-weather .wt-container .wt-info .wt-day span.date {
-    margin-top: 10px
+    margin-top: 10px;
+    font-size: 23px;
 }
 
 @media (max-width:767px) {

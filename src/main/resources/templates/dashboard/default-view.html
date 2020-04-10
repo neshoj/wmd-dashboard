@@ -9,109 +9,240 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{theme/lib/chartjs/Chart.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{theme/lib/formvalidation/formValidation.min.css}"/>
+    <link rel="stylesheet" th:href="@{theme/lib/fullcalendar/fullcalendar.css}"/>
+
+
+    <link th:href="@{theme/lib/fullcalendar/fullcalendar.css}" rel="stylesheet">
+    <link th:href="@{theme/lib/fullcalendar/fullcalendar.print.css}" rel='stylesheet' media='print'>
 </head>
 <body>
 
 <th:block layout:fragment="content">
     <div class="row">
-        <div class="col-md-12">
-            <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
-                <div class="form-group">
-                    <div class="col-sm-4">
-                        <select class="form-control weighbridges">
-                            <option value=""> Select Weighbridge Station</option>
-                            <option th:each="item : ${weighbridges}"
-                                    th:value="${item.id}"
-                                    th:text="${item.name}"></option>
-                        </select>
+        <div class="col-md-7">
+            <div class="widget widget-fullwidth line-chart">
+                <div class="widget-head">
+                    <div class="tools"><span class="icon s7-graph2"></span></div>
+                    <span class="title">Vehicle Weighing</span>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-container" style="height: 285px; padding: 0px; position: relative;">
+                        <canvas id="weighingLineChart" width="948"
+                                height="285"
+                                style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 948px; height: 285px;">
+                        </canvas>
                     </div>
                 </div>
-            </form>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="10" class="value">10</div>
+                            <div class="desc">No Of Stations</div>
+                        </div>
+                        <div class="icon"><span class="s7-map-marker"></span></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="126" class="value">126</div>
+                            <div class="desc">Hardware Monitor</div>
+                        </div>
+                        <div class="icon"><span class="s7-share"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="5436" class="value">5436</div>
+                            <div class="desc">Tagged Vehicles</div>
+                        </div>
+                        <div class="icon"><span class="s7-ticket"></span></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget widget-tile">
+                        <div class="data-info">
+                            <div data-toggle="counter" data-end="4300" class="value">4300</div>
+                            <div class="desc">Census</div>
+                        </div>
+                        <div class="icon"><span class="s7-search"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget widget-tile widget-tile-wide">
+                        <div class="tile-info">
+                            <div class="icon"><span class="s7-car"></span></div>
+                            <div class="data-info">
+                                <div class="title">Total Weighed</div>
+                                <div class="desc">Today's weighing numbers</div>
+                            </div>
+                        </div>
+                        <div class="tile-value"><span data-toggle="counter" data-end="28458">28,458.00</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="widget widget-pie">
-                <div class="widget-head"><span class="title">Weighing</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-12" style="height: 80px !important   ">
-                        <canvas id="donutWeighingStatusChart" class="chart"
-                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
-                                height="80"></canvas>
+        <div class="col-md-8">
+            <div class="panel panel-dark">
+                <div class="panel-heading">
+                    <div class="tools"><span class="icon s7-display1"></span>
                     </div>
+                    <span class="title">Calendar Data</span>
                 </div>
-                <div class="row chart-info">
-                    <div class="col-xs-4"><span class="title">T/T Weighed</span>
-                        <a th:href="@{/weighing-transactions}"><span th:text="${data.weighedVehicles}"
-                                                                     class="number">0</span></a>
-                    </div>
-                    <div class="col-xs-4"><span class="title">Overloads</span><a
-                            th:href="@{/weighing-transactions}"><span
-                            th:text="${data.overloadVehicles}" class="number"
-                    ></span></a></div>
-                    <div class="col-xs-4"><span class="title">Within Limit</span><a th:href="@{/weighing-transactions}"><span
-                            th:text="${data.weighedWithinLimits}" class="number">0</span></a>
+                <div class="panel-body">
+                    <div class="chart-container">
+                        <div class="chart-table">
+                            <div id="calendar"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="widget widget-pie widget-pie-stats">
-                <div class="widget-head"><span class="title">Vehicle Census</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-12" style="height: 80px">
-                        <canvas id="vehicleChartCensus" class="chart"
-                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
-                                height="80"></canvas>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-6">
-                        <div id="spk1" class="sparkline"></div>
-                        <span class="title">Within Limits</span><span
-                            th:text="${data.percentageWthinLimit}+ '%'">0%</span>
-                    </div>
-                    <div class="col-xs-6">
-                        <div id="spk2" class="sparkline"></div>
-                        <span class="title">Overload</span><span th:text="${data.percentageOverload}+ '%'">0%</span>
+            <div class="widget widget-weather">
+                <div class="wt-container">
+                    <div class="wt-hour"><span class="hour">Census</span></div>
+                    <div class="wt-info">
+                        <div class="wt-day"><span class="day">Buses</span>
+                            <span class="date">30</span>
+                        </div>
+                        <div class="wt-day"><span class="day">Trucks > 3T</span>
+
+                            <span class="date">2825</span>
+                        </div>
+                        <div class="wt-day"><span class="day">Trucks > 7T</span>
+                            <span class="date">218</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="widget widget-pie widget-pie-stats">
-                <div class="widget-head"><span class="title">Vehicle Tagging</span></div>
-                <div class="row chart-container">
-                    <div class="col-md-12" style="height: 80px">
-                        <canvas id="tag-chart" class="chart"
-                                style="display: block; width: 161px !important; height: 80px !important;" width="161"
-                                height="80"></canvas>
-                    </div>
-                </div>
-                <div class="row chart-info">
-                    <div class="col-xs-6"><span class="title">Cleared</span><a th:href="@{/tagging-transactions}"><span
-                            th:text="${chartData.clearTags}" class="number"
-                    >0</span></a></div>
-                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/tagging-transactions}"><span
-                            th:text="${chartData.pendingTags}" class="number">0</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+
+
+
+<!--        <div class="col-md-9">-->
+<!--            <div class="widget">-->
+<!--                <div class="widget-head">-->
+<!--                    <div class="wt-hour"><span class="hour">Vehicle Census</span></div>-->
+<!--                </div>-->
+<!--                -->
+<!--            </div>-->
+<!--        </div>-->
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="widget widget-fullwidth line-chart">
-                <div class="widget-head">
-                    <span class="title">Vehicle Weighing Statistics</span>
-                </div>
-                <div class="chart-container">
-                    <canvas id="weighingLineChart" style="height: 340px"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <!--    <div class="row">-->
+    <!--        <div class="col-md-12">-->
+    <!--            <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">-->
+    <!--                <div class="form-group">-->
+    <!--                    <div class="col-sm-4">-->
+    <!--                        <select class="form-control weighbridges">-->
+    <!--                            <option value=""> Select Weighbridge Station</option>-->
+    <!--                            <option th:each="item : ${weighbridges}"-->
+    <!--                                    th:value="${item.id}"-->
+    <!--                                    th:text="${item.name}"></option>-->
+    <!--                        </select>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </form>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="row">-->
+    <!--        <div class="col-md-4">-->
+    <!--            <div class="widget widget-pie">-->
+    <!--                <div class="widget-head"><span class="title">Weighing</span></div>-->
+    <!--                <div class="row chart-container">-->
+    <!--                    <div class="col-md-12" style="height: 80px !important   ">-->
+    <!--                        <canvas id="donutWeighingStatusChart" class="chart"-->
+    <!--                                style="display: block; width: 161px !important; height: 80px !important;" width="161"-->
+    <!--                                height="80"></canvas>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <div class="row chart-info">-->
+    <!--                    <div class="col-xs-4"><span class="title">T/T Weighed</span>-->
+    <!--                        <a th:href="@{/weighing-transactions}"><span th:text="${data.weighedVehicles}"-->
+    <!--                                                                     class="number">0</span></a>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-xs-4"><span class="title">Overloads</span><a-->
+    <!--                            th:href="@{/weighing-transactions}"><span-->
+    <!--                            th:text="${data.overloadVehicles}" class="number"-->
+    <!--                    ></span></a></div>-->
+    <!--                    <div class="col-xs-4"><span class="title">Within Limit</span><a th:href="@{/weighing-transactions}"><span-->
+    <!--                            th:text="${data.weighedWithinLimits}" class="number">0</span></a>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="col-md-4">-->
+    <!--            <div class="widget widget-pie widget-pie-stats">-->
+    <!--                <div class="widget-head"><span class="title">Vehicle Census</span></div>-->
+    <!--                <div class="row chart-container">-->
+    <!--                    <div class="col-md-12" style="height: 80px">-->
+    <!--                        <canvas id="vehicleChartCensus" class="chart"-->
+    <!--                                style="display: block; width: 161px !important; height: 80px !important;" width="161"-->
+    <!--                                height="80"></canvas>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <div class="row chart-info">-->
+    <!--                    <div class="col-xs-6">-->
+    <!--                        <div id="spk1" class="sparkline"></div>-->
+    <!--                        <span class="title">Within Limits</span><span-->
+    <!--                            th:text="${data.percentageWthinLimit}+ '%'">0%</span>-->
+    <!--                    </div>-->
+    <!--                    <div class="col-xs-6">-->
+    <!--                        <div id="spk2" class="sparkline"></div>-->
+    <!--                        <span class="title">Overload</span><span th:text="${data.percentageOverload}+ '%'">0%</span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="col-md-4">-->
+    <!--            <div class="widget widget-pie widget-pie-stats">-->
+    <!--                <div class="widget-head"><span class="title">Vehicle Tagging</span></div>-->
+    <!--                <div class="row chart-container">-->
+    <!--                    <div class="col-md-12" style="height: 80px">-->
+    <!--                        <canvas id="tag-chart" class="chart"-->
+    <!--                                style="display: block; width: 161px !important; height: 80px !important;" width="161"-->
+    <!--                                height="80"></canvas>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <div class="row chart-info">-->
+    <!--                    <div class="col-xs-6"><span class="title">Cleared</span><a th:href="@{/tagging-transactions}"><span-->
+    <!--                            th:text="${chartData.clearTags}" class="number"-->
+    <!--                    >0</span></a></div>-->
+    <!--                    <div class="col-xs-6"><span class="title">Pending</span><a th:href="@{/tagging-transactions}"><span-->
+    <!--                            th:text="${chartData.pendingTags}" class="number">0</span></a>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="row">-->
+    <!--        <div class="col-md-12">-->
+    <!--            <div class="widget widget-fullwidth line-chart">-->
+    <!--                <div class="widget-head">-->
+    <!--                    <span class="title">Vehicle Weighing Statistics</span>-->
+    <!--                </div>-->
+    <!--                <div class="chart-container">-->
+    <!--                    <canvas id="weighingLineChart" style="height: 340px"></canvas>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
 </th:block>
 
@@ -141,6 +272,8 @@
             type="text/javascript"></script>
     <script th:src="@{theme/lib/chartjs/Chart.min.js}"
             type="text/javascript"></script>
+    <script th:src="@{theme/lib/moment/moment.min.js}"></script>
+    <script th:src="@{theme/lib/fullcalendar/fullcalendar.js}"></script>
 
     <script th:src="@{js/app-util.js}"></script>
     <script th:src="@{js/dashboard/default-view.js}"></script>
