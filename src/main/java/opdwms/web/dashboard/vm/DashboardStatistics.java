@@ -11,10 +11,10 @@ import java.math.BigInteger;
  */
 public class DashboardStatistics {
   private BigInteger weighedVehicles = BigInteger.ZERO;
-  private long census = 2;
+  private BigInteger census = BigInteger.ZERO;
   private BigInteger taggedVehicle = BigInteger.ZERO;
   private long hardware = 0;
-  private long stations = 0;
+  private BigInteger stations = BigInteger.ZERO;
 
   public BigInteger getWeighedVehicles() {
     return weighedVehicles;
@@ -24,11 +24,11 @@ public class DashboardStatistics {
     this.weighedVehicles = weighedVehicles;
   }
 
-  public long getCensus() {
+  public BigInteger getCensus() {
     return census;
   }
 
-  public DashboardStatistics setCensus(long census) {
+  public DashboardStatistics setCensus(BigInteger census) {
     this.census = census;
     return this;
   }
@@ -51,11 +51,11 @@ public class DashboardStatistics {
     return this;
   }
 
-  public long getStations() {
+  public BigInteger getStations() {
     return stations;
   }
 
-  public DashboardStatistics setStations(long stations) {
+  public DashboardStatistics setStations(BigInteger stations) {
     this.stations = stations;
     return this;
   }

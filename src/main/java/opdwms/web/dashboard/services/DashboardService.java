@@ -54,11 +54,13 @@ public class DashboardService implements DashboardServiceInterface {
       DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
       String startDate = df.format(new Date());
 
-      DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
       Date qStartDate = dateFormat.parse(startDate + " 00:00");
       Date qEndDate = dateFormat.parse(startDate + " 23:59");
 
       data.setWeighedVehicles(getWeighTransactionsDoneToday(session, qStartDate, qEndDate));
+      data.setCensus(data.getWeighedVehicles());
+      data.setStations(getStations(session));
 
       data.setTaggedVehicle(getVehiclesTaggedToday(session, qStartDate, qEndDate));
 
@@ -68,6 +70,15 @@ public class DashboardService implements DashboardServiceInterface {
       e.printStackTrace();
     }
     return data;
+  }
+
+  private BigInteger getStations(Session session) {
+    Query rawHql;
+    StringBuilder query = new StringBuilder();
+    query.append("SELECT COUNT( * ) ").append("FROM weighbridge_stations a ");
+
+    rawHql = session.createNativeQuery(query.toString());
+    return (BigInteger) rawHql.uniqueResult();
   }
 
   private BigInteger getVehiclesTaggedToday(Session session, Date qStartDate, Date qEndDate) {

@@ -47,7 +47,7 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" data-end="10" class="value">10</div>
+                            <div data-toggle="counter" th:attr="data-end=#{data.stations}" class="value" th:text="${data.stations}"></div>
                             <div class="desc">No Of Stations</div>
                         </div>
                         <div class="icon"><span class="s7-map-marker"></span></div>
@@ -67,7 +67,8 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" data-end="5436" class="value">5436</div>
+                            <div data-toggle="counter" class="value" th:attr="data-end=#{data.taggedVehicle}" th:text="${data.taggedVehicle}" >0
+                            </div>
                             <div class="desc">Tagged Vehicles</div>
                         </div>
                         <div class="icon"><span class="s7-ticket"></span></div>
@@ -76,7 +77,7 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" class="value" th:attr="data-end=#{data.taggedVehicle}" th:text="${data.taggedVehicle}">
+                            <div data-toggle="counter" class="value" th:attr="data-end=#{data.census}" th:text="${data.census}" >0
                             </div>
                             <div class="desc">Census</div>
                         </div>
@@ -94,7 +95,7 @@
                                 <a th:href="@{/weighing-transactions}"><div class="desc">Today's weighing numbers</div></a>
                             </div>
                         </div>
-                        <div class="tile-value"><span data-toggle="counter" ><span th:text="${data.weighedVehicles}"></span></span></div>
+                        <div class="tile-value"><span data-toggle="counter"  th:attr="data-end=#{data.weighedVehicles}" th:text="${data.weighedVehicles}"></span></div>
                     </div>
                 </div>
             </div>
