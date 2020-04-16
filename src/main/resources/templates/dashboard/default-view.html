@@ -20,20 +20,27 @@
 <th:block layout:fragment="content">
     <div class="row">
         <div class="col-md-7">
-            <div class="widget widget-fullwidth line-chart">
-                <div class="widget-head">
-                    <div class="tools"><span class="icon s7-graph2"></span></div>
-                    <span class="title">Vehicle Weighing</span>
-                </div>
-                <div class="chart-container">
-                    <div class="chart-container" style="height: 285px; padding: 0px; position: relative;">
-                        <canvas id="weighingLineChart" width="948"
-                                height="285"
-                                style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 948px; height: 285px;">
-                        </canvas>
+            <div class="panel panel-dark">
+                <div class="panel-body">
+                    <span class="custom-header">TREND</span>
+                    <div class="chart-container">
+                        <div class="chart-container" style="height: 285px; padding: 0px; position: relative;">
+                            <canvas id="weighingLineChart" width="948"
+                                    height="285"
+                                    style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 948px; height: 285px;">
+                            </canvas>
+                        </div>
                     </div>
                 </div>
             </div>
+
+<!--            <div class="widget widget-fullwidth line-chart">-->
+<!--                <div class="widget-head">-->
+<!--                    <div class="tools"><span class="icon s7-graph2"></span></div>-->
+<!--                    <span class="title">Vehicle Weighing</span>-->
+<!--                </div>-->
+<!--                -->
+<!--            </div>-->
         </div>
         <div class="col-md-5">
             <div class="row">
@@ -69,7 +76,8 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" data-end="4300" class="value">4300</div>
+                            <div data-toggle="counter" class="value" th:attr="data-end=#{data.taggedVehicle}" th:text="${data.taggedVehicle}">
+                            </div>
                             <div class="desc">Census</div>
                         </div>
                         <div class="icon"><span class="s7-search"></span></div>
@@ -83,10 +91,10 @@
                             <div class="icon"><span class="s7-car"></span></div>
                             <div class="data-info">
                                 <div class="title">Total Weighed</div>
-                                <div class="desc">Today's weighing numbers</div>
+                                <a th:href="@{/weighing-transactions}"><div class="desc">Today's weighing numbers</div></a>
                             </div>
                         </div>
-                        <div class="tile-value"><span data-toggle="counter" data-end="28458">28,458.00</span></div>
+                        <div class="tile-value"><span data-toggle="counter" ><span th:text="${data.weighedVehicles}"></span></span></div>
                     </div>
                 </div>
             </div>
@@ -131,17 +139,6 @@
         </div>
 
 
-
-
-
-<!--        <div class="col-md-9">-->
-<!--            <div class="widget">-->
-<!--                <div class="widget-head">-->
-<!--                    <div class="wt-hour"><span class="hour">Vehicle Census</span></div>-->
-<!--                </div>-->
-<!--                -->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 
     <!--    <div class="row">-->

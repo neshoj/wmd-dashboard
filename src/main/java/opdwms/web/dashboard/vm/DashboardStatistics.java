@@ -1,61 +1,62 @@
 package opdwms.web.dashboard.vm;
 
+import java.math.BigInteger;
+
 /**
- * @category    Dashboard
- * @package     Dev
- * @since       Nov 05, 2018
- * @author      Ignatius
- * @version     1.0.0
+ * @category Dashboard
+ * @package Dev
+ * @since Nov 05, 2018
+ * @author Ignatius
+ * @version 1.0.0
  */
 public class DashboardStatistics {
-    private long weighedVehicles = 0;
-    private long overloadVehicles = 2;
-    private long weighedWithinLimits = 3 ;
-    private long percentageOverload = 0 ;
-    private long percentageWithinLimit = 0 ;
+  private BigInteger weighedVehicles = BigInteger.ZERO;
+  private long census = 2;
+  private BigInteger taggedVehicle = BigInteger.ZERO;
+  private long hardware = 0;
+  private long stations = 0;
 
-    public long getWeighedVehicles() {
-        return weighedVehicles;
-    }
+  public BigInteger getWeighedVehicles() {
+    return weighedVehicles;
+  }
 
-    public void setWeighedVehicles(long weighedVehicles) {
-        this.weighedVehicles = weighedVehicles;
-    }
+  public void setWeighedVehicles(BigInteger weighedVehicles) {
+    this.weighedVehicles = weighedVehicles;
+  }
 
-    public long getOverloadVehicles() {
-        return overloadVehicles;
-    }
+  public long getCensus() {
+    return census;
+  }
 
-    public void setOverloadVehicles(long overloadVehicles) {
-        this.overloadVehicles = overloadVehicles;
-    }
+  public DashboardStatistics setCensus(long census) {
+    this.census = census;
+    return this;
+  }
 
-    public long getWeighedWithinLimits() {
-        return weighedWithinLimits;
-    }
+  public BigInteger getTaggedVehicle() {
+    return taggedVehicle;
+  }
 
-    public void setWeighedWithinLimits(long weighedWithinLimits) {
-        this.weighedWithinLimits = weighedWithinLimits;
-    }
+  public DashboardStatistics setTaggedVehicle(BigInteger taggedVehicle) {
+    this.taggedVehicle = taggedVehicle;
+    return this;
+  }
 
-    public long getPercentageOverload() {
-        return percentageOverload;
-    }
+  public long getHardware() {
+    return hardware;
+  }
 
-    public void setPercentageOverload(long percentageOverload) {
-        this.percentageOverload = percentageOverload;
-    }
+  public DashboardStatistics setHardware(long hardware) {
+    this.hardware = hardware;
+    return this;
+  }
 
-    public long getPercentageWthinLimit() {
-        return percentageWithinLimit;
-    }
+  public long getStations() {
+    return stations;
+  }
 
-    public void setPercentageWthinLimit(long percentageWthinLimit) {
-        this.percentageWithinLimit = percentageWthinLimit;
-    }
-
-    public void setPercentage() {
-        this.percentageOverload = overloadVehicles != 0 ? (overloadVehicles * 100)/ weighedVehicles : 0;
-        this.percentageWithinLimit = percentageOverload != 0 ?100 - percentageOverload : 0;
-    }
+  public DashboardStatistics setStations(long stations) {
+    this.stations = stations;
+    return this;
+  }
 }
