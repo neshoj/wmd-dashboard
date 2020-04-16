@@ -51,7 +51,7 @@ public class DashboardService implements DashboardServiceInterface {
     DashboardStatistics data = new DashboardStatistics();
     try {
 
-      DateFormat df = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+      DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
       String startDate = df.format(new Date());
 
       DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
@@ -62,6 +62,8 @@ public class DashboardService implements DashboardServiceInterface {
 
       data.setTaggedVehicle(getVehiclesTaggedToday(session, qStartDate, qEndDate));
 
+      System.err.println("data.getWeighedVehicles() = " + data.getWeighedVehicles());
+
     } catch (ParseException e) {
       e.printStackTrace();
     }
@@ -69,6 +71,9 @@ public class DashboardService implements DashboardServiceInterface {
   }
 
   private BigInteger getVehiclesTaggedToday(Session session, Date qStartDate, Date qEndDate) {
+    System.out.println("qStartDate = " + qStartDate);
+    System.out.println("qEndDate = " + qEndDate);
+
     Query rawHql;
     StringBuilder query = new StringBuilder();
     query
@@ -76,13 +81,18 @@ public class DashboardService implements DashboardServiceInterface {
         .append("FROM tagging_transactions a ")
         .append("WHERE DATE(a.transaction_date)  BETWEEN :startDate AND :endDate ");
 
-    rawHql = session.createNativeQuery(query.toString())
+    rawHql =
+        session
+            .createNativeQuery(query.toString())
             .setParameter("startDate", qStartDate)
             .setParameter("endDate", qEndDate);
     return (BigInteger) rawHql.uniqueResult();
   }
 
-    BigInteger getWeighTransactionsDoneToday(Session session, Date qStartDate, Date qEndDate) {
+  BigInteger getWeighTransactionsDoneToday(Session session, Date qStartDate, Date qEndDate) {
+    System.out.println("qStartDate = " + qStartDate);
+    System.out.println("qEndDate = " + qEndDate);
+
     Query rawHql;
     StringBuilder query = new StringBuilder();
     query
@@ -90,7 +100,9 @@ public class DashboardService implements DashboardServiceInterface {
         .append("FROM weighing_transactions a ")
         .append("WHERE DATE(a.transaction_date) BETWEEN :startDate AND :endDate ");
 
-    rawHql = session.createNativeQuery(query.toString())
+    rawHql =
+        session
+            .createNativeQuery(query.toString())
             .setParameter("startDate", qStartDate)
             .setParameter("endDate", qEndDate);
     return (BigInteger) rawHql.uniqueResult();
