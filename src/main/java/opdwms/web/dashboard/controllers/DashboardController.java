@@ -72,7 +72,7 @@ public class DashboardController {
         }
 
         return view
-//                .addAttribute("data", dashboardService.fetchStatistics(request))
+                .addAttribute("data", dashboardService.fetchStatistics(request))
 //                .addAttribute("weighbridges", weighbridgeStationsRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD))
                 .addAttribute("chartData", fetchLineChartData(request))
                 .getView();

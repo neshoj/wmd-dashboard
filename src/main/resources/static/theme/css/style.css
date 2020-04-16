@@ -13799,7 +13799,6 @@ li.L9 {
     color: #fff;
     font-size: 35px;
     font-weight: 300;
-    padding: 10px;
     text-align: center
 }
 
@@ -22588,4 +22587,9 @@ table{
 iframe {
     border: none;
     background-color: #555;
+}
+
+.custom-header {
+    font-size: 15px;
+    font-weight: 300;
 }
