@@ -88,7 +88,6 @@
                     $('#no-of-stations').text(data.stations);
                     $('#hardware-monitor').text(data.hardware);
                     $('#tagged-vehicles').text(data.taggedVehicle);
-                    $('#tagged-vehicles').text(data.taggedVehicle);
                     $('#census').text(data.census);
                     $('#weighed-vehicles').text(data.weighedVehicles);
                     // $('#no-of-stations').counter();
