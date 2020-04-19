@@ -1,6 +1,7 @@
 package opdwms.web.dashboard.services;
 
 import opdwms.web.dashboard.DashboardServiceInterface;
+import opdwms.web.dashboard.vm.CensusStats;
 import opdwms.web.dashboard.vm.DashboardStatistics;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -42,9 +43,26 @@ public class DashboardService implements DashboardServiceInterface {
     String parentType = (String) request.getSession().getAttribute("_userParentType");
     Long parentNo = (Long) request.getSession().getAttribute("_userParentNo");
     Session session = entityManager.unwrap(Session.class);
-
-    //        if( StringUtils.isEmpty( parentType ) )
     return statistics(session);
+  }
+
+  @Override
+  public CensusStats fetchCensusStatistics(HttpServletRequest request) {
+    CensusStats data = new CensusStats();
+    try {
+      DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+      String startDate = df.format(new Date());
+
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+      Date qStartDate = dateFormat.parse(startDate + " 00:00");
+      Date qEndDate = dateFormat.parse(startDate + " 23:59");
+
+
+
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return data;
   }
 
   private DashboardStatistics statistics(Session session) {

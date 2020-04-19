@@ -47,7 +47,7 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" th:attr="data-end=#{data.stations}" class="value" th:text="${data.stations}"></div>
+                            <div data-toggle="counter" data-end="0" class="value" id="no-of-stations">0</div>
                             <div class="desc">No Of Stations</div>
                         </div>
                         <div class="icon"><span class="s7-map-marker"></span></div>
@@ -56,7 +56,7 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" data-end="126" class="value">126</div>
+                            <div data-toggle="counter" data-end="126" class="value" id="hardware-monitor">0</div>
                             <div class="desc">Hardware Monitor</div>
                         </div>
                         <div class="icon"><span class="s7-share"></span></div>
@@ -67,7 +67,7 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" class="value" th:attr="data-end=#{data.taggedVehicle}" th:text="${data.taggedVehicle}" >0
+                            <div data-toggle="counter" class="value" data-end="0" id="tagged-vehicles">0
                             </div>
                             <div class="desc">Tagged Vehicles</div>
                         </div>
@@ -77,7 +77,7 @@
                 <div class="col-md-6">
                     <div class="widget widget-tile">
                         <div class="data-info">
-                            <div data-toggle="counter" class="value" th:attr="data-end=#{data.census}" th:text="${data.census}" >0
+                            <div data-toggle="counter" class="value" data-end="0" id="census">0
                             </div>
                             <div class="desc">Census</div>
                         </div>
@@ -95,7 +95,7 @@
                                 <a th:href="@{/weighing-transactions}"><div class="desc">Today's weighing numbers</div></a>
                             </div>
                         </div>
-                        <div class="tile-value"><span data-toggle="counter"  th:attr="data-end=#{data.weighedVehicles}" th:text="${data.weighedVehicles}"></span></div>
+                        <div class="tile-value"><span data-toggle="counter" data-end="0" id="weighed-vehicles">0</span></div>
                     </div>
                 </div>
             </div>
@@ -125,14 +125,13 @@
                     <div class="wt-hour"><span class="hour">Census</span></div>
                     <div class="wt-info">
                         <div class="wt-day"><span class="day">Buses</span>
-                            <span class="date">30</span>
+                            <span class="date" id="census-buses">0</span>
                         </div>
                         <div class="wt-day"><span class="day">Trucks > 3T</span>
-
-                            <span class="date">2825</span>
+                            <span class="date" id="census-trucks-3t">0</span>
                         </div>
                         <div class="wt-day"><span class="day">Trucks > 7T</span>
-                            <span class="date">218</span>
+                            <span class="date" id="census-trucks-7t">0</span>
                         </div>
                     </div>
                 </div>
