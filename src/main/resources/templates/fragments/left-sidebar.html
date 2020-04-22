@@ -58,18 +58,20 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-arrest','/mobile-weigh-prosecution')}">
-                    <a th:href="@{/mobile-weigh-arrest}"><i class="icon s7-phone"></i><span> Mobile </span></a>
+                    th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report','/daily-tagging-report')}">
+                    <a th:href="@{/daily-weighing-report}"><i class="icon s7-news-paper"></i><span>Reports</span></a>
                     <ul class="sub-menu">
-                        <li th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-arrest')}">
-                            <a th:href="@{/mobile-weigh-arrest}"> Mobile Weigh Arrest </a>
+                        <li th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report')}"><a th:href="@{/daily-weighing-report}">Daily Weighing Reports</a>
                         </li>
-                        <li th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-prosecution')}">
-                            <a th:href="@{/mobile-weigh-prosecution}"> Mobile Weigh Prosecution </a>
+                        <li th:classappend="${@viewTags.isActiveMenu('/daily-tagging-report')}"><a th:href="@{/daily-tagging-report}">Daily Tagging Reports</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/weigh-station-transaction-report')}"><a th:href="@{/weigh-station-transaction-report}">Weigh Station Transaction Reports</a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="parent"
                     th:classappend="${@viewTags.isActiveMenu('/tagging-cleared-transactions','/tagging-open-transactions', '/virtual-station-tagging-transactions')}">
                     <a th:href="@{/tagging-open-transactions}"><i class="icon s7-car"></i><span> Vehicle Tags</span></a>
@@ -85,6 +87,19 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="parent"
+                    th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-arrest','/mobile-weigh-prosecution')}">
+                    <a th:href="@{/mobile-weigh-arrest}"><i class="icon s7-phone"></i><span> Mobile </span></a>
+                    <ul class="sub-menu">
+                        <li th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-arrest')}">
+                            <a th:href="@{/mobile-weigh-arrest}"> Mobile Weigh Arrest </a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/mobile-weigh-prosecution')}">
+                            <a th:href="@{/mobile-weigh-prosecution}"> Mobile Weigh Prosecution </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="parent"
                     th:classappend="${@viewTags.isActiveMenu('/weighing-transactions', '/hswim-transactions', '/virtual-station-transactions')}">
                     <a th:href="@{/weighing-transactions}"><i class="icon s7-note2"></i><span> Transactions </span></a>
@@ -97,16 +112,6 @@
                         </li>
                         <li th:classappend="${@viewTags.isActiveMenu('/virtual-station-transactions')}"><a
                                 th:href="@{/virtual-station-transactions}">Virtual Station Transactions</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="parent"
-                    th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report','/daily-tagging-report')}">
-                    <a th:href="@{/daily-weighing-report}"><i class="icon s7-news-paper"></i><span>Reports</span></a>
-                    <ul class="sub-menu">
-                        <li th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report')}"><a th:href="@{/daily-weighing-report}">Daily Weighing Reports</a>
-                        </li>
-                        <li th:classappend="${@viewTags.isActiveMenu('/daily-tagging-report')}"><a th:href="@{/daily-tagging-report}">Daily Tagging Reports</a>
                         </li>
                     </ul>
                 </li>

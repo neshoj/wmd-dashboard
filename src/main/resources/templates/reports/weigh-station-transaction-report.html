@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/report-layout}"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <meta charset="utf-8"/>
-    <title>OPD-WMS &middot; Daily Weighing Reports </title>
+    <title>OPD-WMS &middot; Weigh Station Transaction Reports </title>
 
 </head>
 <body>
@@ -16,7 +16,7 @@
         <ol class="breadcrumb">
             <li><a th:href="@{/}">Home</a></li>
             <li><a th:href="@{/daily-weighing-report}">Reports</a></li>
-            <li class="active" th:text="#{page.report.weighing.date}"></li>
+            <li class="active"> Weigh Station Transaction</li>
         </ol>
     </div>
 
@@ -31,47 +31,6 @@
                             <div class="text-center float-e-margins">
                                 <div class="heading-elements">
                                     <button class="btn  btn-space  btn-success"> Refresh</button>
-
-<!--                                    <div class="btn-group weighbridge-station-no">-->
-<!--                                        <button type="button"-->
-<!--                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"-->
-<!--                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                            Weighbridge stations-->
-<!--                                        </button>-->
-<!--                                        <div class="dropdown-menu">-->
-<!--                                            <button data-index="" class="dropdown-item" type="button"> &#45;&#45; Select-->
-<!--                                                Weighbridge Station &#45;&#45;-->
-<!--                                            </button>-->
-<!--                                            <div class="dropdown-divider"></div>-->
-<!--                                            <button th:each="item : ${weighbridgestations}"-->
-<!--                                                    data-filter="weighbridge-station-no"-->
-<!--                                                    th:data-index="${item.id}"-->
-<!--                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="btn-group action-taken">-->
-<!--                                        <button type="button"-->
-<!--                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"-->
-<!--                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                            Weighing Outcome-->
-<!--                                        </button>-->
-<!--                                        <div class="dropdown-menu">-->
-<!--                                            <button data-index="" class="dropdown-item" type="button"> &#45;&#45; Action Taken-->
-<!--                                                &#45;&#45;-->
-<!--                                            </button>-->
-<!--                                            <div class="dropdown-divider"></div>-->
-<!--                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"-->
-<!--                                                    type="button"> Within limit-->
-<!--                                            </button>-->
-<!--                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"-->
-<!--                                                    type="button"> Withing Permissible-->
-<!--                                            </button>-->
-<!--                                            <button data-filter="action-taken" data-index="2" class="dropdown-item"-->
-<!--                                                    type="button"> Overloads-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
 
                                     <button class="btn btn-flat btn-space btn-default date-range"
                                             title="Specify Range ">
@@ -108,9 +67,6 @@
                                             <tr>
                                                 <th>Date</th>
                                                 <th>Vehicles Weighed</th>
-                                                <th>Total Traffic</th>
-                                                <th>Special Released</th>
-                                                <th>Total Overload</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -134,47 +90,6 @@
                                 <div class="heading-elements">
                                     <button class="btn  btn-space   btn-info"> Back</button>
                                     <button class="btn  btn-space  btn-success"> Refresh</button>
-
-                                    <div class="btn-group weighbridge-station-no">
-                                        <button type="button"
-                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Weighbridge stations
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button data-index="" class="dropdown-item" type="button"> -- Select
-                                                Weighbridge Station --
-                                            </button>
-                                            <div class="dropdown-divider"></div>
-                                            <button th:each="item : ${weighbridgestations}"
-                                                    data-filter="weighbridge-station-no"
-                                                    th:data-index="${item.id}"
-                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>
-                                        </div>
-                                    </div>
-
-                                    <div class="btn-group action-taken">
-                                        <button type="button"
-                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Weighing Outcome
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button data-index="" class="dropdown-item" type="button"> -- Action Taken
-                                                --
-                                            </button>
-                                            <div class="dropdown-divider"></div>
-                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"
-                                                    type="button"> Within limit
-                                            </button>
-                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"
-                                                    type="button"> Withing Permissible
-                                            </button>
-                                            <button data-filter="action-taken" data-index="2" class="dropdown-item"
-                                                    type="button"> Overloads
-                                            </button>
-                                        </div>
-                                    </div>
 
                                     <button class="btn btn-flat btn-space btn-default date-range"
                                             title="Specify Range ">
