@@ -18,15 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-public class WeighStationReportController extends AbstractExcelReportController {
+public class VehicleBasedReportController extends AbstractExcelReportController {
 
   @Autowired
-  public WeighStationReportController() {}
+  public VehicleBasedReportController() {}
 
-  @RequestMapping(value = "/weigh-station-transaction-report")
+  @RequestMapping(value = "/vehicle-transaction-report")
   public ModelAndView index(HttpServletRequest request) {
     String parentType = (String) request.getSession().getAttribute("_userParentType");
-    View view = new View("reports/weigh-station-transaction-report");
+    View view = new View("reports/vehicle-transaction-report");
 
     if (AjaxUtils.isAjaxRequest(request)) {
       return fetchTableData(request, view);
@@ -54,10 +54,9 @@ public class WeighStationReportController extends AbstractExcelReportController 
 
       dataTable
           .nativeSQL(true)
-          .select("b.name, COALESCE(COUNT(a.id); 0), b.id ")
+          .select("a.vehicle_no, COALESCE(COUNT(a.id); 0), a.vehicle_no")
           .from("weighing_transactions a ")
-          .from(" LEFT JOIN weighbridge_stations b ON b.id = a.weighbridge_no")
-          .groupBy(" b.name");
+          .groupBy(" a.vehicle_no");
 
       // Set Date Filters
       setDateFilters(request, "a");
@@ -87,7 +86,7 @@ public class WeighStationReportController extends AbstractExcelReportController 
               "DATE_FORMAT(a.transaction_date; '%Y-%m-%d %H:%i'), a.vehicle_no, a.ticket_no, b.name, a.operator, a.wbt_shift,  a.axle_configuration, FORMAT(a.vehicleGVM; 0), a.permit_no ")
           .from(
               "weighing_transactions a LEFT JOIN weighbridge_stations  b ON b.id = a.weighbridge_no ")
-          .where("a.weighbridge_no = :wbsNo") .setParameter("wbsNo", weighbridgeStationNo.trim());
+          .where("a.weighbridge_no = :vehicle") .setParameter("vehicle", weighbridgeStationNo.trim());
 
       // Set Date Filters
       setDateFilters(request, "a");
@@ -98,15 +97,15 @@ public class WeighStationReportController extends AbstractExcelReportController 
     return view.sendJSON(dataTable.showTable());
   }
 
-  @RequestMapping(value = "/weigh-station-transaction-report/xls", method = RequestMethod.GET)
+  @RequestMapping(value = "/vehicle-transaction-report/xls", method = RequestMethod.GET)
   public void exportReportInExcel(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     ReportMetaData reportMetaData = new ReportMetaData();
-    reportMetaData.setReportTitle("Weigh Station Transaction Report");
+    reportMetaData.setReportTitle("Vehicle Report");
     generateDoc(
         request,
         response,
-        "weigh-station-transaction-report"
+        "vehicle-report"
             + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()),
         "xls");
   }

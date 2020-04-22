@@ -63,11 +63,15 @@
                     th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report','/daily-tagging-report')}">
                     <a th:href="@{/daily-weighing-report}"><i class="icon s7-news-paper"></i><span>Reports</span></a>
                     <ul class="sub-menu">
-                        <li th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report')}"><a th:href="@{/daily-weighing-report}">Daily Weighing Reports</a>
-                        </li>
+<!--                        <li th:classappend="${@viewTags.isActiveMenu('/daily-weighing-report')}"><a th:href="@{/daily-weighing-report}">Daily Weighing Reports</a>-->
+<!--                        </li>-->
                         <li th:classappend="${@viewTags.isActiveMenu('/daily-tagging-report')}"><a th:href="@{/daily-tagging-report}">Daily Tagging Reports</a>
                         </li>
                         <li th:classappend="${@viewTags.isActiveMenu('/weigh-station-transaction-report')}"><a th:href="@{/weigh-station-transaction-report}">Weigh Station Transaction Reports</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/vehicle-class-transaction-report')}"><a th:href="@{/vehicle-class-transaction-report}">Vehicle Classification Reports</a>
+                        </li>
+                        <li th:classappend="${@viewTags.isActiveMenu('/vehicle-transaction-report')}"><a th:href="@{/vehicle-transaction-report}">Vehicle Reports</a>
                         </li>
                     </ul>
                 </li>

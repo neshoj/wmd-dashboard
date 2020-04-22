@@ -57,7 +57,6 @@ public class DailyTransactionReportController extends AbstractReportController {
         }
         generateDoc(request, response, "daily-transaction-report_" + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()), format, "DailyWeighingReport", reportMetaData);
 
-
     }
 
     /**

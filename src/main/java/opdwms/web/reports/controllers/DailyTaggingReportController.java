@@ -5,12 +5,10 @@ import opdwms.core.export.ReportMetaData;
 import opdwms.core.template.AjaxUtils;
 import opdwms.core.template.AppConstants;
 import opdwms.core.template.View;
-import opdwms.web.weighbridgestations.entities.WeighbridgeStations;
 import opdwms.web.weighbridgestations.repository.WeighbridgeStationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,10 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Controller
-public class DailyTaggingReportController extends AbstractReportController {
+public class DailyTaggingReportController extends AbstractExcelReportController {
 
     @Autowired
     private WeighbridgeStationsRepository weighbridgeStationsRepository;
@@ -42,21 +39,17 @@ public class DailyTaggingReportController extends AbstractReportController {
                 .getView();
     }
 
-    @RequestMapping(value = "/daily-tagging-report/{format}", method = RequestMethod.GET)
-    public void export(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            @PathVariable("format") String format) throws IOException {
+    @RequestMapping(value = "/daily-tagging-report/xls", method = RequestMethod.GET)
+    public void exportReportInExcel(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
         ReportMetaData reportMetaData = new ReportMetaData();
-        List<WeighbridgeStations> stationsRepositoryAllByFlag = weighbridgeStationsRepository.findAllByFlag(AppConstants.STATUS_ACTIVERECORD);
-        if (stationsRepositoryAllByFlag.size() > 0) {
-            WeighbridgeStations weighbridgeStations = stationsRepositoryAllByFlag.get(0);
-            reportMetaData.setStationName(weighbridgeStations.getName())
-                    .setReportTitle("DAILY TAGGING REPORT");
-        }
-        generateDoc(request, response, "daily-tagging-report_" + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()), format, "DailyTaggingReport", reportMetaData);
-
-
+        reportMetaData.setReportTitle("Tagging Report");
+        generateDoc(
+                request,
+                response,
+                "tagging-report"
+                        + new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()),
+                "xls");
     }
 
     /**
