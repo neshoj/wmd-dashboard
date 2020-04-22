@@ -10,14 +10,13 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,7 +33,7 @@ public class ReportService {
     }
 
     @Scheduled(cron = "${app.dailytrucksweighed.cron.expression}")
-    public void scheduledTrucksWeighedDailyTask(){
+    public void scheduledTrucksWeighedDailyTask() {
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
@@ -44,13 +43,70 @@ public class ReportService {
     }
 
 
+    public Map<String, Object> generateTrucksWeighedDailyDataTable(HttpServletRequest request) {
+        Map<String, Object> resp = new HashMap<>();
+        int limit = Integer.parseInt(request.getParameter("iDisplayLength"));
+        int page = Integer.parseInt(request.getParameter("iDisplayStart"));
+        int offset = limit * page;
+        int sEcho = Integer.parseInt(request.getParameter("sEcho"));
+        int sortFieldIndex = Integer.parseInt(request.getParameter("iSortCol_0"));
+
+        String searchString = request.getParameter("sSearch").toLowerCase();
+        String sortDir;
+        if(sortFieldIndex ==0){
+            sortDir = request.getParameter("sSortDir_0").toUpperCase();
+        }else{
+            sortDir = "DESC";
+        }
+        String fetchReports;
+        if(!ObjectUtils.isEmpty(searchString)){
+            fetchReports = "SELECT * FROM vehicles_weighed_daily_reports WHERE date like '%"+searchString+"%'" +
+                    " ORDER BY date "+sortDir+" LIMIT " + offset + "," + limit;
+        }else{
+            fetchReports = "SELECT * FROM  vehicles_weighed_daily_reports ORDER BY date "+sortDir+" LIMIT " + offset + "," + limit;
+        }
+
+        String countQuery = "SELECT COUNT(id) FROM vehicles_weighed_daily_reports";
+
+
+        List<Map<String, Object>> reportsResponse = jdbcTemplate.queryForList(fetchReports);
+        Integer reportCount = jdbcTemplate.queryForObject(countQuery, Integer.class);
+        List<Object[]> data = new ArrayList<>();
+        if (reportsResponse.isEmpty()) {
+            resp.put("aaData", data);
+            resp.put("iTotalRecords", 0);
+            resp.put("iTotalDisplayRecords", 0);
+            resp.put("sEcho", sEcho);
+            return resp;
+        }
+
+        for (Map<String, Object> row : reportsResponse) {
+            String jsonReportString = (String) row.get("report_json");
+            logger.debug("Fetched report: {}", jsonReportString);
+            JSONObject jsonReport = new JSONObject(jsonReportString);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String reportDate = formatter.format((Date) row.get("date"));
+
+            Object[] dtRow = new Object[]{reportDate,jsonReport.get("totalWeighed_X"), jsonReport.get("totalTraffic_T"),
+                    jsonReport.getInt("specialReleaseTrucks_G"), jsonReport.getInt("totalOverloaded")};
+            data.add(dtRow);
+        }
+
+        resp.put("aaData", data);
+        resp.put("iTotalRecords", reportCount);
+        resp.put("iTotalDisplayRecords", reportCount);
+        resp.put("sEcho", sEcho);
+        return resp;
+    }
+
     private void generateTrucksWeighedDailyReport(Date date) {
 
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//            String reportDate = "2019-10-20";
             String reportDate = formatter.format(date);
             String weighedTrucksQuery = "SELECT COUNT(id) from weighing_transactions where cast(transaction_date AS DATE) ='" + reportDate + "'";
-           logger.debug("weighedTrucksQuery: {}", weighedTrucksQuery);
+            logger.debug("weighedTrucksQuery: {}", weighedTrucksQuery);
 
             Integer weighedScale_N = jdbcTemplate.queryForObject(weighedTrucksQuery, Integer.class);
             Integer manuallyWeighed_M = 0, weighedHSWIM_Q = 0;
@@ -65,7 +121,7 @@ public class ReportService {
             //Overloaded
             String totalOverloadedQuery = "SELECT COUNT(id) from weighing_transactions where status='" + GVM_OVERLOAD +
                     "' AND cast(transaction_date AS DATE) ='" + reportDate + "'";
-            logger.debug("totalOverloadedQuery: {}",totalOverloadedQuery);
+            logger.debug("totalOverloadedQuery: {}", totalOverloadedQuery);
             Integer totalOverloaded = jdbcTemplate.queryForObject(totalOverloadedQuery, Integer.class);
 
             Integer totalCharged = 0;
