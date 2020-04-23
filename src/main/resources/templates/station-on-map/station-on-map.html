@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default-layout}"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <meta charset="utf-8"/>
-    <title>OPD-WMS &middot; Station On Map </title>
+    <title>WMS &middot; Station On Map </title>
     <style>
         #map {
-            height: 100%;
+            height: 700px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
         }
-
     </style>
 </head>
 <body>
@@ -31,10 +31,7 @@
             <div class="col-sm-12">
                 <div class="tab-container">
                     <div class="tab-content">
-
-                            <div id="map"></div>
-
-
+                        <div id="map"></div>
                     </div>
                 </div>
             </div>
@@ -47,21 +44,93 @@
 
 
 <th:block layout:fragment="script">
-<!--    <script th:src="@{js/app-util.js}"></script>-->
-<!--    <script th:src="@{js/station-on-map/station-on-map.js}"></script>-->
+    <!--    <script th:src="@{js/app-util.js}"></script>-->
+    <!--    <script th:src="@{js/station-on-map/station-on-map.js}"></script>-->
     <script>
-        var map;
         function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
+            let mapCentre = {lat: -0.152310, lng: 37.308365}
+            // The map, centered at gilgil
+            let map = new google.maps.Map(document.getElementById('map'), {zoom: 8, center: mapCentre});
+
+            // The location of gilgil
+            let gilgil = {lat: -0.577976, lng: 36.366258};
+            // The marker, positioned at gilgil
+            let gilgilmarker = new google.maps.Marker({
+                position: gilgil,
+                map: map,
+                title: 'GILGIL WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
+            });
+
+            // The location of mlolongo
+            let mlolongo = {lat: -1.3899006, lng: 36.9362097};
+            // The marker, positioned at gilgil
+            let mlolongomarker = new google.maps.Marker({
+                position: mlolongo,
+                map: map,
+                title: 'ATHI RIVER WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
+            });
+
+            // The location of busia ,
+            let busia = {lat: 0.44774656, lng: 34.13921684};
+            // The marker, positioned at gilgil
+            let busiamarker = new google.maps.Marker({
+                position: busia,
+                map: map,
+                title: 'BUSIA WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
+            });
+
+            // The location of webuye ,
+            let webuye = {lat: 0.605893, lng: 34.7509193};
+            // The marker, positioned at gilgil
+            let webuyemarker = new google.maps.Marker({
+                position: webuye,
+                map: map,
+                title: 'WEBUYE WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
+            });
+
+            // The location of mariakani ,
+            let mariakani = {lat: -3.835684 , lng: 39.4348562};
+            // The marker, positioned at gilgil
+            let mariakanimarker = new google.maps.Marker({
+                position: mariakani,
+                map: map,
+                title: 'MARIAKANI WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
+            });
+
+            // The location of dongo kundu
+            let dongokundu = {lat: -4.0027185 , lng: 39.5679977};
+            // The marker, positioned at gilgil
+            let dongokundumarker = new google.maps.Marker({
+                position: dongokundu,
+                map: map,
+                title: 'DONGO KUNDU WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
+            });
+
+            // The location of mariakani ,
+            let mtwapa = {lat: -3.9394279, lng: 39.7425296};
+            // The marker, positioned at gilgil
+            let mtwapamarker = new google.maps.Marker({
+                position: mtwapa,
+                map: map,
+                title: 'MTWAPA WBS',
+                icon: 'https://image.winudf.com/v2/image1/Y29tLmNpcGhlcmh1Yi56cGNsd2VpZ2hicmlkZ2VfaWNvbl8xNTY1NTI3ODk3XzA5Mg/icon.png?w=35&fakeurl=1'
             });
         }
     </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAyV-_ge1zSsxrgSvo2T0rGFDAOUDR5Kdc&callback=initMap">
-    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyV-_ge1zSsxrgSvo2T0rGFDAOUDR5Kdc&callback=initMap"
+            async defer></script>
 </th:block>
 
 </body>
