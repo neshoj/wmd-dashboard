@@ -13,7 +13,7 @@ public class DashboardStatistics {
   private BigInteger weighedVehicles = BigInteger.ZERO;
   private BigInteger census = BigInteger.ZERO;
   private BigInteger taggedVehicle = BigInteger.ZERO;
-  private long hardware = 0;
+  private BigInteger hardware = BigInteger.ZERO;
   private BigInteger stations = BigInteger.ZERO;
 
   public BigInteger getWeighedVehicles() {
@@ -42,11 +42,11 @@ public class DashboardStatistics {
     return this;
   }
 
-  public long getHardware() {
+  public BigInteger getHardware() {
     return hardware;
   }
 
-  public DashboardStatistics setHardware(long hardware) {
+  public DashboardStatistics setHardware(BigInteger hardware) {
     this.hardware = hardware;
     return this;
   }

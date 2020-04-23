@@ -80,6 +80,7 @@ public class DashboardService implements DashboardServiceInterface {
       data.setCensus(data.getWeighedVehicles());
       data.setStations(getStations(session));
 
+      data.setHardware(getHardwareMonitored(session));
       data.setTaggedVehicle(getVehiclesTaggedToday(session, qStartDate, qEndDate));
 
       System.err.println("data.getWeighedVehicles() = " + data.getWeighedVehicles());
@@ -88,6 +89,15 @@ public class DashboardService implements DashboardServiceInterface {
       e.printStackTrace();
     }
     return data;
+  }
+
+  private BigInteger getHardwareMonitored(Session session) {
+    Query rawHql;
+    StringBuilder query = new StringBuilder();
+    query.append("SELECT COUNT( * ) ").append("FROM hardware_monitoring a ");
+
+    rawHql = session.createNativeQuery(query.toString());
+    return (BigInteger) rawHql.uniqueResult();
   }
 
   private BigInteger getStations(Session session) {

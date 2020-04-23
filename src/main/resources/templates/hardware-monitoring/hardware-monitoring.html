@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Hardware Monitoring </title>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title"> Hardware Monitoring </h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/hardware-monitoring}"> Dashboard</a></li>
+            <li class="active">Hardware Monitoring</li>
+        </ol>
+    </div>
+
+    <div class="main-content">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-container">
+                    <div class="tab-content">
+
+                        <div id="active" class="tab-pane active cont active">
+
+                            <table class="table table-striped table-hover table-fw-widget table-active">
+                                <thead>
+                                <tr>
+                                    <th>Site Name</th>
+                                    <th>IP Address</th>
+                                    <th>Device Name</th>
+                                    <th>Last Updated</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="modals"></th:block>
+
+
+<th:block layout:fragment="script">
+    <script th:src="@{js/app-util.js}"></script>
+    <script th:src="@{js/hardware-monitoring/hardware-monitoring.js}"></script>
+
+</th:block>
+
+</body>
+</html>

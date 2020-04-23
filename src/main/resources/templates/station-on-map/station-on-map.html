@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8"/>
+    <title>OPD-WMS &middot; Station On Map </title>
+    <style>
+        #map {
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title"> Station Location</h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/station-on-map}"> Dashboard</a></li>
+            <li class="active">Station Location</li>
+        </ol>
+    </div>
+
+    <div class="main-content">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="tab-container">
+                    <div class="tab-content">
+
+                            <div id="map"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="modals"></th:block>
+
+
+<th:block layout:fragment="script">
+<!--    <script th:src="@{js/app-util.js}"></script>-->
+<!--    <script th:src="@{js/station-on-map/station-on-map.js}"></script>-->
+    <script>
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAyV-_ge1zSsxrgSvo2T0rGFDAOUDR5Kdc&callback=initMap">
+    </script>
+
+</th:block>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8"/>
-    <title>OPD-WMS &middot; Daily Tagging Reports </title>
+    <title>OPD-WMS &middot; Tagging Reports </title>
 
 </head>
 <body>
@@ -32,43 +32,43 @@
                                 <div class="heading-elements">
                                     <button class="btn  btn-space  btn-success"> Refresh</button>
 
-                                    <div class="btn-group weighbridge-station-no">
-                                        <button type="button"
-                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Weighbridge stations
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button data-index="" class="dropdown-item" type="button"> -- Select
-                                                Weighbridge Station --
-                                            </button>
-                                            <div class="dropdown-divider"></div>
-                                            <button th:each="item : ${weighbridgestations}"
-                                                    data-filter="weighbridge-station-no"
-                                                    th:data-index="${item.id}"
-                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="btn-group weighbridge-station-no">-->
+<!--                                        <button type="button"-->
+<!--                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"-->
+<!--                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                            Weighbridge stations-->
+<!--                                        </button>-->
+<!--                                        <div class="dropdown-menu">-->
+<!--                                            <button data-index="" class="dropdown-item" type="button"> &#45;&#45; Select-->
+<!--                                                Weighbridge Station &#45;&#45;-->
+<!--                                            </button>-->
+<!--                                            <div class="dropdown-divider"></div>-->
+<!--                                            <button th:each="item : ${weighbridgestations}"-->
+<!--                                                    data-filter="weighbridge-station-no"-->
+<!--                                                    th:data-index="${item.id}"-->
+<!--                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
-                                    <div class="btn-group action-taken">
-                                        <button type="button"
-                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Tagging Status
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button data-index="" class="dropdown-item" type="button"> -- Action Taken
-                                                --
-                                            </button>
-                                            <div class="dropdown-divider"></div>
-                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"
-                                                    type="button"> Pending Tags
-                                            </button>
-                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"
-                                                    type="button"> Cleared Tags
-                                            </button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="btn-group action-taken">-->
+<!--                                        <button type="button"-->
+<!--                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"-->
+<!--                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                            Tagging Status-->
+<!--                                        </button>-->
+<!--                                        <div class="dropdown-menu">-->
+<!--                                            <button data-index="" class="dropdown-item" type="button"> &#45;&#45; Action Taken-->
+<!--                                                &#45;&#45;-->
+<!--                                            </button>-->
+<!--                                            <div class="dropdown-divider"></div>-->
+<!--                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"-->
+<!--                                                    type="button"> Pending Tags-->
+<!--                                            </button>-->
+<!--                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"-->
+<!--                                                    type="button"> Cleared Tags-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
                                     <button class="btn btn-flat btn-space btn-default date-range"
                                             title="Specify Range ">
@@ -89,7 +89,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right download-report">
                                             <li><a data-action="xls" href="/daily-weighing-report/xls" target="_blank">
-                                                PDF </a>
+                                                Excel </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -129,43 +129,43 @@
                                     <button class="btn  btn-space   btn-info"> Back</button>
                                     <button class="btn  btn-space  btn-success"> Refresh</button>
 
-                                    <div class="btn-group weighbridge-station-no">
-                                        <button type="button"
-                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Weighbridge stations
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button data-index="" class="dropdown-item" type="button"> -- Select
-                                                Weighbridge Station --
-                                            </button>
-                                            <div class="dropdown-divider"></div>
-                                            <button th:each="item : ${weighbridgestations}"
-                                                    data-filter="weighbridge-station-no"
-                                                    th:data-index="${item.id}"
-                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="btn-group weighbridge-station-no">-->
+<!--                                        <button type="button"-->
+<!--                                                class="btn btn-secondary btn-space  dropdown-toggle wbs-title-btn"-->
+<!--                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                            Weighbridge stations-->
+<!--                                        </button>-->
+<!--                                        <div class="dropdown-menu">-->
+<!--                                            <button data-index="" class="dropdown-item" type="button"> &#45;&#45; Select-->
+<!--                                                Weighbridge Station &#45;&#45;-->
+<!--                                            </button>-->
+<!--                                            <div class="dropdown-divider"></div>-->
+<!--                                            <button th:each="item : ${weighbridgestations}"-->
+<!--                                                    data-filter="weighbridge-station-no"-->
+<!--                                                    th:data-index="${item.id}"-->
+<!--                                                    class="dropdown-item" type="button" th:text="${item.name}"></button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
-                                    <div class="btn-group action-taken">
-                                        <button type="button"
-                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Tagging Status
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <button data-index="" class="dropdown-item" type="button"> -- Action Taken
-                                                --
-                                            </button>
-                                            <div class="dropdown-divider"></div>
-                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"
-                                                    type="button"> Pending Tags
-                                            </button>
-                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"
-                                                    type="button"> Cleared Tags
-                                            </button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="btn-group action-taken">-->
+<!--                                        <button type="button"-->
+<!--                                                class="btn btn-secondary btn-space  dropdown-toggle title-btn"-->
+<!--                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                            Tagging Status-->
+<!--                                        </button>-->
+<!--                                        <div class="dropdown-menu">-->
+<!--                                            <button data-index="" class="dropdown-item" type="button"> &#45;&#45; Action Taken-->
+<!--                                                &#45;&#45;-->
+<!--                                            </button>-->
+<!--                                            <div class="dropdown-divider"></div>-->
+<!--                                            <button data-filter="action-taken" data-index="0" class="dropdown-item"-->
+<!--                                                    type="button"> Pending Tags-->
+<!--                                            </button>-->
+<!--                                            <button data-filter="action-taken" data-index="1" class="dropdown-item"-->
+<!--                                                    type="button"> Cleared Tags-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
                                     <button class="btn btn-flat btn-space btn-default date-range"
                                             title="Specify Range ">
@@ -186,7 +186,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right download-report">
                                             <li><a data-action="xls" href="/daily-weighing-report/xls" target="_blank">
-                                                PDF </a>
+                                                Excel </a>
                                             </li>
                                         </ul>
                                     </div>
