@@ -9,8 +9,21 @@
 
     $(document).ready(function ($) {
 
-        let oTable = utils.dataTable({
-            table : $(".table")
+        // let oTable = utils.dataTable({
+        //     table : $(".table")
+        // });
+
+       let oTable = utils.dataTable({
+            table: $(".table"),
+            fnRowCallback: function (nRow, aData) {
+                //Process data
+                let k = 0;
+                $(aData).each(function (i) {
+                    k++;
+                    if (k === 3)
+                         $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-signal fa-2x green"></i>');
+                });
+            }
         });
 
         //When to refresh table info
