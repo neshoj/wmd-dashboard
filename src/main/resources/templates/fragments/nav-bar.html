@@ -51,21 +51,14 @@
                 </ul>
                 <ul class="nav navbar-nav am-top-menu">
                     <li><a th:href="@{/}">Home</a></li>
-                    <li><a th:href="@{/live-preview}">Live Preview</a></li>
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Quick Access <span class="angle-down s7-angle-down"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a th:href="@{/weighbridge-stations}">Weighbridge Stations</a></li>
-                            <li><a th:href="@{/daily-weighing-report}">Reports</a></li>
-                            <li><a th:href="@{/tagging-open-transactions}">Tagged Vehicles</a></li>
-                        </ul>
-                    </li>
+                    <li><a th:href="@{/live-preview}">Live Static Stations</a></li>
                     <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Virtual Stations<span class="angle-down s7-angle-down"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a th:href="@{/virtual-station-transactions}"> Transactions </a></li>
                             <li><a th:href="@{/virtual-station-tagging-transactions}"> Tagged Vehicles </a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"> Maps <span class="angle-down s7-angle-down"></span></a>
+                    <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"> Station Geo Maps <span class="angle-down s7-angle-down"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a th:href="@{/station-on-map}"> Weighbridge Stations </a></li>
                         </ul>

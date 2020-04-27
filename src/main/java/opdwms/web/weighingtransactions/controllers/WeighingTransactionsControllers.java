@@ -128,7 +128,6 @@ public class WeighingTransactionsControllers {
 
                 List<Map<String, String>> listItems = new ArrayList<>();
                 Map<String, String> axleOne = new HashMap<>();
-                axleOne.put("column1", weighingTransactions.getFirstAxleType());
                 axleOne.put("column2", String.valueOf(weighingTransactions.getFirstAxleLegalWeight().intValue()));
                 axleOne.put("column3", String.valueOf(weighingTransactions.getFirstAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                 axleOne.put("column4", String.valueOf(weighingTransactions.getFirstAxleWeight().intValue()));
@@ -138,7 +137,6 @@ public class WeighingTransactionsControllers {
                 listItems.add(axleOne);
 
                 Map<String, String> axleTwo = new HashMap<>();
-                axleTwo.put("column1", weighingTransactions.getSecondAxleType());
                 axleTwo.put("column2", String.valueOf(weighingTransactions.getSecondAxleLegalWeight().intValue()));
                 axleTwo.put("column3", String.valueOf(weighingTransactions.getSecondAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                 axleTwo.put("column4", String.valueOf(weighingTransactions.getSecondAxleWeight().intValue()));
@@ -150,7 +148,6 @@ public class WeighingTransactionsControllers {
                 if (weighingTransactions.getThirdAxleWeight().intValue() != 0) {
 
                     Map<String, String> record = new HashMap<>();
-                    record.put("column1", weighingTransactions.getThirdAxleType());
                     record.put("column2", String.valueOf(weighingTransactions.getThirdAxleLegalWeight().intValue()));
                     record.put("column3", String.valueOf(weighingTransactions.getThirdAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                     record.put("column4", String.valueOf(weighingTransactions.getThirdAxleWeight().intValue()));
@@ -162,7 +159,6 @@ public class WeighingTransactionsControllers {
 
                 if (weighingTransactions.getFourthAxleWeight().intValue() != 0) {
                     Map<String, String> record = new HashMap<>();
-                    record.put("column1", weighingTransactions.getFourthAxleType());
                     record.put("column2", String.valueOf(weighingTransactions.getFourthAxleLegalWeight().intValue()));
                     record.put("column3", String.valueOf(weighingTransactions.getFourthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                     record.put("column4", String.valueOf(weighingTransactions.getFourthAxleWeight().intValue()));
@@ -174,7 +170,6 @@ public class WeighingTransactionsControllers {
 
                 if (weighingTransactions.getFifthAxleWeight().intValue() != 0) {
                     Map<String, String> record = new HashMap<>();
-                    record.put("column1", weighingTransactions.getFifthAxleType());
                     record.put("column2", String.valueOf(weighingTransactions.getFifthAxleLegalWeight().intValue()));
                     record.put("column3", String.valueOf(weighingTransactions.getFifthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                     record.put("column4", String.valueOf(weighingTransactions.getFifthAxleWeight().intValue()));
@@ -186,7 +181,6 @@ public class WeighingTransactionsControllers {
 
                 if (weighingTransactions.getSixthAxleWeight().intValue() != 0) {
                     Map<String, String> record = new HashMap<>();
-                    record.put("column1", weighingTransactions.getSixthAxleType());
                     record.put("column2", String.valueOf(weighingTransactions.getSixthAxleWeight().intValue()));
                     record.put("column3", String.valueOf(weighingTransactions.getSixthAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                     record.put("column4", String.valueOf(weighingTransactions.getSixthAxleWeight().intValue()));
@@ -198,7 +192,6 @@ public class WeighingTransactionsControllers {
 
                 if (weighingTransactions.getSeventhAxleWeight().intValue() != 0) {
                     Map<String, String> record = new HashMap<>();
-                    record.put("column1", weighingTransactions.getSeventhAxleType());
                     record.put("column2", String.valueOf(weighingTransactions.getSeventhAxleWeight().intValue()));
                     record.put("column3", String.valueOf(weighingTransactions.getSeventhAxleLegalWeight().multiply(new BigDecimal("1.05")).intValue()));
                     record.put("column4", String.valueOf(weighingTransactions.getSeventhAxleWeight().intValue()));

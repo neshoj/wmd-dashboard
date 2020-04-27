@@ -138,11 +138,11 @@ public class DataTable implements DatatablesInterface {
 
             SearchHit[] searchHits = response.getHits().getHits();
             for (SearchHit hit : searchHits) {
+
                 // do something with the SearchHit
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
                 Object[] docValues = new Object[_esDocFields.length];
                 SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//                parser.setTimeZone(TimeZone.getTimeZone("UTC"));
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 formatter.setTimeZone(TimeZone.getTimeZone("EAT"));
 
@@ -425,11 +425,7 @@ public class DataTable implements DatatablesInterface {
         map.put("iTotalRecords", buildResultSet("total").iterator().next());
         map.put("iTotalDisplayRecords", buildResultSet("filtered-total").iterator().next());
 
-        List<Object[]> total = buildResultSet("total");
-//        map.put("iTotalRecords", 0);
-//        map.put("iTotalDisplayRecords", 0);
         if (!_footerColumns.isEmpty()) {
-//            map.put("footerTotals", 0);
             map.put("footerTotals", buildResultSet("footer-totals"));
         }
 

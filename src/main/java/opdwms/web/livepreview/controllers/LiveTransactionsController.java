@@ -38,14 +38,19 @@ public class LiveTransactionsController {
 
         // Fetch the table data
         if (AjaxUtils.isAjaxRequest(request)) {
+            datatable.esDocument("static_station_trans")
+                    .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
+                            "vehicleGVM", "operator", "operatorShift", "permitNo", "id")
+                    .esDateFields("transactionDate");
+            return view.sendJSON(datatable.showEsTable());
 
             //Set-up data
-            datatable
-                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, b.name, a.vehicleNo," +
-                            " a.axleConfiguration, a.vehicleGVM, a.actionTaken")
-                    .from("WeighingTransactions a LEFT JOIN WeighbridgeStations b ON b.id = a.stationCode");
-
-            return view.sendJSON(datatable.showTable());
+//            datatable
+//                    .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.ticketNo, b.name, a.vehicleNo," +
+//                            " a.axleConfiguration, a.vehicleGVM, a.actionTaken")
+//                    .from("WeighingTransactions a LEFT JOIN WeighbridgeStations b ON b.id = a.stationCode");
+//
+//            return view.sendJSON(datatable.showTable());
         }
 
         return view.getView();

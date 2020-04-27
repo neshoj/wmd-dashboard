@@ -49,11 +49,6 @@ public class WeighingTransactions  implements Serializable {
     @Column(name = "first_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal firstAxleLegalWeight;
 
-    @Column(name = "first_axle_type", length = 20)
-    private String firstAxleType;
-
-    @Column(name = "first_axle_grouping", length = 20)
-    private String firstAxleGrouping;
 
     //    Second Axle
     @Column(name = "second_axle_weight", precision = 11, scale = 2)
@@ -68,12 +63,6 @@ public class WeighingTransactions  implements Serializable {
     @Column(name = "second_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal secondAxleLegalWeight;
 
-    @Column(name = "second_axle_type", length = 20)
-    private String secondAxleType;
-
-    @Column(name = "second_axle_grouping", length = 20)
-    private String secondAxleGrouping;
-
     //    Third Axle
     @Column(name = "third_axle_weight", precision = 11, scale = 2)
     private BigDecimal thirdAxleWeight;
@@ -86,12 +75,6 @@ public class WeighingTransactions  implements Serializable {
 
     @Column(name = "third_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal thirdAxleLegalWeight;
-
-    @Column(name = "third_axle_type", length = 20)
-    private String thirdAxleType;
-
-    @Column(name = "third_axle_grouping", length = 20)
-    private String thirdAxleGrouping;
 
     //    Fourth Axle
     @Column(name = "fourth_axle_weight", precision = 11, scale = 2)
@@ -106,11 +89,6 @@ public class WeighingTransactions  implements Serializable {
     @Column(name = "fourth_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal fourthAxleLegalWeight;
 
-    @Column(name = "fourth_axle_type", length = 20)
-    private String fourthAxleType;
-
-    @Column(name = "fourth_axle_grouping", length = 20)
-    private String fourthAxleGrouping;
 
     //    Fifth Axle
     @Column(name = "fifth_axle_weight", precision = 11, scale = 2)
@@ -125,11 +103,6 @@ public class WeighingTransactions  implements Serializable {
     @Column(name = "fifth_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal fifthAxleLegalWeight;
 
-    @Column(name = "fifth_axle_type", length = 20)
-    private String fifthAxleType;
-
-    @Column(name = "fifth_axle_grouping", length = 20)
-    private String fifthAxleGrouping;
 
     //    Sixth Axle
     @Column(name = "sixth_axle_weight", precision = 11, scale = 2)
@@ -144,11 +117,6 @@ public class WeighingTransactions  implements Serializable {
     @Column(name = "sixth_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal sixthAxleLegalWeight;
 
-    @Column(name = "sixth_axle_type", length = 20)
-    private String sixthAxleType;
-
-    @Column(name = "sixth_axle_grouping", length = 20)
-    private String sixthAxleGrouping;
 
     //    Seventh axle
     @Column(name = "seventh_axle_weight", precision = 11, scale = 2)
@@ -163,11 +131,6 @@ public class WeighingTransactions  implements Serializable {
     @Column(name = "seventh_axle_legal_weight", precision = 11, scale = 2)
     private BigDecimal seventhAxleLegalWeight;
 
-    @Column(name = "seventh_axle_type", length = 20)
-    private String seventhAxleType;
-
-    @Column(name = "seventh_axle_grouping", length = 20)
-    private String seventhAxleGrouping;
 
     @Column(name = "gvw_exceeded_percent", precision = 4, scale = 2)
     private BigDecimal gvwExceededPercent;
@@ -189,18 +152,6 @@ public class WeighingTransactions  implements Serializable {
 
     @Column(name = "status", length = 2)
     private String status;
-
-    @Column(name = "wbt_status", length = 20)
-    private String wbtStatus;
-
-    @Column(name = "wbt_direction", length = 11)
-    private String direction;
-
-    @Column(name = "wbt_bu", length = 11)
-    private String wbtbu;
-
-    @Column(name = "wbt_shift", length = 20)
-    private String operatorShift;
 
     @Column(name = "origin", length = 150)
     private String origin;
@@ -300,24 +251,6 @@ public class WeighingTransactions  implements Serializable {
         return this;
     }
 
-    public String getFirstAxleType() {
-        return firstAxleType;
-    }
-
-    public WeighingTransactions setFirstAxleType(String firstAxleType) {
-        this.firstAxleType = firstAxleType;
-        return this;
-    }
-
-    public String getFirstAxleGrouping() {
-        return firstAxleGrouping;
-    }
-
-    public WeighingTransactions setFirstAxleGrouping(String firstAxleGrouping) {
-        this.firstAxleGrouping = firstAxleGrouping;
-        return this;
-    }
-
     public BigDecimal getSecondAxleWeight() {
         return secondAxleWeight;
     }
@@ -333,24 +266,6 @@ public class WeighingTransactions  implements Serializable {
 
     public WeighingTransactions setSecondAxleLegalWeight(BigDecimal secondAxleLegalWeight) {
         this.secondAxleLegalWeight = secondAxleLegalWeight;
-        return this;
-    }
-
-    public String getSecondAxleType() {
-        return secondAxleType;
-    }
-
-    public WeighingTransactions setSecondAxleType(String secondAxleType) {
-        this.secondAxleType = secondAxleType;
-        return this;
-    }
-
-    public String getSecondAxleGrouping() {
-        return secondAxleGrouping;
-    }
-
-    public WeighingTransactions setSecondAxleGrouping(String secondAxleGrouping) {
-        this.secondAxleGrouping = secondAxleGrouping;
         return this;
     }
 
@@ -372,24 +287,6 @@ public class WeighingTransactions  implements Serializable {
         return this;
     }
 
-    public String getThirdAxleType() {
-        return thirdAxleType;
-    }
-
-    public WeighingTransactions setThirdAxleType(String thirdAxleType) {
-        this.thirdAxleType = thirdAxleType;
-        return this;
-    }
-
-    public String getThirdAxleGrouping() {
-        return thirdAxleGrouping;
-    }
-
-    public WeighingTransactions setThirdAxleGrouping(String thirdAxleGrouping) {
-        this.thirdAxleGrouping = thirdAxleGrouping;
-        return this;
-    }
-
     public BigDecimal getFourthAxleWeight() {
         return fourthAxleWeight;
     }
@@ -408,23 +305,6 @@ public class WeighingTransactions  implements Serializable {
         return this;
     }
 
-    public String getFourthAxleType() {
-        return fourthAxleType;
-    }
-
-    public WeighingTransactions setFourthAxleType(String fourthAxleType) {
-        this.fourthAxleType = fourthAxleType;
-        return this;
-    }
-
-    public String getFourthAxleGrouping() {
-        return fourthAxleGrouping;
-    }
-
-    public WeighingTransactions setFourthAxleGrouping(String fourthAxleGrouping) {
-        this.fourthAxleGrouping = fourthAxleGrouping;
-        return this;
-    }
 
     public BigDecimal getFifthAxleWeight() {
         return fifthAxleWeight;
@@ -444,23 +324,7 @@ public class WeighingTransactions  implements Serializable {
         return this;
     }
 
-    public String getFifthAxleType() {
-        return fifthAxleType;
-    }
 
-    public WeighingTransactions setFifthAxleType(String fifthAxleType) {
-        this.fifthAxleType = fifthAxleType;
-        return this;
-    }
-
-    public String getFifthAxleGrouping() {
-        return fifthAxleGrouping;
-    }
-
-    public WeighingTransactions setFifthAxleGrouping(String fifthAxleGrouping) {
-        this.fifthAxleGrouping = fifthAxleGrouping;
-        return this;
-    }
 
     public BigDecimal getSixthAxleWeight() {
         return sixthAxleWeight;
@@ -480,23 +344,6 @@ public class WeighingTransactions  implements Serializable {
         return this;
     }
 
-    public String getSixthAxleType() {
-        return sixthAxleType;
-    }
-
-    public WeighingTransactions setSixthAxleType(String sixthAxleType) {
-        this.sixthAxleType = sixthAxleType;
-        return this;
-    }
-
-    public String getSixthAxleGrouping() {
-        return sixthAxleGrouping;
-    }
-
-    public WeighingTransactions setSixthAxleGrouping(String sixthAxleGrouping) {
-        this.sixthAxleGrouping = sixthAxleGrouping;
-        return this;
-    }
 
     public BigDecimal getSeventhAxleWeight() {
         return seventhAxleWeight;
@@ -513,24 +360,6 @@ public class WeighingTransactions  implements Serializable {
 
     public WeighingTransactions setSeventhAxleLegalWeight(BigDecimal seventhAxleLegalWeight) {
         this.seventhAxleLegalWeight = seventhAxleLegalWeight;
-        return this;
-    }
-
-    public String getSeventhAxleType() {
-        return seventhAxleType;
-    }
-
-    public WeighingTransactions setSeventhAxleType(String seventhAxleType) {
-        this.seventhAxleType = seventhAxleType;
-        return this;
-    }
-
-    public String getSeventhAxleGrouping() {
-        return seventhAxleGrouping;
-    }
-
-    public WeighingTransactions setSeventhAxleGrouping(String seventhAxleGrouping) {
-        this.seventhAxleGrouping = seventhAxleGrouping;
         return this;
     }
 
@@ -552,41 +381,6 @@ public class WeighingTransactions  implements Serializable {
         return this;
     }
 
-    public String getWbtStatus() {
-        return wbtStatus;
-    }
-
-    public WeighingTransactions setWbtStatus(String wbtStatus) {
-        this.wbtStatus = wbtStatus;
-        return this;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public WeighingTransactions setDirection(String direction) {
-        this.direction = direction;
-        return this;
-    }
-
-    public String getWbtbu() {
-        return wbtbu;
-    }
-
-    public WeighingTransactions setWbtbu(String wbtbu) {
-        this.wbtbu = wbtbu;
-        return this;
-    }
-
-    public String getOperatorShift() {
-        return operatorShift;
-    }
-
-    public WeighingTransactions setOperatorShift(String operatorShift) {
-        this.operatorShift = operatorShift;
-        return this;
-    }
 
     public String getOrigin() {
         return origin;
