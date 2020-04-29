@@ -40,7 +40,7 @@ public class LiveTransactionsController {
         if (AjaxUtils.isAjaxRequest(request)) {
             datatable.esDocument("static_station_trans")
                     .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
-                            "vehicleGVM", "operator", "operatorShift", "permitNo", "id")
+                            "vehicleGVM", "permitNo")
                     .esDateFields("transactionDate");
             return view.sendJSON(datatable.showEsTable());
 

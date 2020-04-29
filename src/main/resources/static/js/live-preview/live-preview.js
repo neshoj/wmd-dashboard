@@ -10,11 +10,23 @@
     $(document).ready(function ($) {
         let stompClient = null;
         let oTable = utils.dataTable({
-            table : $(".table")
+            table: $(".table"),
+            fnRowCallback: function (nRow, aData) {
+                //Process data
+                let k = 0, WEIGH_STATUS=1;
+                $(aData).each(function () {
+                    k++;
+                    if (k === WEIGH_STATUS) {
+                        aData[k] === "2" ? $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x red"></i>') :
+                            $(nRow).find('td:eq(' + k + ')').html('<i class="fa fa-car fa-2x green"></i>');
+                    }
+                });
+            }
         });
 
+
         //When to refresh table info
-        $('[data-action="refresh"]').click( function(){
+        $('[data-action="refresh"]').click(function () {
             setTimeout(function () {
                 oTable.fnDraw();
             });
@@ -41,8 +53,7 @@
         // Connect to back office
         // connect();
 
-        let timerId = setInterval(() =>  oTable.fnDraw(), 120000);
-
+        let timerId = setInterval(() => oTable.fnDraw(), 120000);
 
 
     });
