@@ -163,4 +163,13 @@ public class DashboardController {
     CensusStats statistics = dashboardService.fetchCensusStatistics(request);
     return statistics;
   }
+
+  @RequestMapping("/kibana-analytics")
+  public ModelAndView kibanaFrame(HttpServletRequest request) throws Exception {
+    View view = new View("dashboard/kibana-analytics");
+    String parentType = (String) request.getSession().getAttribute("_userParentType");
+
+    return view            .getView();
+  }
+
 }
