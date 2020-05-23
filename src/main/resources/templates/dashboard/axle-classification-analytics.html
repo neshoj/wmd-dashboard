@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/report-layout}"
+>
+<head>
+    <meta charset="utf-8"/>
+    <title>WMS &middot; Kibana Analytics </title>
+
+</head>
+<body>
+
+<th:block layout:fragment="content">
+    <div class="page-head">
+        <h2 class="page-head-title">Axle Classification Analytics</h2>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">Home</a></li>
+            <li class="active">Axle Classification</li>
+        </ol>
+    </div>
+
+    <div class="main-content">
+
+        <div class="row">
+            <div class="col-sm-12  parent-panel">
+                <div class="tab-container">
+                    <div class="tab-content">
+                        <div class="tab-pane active cont active">
+                            <div class="tab-pane active show">
+                                <div class="panel-body">
+                                    <div class="table-responsive ">
+
+                                        <iframe allowtransparency="true"
+                                                src="https://kibana.kenhavws.com/app/kibana#/dashboard/838367f0-9ccc-11ea-9552-8b51248d791b?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:now-3M,to:now))&_a=(description:'Axle%20Classification',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:17,i:e713b8b5-9b00-4ee6-9a67-4af9f179d2b3,w:48,x:0,y:0),id:b3e73670-9ccb-11ea-9552-8b51248d791b,panelIndex:e713b8b5-9b00-4ee6-9a67-4af9f179d2b3,type:visualization,version:'7.6.1'),(embeddableConfig:(),gridData:(h:29,i:'4e9b8000-cf9b-4463-b9ef-9bf63e4bf876',w:48,x:0,y:17),id:'79484380-9cc9-11ea-9552-8b51248d791b',panelIndex:'4e9b8000-cf9b-4463-b9ef-9bf63e4bf876',type:visualization,version:'7.6.1'),(embeddableConfig:(),gridData:(h:29,i:'044db228-25b5-4291-a33a-70bfd2210346',w:48,x:0,y:46),id:'2c88bde0-9cc9-11ea-9552-8b51248d791b',panelIndex:'044db228-25b5-4291-a33a-70bfd2210346',type:visualization,version:'7.6.1')),query:(language:kuery,query:''),timeRestore:!t,title:'Dashboard%20%231',viewMode:view)"
+                                                height="2200" width="100%" frameborder="0"></iframe>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</th:block>
+
+<th:block layout:fragment="modals"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+</body>
+</html>

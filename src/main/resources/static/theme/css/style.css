@@ -5438,8 +5438,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:focus,
 .navbar-default .navbar-nav>.active>a:hover {
-    color: #fff;
-    background-color: #ed5454
+    color: #e1e1e1 !important;
+    background-color: #555;
 }
 
 .navbar-default .navbar-nav>.disabled>a,

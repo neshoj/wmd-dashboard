@@ -156,6 +156,7 @@ public class DashboardController {
     DashboardStatistics statistics = dashboardService.fetchStatistics(request);
     return statistics;
   }
+
   @RequestMapping("/census-statistic")
   public @ResponseBody CensusStats fetchCensusStatistics(HttpServletRequest request)
       throws Exception {
@@ -164,12 +165,17 @@ public class DashboardController {
     return statistics;
   }
 
-  @RequestMapping("/kibana-analytics")
-  public ModelAndView kibanaFrame(HttpServletRequest request) throws Exception {
-    View view = new View("dashboard/kibana-analytics");
+  @RequestMapping("/weigh-station-analytics")
+  public ModelAndView weighStationAnalytics(HttpServletRequest request) throws Exception {
+    View view = new View("dashboard/weigh-station-analytics");
     String parentType = (String) request.getSession().getAttribute("_userParentType");
-
-    return view            .getView();
+    return view.getView();
   }
 
+  @RequestMapping("/axle-classification-analytics")
+  public ModelAndView axleClassificationAnalytics(HttpServletRequest request) throws Exception {
+    View view = new View("dashboard/axle-classification-analytics");
+    String parentType = (String) request.getSession().getAttribute("_userParentType");
+    return view.getView();
+  }
 }
