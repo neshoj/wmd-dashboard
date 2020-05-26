@@ -1,20 +1,69 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/auth-layout}"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" data-textdirection="ltr" class="loading"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>WMS &middot; Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weighbridge Management Dashboard</title>
+
+    <link th:href="@{theme/login/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{theme/login/font-awesome/css/font-awesome.css}" rel="stylesheet">
+
+    <link th:href="@{theme/login/animate.css}" rel="stylesheet">
+    <link th:href="@{theme/login/style.css}" rel="stylesheet">
+
 </head>
-<body>
 
-<div layout:fragment="content">
+<body class="gray-bg">
 
-    <div class="login-container">
-        <div class="panel panel-default">
-            <div class="panel-heading"><img th:src="@{theme/img/logo-full-retina.png}" alt="logo" width="150px" height="39px" class="logo-img"><span>Please enter your user information.</span></div>
-            <div class="panel-body">
+<div class="loginColumns animated fadeInDown">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="">
+                <div class="carousel slide" id="carousel2">
+                    <ol class="carousel-indicators">
+                        <li data-slide-to="0" data-target="#carousel2"  class="active"></li>
+                        <li data-slide-to="1" data-target="#carousel2"></li>
+                        <li data-slide-to="2" data-target="#carousel2" class=""></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img alt="image"
+                                 class="img-responsive" th:src="@{theme/img/road/roada.jpg}">
+                            <!-- <div class="carousel-caption">
+                                <p>This is simple caption 1</p>
+                            </div> -->
+                        </div>
+                        <div class="item ">
+                            <img alt="image"  class="img-responsive" th:src="@{theme/img/road/roadb.jpg}">
+                            <!-- <div class="carousel-caption">
+                                <p>This is simple caption 2</p>
+                            </div> -->
+                        </div>
+                        <div class="item">
+                            <img alt="image"  class="img-responsive" th:src="@{theme/img/road/roadc.jpg}">
+                            <!--  <div class="carousel-caption">
+                                 <p>This is simple caption 3</p>
+                             </div> -->
+                        </div>
+                    </div>
+                    <a data-slide="prev" href="#carousel2" class="left carousel-control">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a data-slide="next" href="#carousel2" class="right carousel-control">
+                        <span class="icon-next"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3 class="font-bold">WEIGHBRIDGE MANAGEMENT DASHBOARD</h3>
+            <div class="ibox-content">
 
                 <div th:if="${error}" class="alert alert-danger alert-dismissable">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -25,45 +74,42 @@
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                     <span th:text="${msg}"></span>
                 </div>
-
-                <form th:action="@{/login}" method="post" autocomplete="off" class="form-horizontal">
-                    <div class="login-form">
-                        <div class="form-group">
-                            <div class="input-group"><span class="input-group-addon"><i class="icon s7-user"></i></span>
-                                <input id="email" type="text" placeholder="email" required="" name="email"  autocomplete="off" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group"><span class="input-group-addon"><i class="icon s7-lock"></i></span>
-                                <input id="password" type="password" name="password" placeholder="Password" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group login-submit">
-                            <button data-dismiss="modal" type="submit" class="btn btn-primary btn-lg">Log me in</button>
-                        </div>
-                        <div class="form-group footer row">
-                            <div class="col-xs-6"><a th:href="@{/password-reset}">Forgot Password?</a></div>
-                        </div>
+                <form class="m-t" th:action="@{/login}" method="post" autocomplete="off">
+                    <div class="form-group">
+                        <input name="email" id="email" type="email" class="form-control" placeholder="Account Email" required="">
                     </div>
+                    <div class="form-group">
+                        <input  id="password" name="password" type="password" class="form-control" placeholder="Password" required="">
+                    </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                    <a th:href="@{/password-reset}">
+                        <small>Forgot password?</small>
+                    </a>
+
                 </form>
+
             </div>
         </div>
-        <div class="text-center out-links"><a href="https://aealimited.com/">© 2020 AEA Limited</a></div>
     </div>
-
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            Copyright Kenya National Highways Authority (KeNHA)
+        </div>
+        <div class="col-md-6 text-right">
+            <small>© 2020</small>
+        </div>
+    </div>
 </div>
 
-<th:block layout:fragment="script">
-    <!--<script th:src="@{/js/app-util.js}"></script>-->
-    <!--<script th:src="@{/js/user-manager/login.js}"></script>-->
-    <!--<script type="text/javascript">-->
-        <!--$(document).ready(function(){-->
-            <!--//initialize the javascript-->
-            <!--App.init();-->
-        <!--});-->
-    <!--</script>-->
-</th:block>
+<!-- Mainly scripts -->
+<script th:src="@{theme/login/js/jquery-3.1.1.min.js}"></script>
+<script th:src="@{theme/login/js/bootstrap.min.js}"></script>
+<script th:src="@{theme/login/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{theme/login/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+
 
 </body>
+
 </html>
