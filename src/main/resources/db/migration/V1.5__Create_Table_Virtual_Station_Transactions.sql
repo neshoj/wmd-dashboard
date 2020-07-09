@@ -1,6 +1,6 @@
 set foreign_key_checks = 0;
 
---- Virtual Stations Transactions Table
+-- Virtual Stations Transactions Table
 drop table if exists `virtual_stations_transactions`;
 create table `virtual_stations_transactions` (
   `id`                              int(11) not null auto_increment,
@@ -39,9 +39,9 @@ create table `virtual_stations_transactions` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
--- --------------------------------
+-- ----------------------
 -- Weighbridge Transaction Table
--- --------------------------------
+-- ----------------------
 CREATE INDEX virtual_station_transaction_id
 ON virtual_stations_transactions (virtual_station_transaction_id);
 

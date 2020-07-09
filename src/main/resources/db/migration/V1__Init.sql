@@ -1,6 +1,6 @@
 set foreign_key_checks = 0;
 
---- Application Roles Table
+-- Application Roles Table
 drop table if exists `app_roles`;
 create table `app_roles` (
   `id`           int(11)   not null auto_increment,
@@ -26,7 +26,7 @@ INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function)
 INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (9,   'Reports', 'ROLE_REPORTS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin, aea-weighbridge-manager,aea-operations-manager');
 INSERT INTO app_roles (id, name, app_code, created_at, updated_at, app_function) VALUES (10,   'Audit Logs', 'ROLE_AUDIT_LOGS', '2019-02-22 10:15:02', '2019-02-22 10:15:02', 'super-admin, kenha-admin, aea-admin');
 
---- App Settings Table
+-- App Settings Table
 drop table if exists `app_settings`;
 create table `app_settings` (
   `id`          int(11) not null auto_increment,
@@ -48,7 +48,7 @@ values
 (3, 'Reset code expiry period', 'RESET_EXPIRY', 'settings', '2','Period in hours in which a reset password token is valid'),
 (4, 'Axle Weight Tolerance', 'AXLE_WEIGHT_TOLERANCE', 'settings', '5','A percentage tolerance is allowed on the permissible axle weights and the permissible axle group');
 
---- Audit Trail Table
+-- Audit Trail Table
 drop table if exists `audit_trail`;
 create table `audit_trail` (
   `id`         int(11)   not null auto_increment,
@@ -64,7 +64,7 @@ create table `audit_trail` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
---- Reason Codes Table
+-- Reason Codes Table
 drop table if exists `reason_codes`;
 create table `reason_codes` (
   `id`          int(11)   not null auto_increment,
@@ -80,7 +80,7 @@ create table `reason_codes` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
---- Maker Checker Table
+-- Maker Checker Table
 drop table if exists `maker_checker`;
 create table `maker_checker` (
   `id`      int(11) not null default '0',
@@ -103,7 +103,7 @@ VALUES
       ('7', 'Users', 'Users', true);
 
 
---- User Login Attempts Table
+-- User Login Attempts Table
 drop table if exists `user_attempts`;
 create table `user_attempts` (
   `id`            int(11) not null auto_increment,
@@ -211,7 +211,7 @@ INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VA
 INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (66, 'Can view reports', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 7);
 INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VALUES (67, 'Can view audit logs', 'activate', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 8);
 
---- Group Permissions Table
+-- Group Permissions Table
 drop table if exists `group_permissions`;
 create table `group_permissions` (
   `permission_id` int(11) not null,
@@ -252,7 +252,7 @@ create table `user_groups` (
 
 insert into `user_groups` (`name`, `description`, `flag`, `base_type`, `system_defined`) values ('Super Admin Group', 'Super Administrators Group', 1, 'super-admin', 1);
 
---- User Types Table
+-- User Types Table
 DROP TABLE IF EXISTS `user_types`;
 CREATE TABLE `user_types` (
   `id`   int(11) not null auto_increment,
@@ -274,7 +274,7 @@ values
   (6, 'AEA Operations Manager', 'aea-operations-manager');
 
 
---- Users Table
+-- Users Table
 drop table if exists `users`;
 create table `users` (
   `id`                         int(11)   not null auto_increment,
@@ -330,7 +330,7 @@ values
 -- =========================        Clients         ====================================================================
 -- =====================================================================================================================
 
---- clients Table
+-- clients Table
 drop table if exists clients;
 create table clients (
   `id`                 int(11)      not null auto_increment,
@@ -360,7 +360,7 @@ INSERT INTO `clients` (`name`, `location`, `contact_first_name`, `contact_surnam
 INSERT INTO `clients` (`name`, `location`, `contact_first_name`, `contact_surname`, `contact_phone`, `contact_email`, `flag`, `created_by`, `updated_by`, `created_on`, `updated_on`) VALUES ('KENHA', 'Nairobi', 'KENHA', 'Support', '+254-020-2729200', 'info@kenha.co.ke', '1', '1', '1', '2019-02-22 10:15:02', '2019-02-22 10:15:02');
 
 
---- Client Users Table
+-- Client Users Table
 drop table if exists client_users;
 create table client_users (
   `id`          int(11) not null,
@@ -374,7 +374,7 @@ create table client_users (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
---- Clients User Groups Table
+-- Clients User Groups Table
 drop table if exists clients_groups;
 create table clients_groups (
   `id`          int(11) not null,
@@ -448,7 +448,7 @@ create table `weighbridge_stations` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
---- weighbridge stations Users Table
+-- weighbridge stations Users Table
 drop table if exists weighbridge_stations_users;
 create table weighbridge_stations_users (
   `id`                      int(11) not null,
@@ -462,7 +462,7 @@ create table weighbridge_stations_users (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
---- weighbridge_stations User Groups Table
+-- weighbridge_stations User Groups Table
 drop table if exists weighbridge_stations_groups;
 create table weighbridge_stations_groups (
   `id`                      int(11) not null,

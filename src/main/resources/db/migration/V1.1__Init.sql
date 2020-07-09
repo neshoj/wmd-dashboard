@@ -1,6 +1,6 @@
 set foreign_key_checks = 0;
 
---- HSWIM Data Table
+-- HSWIM Data Table
 drop table if exists `hswim_transactions`;
 create table `hswim_transactions` (
   `id`                int(11)         not     null auto_increment,

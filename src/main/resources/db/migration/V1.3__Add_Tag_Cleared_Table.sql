@@ -1,8 +1,8 @@
 set foreign_key_checks = 0;
 
--- --------------------------------
+-- ----------------------
 -- Tag Clearance Report Table
--- --------------------------------
+-- ----------------------
 drop table if exists `tag_clearances_report`;
 create table `tag_clearances_report` (
   `id`          int(11)             not null auto_increment,

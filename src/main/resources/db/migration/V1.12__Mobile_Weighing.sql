@@ -11,11 +11,11 @@ INSERT INTO permissions (id, name, app_code, created_on, updated_on, role_no) VA
 (69, 'Can add mobile weigh arrest transactions', 'can-add-mobile-weigh-arrest-transactions', '2019-03-01 02:30:30', '2019-03-01 02:30:30', 11);
 -- Add Permission
 
---- Add user type mobile-operators
+-- Add user type mobile-operators
 insert into `user_types` (`id`, `name`, `code`)
 values
   (7, 'Mobile Operators', 'mobile-operators');
---- Add user type mobile-operators
+-- Add user type mobile-operators
 
 --  Police Officer details table
 drop table if exists police_officer_details;

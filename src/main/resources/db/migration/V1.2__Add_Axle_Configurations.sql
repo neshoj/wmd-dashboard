@@ -1,8 +1,8 @@
 set foreign_key_checks = 0;
 
--- --------------------------------
+-- ---------------------
 -- Axle Configurations
--- --------------------------------
+-- ----------------------
 drop table if exists `axle_configuration`;
 create table `axle_classifications` (
   `id`          int(11)             not null auto_increment,
@@ -29,9 +29,9 @@ create table `axle_classifications` (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
--- ---------------------------------
+-- ----------------------
 --  Update transaction table
--- ---------------------------------
+-- ----------------------
 ALTER TABLE `weighing_transactions`
       ADD COLUMN  `first_axle_weight_exceeded_percent`    decimal (11, 2) default 0,
       ADD COLUMN  `first_axle_weight_exceeded_weight`     decimal (11, 2) default 0,
