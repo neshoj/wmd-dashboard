@@ -38,7 +38,7 @@ public class LiveTransactionsController {
 
         // Fetch the table data
         if (AjaxUtils.isAjaxRequest(request)) {
-            datatable.esDocument("static_station_trans")
+            datatable.esDocument("static_station_weigh_transaction")
                     .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
                             "vehicleGVM", "permitNo")
                     .esDateFields("transactionDate");

@@ -77,7 +77,7 @@ public class WeighingTransactionsControllers {
 
             } else {
                 //Set-up data
-                datatable.esDocument("static_station_trans")
+                datatable.esDocument("static_station_weigh_transaction")
                         .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
                                 "vehicleGVM", "operator", "operatorShift", "permitNo", "id")
                         .esDateFields("transactionDate");
