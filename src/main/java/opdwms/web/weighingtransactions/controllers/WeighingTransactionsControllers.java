@@ -270,14 +270,21 @@ public class WeighingTransactionsControllers {
                 return view.sendJSON(clearTaggingTransaction(request));
             } else {
                 //Set-up data
-                datatable
-                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
-                        .select("a.taggingSystem, a.taggingScene, ")
-                        .select(" a.weighbridge, a.chargedReason, a.id ")
-                        .from("TaggingTransactions a ")
-                        .where("a.tagStatus = :state")
-                        .setParameter("state", TaggingTransactions.OPEN_TAGS);
-                return view.sendJSON(datatable.showTable());
+
+                datatable.esDocument("static_station_tagging_transaction")
+                        .esFields("transactionDate", "tagReference", "vehicleNo", "transgression", "taggingSystem", "taggingScene",
+                                "stationName", "id")
+                        .esDateFields("transactionDate");
+                return view.sendJSON(datatable.showEsTable());
+//
+//                datatable
+//                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
+//                        .select("a.taggingSystem, a.taggingScene, ")
+//                        .select(" a.weighbridge, a.chargedReason, a.id ")
+//                        .from("TaggingTransactions a ")
+//                        .where("a.tagStatus = :state")
+//                        .setParameter("state", TaggingTransactions.OPEN_TAGS);
+//                return view.sendJSON(datatable.showTable());
             }
         }
         return view.getView();
