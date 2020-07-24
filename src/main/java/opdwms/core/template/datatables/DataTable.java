@@ -144,7 +144,7 @@ public class DataTable implements DatatablesInterface {
                 Object[] docValues = new Object[_esDocFields.length];
                 SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                formatter.setTimeZone(TimeZone.getTimeZone("EAT"));
+//                formatter.setTimeZone(TimeZone.getTimeZone("EAT"));
 
                 for (int x = 0; x < _esDocFields.length; x++) {
                     //TODO use regex later on
