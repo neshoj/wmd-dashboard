@@ -15206,7 +15206,7 @@ li.L9 {
 
 .btn-space,
 .btn-vspace {
-    margin-bottom: 5px
+    margin-bottom: -2px
 }
 
 .pricing-table-primary {
@@ -15331,7 +15331,7 @@ pre {
 
 .btn-space {
     margin-right: 5px;
-    padding: 5px
+    /*padding: 5px*/
 }
 
 .rtl .btn-space {
