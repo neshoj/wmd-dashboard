@@ -142,15 +142,16 @@ public class DataTable implements DatatablesInterface {
                 // do something with the SearchHit
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
                 Object[] docValues = new Object[_esDocFields.length];
-//                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//                formatter.setTimeZone(TimeZone.getTimeZone("EAT"));
+                formatter.setTimeZone(TimeZone.getTimeZone("EAT"));
 
                 for (int x = 0; x < _esDocFields.length; x++) {
                     //TODO use regex later on
                     if (Arrays.asList(_esDateFields).contains(_esDocFields[x])) {
-                        Date date = parser.parse((String) sourceAsMap.get(_esDocFields[x]));
+                        String source = (String) sourceAsMap.get(_esDocFields[x]);
+            System.out.println("=====================================source = " + source);
+                        Date date = parser.parse(source);
                         docValues[x] = formatter.format(date);
                     } else {
                         docValues[x] = sourceAsMap.get(_esDocFields[x]);
