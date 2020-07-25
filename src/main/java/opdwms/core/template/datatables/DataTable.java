@@ -151,9 +151,10 @@ public class DataTable implements DatatablesInterface {
                     //TODO use regex later on
                     if (Arrays.asList(_esDateFields).contains(_esDocFields[x])) {
                         String source = (String) sourceAsMap.get(_esDocFields[x]);
-            System.out.println("=====================================source = " + source);
                         Date date = parser.parse(source);
-                        docValues[x] = formatter.format(date);
+                        String formattedDate = formatter.format(date);
+                        docValues[x] = formattedDate;
+                        System.out.println("=====================================source = " + formattedDate);
                     } else {
                         docValues[x] = sourceAsMap.get(_esDocFields[x]);
                     }
