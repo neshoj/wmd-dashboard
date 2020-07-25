@@ -141,7 +141,7 @@ public class DataTable implements DatatablesInterface {
         Map<String, Object> sourceAsMap = hit.getSourceAsMap();
         Object[] docValues = new Object[_esDocFields.length];
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        parser.setTimeZone(TimeZone.getTimeZone("EAT"));
+        parser.setTimeZone(TimeZone.getTimeZone("GMT"));
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         formatter.setTimeZone(TimeZone.getTimeZone("EAT"));
 
