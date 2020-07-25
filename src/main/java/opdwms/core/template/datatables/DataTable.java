@@ -152,6 +152,7 @@ public class DataTable implements DatatablesInterface {
                     if (Arrays.asList(_esDateFields).contains(_esDocFields[x])) {
                         String source = (String) sourceAsMap.get(_esDocFields[x]);
                         Date date = parser.parse(source);
+                        System.out.println("=====================================source = " + date);
                         String formattedDate = formatter.format(date);
                         docValues[x] = formattedDate;
                         System.out.println("=====================================source = " + formattedDate);
