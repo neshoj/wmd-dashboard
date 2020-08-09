@@ -79,7 +79,7 @@ public class WeighingTransactionsControllers {
                 //Set-up data
                 datatable.esDocument("static_station_weigh_transaction")
                         .esFields("transactionDate", "status", "ticketNo", "stationName", "vehicleNo", "axleConfiguration",
-                                "vehicleGVM", "operator", "operatorShift", "permitNo", "id")
+                                "vehicleGVM", "operator", "permitNo", "id")
                         .esDateFields("transactionDate");
                 return view.sendJSON(datatable.showEsTable());
 //                datatable
@@ -276,15 +276,6 @@ public class WeighingTransactionsControllers {
                                 "stationName", "id")
                         .esDateFields("transactionDate");
                 return view.sendJSON(datatable.showEsTable());
-//
-//                datatable
-//                        .select("str(a.transactionDate; 'YYYY-MM-DD HH24:MI'), a.tagReference, a.vehicleNo, a.transgression, ")
-//                        .select("a.taggingSystem, a.taggingScene, ")
-//                        .select(" a.weighbridge, a.chargedReason, a.id ")
-//                        .from("TaggingTransactions a ")
-//                        .where("a.tagStatus = :state")
-//                        .setParameter("state", TaggingTransactions.OPEN_TAGS);
-//                return view.sendJSON(datatable.showTable());
             }
         }
         return view.getView();

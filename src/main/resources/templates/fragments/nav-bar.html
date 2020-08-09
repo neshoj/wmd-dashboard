@@ -71,19 +71,19 @@
                             <li><a th:href="@{/tagging-open-transactions}"> Tagging Transactions </a></li>
                         </ul>
                     </li>
-                    <li th:classappend="${@viewTags.isActiveMenu('/virtual-station-transactions','/virtual-station-tagging-transactions')}"
-                        class="dropdown">
-                        <a th:classappend="${@viewTags.isActiveMenu('/virtual-station-transactions','/virtual-station-tagging-transactions')}"
-                           href="#"
-                           data-toggle="dropdown"
-                           role="button" aria-expanded="false"
-                           class="dropdown-toggle">Virtual Stations<span
-                                class="angle-down s7-angle-down"></span></a>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a th:href="@{/virtual-station-transactions}"> Transactions </a></li>
-                            <li><a th:href="@{/virtual-station-tagging-transactions}"> Tagged Vehicles </a></li>
-                        </ul>
-                    </li>
+<!--                    <li th:classappend="${@viewTags.isActiveMenu('/virtual-station-transactions','/virtual-station-tagging-transactions')}"-->
+<!--                        class="dropdown">-->
+<!--                        <a th:classappend="${@viewTags.isActiveMenu('/virtual-station-transactions','/virtual-station-tagging-transactions')}"-->
+<!--                           href="#"-->
+<!--                           data-toggle="dropdown"-->
+<!--                           role="button" aria-expanded="false"-->
+<!--                           class="dropdown-toggle">Virtual Stations<span-->
+<!--                                class="angle-down s7-angle-down"></span></a>-->
+<!--                        <ul role="menu" class="dropdown-menu">-->
+<!--                            <li><a th:href="@{/virtual-station-transactions}"> Transactions </a></li>-->
+<!--                            <li><a th:href="@{/virtual-station-tagging-transactions}"> Tagged Vehicles </a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li th:classappend="${@viewTags.isActiveMenu('/station-on-map')}"
                         class="dropdown">
                         <a th:classappend="${@viewTags.isActiveMenu('/station-on-map')}"

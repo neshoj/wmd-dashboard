@@ -133,6 +133,7 @@ var utils = (function (p) {
 
         //Initialize a dataTable object
         oTable = {
+            'lengthMenu': [ 10, 25, 50, 100, 500, 1000 ],
             'bProcessing': true,
             'sAjaxSource': fn.sAjaxSource,
             'aaSorting': sortOrder,
