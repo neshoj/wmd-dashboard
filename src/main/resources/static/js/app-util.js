@@ -249,6 +249,7 @@ var utils = (function (p) {
             };
 
             oTable = {
+                'lengthMenu': [ 10, 25, 50, 100, 500, 1000 ],
                 "bProcessing": true,
                 "bServerSide": true,
                 "sAjaxSource": url,
